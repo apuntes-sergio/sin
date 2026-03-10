@@ -1,0 +1,15 @@
+# MkDocs build output
+site/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# Archivos específicos
+*:Zero.Identifier*

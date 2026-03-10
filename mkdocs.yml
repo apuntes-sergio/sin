@@ -1,0 +1,131 @@
+site_name: Apuntes Sistemas Informáticos - DAM
+site_url: https://sergio-apuntes.github.io/sin/
+site_author: Sergio Rey Martínez
+copyright: Sergio Rey Martínez - DAM - SIN - 2026
+
+theme:
+  name: material
+  language: es
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light green
+      accent: light green
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: light green
+      accent: light green
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.indexes
+    - navigation.footer
+    - navigation.instant          # DESACTIVADO TEMPORALMENTE PARA PRUEBAS
+    - navigation.instant.progress # DESACTIVADO TEMPORALMENTE PARA PRUEBAS
+    - toc.follow
+    - navigation.top
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - glightbox
+
+nav:
+  - Presentación: index.md
+  - Introducción a los Sistemas Operativos de Servidor:
+    - 01_1_introducción.md
+    - 01_2_arquitectura_cliente_servidor.md
+    - 01_3_funciones_SO.md
+    - 01_4_sistemas_operativos_servidor.md
+    - 01_5_recordatorio_red.md
+  - Instalación de sistemas operativos de servidor privativos:
+    - 02_1_instalacion_SO_introduccion.md
+    - 02_2_instalacion_windows_server.md
+    - 02_3_config_basica.md
+    - 02_4_documentar_instalacion.md
+    - 02_5_administrar_discos.md
+    - 02_6_dominio.md
+  - Administración de usuarios y grupos en Windows Server:
+    - 03_01_objetos_dominios.md
+    - 03_02_usuarios.md
+    - 03_03_grupos.md
+    - 03_04_equipos.md
+    - 03_05_unidades_organizativas.md
+    - 03_06_herramientas_administracion.md
+    - 03_07_perfiles_usuarios.md
+  - Gestión de recursos compartidos en Windows Server:
+    - 04_01_permisos_derechos.md
+    - 04_02_servidor_archivos.md
+    - 04_03_compartir_impresoras.md
+  - Directivas de grupo en Windows Server:
+    - 05_01_introduccion_directivas.md
+    - 05_02_creacion_directivas.md
+    - 05_03_herencia_directivas.md
+    - 05_04_configuacion_directivas_comunes.md
+    - 05_05_verificacion_problemas.md
+  - Configuraciones avanzadas y adicionales:
+    - 06_01_configuraciones_adicionales.md
+    - 06_02_carpetas_compartidas_ocultas.md
+    - 06_03_cuotas_discos.md
+    - 06_04_servidor_dhcp.md
+    - 06_05_escritorio_remoto.md
+    - 06_06_redes_virtuales_VPN.md
+    - 06_07_rsat.md
+    - 06_08_backups.md
+    - 06_09_controlador_secundario.md
+    - 06_10_supervision_monitorizacion.md
+    - 06_11_servicios.md
+    - 06_12_actualizacion_despliegue.md  
+
+  - Fundamentos de la Línea de Comandos en Linux:
+    - 10_01_introducciom.md
+    - 10_02_conceptos_basicos.md
+    - 10_03_comprendiendo_almacenamiento.md
+    - 10_04_rutas_absolutas_relativas.md
+    - 10_05_linea_comandos_linux.md
+    - 10_06_comandos_basicos_alias.md
+    - 10_07_gestion_directorios.md
+    - 10_08_gestion_ficheros.md
+    - 10_09_visualizacion_contenido.md
+    - 10_10_redireccionamiento_tuberias.md
+    - 10_11_procesamiento_avanzado_texto.md
+
+  - Administración de usuarios y permisos en Linux:
+    - 11_01_usuarios_grupos_linux.md
+    - 11_02_gestion_entorno_grafico.md
+    - 11_03_gestion_linea_comandos.md
+    - 11_04_sistema_permisos_ugo.md
+    - 11_05_permisos_umask.md
+
+  - Scripts de administración en Linux:
+    - 12_01_fundamentos_scripts.md
+    - 12_02_gestion_datos_comunicacion.md
+    - 12_03_logica_aritmetica.md
+    - 12_04_control_flujo.md
+    - 12_05_bucles.md
+    - 12_06_avanzada_modularidad.md
+    - 12_07_anexos.md
