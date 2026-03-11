@@ -6,11 +6,13 @@ highlight_theme: monokai
 
 # Sistemas Informáticos
 
+prueba de prueba
 ---
 
 ### DAM · Sergio Rey Martínez
 
 ## Presentación 
+
 ---
 
 ## ¿Qué vamos a aprender?

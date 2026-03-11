@@ -2,9 +2,9 @@ name: Deploy slides
 on:
   push:
     branches: [main]
-    paths:
-      - 'slides/**'
-      - 'mkslides.yml'
+  # paths:  <-- Comentado temporalmente para forzar el test
+  #   - 'slides/**'
+  #   - 'mkslides.yml'
 
 jobs:
   deploy:
@@ -22,7 +22,9 @@ jobs:
           pip install omegaconf mkslides
 
       - name: Build slides
-        run: mkslides build --config-file mkslides.yml slides/
+        run: |
+          mkslides build --config-file mkslides.yml slides/
+          ls -R ./site # Esto nos dirá en los logs qué archivos se han creado
 
       - name: Deploy to sin-slides
         uses: peaceiris/actions-gh-pages@v3
