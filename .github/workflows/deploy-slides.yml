@@ -21,24 +21,29 @@ jobs:
 
       - name: Build slides
         run: |
-          # 1. Limpieza para evitar conflictos de archivos viejos
+          # 1. Limpieza absoluta
           rm -rf site
           
-          # 2. Construcción: IMPORTANTE 'slides' sin barra final
-          # Esto ayuda a mantener la jerarquía de carpetas
+          # 2. Construcción respetando la jerarquía
+          # Ejecutamos mkslides indicando que el destino mantenga la estructura
           mkslides build --config-file mkslides.yml slides
           
-          # 3. Corrección de rutas para subcarpetas (UD00, UD01...)
-          # Cambia /mkslides-assets por ../mkslides-assets en todos los HTML
-          find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
-          find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
-          
-          # 4. Excepción para el index de la raíz (si existe uno principal)
-          # En la raíz, los assets no llevan "../"
-          if [ -f site/index.html ]; then
-            sed -i 's|href="../mkslides-assets|href="./mkslides-assets|g' site/index.html
-            sed -i 's|src="../mkslides-assets|src="./mkslides-assets|g' site/index.html
+          # 3. TRUCO DE SEGURIDAD: Si mkslides ha puesto el index en la raíz por error,
+          # creamos la carpeta UD00 y lo movemos allí.
+          if [ ! -d "site/UD00" ]; then
+            mkdir -p site/UD00
+            cp site/index.html site/UD00/index.html
           fi
+          
+          # 4. CORRECCIÓN DE RUTAS (Muy importante para el 404 de los estilos)
+          # Ahora que estamos en una subcarpeta (UD00), los assets están un nivel arriba
+          find site/UD00 -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
+          find site/UD00 -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
+          
+          # 5. Para que la raíz del dominio no esté vacía, mantenemos un index en la raíz
+          # pero arreglamos sus rutas también
+          sed -i 's|href="/mkslides-assets|href="./mkslides-assets|g' site/index.html
+          sed -i 's|src="/mkslides-assets|src="./mkslides-assets|g' site/index.html
 
           touch site/.nojekyll
 

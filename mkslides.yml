@@ -4,3 +4,5 @@ revealjs:
   center: true
   hash: true
   theme: black
+
+use_directory_urls: true  
