@@ -1,0 +1,3585 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Scripts en Bash para la administración de linux">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/12_07_anexos/">
+      
+      
+        <link rel="prev" href="../12_06_avanzada_modularidad/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Anexos - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#el-doble-parentesis" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Anexos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a los Sistemas Operativos de Servidor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introducción a los Sistemas Operativos de Servidor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_1_introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_2_arquitectura_cliente_servidor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura cliente/servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_3_funciones_SO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funciones de Sistemas Operativos en Red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_4_sistemas_operativos_servidor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principales sistemas operativos servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_5_recordatorio_red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repaso conceptos de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación de sistemas operativos de servidor privativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Instalación de sistemas operativos de servidor privativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_1_instalacion_SO_introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_2_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación de Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_3_config_basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_4_documentar_instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_5_administrar_discos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrar discos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_6_dominio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de usuarios y grupos en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administración de usuarios y grupos en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_objetos_dominios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetos del Dominio en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_usuarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cuentas de Usuario en un Dominio Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_grupos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grupos en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_equipos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipos en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_unidades_organizativas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidades Organizativas en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_herramientas_administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de administración en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_07_perfiles_usuarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perfiles de usuario en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de recursos compartidos en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión de recursos compartidos en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_permisos_derechos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisos y derechos en sistemas Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_servidor_archivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    El servidor de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_compartir_impresoras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compartir impresoras en red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directivas de grupo en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Directivas de grupo en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_introduccion_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a las directivas de grupo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_creacion_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creación y ámbito de aplicación de GPO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_herencia_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herencia de directivas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_configuacion_directivas_comunes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de directivas comunes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_verificacion_problemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verificación y resolución de problemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuraciones avanzadas y adicionales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuraciones avanzadas y adicionales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_configuraciones_adicionales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración avanzada de Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_carpetas_compartidas_ocultas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos Compartidos Ocultos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_cuotas_discos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cuotas de discos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidor DHCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_escritorio_remoto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Escritorio Remoto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_redes_virtuales_VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Red VPN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_rsat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Administración Remota del Servidor (RSAT)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Copias de seguridad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_controlador_secundario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controlador de Dominio Secundario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_10_supervision_monitorizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_11_servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_12_actualizacion_despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSUS &amp; WDS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de la Línea de Comandos en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de la Línea de Comandos en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_01_introducciom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a la Interfaz de Línea de Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_02_conceptos_basicos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conceptos Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_03_comprendiendo_almacenamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organización del Almacenamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_04_rutas_absolutas_relativas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rutas Absolutas y Relativas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_05_linea_comandos_linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La Línea de Comandos de GNU/Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_06_comandos_basicos_alias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandos Básicos y Alias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_07_gestion_directorios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Directorios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_08_gestion_ficheros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Ficheros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_09_visualizacion_contenido/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualización de Contenido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_10_redireccionamiento_tuberias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redireccionamiento y Tuberías
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_11_procesamiento_avanzado_texto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento Avanzado de Texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de usuarios y permisos en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administración de usuarios y permisos en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_01_usuarios_grupos_linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usuarios y Grupos en GNU/Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_02_gestion_entorno_grafico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión desde el Entorno Gráfico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_03_gestion_linea_comandos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión desde la Línea de Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_04_sistema_permisos_ugo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Permisos UGO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_05_permisos_umask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisos por Defecto - umask
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts de administración en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripts de administración en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_01_fundamentos_scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos del scripting en linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_02_gestion_datos_comunicacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comando entrada salida
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_03_logica_aritmetica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lógica matemática
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_04_control_flujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de flujo de programa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_05_bucles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_06_avanzada_modularidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modularidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#el-doble-parentesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El doble paréntesis (( .. ))
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expresiones-regulares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresiones regulares
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numero-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Número aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comando-awk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comando awk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-color-y-posicion-del-texto-en-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir color y posición del texto en la consola
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-posicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la posición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zenity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zenity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-para-mejorar-la-salida-por-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos para mejorar la salida por consola.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión final
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#el-doble-parentesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El doble paréntesis (( .. ))
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expresiones-regulares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresiones regulares
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numero-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Número aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comando-awk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comando awk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-color-y-posicion-del-texto-en-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir color y posición del texto en la consola
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-posicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la posición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zenity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zenity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-para-mejorar-la-salida-por-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos para mejorar la salida por consola.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión final
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Anexos</h1>
+
+<p>Para finalizar esta documentación sobre scripting vamos a revisar una serie de elementos que nos permiten crear scripts más profesionales con mejores interacciones con el usuario, comando avanzados como <code>awk</code> y aclaraciones sobre algunos aspectos de la sintaxis</p>
+<h2 id="el-doble-parentesis">El doble paréntesis <code>(( .. ))</code></h2>
+<p>El doble paréntesis, cuyo uso en un caso muy particular ya hemos visto con el bucle <code>for</code>, forma un estructura con funcionamiento muy similar al comando <code>let</code>. De hecho podemos hacer lo mismo que hacíamos con <code>let</code> (El dólar para leer las variables sigue siendo opcional en este caso solamente, sólo para leer, al darles valor siempre van sin dólar):</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">((</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>+<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">))</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$n</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># La variable n valdrá 8</span>
+</span></code></pre></div>
+</div>
+<p>Si en lugar de usarlo como el <code>let</code> (asignar un valor a una variable), queremos que funcione más bien como usar <code>expr operación</code> basta con ponerle el dólar '<code>$</code>' delante y se sustituirá por el resultado de la operación.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">n</span><span class="o">=</span><span class="m">5</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">echo</span><span class="w"> </span>“El<span class="w"> </span>doble<span class="w"> </span>de<span class="w"> </span><span class="nv">$n</span><span class="w"> </span>es<span class="w"> </span><span class="k">$((</span><span class="nv">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="k">))</span>”<span class="w"> </span><span class="c1"># El doble de 5 es 10</span>
+</span></code></pre></div>
+</div>
+<p>Lo mejor de usar el doble paréntesis, es que cuando ponemos una condición lógica dentro devuelve un valor verdadero o falso, con lo cual se hace posible utilizarlo como condición, para un if o para un bucle while por ejemplo:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">i</span><span class="o">=</span><span class="m">0</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Contador desde i=0 a i=4</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">while</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">))</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">do</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="o">(</span>i<span class="w"> </span>%<span class="w"> </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">))</span><span class="w"> </span><span class="c1">#Numero par</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">then</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Numero par: </span><span class="nv">$i</span><span class="s2">"</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="c1">#Numero impar</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Numero impar: </span><span class="nv">$i</span><span class="s2">"</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">fi</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="o">((</span><span class="w"> </span>i++<span class="w"> </span><span class="o">))</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">done</span>
+</span></code></pre></div>
+</div>
+<p>Otra posibilidad del doble paréntesis es la de poder hacer operaciones con variables, para mostrarlas por pantalla, por ejemplo, si tenemos una posición de un array, y queremos mostrar una posición más (para empezar desde la 1 y no desde la 0), en ese caso se pone el símbolo <code>$</code>, seguido del doble paréntesis y la operación dentro. Ejemplo:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span><span class="si">${#</span><span class="nv">vector</span><span class="p">[*]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="w"> </span><span class="o">))</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">do</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Elemento </span><span class="k">$((</span><span class="nv">i</span><span class="o">+</span><span class="m">1</span><span class="k">))</span><span class="s2">: </span><span class="si">${</span><span class="nv">vector</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">done</span>
+</span></code></pre></div>
+</div>
+<h2 id="expresiones-regulares">Expresiones regulares</h2>
+<p>Dominar las expresiones regulares es fundamental para realizar todo tipo de operaciones en texto.</p>
+<p>A continuación tenemos un compendio extraido de la siguiente fuente: <a href="https://bioinf.comav.upv.es/courses/unix/expresiones_regulares.html">UPV. COMAV. Expresiones regulares</a></p>
+<ul>
+<li><strong>Contenedores</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>POSIX</th>
+<th>ASCII</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[:alnum:]</td>
+<td>[A-Za-z0-9]</td>
+<td>Caracteres alfanuméricos (letras y números)</td>
+</tr>
+<tr>
+<td>[:word:]</td>
+<td>[A-Za-z0-9_]</td>
+<td>Caracteres alfanuméricos y “_”</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>[A-Za-z]</td>
+<td>Caracteres alfabéticos</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>[ \t]</td>
+<td>Espacio y tabulador</td>
+</tr>
+<tr>
+<td>[:space:]</td>
+<td>[ \t\r\n\v\f]</td>
+<td>Espacios</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>[0-9]</td>
+<td>Dígitos</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>[a-z]</td>
+<td>Letras minúsculas</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>[A-Z]</td>
+<td>Letras mayúsculas</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td>[][!”#$%&amp;’()*+,./:;&lt;=&gt;?@^_`{|}~-]</td>
+<td>Caracteres de puntuación</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Cuantificadores</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Expr</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>?</code></td>
+<td>el carácter aparece ninguna o una vez. “usher1?” coincidiría con “usher” o “usher1”.</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>cero, una o varias veces.</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>al menos una vez</td>
+</tr>
+<tr>
+<td><code>{4}</code></td>
+<td>cuatro veces.</td>
+</tr>
+<tr>
+<td><code>{4,10}</code></td>
+<td>entre 4 y 10 veces</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Puntos de anclaje</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Expr</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^</code></td>
+<td>inicio de línea</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>fin de línea</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>principio de palabra</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>fin de palabra</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>límite de palabra</td>
+</tr>
+</tbody>
+</table>
+<p>Veamos algunos ejemplos de uso: </p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1. Búsquedas de carpetas</p>
+<p>Buscamos solo directorios</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^d
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2. Búsquedas de archivos concretos</p>
+<p>Buscamos archivos de configuración, que sean archivos y que tengan cosas intermedias y que acaben en <code>.conf</code>. La barra invertida es para que el punto se tome como punto (<code>\.</code>)</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^-.*<span class="se">\.</span>conf$
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3. Más filtros para archivos</p>
+<p>Buscamos ficheros que comiencen y terminen por una vocal
+```bash
+ls /etc | grep ^[aeiouAEIOU].*[aeiouAEIOU]$ </p>
+</div>
+<p>```</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4. Búsquedas de caracteres especiales</p>
+<p>Para los caracteres comodines, si los queremos buscar utilizamos escapes, por ejemplo para buscar  3 o 4 puntos </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span>fdf....fdfsaf...a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"\.\.\."</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span>fdf....fdfsaf...a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"\.\.\.\."</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>ls<span class="w"> </span>-1<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">".conf"</span><span class="w">   </span>//aquí<span class="w"> </span>el<span class="w"> </span>punto<span class="w"> </span>se<span class="w"> </span>interpreta<span class="w"> </span>como<span class="w"> </span>cualquier<span class="w"> </span>caracter
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>ls<span class="w"> </span>-1<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"\.conf"</span><span class="w">  </span>//aqui<span class="w"> </span>el<span class="w"> </span>punto<span class="w"> </span>se<span class="w"> </span>toma<span class="w"> </span>como<span class="w"> </span>un<span class="w"> </span>punto
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 5. Búsquedas usando máscaras de permisos</p>
+<p>podemos crear máscaras para mostrar los que tengan ciertos permisos
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'^......x.w.'</span>
+</span></code></pre></div>
+en este caso, los que los del grupo puedan ejecutar y los otros puedan escribir.<p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 6. Búsquedas para contar</p>
+<p>Todos los directorios: contarlos
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^d<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</span></code></pre></div><p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 7. Transformaciones tras búsquedas</p>
+<p>listado de todos los directorios en mayúsculas
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^d<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-s<span class="w"> </span><span class="s2">" "</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f9<span class="w"> </span>-d<span class="s2">" "</span><span class="w"> </span><span class="p">|</span>tr<span class="w"> </span>a-z<span class="w"> </span>A-Z
+</span></code></pre></div><p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 8. Filtros sobre entrada teclado</p>
+<p>Con el siguiente comando, te coge la entrada estándar, que es el teclado, y te repite las lineas que cumplen las condiciones indicadas, comienzan por letra, sigue por letra o número o _, y acaba por letra o numero
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>grep<span class="w"> </span><span class="s1">'^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$'</span>
+</span></code></pre></div><p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 9. Enumerando búsquedas</p>
+<p>Numerara a la hora de buscar / filtra
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w">  </span>/etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-n<span class="w"> </span>^d
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># resultado </span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="m">39</span>:dbus-1
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="m">40</span>:dconf
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="m">41</span>:debconf.conf
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="m">42</span>:debian_version
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="m">43</span>:default
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="m">44</span>:deluser.conf
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="m">45</span>:depmod.d
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="m">46</span>:dhcp
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="m">47</span>:dictionaries-common
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="m">48</span>:dpkg
+</span></code></pre></div><p></p>
+</div>
+<h2 id="numero-aleatorios">Número aleatorios</h2>
+<p>A veces, estamos programando algún script en <code>Bash</code> y necesitamos (por algún motivo) generar algún <strong>número aleatorio</strong>. <code>RANDOM</code> es una variable de shell que se utiliza para generar enteros aleatorios en Linux. Es un comando bash interno que devuelve un entero de 16 bits en el rango 0 - 32767.Devuelve un entero diferente en cada invocación.</p>
+<ul>
+<li>Generando un entero aleatorio cuando se da el límite superior.</li>
+</ul>
+<p>Si se desea generar un número entero aleatorio dentro de Y (donde Y no está incluido). El formato para lograr esto es:</p>
+<div class="admonition example">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">NUM</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">Y</span><span class="k">))</span>
+</span></code></pre></div>
+</div>
+<p>Para incluir el valor del limite superior (Y) la operación será Y+1. El formato es:</p>
+<div class="admonition example">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">R</span><span class="o">=</span><span class="k">$((</span><span class="nv">$RANDOM</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nv">Y</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+</span></code></pre></div>
+</div>
+<ul>
+<li>Generando un número entero aleatorio cuando se da tanto el límite superior como el inferior</li>
+</ul>
+<p>Si se desea generar un número entero aleatorio entre X e Y donde X es el límite inferior (X ≠ 0) e Y es el límite superior. El formato para lograr esto es:</p>
+<div class="admonition example">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">RANGO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>$<span class="w"> </span><span class="o">((</span>Y-X<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">NUM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>$<span class="w"> </span><span class="o">((</span>$<span class="w"> </span><span class="o">((</span>$<span class="w"> </span>RANDOM%<span class="w"> </span>$<span class="w"> </span>RANGO<span class="o">))</span><span class="w"> </span>+<span class="w"> </span>X<span class="o">))</span>
+</span></code></pre></div>
+</div>
+<p>Otra forma de conseguir un valor aleatorio es mediante el comando <code>shuf</code> (<em>shuffle</em> = barajar). Como argumentos más representativos tenemos: </p>
+<ul>
+<li><code>-i</code>: indica el intervalo del que debe extraer el número aletorio</li>
+<li><code>-n</code>: indica la cantidad de números aleatorios a obtener, si no ponemos nada realiza un orden aleatorio de todos el intervalo indicado</li>
+<li><code>-r</code>: se pueden repetir los números obtenidos. Si no se pone, no se repiten, se van descartando.</li>
+<li><code>-z</code>: el delimitador de línes es NUL. Obtiene todos los números en una misma línea.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>shuf<span class="w"> </span>-i1-10<span class="w"> </span>-n3
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># Obtiene 3 números aleatorios desde el 1 al 10 ambos incluidos</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>shuf<span class="w"> </span>-i<span class="w"> </span><span class="m">0</span>-9<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-r<span class="w"> </span>-z
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1"># obtiene 5 dígitos aleatorios entre 0 y 9, que se pueden repetir y se obtienen en una misma línea</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"El número primeado ha sido el `shuf -i0-9 -n5 -rz`"</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1"># ídem anterior, pero lo muestra en una frase.</span>
+</span></code></pre></div>
+</div>
+<h2 id="comando-awk">Comando <code>awk</code></h2>
+<p>El comando <code>awk</code> de linux es una herramienta que te permite procesar y modificar archivos de texto según tus necesidades. Con <code>awk</code> puedes buscar palabras o patrones en los archivos y realizar acciones sobre ellos, como imprimir, reemplazar o hacer operaciones matemáticas1. <code>awk</code> también <strong><em>tiene su propio lenguaje de programación y scripting</em></strong>, que te permite escribir programas más complejos y flexibles.</p>
+<p>Aquí tienes algunos ejemplos de cómo usar el comando awk:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Para mostrar solo la primera columna de un archivo separado por espacios</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>awk<span class="w"> </span><span class="s1">'{print $1}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Para mostrar solo las líneas que contienen la palabra “Linux”:</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>awk<span class="w"> </span><span class="s1">'/Linux/ {print}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Para sumar los valores de la segunda columna de un archivo separado por comas:</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">','</span><span class="w"> </span><span class="s1">'{sum += $2} END {print sum}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Para contar el número de líneas que contienen una vocal:</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>awk<span class="w"> </span><span class="s1">'/[aeiou]/ {count++} END {print count}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 5</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Para mostrar las líneas que tienen una longitud mayor que 10 caracteres:</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>awk<span class="w"> </span><span class="s1">'length($0) &gt; 10 {print}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 6</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Para convertir las letras minúsculas en mayúsculas:</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>awk<span class="w"> </span><span class="s1">'{print toupper($0)}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 7</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Para generar un código QR con el texto del archivo:</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>awk<span class="w"> </span><span class="s1">'BEGIN {srand()} {a[NR] = $0} END {for (i=1; i&lt;=NR; i++) {n = int(rand() * NR) + 1; print "\\qr{" a[n] "}\\\\"}}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 8</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Para generar un poema con las palabras del archivo:</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>awk<span class="w"> </span><span class="s1">'BEGIN {srand()} {a[NR] = $0} END {for (i=1; i&lt;=4; i++) {n = int(rand() * NR) + 1; print a[n]}}'</span><span class="w"> </span>archivo.txt
+</span></code></pre></div>
+</div>
+<h2 id="definir-color-y-posicion-del-texto-en-la-consola">Definir color y posición del texto en la consola</h2>
+<p>Para hacer que el texto aparezca de un determinado color o en una determinada posición de la consola (definida por número de columna y de fila), se utilizan una serie de códigos especiales, que luego serán interpretados por el comando echo con la opción -n (igual que cuando queremos que funcionen los saltos de línea o tabuladores <code>\n\t)</code>.</p>
+<p>Estos son los códigos para colores y estilos de letra (<em>subrayado</em>, <em>negrita</em>), lo más útil es guardarlos en variables por ejemplo, al principio de nuestro script o en otro al cual llamaremos desde el nuestro (lo ejecutamos).</p>
+<div class="admonition note">
+<p class="admonition-title">Codificación</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Resetear el formato de texto (volver al original)</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nv">Color_Off</span><span class="o">=</span><span class="s1">'\e[0m'</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># Text Reset</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="c1"># Colores normales</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="nv">Black</span><span class="o">=</span><span class="s1">'\e[0;30m'</span><span class="w">    </span><span class="c1"># Black</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="nv">Red</span><span class="o">=</span><span class="s1">'\e[0;31m'</span><span class="w">      </span><span class="c1"># Red</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="nv">Green</span><span class="o">=</span><span class="s1">'\e[0;32m'</span><span class="w">    </span><span class="c1"># Green</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="nv">Yellow</span><span class="o">=</span><span class="s1">'\e[0;33m'</span><span class="w">   </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="nv">Blue</span><span class="o">=</span><span class="s1">'\e[0;34m'</span><span class="w">     </span><span class="c1"># Blue</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="nv">Purple</span><span class="o">=</span><span class="s1">'\e[0;35m'</span><span class="w">   </span><span class="c1"># Purple</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="nv">Cyan</span><span class="o">=</span><span class="s1">'\e[0;36m'</span><span class="w">     </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="nv">White</span><span class="o">=</span><span class="s1">'\e[0;37m'</span><span class="w">    </span><span class="c1"># White</span>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="c1"># Colores + negrita</span>
+</span><span id="__span-24-16"><a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="nv">BBlack</span><span class="o">=</span><span class="s1">'\e[1;30m'</span><span class="w">   </span><span class="c1"># Black</span>
+</span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="nv">BRed</span><span class="o">=</span><span class="s1">'\e[1;31m'</span><span class="w">     </span><span class="c1"># Red</span>
+</span><span id="__span-24-18"><a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="nv">BGreen</span><span class="o">=</span><span class="s1">'\e[1;32m'</span><span class="w">   </span><span class="c1"># Green</span>
+</span><span id="__span-24-19"><a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="nv">BYellow</span><span class="o">=</span><span class="s1">'\e[1;33m'</span><span class="w">  </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-20"><a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="nv">BBlue</span><span class="o">=</span><span class="s1">'\e[1;34m'</span><span class="w">    </span><span class="c1"># Blue</span>
+</span><span id="__span-24-21"><a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a><span class="nv">BPurple</span><span class="o">=</span><span class="s1">'\e[1;35m'</span><span class="w">  </span><span class="c1"># Purple</span>
+</span><span id="__span-24-22"><a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a><span class="nv">BCyan</span><span class="o">=</span><span class="s1">'\e[1;36m'</span><span class="w">    </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-23"><a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a><span class="nv">BWhite</span><span class="o">=</span><span class="s1">'\e[1;37m'</span><span class="w">   </span><span class="c1"># White</span>
+</span><span id="__span-24-24"><a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>
+</span><span id="__span-24-25"><a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a><span class="c1"># Colores + subrayado</span>
+</span><span id="__span-24-26"><a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="nv">UBlack</span><span class="o">=</span><span class="s1">'\e[4;30m'</span><span class="w">   </span><span class="c1"># Black</span>
+</span><span id="__span-24-27"><a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a><span class="nv">URed</span><span class="o">=</span><span class="s1">'\e[4;31m'</span><span class="w">     </span><span class="c1"># Red</span>
+</span><span id="__span-24-28"><a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a><span class="nv">UGreen</span><span class="o">=</span><span class="s1">'\e[4;32m'</span><span class="w">   </span><span class="c1"># Green</span>
+</span><span id="__span-24-29"><a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a><span class="nv">UYellow</span><span class="o">=</span><span class="s1">'\e[4;33m'</span><span class="w">  </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-30"><a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="nv">UBlue</span><span class="o">=</span><span class="s1">'\e[4;34m'</span><span class="w">    </span><span class="c1"># Blue</span>
+</span><span id="__span-24-31"><a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a><span class="nv">UPurple</span><span class="o">=</span><span class="s1">'\e[4;35m'</span><span class="w">  </span><span class="c1"># Purple</span>
+</span><span id="__span-24-32"><a id="__codelineno-24-32" name="__codelineno-24-32" href="#__codelineno-24-32"></a><span class="nv">UCyan</span><span class="o">=</span><span class="s1">'\e[4;36m'</span><span class="w">    </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-33"><a id="__codelineno-24-33" name="__codelineno-24-33" href="#__codelineno-24-33"></a><span class="nv">UWhite</span><span class="o">=</span><span class="s1">'\e[4;37m'</span><span class="w">   </span><span class="c1"># White</span>
+</span><span id="__span-24-34"><a id="__codelineno-24-34" name="__codelineno-24-34" href="#__codelineno-24-34"></a>
+</span><span id="__span-24-35"><a id="__codelineno-24-35" name="__codelineno-24-35" href="#__codelineno-24-35"></a><span class="c1"># Color de fondo (anteriores era para el texto)</span>
+</span><span id="__span-24-36"><a id="__codelineno-24-36" name="__codelineno-24-36" href="#__codelineno-24-36"></a><span class="nv">On_Black</span><span class="o">=</span><span class="s1">'\e[40m'</span><span class="w">   </span><span class="c1"># Black</span>
+</span><span id="__span-24-37"><a id="__codelineno-24-37" name="__codelineno-24-37" href="#__codelineno-24-37"></a><span class="nv">On_Red</span><span class="o">=</span><span class="s1">'\e[41m'</span><span class="w">     </span><span class="c1"># Red</span>
+</span><span id="__span-24-38"><a id="__codelineno-24-38" name="__codelineno-24-38" href="#__codelineno-24-38"></a><span class="nv">On_Green</span><span class="o">=</span><span class="s1">'\e[42m'</span><span class="w">   </span><span class="c1"># Green</span>
+</span><span id="__span-24-39"><a id="__codelineno-24-39" name="__codelineno-24-39" href="#__codelineno-24-39"></a><span class="nv">On_Yellow</span><span class="o">=</span><span class="s1">'\e[43m'</span><span class="w">  </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-40"><a id="__codelineno-24-40" name="__codelineno-24-40" href="#__codelineno-24-40"></a><span class="nv">On_Blue</span><span class="o">=</span><span class="s1">'\e[44m'</span><span class="w">    </span><span class="c1"># Blue</span>
+</span><span id="__span-24-41"><a id="__codelineno-24-41" name="__codelineno-24-41" href="#__codelineno-24-41"></a><span class="nv">On_Purple</span><span class="o">=</span><span class="s1">'\e[45m'</span><span class="w">  </span><span class="c1"># Purple</span>
+</span><span id="__span-24-42"><a id="__codelineno-24-42" name="__codelineno-24-42" href="#__codelineno-24-42"></a><span class="nv">On_Cyan</span><span class="o">=</span><span class="s1">'\e[46m'</span><span class="w">    </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-43"><a id="__codelineno-24-43" name="__codelineno-24-43" href="#__codelineno-24-43"></a><span class="nv">On_White</span><span class="o">=</span><span class="s1">'\e[47m'</span><span class="w">   </span><span class="c1"># White</span>
+</span><span id="__span-24-44"><a id="__codelineno-24-44" name="__codelineno-24-44" href="#__codelineno-24-44"></a>
+</span><span id="__span-24-45"><a id="__codelineno-24-45" name="__codelineno-24-45" href="#__codelineno-24-45"></a><span class="c1"># Colores de alta intensidad</span>
+</span><span id="__span-24-46"><a id="__codelineno-24-46" name="__codelineno-24-46" href="#__codelineno-24-46"></a><span class="nv">IBlack</span><span class="o">=</span><span class="s1">'\e[0;90m'</span><span class="w">   </span><span class="c1"># Black</span>
+</span><span id="__span-24-47"><a id="__codelineno-24-47" name="__codelineno-24-47" href="#__codelineno-24-47"></a><span class="nv">IRed</span><span class="o">=</span><span class="s1">'\e[0;91m'</span><span class="w">     </span><span class="c1"># Red</span>
+</span><span id="__span-24-48"><a id="__codelineno-24-48" name="__codelineno-24-48" href="#__codelineno-24-48"></a><span class="nv">IGreen</span><span class="o">=</span><span class="s1">'\e[0;92m'</span><span class="w">   </span><span class="c1"># Green</span>
+</span><span id="__span-24-49"><a id="__codelineno-24-49" name="__codelineno-24-49" href="#__codelineno-24-49"></a><span class="nv">IYellow</span><span class="o">=</span><span class="s1">'\e[0;93m'</span><span class="w">  </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-50"><a id="__codelineno-24-50" name="__codelineno-24-50" href="#__codelineno-24-50"></a><span class="nv">IBlue</span><span class="o">=</span><span class="s1">'\e[0;94m'</span><span class="w">    </span><span class="c1"># Blue</span>
+</span><span id="__span-24-51"><a id="__codelineno-24-51" name="__codelineno-24-51" href="#__codelineno-24-51"></a><span class="nv">IPurple</span><span class="o">=</span><span class="s1">'\e[0;95m'</span><span class="w">  </span><span class="c1"># Purple</span>
+</span><span id="__span-24-52"><a id="__codelineno-24-52" name="__codelineno-24-52" href="#__codelineno-24-52"></a><span class="nv">ICyan</span><span class="o">=</span><span class="s1">'\e[0;96m'</span><span class="w">    </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-53"><a id="__codelineno-24-53" name="__codelineno-24-53" href="#__codelineno-24-53"></a><span class="nv">IWhite</span><span class="o">=</span><span class="s1">'\e[0;97m'</span><span class="w">   </span><span class="c1"># White</span>
+</span><span id="__span-24-54"><a id="__codelineno-24-54" name="__codelineno-24-54" href="#__codelineno-24-54"></a>
+</span><span id="__span-24-55"><a id="__codelineno-24-55" name="__codelineno-24-55" href="#__codelineno-24-55"></a><span class="c1"># Colores de alta intensidad + negrita</span>
+</span><span id="__span-24-56"><a id="__codelineno-24-56" name="__codelineno-24-56" href="#__codelineno-24-56"></a><span class="nv">BIBlack</span><span class="o">=</span><span class="s1">'\e[1;90m'</span><span class="w">  </span><span class="c1"># Black</span>
+</span><span id="__span-24-57"><a id="__codelineno-24-57" name="__codelineno-24-57" href="#__codelineno-24-57"></a><span class="nv">BIRed</span><span class="o">=</span><span class="s1">'\e[1;91m'</span><span class="w">    </span><span class="c1"># Red</span>
+</span><span id="__span-24-58"><a id="__codelineno-24-58" name="__codelineno-24-58" href="#__codelineno-24-58"></a><span class="nv">BIGreen</span><span class="o">=</span><span class="s1">'\e[1;92m'</span><span class="w">  </span><span class="c1"># Green</span>
+</span><span id="__span-24-59"><a id="__codelineno-24-59" name="__codelineno-24-59" href="#__codelineno-24-59"></a><span class="nv">BIYellow</span><span class="o">=</span><span class="s1">'\e[1;93m'</span><span class="w"> </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-60"><a id="__codelineno-24-60" name="__codelineno-24-60" href="#__codelineno-24-60"></a><span class="nv">BIBlue</span><span class="o">=</span><span class="s1">'\e[1;94m'</span><span class="w">   </span><span class="c1"># Blue</span>
+</span><span id="__span-24-61"><a id="__codelineno-24-61" name="__codelineno-24-61" href="#__codelineno-24-61"></a><span class="nv">BIPurple</span><span class="o">=</span><span class="s1">'\e[1;95m'</span><span class="w"> </span><span class="c1"># Purple</span>
+</span><span id="__span-24-62"><a id="__codelineno-24-62" name="__codelineno-24-62" href="#__codelineno-24-62"></a><span class="nv">BICyan</span><span class="o">=</span><span class="s1">'\e[1;96m'</span><span class="w">   </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-63"><a id="__codelineno-24-63" name="__codelineno-24-63" href="#__codelineno-24-63"></a><span class="nv">BIWhite</span><span class="o">=</span><span class="s1">'\e[1;97m'</span><span class="w">  </span><span class="c1"># White</span>
+</span><span id="__span-24-64"><a id="__codelineno-24-64" name="__codelineno-24-64" href="#__codelineno-24-64"></a>
+</span><span id="__span-24-65"><a id="__codelineno-24-65" name="__codelineno-24-65" href="#__codelineno-24-65"></a><span class="c1"># Colores de fondo de alta intensidad</span>
+</span><span id="__span-24-66"><a id="__codelineno-24-66" name="__codelineno-24-66" href="#__codelineno-24-66"></a><span class="nv">On_IBlack</span><span class="o">=</span><span class="s1">'\e[0;100m'</span><span class="w">   </span><span class="c1"># Black</span>
+</span><span id="__span-24-67"><a id="__codelineno-24-67" name="__codelineno-24-67" href="#__codelineno-24-67"></a><span class="nv">On_IRed</span><span class="o">=</span><span class="s1">'\e[0;101m'</span><span class="w">     </span><span class="c1"># Red</span>
+</span><span id="__span-24-68"><a id="__codelineno-24-68" name="__codelineno-24-68" href="#__codelineno-24-68"></a><span class="nv">On_IGreen</span><span class="o">=</span><span class="s1">'\e[0;102m'</span><span class="w">   </span><span class="c1"># Green</span>
+</span><span id="__span-24-69"><a id="__codelineno-24-69" name="__codelineno-24-69" href="#__codelineno-24-69"></a><span class="nv">On_IYellow</span><span class="o">=</span><span class="s1">'\e[0;103m'</span><span class="w">  </span><span class="c1"># Yellow</span>
+</span><span id="__span-24-70"><a id="__codelineno-24-70" name="__codelineno-24-70" href="#__codelineno-24-70"></a><span class="nv">On_IBlue</span><span class="o">=</span><span class="s1">'\e[0;104m'</span><span class="w">    </span><span class="c1"># Blue</span>
+</span><span id="__span-24-71"><a id="__codelineno-24-71" name="__codelineno-24-71" href="#__codelineno-24-71"></a><span class="nv">On_IPurple</span><span class="o">=</span><span class="s1">'\e[10;95m'</span><span class="w">  </span><span class="c1"># Purple</span>
+</span><span id="__span-24-72"><a id="__codelineno-24-72" name="__codelineno-24-72" href="#__codelineno-24-72"></a><span class="nv">On_ICyan</span><span class="o">=</span><span class="s1">'\e[0;106m'</span><span class="w">    </span><span class="c1"># Cyan</span>
+</span><span id="__span-24-73"><a id="__codelineno-24-73" name="__codelineno-24-73" href="#__codelineno-24-73"></a><span class="nv">On_IWhite</span><span class="o">=</span><span class="s1">'\e[0;107m'</span><span class="w">   </span><span class="c1"># White</span>
+</span></code></pre></div>
+</div>
+<p>Para probar estos colores, simplemente debemos meter la variable entre el texto (los cambios serán permanentes hasta que los volvamos a resetear o cambiar de nuevo):</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo con códigos de colores</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">Blue</span><span class="si">}</span><span class="s2">Texto azul </span><span class="si">${</span><span class="nv">UGreen</span><span class="si">}</span><span class="s2">Texto verde subrayado</span><span class="si">${</span><span class="nv">Color_Off</span><span class="si">}</span><span class="s2"> Reset"</span>
+</span></code></pre></div>
+</div>
+<h2 id="definir-la-posicion">Definir la posición</h2>
+<p>Se hace de una forma parecida a usar colores, es decir, mediante un código. Los 3 tipos de códigos que nos interesan son:</p>
+<p>Tabla: Control del Cursor y Pantalla (Secuencias ANSI)</p>
+<table>
+<thead>
+<tr>
+<th>Código ANSI</th>
+<th>Acción / Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\033[s</code></td>
+<td><strong>Guarda</strong> la posición actual del cursor (útil para volver a ella más tarde).</td>
+</tr>
+<tr>
+<td><code>\033[&lt;F&gt;;&lt;C&gt;f</code></td>
+<td><strong>Posiciona</strong> el cursor en la fila <code>&lt;F&gt;</code> y columna <code>&lt;C&gt;</code> indicadas (ambas empiezan en 1).</td>
+</tr>
+<tr>
+<td><code>\033[u</code></td>
+<td><strong>Restaura</strong> el cursor a la última posición guardada con <code>\033[s</code>.</td>
+</tr>
+<tr>
+<td><code>\033[&lt;N&gt;A</code></td>
+<td>Mueve el cursor <strong>hacia arriba</strong> <code>&lt;N&gt;</code> líneas.</td>
+</tr>
+<tr>
+<td><code>\033[&lt;N&gt;B</code></td>
+<td>Mueve el cursor <strong>hacia abajo</strong> <code>&lt;N&gt;</code> líneas.</td>
+</tr>
+<tr>
+<td><code>\033[&lt;N&gt;C</code></td>
+<td>Mueve el cursor <strong>hacia adelante</strong> (derecha) <code>&lt;N&gt;</code> columnas.</td>
+</tr>
+<tr>
+<td><code>\033[&lt;N&gt;D</code></td>
+<td>Mueve el cursor <strong>hacia atrás</strong> (izquierda) <code>&lt;N&gt;</code> columnas.</td>
+</tr>
+<tr>
+<td><code>\033[2J</code></td>
+<td><strong>Limpia</strong> completamente la pantalla de la terminal.</td>
+</tr>
+<tr>
+<td><code>\033[K</code></td>
+<td><strong>Limpia</strong> la línea desde la posición actual del cursor hasta el final de esta.</td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplos de uso</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'\033[2J\033[1;1fBienvenido a: \033[4;7f La consola\033[4C...Del futuro'</span>
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="c1"># Limpiar pantalla y situar el cursor en la fila 5, columna 10</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"\033[2J\033[5;10fHola Mundo en una posición específica"</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="c1"># Mover el cursor 2 líneas hacia abajo para la siguiente frase</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"\033[2BPróximo texto dos líneas más abajo."</span>
+</span></code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota técnica:</p>
+<p>El código <code>\033</code> representa el carácter <strong>ESC</strong> (Escape). En algunos manuales también lo verás escrito como <code>\e</code> o <code>\x1b</code>, pero <code>\033</code> es la representación octal más estándar en Bash.</p>
+</div>
+<h2 id="zenity"><code>Zenity</code></h2>
+<p><code>Zenity</code> es una herramienta que te permite crear cuadros de diálogo gráficos desde la línea de comandos o desde scripts de shell1. Con <code>Zenity</code> puedes interactuar con el usuario y recibir información de forma sencilla y visual. <code>Zenity</code> usa las librerías GTK y se integra bien con el entorno de escritorio GNOME, pero también funciona en otros entornos2.</p>
+<p>Para usar <code>Zenity</code>, solo tienes que escribir el nombre del comando seguido del tipo de cuadro de diálogo y las opciones que quieras. Por ejemplo, para mostrar un cuadro de diálogo de entrada con el texto <em>“Escribe tu nombre”</em>, puedes escribir:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo uso Zenity</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>zenity<span class="w"> </span>--entry<span class="w"> </span>--text<span class="o">=</span><span class="s2">"Escribe tu nombre"</span>
+</span></code></pre></div>
+</div>
+<p><code>Zenity</code> tiene varios tipos de cuadros de diálogo que puedes usar según tus necesidades, como por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de Diálogo</th>
+<th>Opción de Zenity</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calendario</strong></td>
+<td><code>--calendar</code></td>
+<td>Muestra un calendario para seleccionar una fecha.</td>
+</tr>
+<tr>
+<td><strong>Entrada</strong></td>
+<td><code>--entry</code></td>
+<td>Solicita al usuario que introduzca un texto.</td>
+</tr>
+<tr>
+<td><strong>Error / Aviso</strong></td>
+<td><code>--error</code> / <code>--warning</code></td>
+<td>Muestra un mensaje de error o una advertencia.</td>
+</tr>
+<tr>
+<td><strong>Información</strong></td>
+<td><code>--text-info</code></td>
+<td>Muestra un área de texto con información.</td>
+</tr>
+<tr>
+<td><strong>Lista</strong></td>
+<td><code>--list</code></td>
+<td>Muestra una lista de opciones para elegir una o varias.</td>
+</tr>
+<tr>
+<td><strong>Notificación</strong></td>
+<td><code>--notification</code></td>
+<td>Muestra un icono de notificación en el área de estado.</td>
+</tr>
+<tr>
+<td><strong>Progreso</strong></td>
+<td><code>--progress</code></td>
+<td>Muestra una barra para indicar el progreso de una tarea.</td>
+</tr>
+<tr>
+<td><strong>Pregunta</strong></td>
+<td><code>--question</code></td>
+<td>Realiza una pregunta con botones de respuesta Sí/No.</td>
+</tr>
+<tr>
+<td><strong>Selector de archivos</strong></td>
+<td><code>--file-selection</code></td>
+<td>Abre un diálogo para seleccionar archivos o carpetas.</td>
+</tr>
+<tr>
+<td><strong>Selector de color</strong></td>
+<td><code>--color-selection</code></td>
+<td>Abre una paleta para seleccionar un color.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Un ejemplo de uso sería:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nv">nombre</span><span class="o">=</span><span class="k">$(</span>zenity<span class="w"> </span>--entry<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">                </span>--title<span class="o">=</span><span class="s2">"Datos del usuario"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">                </span>--width<span class="o">=</span><span class="m">250</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">                </span>--ok-label<span class="o">=</span><span class="s2">"Aceptar"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">                </span>--cancel-label<span class="o">=</span><span class="s2">"No te lo quiero decir"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">                </span>--text<span class="o">=</span><span class="s2">"¿Cual es tu nombre?"</span><span class="k">)</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="nv">ans</span><span class="o">=</span><span class="nv">$?</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$ans</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="k">then</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Su nombre es: </span><span class="si">${</span><span class="nv">nombre</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="k">else</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"No me quiere decir su nombre"</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="k">fi</span>
+</span></code></pre></div>
+</div>
+<p>Para más informción:</p>
+<ul>
+<li><a href="https://help.gnome.org/users/zenity/stable/index.html.es">Manual de Zenity</a></li>
+<li><a href="https://atareao.es/tutorial/dialogos-para-scripts/zenity-dialogos-para-gnome-cinnamon-mate/">atareao con Linux. Zenity, díálogos para GNOME, Cinnamon, MATE...</a></li>
+<li><a href="https://blog.desdelinux.net/usos-practicos-de-la-caja-de-dialog-zenity/">DesdeLinux: Usos prácticos de la caja de dialog Zenity</a></li>
+</ul>
+<h2 id="comandos-para-mejorar-la-salida-por-consola">Comandos para mejorar la salida por consola.</h2>
+<p>Existe una serie de comandos curiosos/divertido/inutiles que permiten mejorar nuestra interaccón con la consola. </p>
+<p>Uno que seguramente habrás visto en clase es la utilidad/fuente <code>figlet</code>, pero hay muchos otros similares como <code>cowsay</code>, <code>banner</code> o <code>espeak</code>.</p>
+<p>Existen suficiente literatura sobre el tema, a continuación un par de enlaces que te servirán de introducción, a partir de ahí, tu sabrás en qué quieres invertir tu tiempo.</p>
+<ul>
+<li><a href="https://www.linkedin.com/pulse/funny-commands-linux-anudeepthi-kolagani">FUNNY COMMANDS IN LINUX</a></li>
+<li><a href="https://www.emezeta.com/articulos/20-curiosidades-geeks-para-terminales-linux">20 curiosidades geeks para terminales linux</a></li>
+<li><a href="https://es.linux-console.net/?p=17876">Diez herramientas para divertirse con el arte ASCII en la terminal Linux</a></li>
+</ul>
+<h2 id="reflexion-final">Reflexión final</h2>
+<p>Finalmente cabe resaltar que todavía no hemos aprendido todas las posibilidades de programar con <code>bash script</code>. Aunque lo aprendido nos servirá para salir airosos de la mayoría de las situaciones, hay ocasiones en las que se requieren conocimientos más avanzados, y por ello, quien esté interesado puede buscar y consultar en los cientos de tutoriales y ejemplos que existen en internet.</p>
+<p>Allí podrá encontrar nuevas posibilidades para programar con bash script. ¡Simplemente usa tu buscador favorito para ello!.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../12_06_avanzada_modularidad/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Modularidad">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Modularidad
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

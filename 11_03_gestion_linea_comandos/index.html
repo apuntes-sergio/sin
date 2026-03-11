@@ -1,0 +1,4382 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Administración de usuarios y grupos en Linux.">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/11_03_gestion_linea_comandos/">
+      
+      
+        <link rel="prev" href="../11_02_gestion_entorno_grafico/">
+      
+      
+        <link rel="next" href="../11_04_sistema_permisos_ugo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Gestión desde la Línea de Comandos - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#archivos-de-configuracion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Gestión desde la Línea de Comandos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a los Sistemas Operativos de Servidor
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introducción a los Sistemas Operativos de Servidor
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_1_introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_2_arquitectura_cliente_servidor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura cliente/servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_3_funciones_SO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funciones de Sistemas Operativos en Red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_4_sistemas_operativos_servidor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principales sistemas operativos servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_5_recordatorio_red/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repaso conceptos de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación de sistemas operativos de servidor privativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Instalación de sistemas operativos de servidor privativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_1_instalacion_SO_introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_2_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación de Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_3_config_basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_4_documentar_instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_5_administrar_discos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrar discos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_6_dominio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de usuarios y grupos en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administración de usuarios y grupos en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_objetos_dominios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetos del Dominio en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_usuarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cuentas de Usuario en un Dominio Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_grupos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grupos en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_equipos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipos en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_unidades_organizativas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidades Organizativas en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_herramientas_administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de administración en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_07_perfiles_usuarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perfiles de usuario en Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de recursos compartidos en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gestión de recursos compartidos en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_permisos_derechos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisos y derechos en sistemas Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_servidor_archivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    El servidor de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_compartir_impresoras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compartir impresoras en red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directivas de grupo en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Directivas de grupo en Windows Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_introduccion_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a las directivas de grupo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_creacion_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creación y ámbito de aplicación de GPO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_herencia_directivas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herencia de directivas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_configuacion_directivas_comunes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de directivas comunes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_verificacion_problemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verificación y resolución de problemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuraciones avanzadas y adicionales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuraciones avanzadas y adicionales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_configuraciones_adicionales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración avanzada de Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_carpetas_compartidas_ocultas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursos Compartidos Ocultos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_cuotas_discos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cuotas de discos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidor DHCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_escritorio_remoto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Escritorio Remoto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_redes_virtuales_VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Red VPN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_rsat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Administración Remota del Servidor (RSAT)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Copias de seguridad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_controlador_secundario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controlador de Dominio Secundario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_10_supervision_monitorizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitorización Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_11_servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios en Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_12_actualizacion_despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSUS &amp; WDS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de la Línea de Comandos en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de la Línea de Comandos en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_01_introducciom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a la Interfaz de Línea de Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_02_conceptos_basicos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conceptos Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_03_comprendiendo_almacenamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organización del Almacenamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_04_rutas_absolutas_relativas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rutas Absolutas y Relativas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_05_linea_comandos_linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La Línea de Comandos de GNU/Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_06_comandos_basicos_alias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandos Básicos y Alias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_07_gestion_directorios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Directorios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_08_gestion_ficheros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Ficheros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_09_visualizacion_contenido/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualización de Contenido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_10_redireccionamiento_tuberias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redireccionamiento y Tuberías
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_11_procesamiento_avanzado_texto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento Avanzado de Texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de usuarios y permisos en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administración de usuarios y permisos en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_01_usuarios_grupos_linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usuarios y Grupos en GNU/Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_02_gestion_entorno_grafico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión desde el Entorno Gráfico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión desde la Línea de Comandos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión desde la Línea de Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#archivos-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos de Configuración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archivos de Configuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcpasswd-informacion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/passwd - Información de Usuarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcshadow-contrasenas-cifradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/shadow - Contraseñas Cifradas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgroup-informacion-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/group - Información de Grupos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgshadow-contrasenas-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/gshadow - Contraseñas de Grupos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcsudoers-privilegios-de-sudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/sudoers - Privilegios de sudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-de-informacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de Información
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos de Información">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whoami-quien-soy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        whoami - Quién soy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-informacion-completa-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        id - Información completa del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groups-grupos-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groups - Grupos del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-usuarios-conectados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        who - Usuarios conectados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#su-cambiar-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        su - Cambiar de usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Usuarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passwd-cambiar-contrasena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        passwd - Cambiar contraseña
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useradd-crear-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        useradd - Crear usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adduser-crear-usuario-metodo-interactivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        adduser - Crear usuario (método interactivo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="adduser - Crear usuario (método interactivo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadir-usuario-a-un-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Añadir usuario a un grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usermod-modificar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        usermod - Modificar usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userdel-o-deluser-eliminar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        userdel o deluser - Eliminar usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Grupos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de Grupos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupadd-o-addgroup-crear-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupadd o addgroup - Crear grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupdel-o-delgroup-eliminar-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupdel o delgroup - Eliminar grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-practicos-completos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos Completos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buenas Prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicios Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_04_sistema_permisos_ugo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Permisos UGO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_05_permisos_umask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Permisos por Defecto - umask
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts de administración en Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripts de administración en Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_01_fundamentos_scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos del scripting en linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_02_gestion_datos_comunicacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comando entrada salida
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_03_logica_aritmetica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lógica matemática
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_04_control_flujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de flujo de programa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_05_bucles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_06_avanzada_modularidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modularidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_07_anexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#archivos-de-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos de Configuración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archivos de Configuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcpasswd-informacion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/passwd - Información de Usuarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcshadow-contrasenas-cifradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/shadow - Contraseñas Cifradas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgroup-informacion-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/group - Información de Grupos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgshadow-contrasenas-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/gshadow - Contraseñas de Grupos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcsudoers-privilegios-de-sudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /etc/sudoers - Privilegios de sudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-de-informacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de Información
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos de Información">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whoami-quien-soy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        whoami - Quién soy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-informacion-completa-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        id - Información completa del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groups-grupos-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groups - Grupos del usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-usuarios-conectados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        who - Usuarios conectados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#su-cambiar-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        su - Cambiar de usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Usuarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passwd-cambiar-contrasena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        passwd - Cambiar contraseña
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useradd-crear-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        useradd - Crear usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adduser-crear-usuario-metodo-interactivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        adduser - Crear usuario (método interactivo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="adduser - Crear usuario (método interactivo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadir-usuario-a-un-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Añadir usuario a un grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usermod-modificar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        usermod - Modificar usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userdel-o-deluser-eliminar-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        userdel o deluser - Eliminar usuario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-grupos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Grupos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de Grupos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupadd-o-addgroup-crear-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupadd o addgroup - Crear grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupdel-o-delgroup-eliminar-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupdel o delgroup - Eliminar grupo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-practicos-completos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos Completos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buenas Prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicios Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Gestión desde la Línea de Comandos</h1>
+
+<p>La gestión de usuarios y grupos desde la <strong>terminal</strong> es la forma más potente, flexible y eficiente de administrar un sistema GNU/Linux. Además, es la <strong>única opción</strong> en servidores sin entorno gráfico.</p>
+<div class="admonition success">
+<p class="admonition-title">Ventajas de la terminal</p>
+<ul>
+<li>⚡ <strong>Rapidez</strong>: Operaciones masivas en segundos</li>
+<li>🔄 <strong>Automatización</strong>: Scripts para tareas repetitivas</li>
+<li>🎯 <strong>Precisión</strong>: Control total sobre cada parámetro</li>
+<li>🌐 <strong>Universal</strong>: Funciona en cualquier sistema Linux</li>
+<li>📡 <strong>Remoto</strong>: Gestión desde cualquier lugar vía SSH</li>
+</ul>
+</div>
+<hr>
+<h2 id="archivos-de-configuracion">Archivos de Configuración</h2>
+<p>En GNU/Linux, <strong>todo son archivos</strong>. La información de usuarios, grupos y contraseñas se almacena en archivos de texto dentro de <code>/etc</code>.</p>
+<p>Ubicación de los archivos:</p>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/passwd</code></td>
+<td>Información de usuarios</td>
+</tr>
+<tr>
+<td><code>/etc/shadow</code></td>
+<td>Contraseñas cifradas de usuarios</td>
+</tr>
+<tr>
+<td><code>/etc/group</code></td>
+<td>Información de grupos</td>
+</tr>
+<tr>
+<td><code>/etc/gshadow</code></td>
+<td>Contraseñas cifradas de grupos</td>
+</tr>
+<tr>
+<td><code>/etc/sudoers</code></td>
+<td>Configuración de privilegios sudo</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Permisos de lectura</p>
+<p>Cualquier usuario puede <strong>leer</strong> <code>/etc/passwd</code> y <code>/etc/group</code>, pero solo <strong>root</strong> puede modificarlos o leer <code>/etc/shadow</code>.</p>
+</div>
+<hr>
+<h3 id="etcpasswd-informacion-de-usuarios"><code>/etc/passwd</code> - Información de Usuarios</h3>
+<p>Contiene la información básica de todos los usuarios del sistema.</p>
+<p>Cada línea representa un usuario, con <strong>7 campos</strong> separados por dos puntos (<code>:</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nombre:x:UID:GID:comentario:directorio_home:shell
+</span></code></pre></div>
+<p>Descripción de los campos:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Posición</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nombre</strong></td>
+<td>1</td>
+<td>Login del usuario</td>
+<td><code>jperez</code></td>
+</tr>
+<tr>
+<td><strong>Contraseña</strong></td>
+<td>2</td>
+<td><code>x</code> (la contraseña está en <code>/etc/shadow</code>)</td>
+<td><code>x</code></td>
+</tr>
+<tr>
+<td><strong>UID</strong></td>
+<td>3</td>
+<td>Identificador único del usuario</td>
+<td><code>1130</code></td>
+</tr>
+<tr>
+<td><strong>GID</strong></td>
+<td>4</td>
+<td>Identificador del grupo principal</td>
+<td><code>1003</code></td>
+</tr>
+<tr>
+<td><strong>Comentario</strong></td>
+<td>5</td>
+<td>Nombre completo, teléfono, etc.</td>
+<td><code>Juan Pérez</code></td>
+</tr>
+<tr>
+<td><strong>Directorio home</strong></td>
+<td>6</td>
+<td>Carpeta personal del usuario</td>
+<td><code>/home/jperez</code></td>
+</tr>
+<tr>
+<td><strong>Shell</strong></td>
+<td>7</td>
+<td>Intérprete de comandos</td>
+<td><code>/bin/bash</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos reales</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>root:x:0:0:root:/root:/bin/bash
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sergio:x:1000:1000:Sergio<span class="w"> </span>Rey:/home/sergio:/bin/bash
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>jperez:x:1130:1003:Juan<span class="w"> </span>Pérez:/home/jperez:/bin/bash
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>vmarti:x:1131:1003::/home/vmarti:/bin/bash
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+</span></code></pre></div>
+<p><strong>Análisis:</strong></p>
+<ul>
+<li><code>root</code>: UID=0 (siempre), home en <code>/root</code>, shell bash</li>
+<li><code>sergio</code>: Usuario normal (UID=1000), grupo principal 1000</li>
+<li><code>jperez</code>: UID=1130, grupo principal 1003 (compartido con vmarti)</li>
+<li><code>www-data</code>: Usuario del sistema (UID=33), sin shell de login</li>
+</ul>
+</div>
+<p>Para ver el archivo:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>/etc/passwd<span class="w">                </span><span class="c1"># Ver todo el archivo</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>grep<span class="w"> </span>sergio<span class="w"> </span>/etc/passwd<span class="w">        </span><span class="c1"># Buscar un usuario específico</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>tail<span class="w"> </span>-5<span class="w"> </span>/etc/passwd<span class="w">           </span><span class="c1"># Ver los últimos 5 usuarios</span>
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Campo de contraseña</p>
+<p>Antiguamente, las contraseñas se guardaban aquí (campo 2). Por seguridad, ahora solo contiene una <code>x</code> y las contraseñas cifradas están en <code>/etc/shadow</code>.</p>
+</div>
+<hr>
+<h3 id="etcshadow-contrasenas-cifradas"><code>/etc/shadow</code> - Contraseñas Cifradas</h3>
+<p>Contiene las contraseñas cifradas y la información de caducidad de las mismas.</p>
+<p>Estructura: </p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nombre:contraseña_cifrada:último_cambio:mín:máx:aviso:inactivo:expiración:reservado
+</span></code></pre></div>
+<p>Campos principales:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nombre</strong></td>
+<td>Login del usuario</td>
+</tr>
+<tr>
+<td><strong>Contraseña cifrada</strong></td>
+<td>Hash de la contraseña (algoritmo SHA-512)</td>
+</tr>
+<tr>
+<td><strong>Último cambio</strong></td>
+<td>Días desde 01/01/1970 del último cambio de contraseña</td>
+</tr>
+<tr>
+<td><strong>Días mínimos</strong></td>
+<td>Días antes de poder cambiar la contraseña</td>
+</tr>
+<tr>
+<td><strong>Días máximos</strong></td>
+<td>Días de validez de la contraseña</td>
+</tr>
+<tr>
+<td><strong>Días de aviso</strong></td>
+<td>Días antes de expirar que se avisa al usuario</td>
+</tr>
+<tr>
+<td><strong>Días inactivos</strong></td>
+<td>Días tras expirar antes de deshabilitar la cuenta</td>
+</tr>
+<tr>
+<td><strong>Fecha de expiración</strong></td>
+<td>Días desde 01/01/1970 cuando expira la cuenta</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sergio:<span class="nv">$6$random$hash</span>...:19740:0:99999:7:::
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>jperez:<span class="nv">$6$random$hash</span>...:19740:5:90:7:14::
+</span></code></pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Solo lectura de root</p>
+<p>Por seguridad, <strong>solo root</strong> puede leer <code>/etc/shadow</code>:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>cat<span class="w"> </span>/etc/shadow
+</span></code></pre></div><p></p>
+</div>
+<h3 id="etcgroup-informacion-de-grupos"><code>/etc/group</code> - Información de Grupos</h3>
+<p>Contiene la información de todos los grupos del sistema.</p>
+<p>Cada línea representa un grupo, con <strong>4 campos</strong> separados por dos puntos (<code>:</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nombre_grupo:x:GID:lista_de_miembros
+</span></code></pre></div>
+<p>Descripción de los campos:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Posición</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nombre del grupo</strong></td>
+<td>1</td>
+<td>Identificador del grupo</td>
+<td><code>profesores</code></td>
+</tr>
+<tr>
+<td><strong>Contraseña</strong></td>
+<td>2</td>
+<td><code>x</code> (en <code>/etc/gshadow</code> si existe)</td>
+<td><code>x</code></td>
+</tr>
+<tr>
+<td><strong>GID</strong></td>
+<td>3</td>
+<td>Identificador único del grupo</td>
+<td><code>1003</code></td>
+</tr>
+<tr>
+<td><strong>Miembros</strong></td>
+<td>4</td>
+<td>Usuarios separados por comas</td>
+<td><code>jperez,vmarti,gllopis</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos reales</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>root:x:0:
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sergio:x:1000:
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo:x:27:sergio,juan
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>alumnos:x:1003:
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>smr:x:1004:jperez,vmarti,gllopis,ralos,fmonllor
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>profesores:x:1005:sergio,ana,pedro
+</span></code></pre></div>
+<p><strong>Análisis:</strong></p>
+<ul>
+<li><code>root</code>: GID=0, sin miembros adicionales</li>
+<li><code>sergio</code>: Grupo personal del usuario sergio</li>
+<li><code>sudo</code>: Grupo de administradores, contiene a sergio y juan</li>
+<li><code>smr</code>: Grupo con 5 miembros</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Miembros del grupo</p>
+<p>La lista de miembros solo incluye usuarios para los que este es un <strong>grupo secundario</strong>. Los usuarios que lo tienen como grupo principal no aparecen aquí.</p>
+</div>
+<p>Para ver el archivo:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cat<span class="w"> </span>/etc/group<span class="w">                 </span><span class="c1"># Ver todos los grupos</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>profesores<span class="w"> </span>/etc/group<span class="w">     </span><span class="c1"># Buscar un grupo específico</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>grep<span class="w"> </span>sergio<span class="w"> </span>/etc/group<span class="w">         </span><span class="c1"># Ver en qué grupos está sergio</span>
+</span></code></pre></div>
+<h3 id="etcgshadow-contrasenas-de-grupos"><code>/etc/gshadow</code> - Contraseñas de Grupos</h3>
+<p>Contiene las contraseñas cifradas de los grupos (raramente usado).</p>
+<p>Estructura:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nombre_grupo:contraseña_cifrada:administradores:miembros
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Poco usado</p>
+<p>Las contraseñas de grupos se usan raramente en la práctica. La mayoría de sistemas no las utilizan.</p>
+</div>
+<hr>
+<h3 id="etcsudoers-privilegios-de-sudo"><code>/etc/sudoers</code> - Privilegios de sudo</h3>
+<p>Configura qué usuarios pueden ejecutar <code>sudo</code> y con qué privilegios.</p>
+<div class="admonition danger">
+<p class="admonition-title">No editar directamente</p>
+<p><strong>NUNCA edites <code>/etc/sudoers</code> directamente</strong> con un editor de texto. Usa el comando <code>visudo</code>:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>visudo
+</span></code></pre></div>
+<code>visudo</code> comprueba la sintaxis antes de guardar, evitando errores que podrían dejarte sin acceso sudo.<p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos de configuración</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Usuario root tiene todos los privilegios</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>root<span class="w">    </span><span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span><span class="w"> </span>ALL
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Grupo sudo puede ejecutar cualquier comando</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>%sudo<span class="w">   </span><span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span><span class="w"> </span>ALL
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Usuario sergio puede reiniciar sin contraseña</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>sergio<span class="w">  </span><span class="nv">ALL</span><span class="o">=</span>NOPASSWD:<span class="w"> </span>/sbin/reboot,<span class="w"> </span>/sbin/poweroff
+</span></code></pre></div>
+</div>
+<h2 id="comandos-de-informacion">Comandos de Información</h2>
+<p>Antes de gestionar usuarios y grupos, veamos comandos para consultar información.</p>
+<h3 id="whoami-quien-soy"><code>whoami</code> - Quién soy</h3>
+<p>Muestra el nombre del usuario actual.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>whoami
+</span></code></pre></div>
+<p><strong>Salida:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sergio
+</span></code></pre></div><p></p>
+<hr>
+<h3 id="id-informacion-completa-del-usuario"><code>id</code> - Información completa del usuario</h3>
+<p>Muestra UID, GID y todos los grupos del usuario.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>id<span class="w">                  </span><span class="c1"># Usuario actual</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>id<span class="w"> </span>jperez<span class="w">          </span><span class="c1"># Usuario específico</span>
+</span></code></pre></div>
+<p><strong>Salida ejemplo:</strong>
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1000</span><span class="o">(</span>sergio<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">1000</span><span class="o">(</span>sergio<span class="o">)</span><span class="w"> </span><span class="nv">grupos</span><span class="o">=</span><span class="m">1000</span><span class="o">(</span>sergio<span class="o">)</span>,27<span class="o">(</span>sudo<span class="o">)</span>,1003<span class="o">(</span>profesores<span class="o">)</span>,1005<span class="o">(</span>informatica<span class="o">)</span>
+</span></code></pre></div><p></p>
+<p><strong>Interpretación:</strong>
+- UID: 1000 (nombre: sergio)
+- GID: 1000 (grupo principal: sergio)
+- Grupos: sergio, sudo, profesores, informatica</p>
+<hr>
+<h3 id="groups-grupos-del-usuario"><code>groups</code> - Grupos del usuario</h3>
+<p>Muestra los grupos a los que pertenece un usuario.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>groups<span class="w">              </span><span class="c1"># Grupos del usuario actual</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>groups<span class="w"> </span>jperez<span class="w">       </span><span class="c1"># Grupos de jperez</span>
+</span></code></pre></div>
+<p><strong>Salida ejemplo:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sergio sudo profesores informatica
+</span></code></pre></div><p></p>
+<h3 id="who-usuarios-conectados"><code>who</code> - Usuarios conectados</h3>
+<p>Muestra qué usuarios están actualmente conectados al sistema.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>who
+</span></code></pre></div>
+<p><strong>Salida ejemplo:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sergio   tty1         2026-02-10 09:30
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>juan     pts/0        2026-02-10 10:15 (192.168.1.50)
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>root     pts/1        2026-02-10 11:00
+</span></code></pre></div><p></p>
+<p><strong>Interpretación:</strong>
+- <code>sergio</code> está en la consola física (tty1)
+- <code>juan</code> está conectado por SSH (pts/0) desde 192.168.1.50
+- <code>root</code> está en una pseudoterminal (pts/1)</p>
+<p>Siguiendo exactamente el formato y la estructura de tu documentación para <code>useradd</code>, aquí tienes el bloque correspondiente al comando <code>su</code>:</p>
+<h3 id="su-cambiar-de-usuario"><code>su</code> - Cambiar de usuario</h3>
+<p>Permite cambiar la identidad del usuario actual a otra cuenta durante la sesión de terminal. Por defecto, si no se especifica un nombre, intenta cambiar al superusuario (<code>root</code>).</p>
+<p>Sintaxis:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>su<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span><span class="o">[</span>nombre_usuario<span class="o">]</span>
+</span></code></pre></div>
+<p>Opciones principales:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code> (o <code>-l</code>)</td>
+<td>Inicia sesión de <strong>login</strong> (carga entorno y variables)</td>
+<td><code>su -</code></td>
+</tr>
+<tr>
+<td><code>-c "comando"</code></td>
+<td>Ejecuta un comando único y finaliza</td>
+<td><code>-c "ls /root"</code></td>
+</tr>
+<tr>
+<td><code>-s /bin/shell</code></td>
+<td>Utiliza una shell específica para la sesión</td>
+<td><code>-s /bin/zsh</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: Cambio a root (sesión limpia)</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>su
+</span></code></pre></div>
+<ul>
+<li>Solicita la contraseña de <strong>root</strong>.</li>
+<li>Carga el <code>PATH</code> y las variables de entorno de root.</li>
+<li>Cambia el directorio actual a <code>/root</code>.</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: Cambio a otro usuario estándar</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>su<span class="w"> </span>amiro<span class="w"> </span>
+</span></code></pre></div>
+<p>Cambia la sesión al usuario <code>amiro</code>:</p>
+<ul>
+<li>Solicita la contraseña de <strong>amiro</strong> (no la de root).</li>
+<li>Carga el entorno completo del usuario destino.</li>
+<li>El directorio de trabajo pasa a ser <code>/home/alumnos/amiro</code>.</li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Diferencia entre <code>su</code> y <code>su -</code></p>
+<p>Es altamente recomendable usar siempre el guion (<code>-</code>).</p>
+<ul>
+<li><strong><code>su</code></strong>: Mantiene las variables de entorno del usuario original (puede causar errores de permisos en rutas).</li>
+<li><strong><code>su -</code></strong>: Simula un inicio de sesión real, refrescando todo el entorno de trabajo.</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Finalizar sesión</p>
+<p>Para volver al usuario original tras usar <code>su</code>, escribe <code>exit</code> o pulsa <code>Ctrl+D</code>.</p>
+</div>
+<h2 id="gestion-de-usuarios">Gestión de Usuarios</h2>
+<h3 id="passwd-cambiar-contrasena"><code>passwd</code> - Cambiar contraseña</h3>
+<p>Permite establecer o cambiar la contraseña de un usuario.</p>
+<p>Para cambiar tu propia contraseña</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>passwd
+</span></code></pre></div>
+<p>Te pedirá:
+1. Contraseña actual
+2. Nueva contraseña (2 veces)</p>
+<p>Para cambiar contraseña de otro usuario (root)</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>passwd<span class="w"> </span>jperez
+</span></code></pre></div>
+<p>Solo pide la nueva contraseña (2 veces).</p>
+<p>Opciones adicionales:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>passwd<span class="w"> </span>-l<span class="w"> </span>jperez<span class="w">        </span><span class="c1"># Bloquear cuenta (lock)</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>passwd<span class="w"> </span>-u<span class="w"> </span>jperez<span class="w">        </span><span class="c1"># Desbloquear cuenta (unlock)</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>passwd<span class="w"> </span>-d<span class="w"> </span>jperez<span class="w">        </span><span class="c1"># Eliminar contraseña (sin contraseña)</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>passwd<span class="w"> </span>-e<span class="w"> </span>jperez<span class="w">        </span><span class="c1"># Expirar contraseña (fuerza cambio en próximo login)</span>
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Forzar cambio de contraseña</p>
+<p><code>passwd -e usuario</code> es útil cuando creas un usuario con contraseña temporal y quieres que la cambie en su primer inicio de sesión.</p>
+</div>
+<h3 id="useradd-crear-usuario"><code>useradd</code> - Crear usuario</h3>
+<p>Crea un usuario con opciones específicas.</p>
+<p>Sintaxis: </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>useradd<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span>nombre_usuario
+</span></code></pre></div>
+<p>Opciones principales:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-m</code></td>
+<td>Crea el directorio home</td>
+<td><code>-m</code></td>
+</tr>
+<tr>
+<td><code>-d /ruta</code></td>
+<td>Especifica directorio home</td>
+<td><code>-d /home/alumnos/juan</code></td>
+</tr>
+<tr>
+<td><code>-s /bin/bash</code></td>
+<td>Define la shell</td>
+<td><code>-s /bin/bash</code></td>
+</tr>
+<tr>
+<td><code>-g grupo</code></td>
+<td>Grupo principal</td>
+<td><code>-g empleados</code></td>
+</tr>
+<tr>
+<td><code>-G grupos</code></td>
+<td>Grupos secundarios</td>
+<td><code>-G ventas,admin</code></td>
+</tr>
+<tr>
+<td><code>-u UID</code></td>
+<td>Especifica el UID</td>
+<td><code>-u 1500</code></td>
+</tr>
+<tr>
+<td><code>-c "comentario"</code></td>
+<td>Comentario (nombre completo)</td>
+<td><code>-c "Juan Pérez"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: Crear usuario básico</p>
+<p></p><div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>jperez
+</span></code></pre></div>
+- Crea usuario <code>jperez</code>
+- Crea <code>/home/jperez</code>
+- NO tiene contraseña aún (añádela con <code>passwd</code>)<p></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: Crear usuario completo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-d<span class="w"> </span>/home/alumnos/amiro<span class="w"> </span>-g<span class="w"> </span>empleados<span class="w"> </span>-G<span class="w"> </span>isca,ventas<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"Antonio Miró"</span><span class="w"> </span>amiro
+</span></code></pre></div>
+<p>Crea usuario <code>amiro</code>:</p>
+<ul>
+<li>Home: <code>/home/alumnos/amiro</code> (debe existir <code>/home/alumnos</code>)</li>
+<li>Grupo principal: <code>empleados</code></li>
+<li>Grupos secundarios: <code>isca</code>, <code>ventas</code></li>
+<li>Shell: <code>/bin/bash</code></li>
+<li>Comentario: "Antonio Miró"</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">useradd NO activa el usuario</p>
+<p>Después de <code>useradd</code>, <strong>debes establecer contraseña</strong>:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo<span class="w"> </span>passwd<span class="w"> </span>amiro
+</span></code></pre></div><p></p>
+</div>
+<h3 id="adduser-crear-usuario-metodo-interactivo"><code>adduser</code> - Crear usuario (método interactivo)</h3>
+<p>Crea usuario de forma <strong>interactiva y completa</strong>.</p>
+<p>Sintaxis</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>nombre_usuario
+</span></code></pre></div>
+<p>Cometido: </p>
+<ol>
+<li>Crea el usuario</li>
+<li>Crea el grupo con su mismo nombre (grupo principal)</li>
+<li>Crea <code>/home/usuario</code></li>
+<li><strong>Pide la contraseña</strong></li>
+<li>Pide información adicional (nombre completo, teléfono, etc.)</li>
+<li>Copia archivos de configuración de <code>/etc/skel/</code></li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>jperez
+</span></code></pre></div>
+<p>Salida interactiva:
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Añadiendo el usuario `jperez' ...
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>Añadiendo el nuevo grupo `jperez' (1001) ...
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Añadiendo el nuevo usuario `jperez' (1001) con grupo `jperez' ...
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>Creando el directorio personal `/home/jperez' ...
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>Copiando los ficheros desde `/etc/skel' ...
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>Nueva contraseña: 
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>Vuelva a escribir la nueva contraseña: 
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>passwd: contraseña actualizada correctamente
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>Cambiando la información de usuario para jperez
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>Introduzca el nuevo valor, o presione INTRO para usar el valor predeterminado
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>    Nombre completo []: Juan Pérez
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>    Número de habitación []: 
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>    Teléfono de trabajo []: 123456789
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>    Teléfono de casa []: 
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>    Otro []: 
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>¿Es correcta la información? [S/n] S
+</span></code></pre></div><p></p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Recomendado para principiantes, NO PARA NOSOTROS</p>
+<p><code>adduser</code> es más fácil de usar que <code>useradd</code> porque es interactivo y crea todo automáticamente, pero para administradores de sistema no es muy útil si vamos a crear scripts, puesto que no tiene sentido lanzar un script para generar 5 usuarios y que nos pregunte dato a dato de cada uno de ellos. </p>
+</div>
+<h4 id="anadir-usuario-a-un-grupo">Añadir usuario a un grupo</h4>
+<p><code>adduser</code> también sirve para añadir usuarios a grupos:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>amiro<span class="w"> </span>produccion
+</span></code></pre></div>
+<p>Añade el usuario <code>amiro</code> al grupo <code>produccion</code> (ambos deben existir).</p>
+<h3 id="usermod-modificar-usuario"><code>usermod</code> - Modificar usuario</h3>
+<p>Modifica las propiedades de un usuario existente.</p>
+<p>Sintaxis:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span>nombre_usuario
+</span></code></pre></div>
+<p>Opciones principales</p>
+<p>Mismas que <code>useradd</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d /nueva/ruta</code></td>
+<td>Cambiar directorio home</td>
+</tr>
+<tr>
+<td><code>-g nuevo_grupo</code></td>
+<td>Cambiar grupo principal</td>
+</tr>
+<tr>
+<td><code>-G grupos</code></td>
+<td>Establecer grupos secundarios</td>
+</tr>
+<tr>
+<td><code>-aG grupos</code></td>
+<td>Añadir a grupos secundarios (sin quitar los actuales)</td>
+</tr>
+<tr>
+<td><code>-s /bin/shell</code></td>
+<td>Cambiar shell</td>
+</tr>
+<tr>
+<td><code>-l nuevo_nombre</code></td>
+<td>Cambiar nombre de usuario (login)</td>
+</tr>
+<tr>
+<td><code>-L</code></td>
+<td>Bloquear cuenta</td>
+</tr>
+<tr>
+<td><code>-U</code></td>
+<td>Desbloquear cuenta</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos</p>
+<p>Cambiar grupo principal:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-g<span class="w"> </span>profesores<span class="w"> </span>jperez
+</span></code></pre></div><p></p>
+<p>Añadir a un grupo sin quitar los demás:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>jperez<span class="w">       </span><span class="c1"># Añade a sudo, mantiene los grupos actuales</span>
+</span></code></pre></div><p></p>
+<p>Reemplazar todos los grupos secundarios:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-G<span class="w"> </span>jefes,ventas,admin<span class="w"> </span>jperez<span class="w">    </span><span class="c1"># Ahora solo está en estos 3 grupos</span>
+</span></code></pre></div><p></p>
+<div class="admonition danger">
+<p class="admonition-title">Cuidado con -G</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>usermod<span class="w"> </span>-G<span class="w"> </span>jefes<span class="w"> </span>amiro<span class="w">          </span><span class="c1"># ❌ Quita de isca y ventas</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>usermod<span class="w"> </span>-aG<span class="w"> </span>jefes<span class="w"> </span>amiro<span class="w">         </span><span class="c1"># ✅ Añade a jefes sin quitar los demás</span>
+</span></code></pre></div>
+</div>
+<p>Cambiar shell:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-s<span class="w"> </span>/bin/zsh<span class="w"> </span>jperez
+</span></code></pre></div><p></p>
+<p>Cambiar nombre de usuario:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-l<span class="w"> </span>juanp<span class="w"> </span>jperez<span class="w">       </span><span class="c1"># jperez ahora se llama juanp</span>
+</span></code></pre></div><p></p>
+</div>
+<hr>
+<h3 id="userdel-o-deluser-eliminar-usuario"><code>userdel</code> o <code>deluser</code> - Eliminar usuario</h3>
+<p>Elimina una cuenta de usuario.</p>
+<p>Sintaxis</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>sudo<span class="w"> </span>userdel<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span>nombre_usuario
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>sudo<span class="w"> </span>deluser<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span>nombre_usuario
+</span></code></pre></div>
+<p>Opciones:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-r</code></td>
+<td>Elimina también el directorio home y correo</td>
+</tr>
+<tr>
+<td><code>--remove-home</code></td>
+<td>(deluser) Elimina el directorio home</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos</p>
+<p>Eliminar usuario sin borrar archivos:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>sudo<span class="w"> </span>userdel<span class="w"> </span>jperez
+</span></code></pre></div>
+- Elimina la cuenta
+- <code>/home/jperez</code> se conserva<p></p>
+<p>Eliminar usuario y sus archivos:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>jperez
+</span></code></pre></div>
+- Elimina la cuenta
+- Elimina <code>/home/jperez</code> y todo su contenido<p></p>
+<div class="admonition warning">
+<p class="admonition-title">Irreversible</p>
+<p>Con <code>-r</code>, <strong>todos los archivos del usuario se pierden</strong> permanentemente. Haz backup si contienen datos importantes.</p>
+</div>
+</div>
+<h2 id="gestion-de-grupos">Gestión de Grupos</h2>
+<h3 id="groupadd-o-addgroup-crear-grupo"><code>groupadd</code> o <code>addgroup</code> - Crear grupo</h3>
+<p>Crea un nuevo grupo.</p>
+<p>Sintaxis:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span><span class="o">[</span>opciones<span class="o">]</span><span class="w"> </span>nombre_grupo
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>sudo<span class="w"> </span>addgroup<span class="w"> </span>nombre_grupo
+</span></code></pre></div>
+<p>Opciones: </p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-g GID</code></td>
+<td>Especifica el GID</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Ejemplos</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span>profesores<span class="w">              </span><span class="c1"># Crea grupo con GID automático</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span>-g<span class="w"> </span><span class="m">2000</span><span class="w"> </span>alumnos<span class="w">        </span><span class="c1"># Crea grupo con GID 2000</span>
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>sudo<span class="w"> </span>addgroup<span class="w"> </span>desarrollo<span class="w">             </span><span class="c1"># Método alternativo</span>
+</span></code></pre></div>
+</div>
+<h3 id="groupdel-o-delgroup-eliminar-grupo"><code>groupdel</code> o <code>delgroup</code> - Eliminar grupo</h3>
+<p>Elimina un grupo del sistema.</p>
+<p>Sintaxis:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>sudo<span class="w"> </span>groupdel<span class="w"> </span>nombre_grupo
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>sudo<span class="w"> </span>delgroup<span class="w"> </span>nombre_grupo
+</span></code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>sudo<span class="w"> </span>groupdel<span class="w"> </span>temporal
+</span></code></pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">No eliminar grupo principal</p>
+<p>No puedes eliminar un grupo si es el <strong>grupo principal</strong> de algún usuario. Primero cambia el grupo principal del usuario.</p>
+</div>
+<hr>
+<h2 id="ejemplos-practicos-completos">Ejemplos Prácticos Completos</h2>
+<div class="admonition example">
+<p class="admonition-title">Escenario 1: Nuevo empleado</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="c1"># 1. Crear usuario con adduser (interactivo)</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>antonio
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="c1"># 2. Añadirlo a grupos necesarios</span>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo,ventas<span class="w"> </span>antonio
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="c1"># 3. Verificar</span>
+</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>id<span class="w"> </span>antonio
+</span><span id="__span-48-9"><a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>groups<span class="w"> </span>antonio
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Escenario 2: Proyecto temporal</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="c1"># 1. Crear grupo del proyecto</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span>-g<span class="w"> </span><span class="m">2500</span><span class="w"> </span>proyecto_x
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="c1"># 2. Añadir miembros al proyecto</span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>proyecto_x<span class="w"> </span>juan
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>proyecto_x<span class="w"> </span>ana
+</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>proyecto_x<span class="w"> </span>pedro
+</span><span id="__span-49-8"><a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>
+</span><span id="__span-49-9"><a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a><span class="c1"># 3. Verificar miembros</span>
+</span><span id="__span-49-10"><a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>grep<span class="w"> </span>proyecto_x<span class="w"> </span>/etc/group
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Escenario 3: Usuario que se va de la empresa</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="c1"># 1. Bloquear la cuenta (no puede entrar)</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>sudo<span class="w"> </span>passwd<span class="w"> </span>-l<span class="w"> </span>empleado_saliente
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
+</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="c1"># 2. Hacer backup de sus archivos</span>
+</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>sudo<span class="w"> </span>tar<span class="w"> </span>czf<span class="w"> </span>/backup/empleado_saliente.tar.gz<span class="w"> </span>/home/empleado_saliente
+</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>
+</span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="c1"># 3. Eliminar usuario y sus archivos</span>
+</span><span id="__span-50-8"><a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a>sudo<span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span>empleado_saliente
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Escenario 4: Cambio de departamento</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="c1"># 1. Quitar de grupo antiguo y añadir a nuevo</span>
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>sudo<span class="w"> </span>deluser<span class="w"> </span>juan<span class="w"> </span>ventas
+</span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>juan<span class="w"> </span>marketing
+</span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
+</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="c1"># O con usermod (reemplaza todos los grupos secundarios):</span>
+</span><span id="__span-51-6"><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-G<span class="w"> </span>marketing,usuarios<span class="w"> </span>juan
+</span><span id="__span-51-7"><a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>
+</span><span id="__span-51-8"><a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="c1"># O con usermod (mantiene grupos actuales):</span>
+</span><span id="__span-51-9"><a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>marketing<span class="w"> </span>juan
+</span></code></pre></div>
+</div>
+<hr>
+<h2 id="resumen">Resumen</h2>
+<p>Comandos de información: </p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>whoami</code></td>
+<td>Usuario actual</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>UID, GID y grupos</td>
+</tr>
+<tr>
+<td><code>groups</code></td>
+<td>Grupos del usuario</td>
+</tr>
+<tr>
+<td><code>who</code></td>
+<td>Usuarios conectados</td>
+</tr>
+</tbody>
+</table>
+<p>Usuarios:</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>passwd</code></td>
+<td>Cambiar/establecer contraseña</td>
+</tr>
+<tr>
+<td><code>useradd</code></td>
+<td>Crear usuario (avanzado)</td>
+</tr>
+<tr>
+<td><code>adduser</code></td>
+<td>Crear usuario (interactivo)</td>
+</tr>
+<tr>
+<td><code>usermod</code></td>
+<td>Modificar usuario</td>
+</tr>
+<tr>
+<td><code>userdel</code></td>
+<td>Eliminar usuario</td>
+</tr>
+</tbody>
+</table>
+<p>Grupos: </p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>groupadd</code></td>
+<td>Crear grupo</td>
+</tr>
+<tr>
+<td><code>groupdel</code></td>
+<td>Eliminar grupo</td>
+</tr>
+<tr>
+<td><code>adduser usuario grupo</code></td>
+<td>Añadir usuario a grupo</td>
+</tr>
+</tbody>
+</table>
+<p>Archivos de Configuración:</p>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Contenido</th>
+<th>Permisos lectura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/passwd</code></td>
+<td>Info de usuarios</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><code>/etc/shadow</code></td>
+<td>Contraseñas cifradas</td>
+<td>Solo root</td>
+</tr>
+<tr>
+<td><code>/etc/group</code></td>
+<td>Info de grupos</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><code>/etc/gshadow</code></td>
+<td>Contraseñas de grupos</td>
+<td>Solo root</td>
+</tr>
+<tr>
+<td><code>/etc/sudoers</code></td>
+<td>Privilegios sudo</td>
+<td>Solo root</td>
+</tr>
+</tbody>
+</table>
+<h2 id="buenas-practicas">Buenas Prácticas</h2>
+<div class="admonition success">
+<p class="admonition-title">Recomendaciones</p>
+<ul>
+<li>✅ Usa <code>adduser</code> en lugar de <code>useradd</code> (más fácil)</li>
+<li>✅ Siempre usa <code>usermod -aG</code> para añadir grupos (no <code>-G</code>)</li>
+<li>✅ Haz backup antes de eliminar usuarios con <code>-r</code></li>
+<li>✅ Bloquea cuentas en lugar de eliminarlas si hay dudas</li>
+<li>✅ Usa <code>visudo</code> para editar <code>/etc/sudoers</code></li>
+<li>✅ Verifica con <code>id</code> y <code>groups</code> después de cambios</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Precauciones</p>
+<ul>
+<li>⚠️ No edites <code>/etc/passwd</code> o <code>/etc/shadow</code> manualmente</li>
+<li>⚠️ Ten cuidado con <code>usermod -G</code> (sin <code>-a</code> quita grupos)</li>
+<li>⚠️ <code>userdel -r</code> es irreversible</li>
+<li>⚠️ No elimines grupos que son principales de usuarios</li>
+<li>⚠️ Verifica antes de dar privilegios sudo</li>
+</ul>
+</div>
+<hr>
+<h2 id="ejercicios-practicos">Ejercicios Prácticos</h2>
+<div class="admonition example">
+<p class="admonition-title">Ejercicio 1: Crear usuarios</p>
+<ol>
+<li>Crea un usuario <code>alumno1</code> con <code>adduser</code></li>
+<li>Crea un usuario <code>alumno2</code> con <code>useradd -m</code></li>
+<li>Establece contraseña a alumno2</li>
+<li>Verifica ambos usuarios con <code>id</code></li>
+</ol>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejercicio 2: Gestión de grupos</p>
+<ol>
+<li>Crea un grupo <code>dam</code></li>
+<li>Añade alumno1 y alumno2 al grupo dam</li>
+<li>Verifica con <code>groups alumno1</code> y <code>groups alumno2</code></li>
+<li>Consulta <code>/etc/group</code> para ver el grupo</li>
+</ol>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejercicio 3: Modificaciones</p>
+<ol>
+<li>Cambia la shell de alumno1 a <code>/bin/sh</code></li>
+<li>Añade alumno1 al grupo sudo</li>
+<li>Cambia el nombre de alumno2 a <code>estudiante2</code></li>
+<li>Verifica los cambios</li>
+</ol>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejercicio 4: Limpieza</p>
+<ol>
+<li>Bloquea la cuenta de estudiante2</li>
+<li>Intenta iniciar sesión (debe fallar)</li>
+<li>Elimina ambos usuarios conservando sus archivos</li>
+<li>Elimina el grupo dam</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../11_02_gestion_entorno_grafico/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Gestión desde el Entorno Gráfico">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Gestión desde el Entorno Gráfico
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../11_04_sistema_permisos_ugo/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Sistema de Permisos UGO">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Sistema de Permisos UGO
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
