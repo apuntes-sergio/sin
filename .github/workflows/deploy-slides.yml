@@ -21,18 +21,24 @@ jobs:
 
       - name: Build slides
         run: |
-          # 1. Limpieza total
+          # 1. Limpieza absoluta
           rm -rf site
           
-          # 2. Construcción limpia
-          mkslides build --config-file mkslides.yml slides/
+          # 2. Construcción: Asegúrate de NO poner la barra final en slides
+          # Esto obliga a mkslides a respetar la jerarquía de carpetas
+          mkslides build --config-file mkslides.yml slides
           
-          # 3. EL TRUCO MAESTRO: Corregir rutas para GitHub Pages
-          # Cambiamos /mkslides-assets por ./mkslides-assets en todos los HTML
-          find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="mkslides-assets|g' {} +
-          find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="mkslides-assets|g' {} +
+          # 3. Corregir rutas para que funcionen en cualquier nivel de carpeta
+          # Este comando busca todos los HTML y quita la barra inicial de los assets
+          find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
+          find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
           
-          # 4. Evitar que GitHub procese la carpeta
+          # Corrección especial para el index de la raíz (si existe)
+          if [ -f site/index.html ]; then
+            sed -i 's|href="../mkslides-assets|href="./mkslides-assets|g' site/index.html
+            sed -i 's|src="../mkslides-assets|src="./mkslides-assets|g' site/index.html
+          fi
+
           touch site/.nojekyll
 
       - name: Deploy to sin-slides
