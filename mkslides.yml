@@ -1,6 +1,3 @@
-# mkslides.yml en tu repositorio 'sin'
-site_url: https://apuntes-sergio.github.io/sin-slides/
-
 revealjs:
   transition: slide
   slideNumber: true

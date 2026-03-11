@@ -2,9 +2,6 @@ name: Deploy slides
 on:
   push:
     branches: [main]
-  # paths:  <-- Comentado temporalmente para forzar el test
-  #   - 'slides/**'
-  #   - 'mkslides.yml'
 
 jobs:
   deploy:
@@ -17,14 +14,17 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install omegaconf mkslides
+        run: pip install omegaconf mkslides
 
       - name: Build slides
         run: |
-          rm -rf site # Borramos cualquier residuo anterior
+          # 1. Limpiamos rastro anterior
+          rm -rf site
+          
+          # 2. Construimos las slides
           mkslides build --config-file mkslides.yml slides/
+          
+          # 3. Evitamos que GitHub Pages use Jekyll
           touch site/.nojekyll
 
       - name: Deploy to sin-slides
@@ -36,4 +36,3 @@ jobs:
           deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
           publish_branch: gh-pages
           force_push: true
-          clean: true
