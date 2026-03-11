@@ -1,7 +1,7 @@
 slides:
-  reveal_theme: black
+  theme: black
   highlight_theme: monokai
-  reveal_js_config:
+  revealjs:
     transition: slide
     slideNumber: true
     center: true
