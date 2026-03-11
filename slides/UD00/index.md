@@ -6,8 +6,7 @@ highlight_theme: monokai
 
 # Sistemas Informáticos
 
-prueba de prueba de prueba
----
+prueba de prueba de prueba de prueba
 
 ### DAM · Sergio Rey Martínez
 
