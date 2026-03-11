@@ -14,16 +14,14 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # Versión estable para evitar errores de librerías
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
-          pip install mkslides
-          # mkslides usa omegaconf internamente, esto asegura compatibilidad
-          pip install omegaconf 
+          python -m pip install --upgrade pip
+          pip install omegaconf mkslides
 
       - name: Build slides
-        # Este comando busca todos los .md dentro de slides/ y sus subcarpetas
         run: mkslides build --config-file mkslides.yml slides/
 
       - name: Deploy to sin-slides
@@ -34,5 +32,3 @@ jobs:
           external_repository: apuntes-sergio/sin-slides
           deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
           publish_branch: main
-          # Esto evita que se borre el historial de despliegues previos
-          force_push: true
