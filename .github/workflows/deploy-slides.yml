@@ -21,29 +21,40 @@ jobs:
 
       - name: Build slides
         run: |
-          # 1. Limpieza absoluta
+          # 1. Limpieza total
           rm -rf site
           
-          # 2. Construcción respetando la jerarquía
-          # Ejecutamos mkslides indicando que el destino mantenga la estructura
+          # 2. Construcción (mkslides a veces aplana si solo hay un archivo por carpeta)
           mkslides build --config-file mkslides.yml slides
           
-          # 3. TRUCO DE SEGURIDAD: Si mkslides ha puesto el index en la raíz por error,
-          # creamos la carpeta UD00 y lo movemos allí.
-          if [ ! -d "site/UD00" ]; then
-            mkdir -p site/UD00
-            cp site/index.html site/UD00/index.html
+          # 3. RECONSTRUCCIÓN DE ESTRUCTURA (Para forzar UD00, UD01, etc.)
+          # Buscamos archivos .md en tus subcarpetas de origen y aseguramos que tengan carpeta en el destino
+          cd slides
+          for dir in UD*/; do
+            dir=${dir%/} # Quitar la barra final
+            if [ -d "$dir" ]; then
+              mkdir -p ../site/$dir
+              # Si mkslides generó un html con el nombre de la carpeta en la raíz, lo movemos dentro como index.html
+              if [ -f "../site/$dir.html" ]; then
+                mv "../site/$dir.html" "../site/$dir/index.html"
+              # Si mkslides ya generó un index.html pero en el lugar equivocado
+              elif [ -f "../site/index.html" ] && [ "$dir" == "UD00" ]; then
+                cp "../site/index.html" "../site/$dir/index.html"
+              fi
+            fi
+          done
+          cd ..
+
+          # 4. CORRECCIÓN DE RUTAS PARA SUBDOMINIOS Y CARPETAS
+          # Esto arregla el CSS/JS para archivos dentro de UD00, UD01...
+          find site -mindepth 2 -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
+          find site -mindepth 2 -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
+          
+          # Esto arregla el CSS/JS para el index de la raíz
+          if [ -f site/index.html ]; then
+            sed -i 's|href="/mkslides-assets|href="./mkslides-assets|g' site/index.html
+            sed -i 's|src="/mkslides-assets|src="./mkslides-assets|g' site/index.html
           fi
-          
-          # 4. CORRECCIÓN DE RUTAS (Muy importante para el 404 de los estilos)
-          # Ahora que estamos en una subcarpeta (UD00), los assets están un nivel arriba
-          find site/UD00 -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
-          find site/UD00 -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
-          
-          # 5. Para que la raíz del dominio no esté vacía, mantenemos un index en la raíz
-          # pero arreglamos sus rutas también
-          sed -i 's|href="/mkslides-assets|href="./mkslides-assets|g' site/index.html
-          sed -i 's|src="/mkslides-assets|src="./mkslides-assets|g' site/index.html
 
           touch site/.nojekyll
 
