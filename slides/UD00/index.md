@@ -3,8 +3,12 @@ title: Sistemas Informáticos - DAM
 ---
 
 # Sistemas Informáticos
+
+---
+
 ### DAM · Sergio Rey Martínez
 
+## Presentación 
 ---
 
 ## ¿Qué vamos a aprender?
