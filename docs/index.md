@@ -78,7 +78,7 @@ Cada unidad del bloque Windows incluye la entrega de una parte de la **memoria d
 
 ---
 
-Apuntes desarrollados por ***Sergio Rey Martínez***
+Apuntes desarrollados por ***Sergio Rey Martínez*** con ayuda de la IA, claro.
 
 ---
 

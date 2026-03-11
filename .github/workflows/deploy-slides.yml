@@ -1,0 +1,24 @@
+name: Deploy slides
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'slides/**'        # solo se dispara si cambias slides
+      - 'mkslides.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install mkslides
+      - run: mkslides build slides/
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          external_repository: apuntes-sergio/sin-slides
+          deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
