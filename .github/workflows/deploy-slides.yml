@@ -31,4 +31,5 @@ jobs:
           publish_dir: ./site
           external_repository: apuntes-sergio/sin-slides
           deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
-          publish_branch: main
+          publish_branch: gh-pages
+          force_push: true
