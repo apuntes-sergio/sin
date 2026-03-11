@@ -1,5 +1,4 @@
 cat > mkslides.yml << 'EOF'
-site_name: SI - DAM · Slides
 
 reveal:
   theme: black
