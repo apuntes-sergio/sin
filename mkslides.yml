@@ -1,8 +1,7 @@
 cat > mkslides.yml << 'EOF'
-
-reveal:
-  theme: black
-  highlight_theme: monokai
+theme: black
+highlight_theme: monokai
+revealjs:
   transition: slide
   slideNumber: true
   center: true
