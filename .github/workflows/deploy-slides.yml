@@ -23,9 +23,9 @@ jobs:
 
       - name: Build slides
         run: |
+          rm -rf site # Borramos cualquier residuo anterior
           mkslides build --config-file mkslides.yml slides/
-          touch site/.nojekyll  
-          ls -R ./site # Esto nos dirá en los logs qué archivos se han creado
+          touch site/.nojekyll
 
       - name: Deploy to sin-slides
         uses: peaceiris/actions-gh-pages@v3

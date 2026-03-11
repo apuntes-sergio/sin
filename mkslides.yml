@@ -1,9 +1,8 @@
+# mkslides.yml en tu repositorio 'sin'
+site_url: https://apuntes-sergio.github.io/sin-slides/
+
 revealjs:
   transition: slide
   slideNumber: true
   center: true
   hash: true
-  # Forzamos a que use rutas relativas para los assets
-  relative_urls: true 
-  # Opcional: define el tema aquí por si el del Markdown no se propaga bien
-  theme: black
