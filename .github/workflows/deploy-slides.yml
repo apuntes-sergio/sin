@@ -21,19 +21,20 @@ jobs:
 
       - name: Build slides
         run: |
-          # 1. Limpieza absoluta
+          # 1. Limpieza para evitar conflictos de archivos viejos
           rm -rf site
           
-          # 2. Construcción: Asegúrate de NO poner la barra final en slides
-          # Esto obliga a mkslides a respetar la jerarquía de carpetas
+          # 2. Construcción: IMPORTANTE 'slides' sin barra final
+          # Esto ayuda a mantener la jerarquía de carpetas
           mkslides build --config-file mkslides.yml slides
           
-          # 3. Corregir rutas para que funcionen en cualquier nivel de carpeta
-          # Este comando busca todos los HTML y quita la barra inicial de los assets
+          # 3. Corrección de rutas para subcarpetas (UD00, UD01...)
+          # Cambia /mkslides-assets por ../mkslides-assets en todos los HTML
           find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
           find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
           
-          # Corrección especial para el index de la raíz (si existe)
+          # 4. Excepción para el index de la raíz (si existe uno principal)
+          # En la raíz, los assets no llevan "../"
           if [ -f site/index.html ]; then
             sed -i 's|href="../mkslides-assets|href="./mkslides-assets|g' site/index.html
             sed -i 's|src="../mkslides-assets|src="./mkslides-assets|g' site/index.html
