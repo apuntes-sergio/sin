@@ -24,6 +24,7 @@ jobs:
       - name: Build slides
         run: |
           mkslides build --config-file mkslides.yml slides/
+          touch site/.nojekyll  
           ls -R ./site # Esto nos dirá en los logs qué archivos se han creado
 
       - name: Deploy to sin-slides

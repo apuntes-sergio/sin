@@ -1,8 +1,9 @@
-# mkslides.yml en la raíz de tu repositorio 'sin'
 revealjs:
   transition: slide
   slideNumber: true
   center: true
   hash: true
-  # Aquí puedes añadir más opciones de Reveal.js
+  # Forzamos a que use rutas relativas para los assets
+  relative_urls: true 
+  # Opcional: define el tema aquí por si el del Markdown no se propaga bien
   theme: black
