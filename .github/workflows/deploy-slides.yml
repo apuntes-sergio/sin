@@ -24,36 +24,19 @@ jobs:
           # 1. Limpieza total
           rm -rf site
           
-          # 2. Construcción (mkslides a veces aplana si solo hay un archivo por carpeta)
+          # 2. Construcción respetando carpetas
           mkslides build --config-file mkslides.yml slides
           
-          # 3. RECONSTRUCCIÓN DE ESTRUCTURA (Para forzar UD00, UD01, etc.)
-          # Buscamos archivos .md en tus subcarpetas de origen y aseguramos que tengan carpeta en el destino
-          cd slides
-          for dir in UD*/; do
-            dir=${dir%/} # Quitar la barra final
-            if [ -d "$dir" ]; then
-              mkdir -p ../site/$dir
-              # Si mkslides generó un html con el nombre de la carpeta en la raíz, lo movemos dentro como index.html
-              if [ -f "../site/$dir.html" ]; then
-                mv "../site/$dir.html" "../site/$dir/index.html"
-              # Si mkslides ya generó un index.html pero en el lugar equivocado
-              elif [ -f "../site/index.html" ] && [ "$dir" == "UD00" ]; then
-                cp "../site/index.html" "../site/$dir/index.html"
-              fi
-            fi
-          done
-          cd ..
-
-          # 4. CORRECCIÓN DE RUTAS PARA SUBDOMINIOS Y CARPETAS
-          # Esto arregla el CSS/JS para archivos dentro de UD00, UD01...
-          find site -mindepth 2 -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
-          find site -mindepth 2 -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
+          # 3. EL ARREGLO DEFINITIVO DE RUTAS
+          # Buscamos todos los .html y cambiamos las rutas absolutas por relativas
+          # Esto hace que funcionen tanto en la raíz como en UD00, UD01, etc.
+          find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="../mkslides-assets|g' {} +
+          find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="../mkslides-assets|g' {} +
           
-          # Esto arregla el CSS/JS para el index de la raíz
+          # Caso especial para el index de la raíz (si existe)
           if [ -f site/index.html ]; then
-            sed -i 's|href="/mkslides-assets|href="./mkslides-assets|g' site/index.html
-            sed -i 's|src="/mkslides-assets|src="./mkslides-assets|g' site/index.html
+            sed -i 's|href="../mkslides-assets|href="./mkslides-assets|g' site/index.html
+            sed -i 's|src="../mkslides-assets|src="./mkslides-assets|g' site/index.html
           fi
 
           touch site/.nojekyll
