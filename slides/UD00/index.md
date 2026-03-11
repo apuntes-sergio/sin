@@ -1,5 +1,7 @@
 ---
 title: Sistemas Informáticos - DAM
+theme: black
+highlight_theme: monokai
 ---
 
 # Sistemas Informáticos

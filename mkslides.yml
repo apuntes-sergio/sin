@@ -1,6 +1,4 @@
 slides:
-  theme: black
-  highlight_theme: monokai
   revealjs:
     transition: slide
     slideNumber: true
