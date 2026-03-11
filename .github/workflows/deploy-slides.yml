@@ -2,6 +2,9 @@ name: Deploy slides
 on:
   push:
     branches: [main]
+    paths:
+      - 'slides/**'
+      - 'mkslides.yml'
 
 jobs:
   deploy:
@@ -18,13 +21,18 @@ jobs:
 
       - name: Build slides
         run: |
-          # 1. Limpiamos rastro anterior
+          # 1. Limpieza total
           rm -rf site
           
-          # 2. Construimos las slides
+          # 2. Construcción limpia
           mkslides build --config-file mkslides.yml slides/
           
-          # 3. Evitamos que GitHub Pages use Jekyll
+          # 3. EL TRUCO MAESTRO: Corregir rutas para GitHub Pages
+          # Cambiamos /mkslides-assets por ./mkslides-assets en todos los HTML
+          find site -name "*.html" -exec sed -i 's|href="/mkslides-assets|href="mkslides-assets|g' {} +
+          find site -name "*.html" -exec sed -i 's|src="/mkslides-assets|src="mkslides-assets|g' {} +
+          
+          # 4. Evitar que GitHub procese la carpeta
           touch site/.nojekyll
 
       - name: Deploy to sin-slides
@@ -36,3 +44,4 @@ jobs:
           deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
           publish_branch: gh-pages
           force_push: true
+          clean: true

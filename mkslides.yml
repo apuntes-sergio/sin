@@ -3,3 +3,4 @@ revealjs:
   slideNumber: true
   center: true
   hash: true
+  theme: black
