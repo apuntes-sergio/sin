@@ -1,5 +1,8 @@
-slides:
-  revealjs:
-    transition: slide
-    slideNumber: true
-    center: true
+# mkslides.yml en la raíz de tu repositorio 'sin'
+revealjs:
+  transition: slide
+  slideNumber: true
+  center: true
+  hash: true
+  # Aquí puedes añadir más opciones de Reveal.js
+  theme: black

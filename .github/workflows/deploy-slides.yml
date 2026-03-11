@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'slides/**'        # solo se dispara si cambias slides
+      - 'slides/**'
       - 'mkslides.yml'
 
 jobs:
@@ -11,15 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-      - run: pip install mkslides
-      - run: mkslides --version      
-      - run: mkslides build --config-file mkslides.yml slides/
-      - uses: peaceiris/actions-gh-pages@v3
+          python-version: '3.11' # Versión estable para evitar errores de librerías
+
+      - name: Install dependencies
+        run: |
+          pip install mkslides
+          # mkslides usa omegaconf internamente, esto asegura compatibilidad
+          pip install omegaconf 
+
+      - name: Build slides
+        # Este comando busca todos los .md dentro de slides/ y sus subcarpetas
+        run: mkslides build --config-file mkslides.yml slides/
+
+      - name: Deploy to sin-slides
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           external_repository: apuntes-sergio/sin-slides
           deploy_key: ${{ secrets.SLIDES_DEPLOY_KEY }}
+          publish_branch: main
+          # Esto evita que se borre el historial de despliegues previos
+          force_push: true
