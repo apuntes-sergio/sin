@@ -1,0 +1,10 @@
+cat > mkslides.yml << 'EOF'
+site_name: SI - DAM · Slides
+
+reveal:
+  theme: black
+  highlight_theme: monokai
+  transition: slide
+  slideNumber: true
+  center: true
+EOF
