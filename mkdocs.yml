@@ -56,50 +56,68 @@ plugins:
 
 nav:
   - Presentación: index.md
+  - Hardware y Arquitectura:
+    - 01_01_introduccion.md
+    - 01_02_representacion_informacion.md
+    - 01_03_cpu.md
+    - 01_04_placa_base.md
+    - 01_05_memoria.md
+    - 01_06_almacenamiento.md
+    - 01_07_perifericos_conectores.md
+  - Fundamentos de redes:
+    - 01_01_introduccion.md
+  - Direccionamiento IP y subnetting:
+    - 01_01_introduccion.md
+  - Simulación de redes con Packet Tracer:
+    - 01_01_introduccion.md
+  - Virtualización e instalación de SSOO:
+    - 01_01_introduccion.md
+
+
   - Introducción a los Sistemas Operativos de Servidor:
-    - 01_1_introducción.md
-    - 01_2_arquitectura_cliente_servidor.md
-    - 01_3_funciones_SO.md
-    - 01_4_sistemas_operativos_servidor.md
-    - 01_5_recordatorio_red.md
+    - 05_01_introducción.md
+    - 05_02_arquitectura_cliente_servidor.md
+    - 05_03_funciones_SO.md
+    - 05_04_sistemas_operativos_servidor.md
+    - 05_05_recordatorio_red.md
   - Instalación de sistemas operativos de servidor privativos:
-    - 02_1_instalacion_SO_introduccion.md
-    - 02_2_instalacion_windows_server.md
-    - 02_3_config_basica.md
-    - 02_4_documentar_instalacion.md
-    - 02_5_administrar_discos.md
-    - 02_6_dominio.md
+    - 06_01_instalacion_SO_introduccion.md
+    - 06_02_instalacion_windows_server.md
+    - 06_03_config_basica.md
+    - 06_04_documentar_instalacion.md
+    - 06_05_administrar_discos.md
+    - 06_06_dominio.md
   - Administración de usuarios y grupos en Windows Server:
-    - 03_01_objetos_dominios.md
-    - 03_02_usuarios.md
-    - 03_03_grupos.md
-    - 03_04_equipos.md
-    - 03_05_unidades_organizativas.md
-    - 03_06_herramientas_administracion.md
-    - 03_07_perfiles_usuarios.md
+    - 07_01_objetos_dominios.md
+    - 07_02_usuarios.md
+    - 07_03_grupos.md
+    - 07_04_equipos.md
+    - 07_05_unidades_organizativas.md
+    - 07_06_herramientas_administracion.md
+    - 07_07_perfiles_usuarios.md
   - Gestión de recursos compartidos en Windows Server:
-    - 04_01_permisos_derechos.md
-    - 04_02_servidor_archivos.md
-    - 04_03_compartir_impresoras.md
+    - 08_01_permisos_derechos.md
+    - 08_02_servidor_archivos.md
+    - 08_03_compartir_impresoras.md
   - Directivas de grupo en Windows Server:
-    - 05_01_introduccion_directivas.md
-    - 05_02_creacion_directivas.md
-    - 05_03_herencia_directivas.md
-    - 05_04_configuacion_directivas_comunes.md
-    - 05_05_verificacion_problemas.md
+    - 09_01_introduccion_directivas.md
+    - 09_02_creacion_directivas.md
+    - 09_03_herencia_directivas.md
+    - 09_04_configuacion_directivas_comunes.md
+    - 09_05_verificacion_problemas.md
   - Configuraciones avanzadas y adicionales:
-    - 06_01_configuraciones_adicionales.md
-    - 06_02_carpetas_compartidas_ocultas.md
-    - 06_03_cuotas_discos.md
-    - 06_04_servidor_dhcp.md
-    - 06_05_escritorio_remoto.md
-    - 06_06_redes_virtuales_VPN.md
-    - 06_07_rsat.md
-    - 06_08_backups.md
-    - 06_09_controlador_secundario.md
-    - 06_10_supervision_monitorizacion.md
-    - 06_11_servicios.md
-    - 06_12_actualizacion_despliegue.md  
+    - 09_11_configuraciones_adicionales.md
+    - 09_12_carpetas_compartidas_ocultas.md
+    - 09_13_cuotas_discos.md
+    - 09_14_servidor_dhcp.md
+    - 09_15_escritorio_remoto.md
+    - 09_16_redes_virtuales_VPN.md
+    - 09_17_rsat.md
+    - 09_18_backups.md
+    - 09_19_controlador_secundario.md
+    - 09_20_supervision_monitorizacion.md
+    - 09_21_servicios.md
+    - 09_22_actualizacion_despliegue.md  
 
   - Fundamentos de la Línea de Comandos en Linux:
     - 10_01_introducciom.md
