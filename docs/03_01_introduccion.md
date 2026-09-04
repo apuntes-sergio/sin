@@ -41,7 +41,7 @@ No todos los sistemas informáticos son iguales. Según su propósito y caracter
 La clave para entender el hardware es comprender que **todos los componentes están relacionados entre sí** y que la elección de uno condiciona al resto. No puedes elegir un procesador sin tener en cuenta la placa base que lo soporta, ni la placa base sin considerar el tipo de memoria RAM que acepta.
 
 <figure markdown="span" align="center">
-  ![TODO](./imgs/hardware/diagrama_componentes.png){ width="100%" }
+  ![TODO](./imgs/hardware/diagrama_componentes.webp){ width="80%" }
   <figcaption>Relación entre los componentes principales de un ordenador</figcaption>
 </figure>
 

@@ -64,14 +64,19 @@ nav:
     - 01_05_memoria.md
     - 01_06_almacenamiento.md
     - 01_07_perifericos_conectores.md
+    - 01_08_fuentes_alimentacion.md
+    - 01_09_arranque_diagnostico.md
+    - 01_10_ejercicio_integrador.md
   - Fundamentos de redes:
-    - 01_01_introduccion.md
+    - 02_01_introduccion.md
+    - 02_02_tipos_red.md
+    - 02_03_topologias_red.md
   - Direccionamiento IP y subnetting:
-    - 01_01_introduccion.md
+    - 03_01_introduccion.md
   - Simulación de redes con Packet Tracer:
-    - 01_01_introduccion.md
+    - 04_01_introduccion.md
   - Virtualización e instalación de SSOO:
-    - 01_01_introduccion.md
+    - 05_01_introduccion.md
 
 
   - Introducción a los Sistemas Operativos de Servidor:

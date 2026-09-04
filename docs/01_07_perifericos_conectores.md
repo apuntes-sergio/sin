@@ -139,8 +139,8 @@ Proyecta la imagen del ordenador sobre una superficie externa. Muy usado en ento
 
 <!-- IMG: fotografía proyector de corta distancia en aula -->
 <figure markdown="span" align="center">
-  ![Proyector](./imgs/hardware/proyector_aula.png){ width="60%" }
-  <figcaption>Proyector de corta distancia en entorno educativo</figcaption>
+  ![Proyector](./imgs/hardware/proyector.png){ width="80%" }
+  <figcaption>Diferentes tipos de proyectores</figcaption>
 </figure>
 
 ## Periféricos de entrada/salida
@@ -159,6 +159,12 @@ Los discos externos funcionan exactamente igual que los internos pero en una car
 
 Combina impresora, escáner y a veces fax en un solo dispositivo. Es el periférico de E/S más habitual en oficinas: imprime (salida) y escanea (entrada).
 
+<figure markdown="span" align="center">
+  ![Impresora Multifunción](./imgs/hardware/impresora_multifuncion.png){ width="65%" }
+  <figcaption>Impresora multifuncion típica de una empresa</figcaption>
+</figure>
+
+
 ### Pantalla táctil
 
 Funciona simultáneamente como periférico de salida (muestra imagen) y de entrada (detecta el toque del dedo o lápiz). Prácticamente todos los smartphones y tablets usan pantallas táctiles.
@@ -170,7 +176,7 @@ Almacenamiento flash en formato compacto con conector USB. Permite transportar d
 <!-- IMG: fotografía pendrive USB-A y USB-C comparativa tamaños -->
 <figure markdown="span" align="center">
   ![Pendrive USB](./imgs/hardware/pendrive_usb.png){ width="55%" }
-  <figcaption>Pendrive USB-A clásico (izquierda) y pendrive USB-C compacto (derecha)</figcaption>
+  <figcaption>Pendrives USB-A clásicos </figcaption>
 </figure>
 
 ---
@@ -197,6 +203,11 @@ La versión USB determina la velocidad máxima de transferencia:
 | USB4 Gen 2×2 | USB4 20 | 20 Gbps | 2019 | Basado en protocolo Thunderbolt |
 | USB4 Gen 3×2 | USB4 40 | 40 Gbps | 2019 | Equivalente a Thunderbolt 3 |
 
+<figure markdown="span" align="center">
+  ![Evolución conector USB](./imgs/hardware/USB-evolvement.png){ width="85%" }
+  <figcaption>Evolución de conector USB: Type-A, Type-B, Mini-B, Micro-B y Type-C</figcaption>
+</figure>
+
 !!! warning "La confusión de los nombres USB"
     La nomenclatura USB es de las más confusas de la informática. Lo que en 2008 se llamó "USB 3.0" se renombró después a "USB 3.1 Gen 1" y luego a "USB 3.2 Gen 1". Un mismo puerto puede tener tres nombres distintos según quién lo etiquete. Lo más fiable es fijarse en la **velocidad en Gbps** que indica el fabricante, no en el número de versión.
 
@@ -217,6 +228,8 @@ La versión (velocidad) y el tipo de conector (forma física) son independientes
 | **Mini-B** | Pequeño, 5 pines | Cámaras y dispositivos antiguos (obsoleto) |
 | **Micro-B** | Muy pequeño, trapezoidal | Móviles y tablets antiguos, discos externos |
 | **Type-C** | Ovalado, reversible | Estándar actual en móviles, portátiles, periféricos |
+
+[Más información sobre los conectores USB. Tienda Cables. Tipos de conectores USB: Guia completa](https://www.tiendacables.com/blogs/noticias/tipos-de-conectores-usb-guia-completa-tipo-a-tipo-c-y-mas?srsltid=AfmBOooWu3HFZYX-81gXRhUEe5ANnCI1DuDE7u-fFE81FsF0jKHgSQdM)
 
 ### USB Type-C: el presente y el futuro
 
@@ -258,7 +271,7 @@ Hoy en día está completamente obsoleto y solo se encuentra en proyectores y mo
 
 <!-- IMG: fotografía conector VGA de 15 pines azul -->
 <figure markdown="span" align="center">
-  ![Conector VGA](./imgs/hardware/conector_vga.png){ width="45%" }
+  ![Conector VGA](./imgs/hardware/conector_vga.png){ width="85%" }
   <figcaption>Conector VGA (D-Sub 15 pines). Señal analógica, actualmente obsoleto</figcaption>
 </figure>
 
@@ -270,7 +283,7 @@ Está también en proceso de desaparición, sustituido por HDMI y DisplayPort. T
 
 <!-- IMG: fotografía conector DVI-D dual link -->
 <figure markdown="span" align="center">
-  ![Conector DVI](./imgs/hardware/conector_dvi.png){ width="45%" }
+  ![Conector DVI](./imgs/hardware/conector_dvi.png){ width="80%" }
   <figcaption>Conector DVI-D Dual Link. Digital, soporta hasta 2560×1600</figcaption>
 </figure>
 
@@ -289,6 +302,9 @@ Está también en proceso de desaparición, sustituido por HDMI y DisplayPort. T
 | HDMI 1.4 | 10,2 Gbps | 4K | 30 Hz |
 | HDMI 2.0 | 18 Gbps | 4K | 60 Hz / 1080p 240 Hz |
 | HDMI 2.1 | 48 Gbps | 10K | 4K 144 Hz / 8K 60 Hz |
+
+
+[Xataka: HDMI, guía a fondo: qué es, tipos, versiones y cuál comprar](https://www.xataka.com/basics/hdmi-guia-a-fondo-que-tipos-versiones-cual-comprar)
 
 ### DisplayPort
 
@@ -349,9 +365,43 @@ La velocidad soportada depende del estándar Ethernet y la categoría del cable:
 | 2.5G Ethernet | 2,5 Gbps | Cat5e |
 | 10G Ethernet | 10 Gbps | Cat6A |
 
+Como informáticos es interesante conocer que los cables RJ45 tiene un interconectado que normalmete sigue una normativa preestablecida. Estos cables suelen venderse por bobinas para poder ajustar el largo que queramos y se añaden o clampan los conectores. 
+
+<figure markdown="span" align="center">
+  ![Conector RJ-45](./imgs/hardware/conexion_RJ45.png){ width="65%" }
+  <figcaption>Conector RJ-45: Cableado</figcaption>
+</figure>
+
+[Electrónica Embajadores: ¿Cómo conectar los conectores RJ45?](https://www.electronicaembajadores.com/blog/instrumentacion/como-conectar-conectores-rj45/)
+
+
+
+#### Estándares de cableado Ethernet (TIA/EIA-568 e ISO/IEC 11801)
+
+| Categoría | Velocidad máxima | Distancia máxima (a velocidad máxima) | Ancho de banda | Blindaje típico | Año/Estándar |
+|---|---|---|---|---|---|
+| Cat3 | 10 Mbps | 100 m | 16 MHz | UTP | Obsoleto, solo telefonía/10BASE-T |
+| Cat5 | 100 Mbps (Fast Ethernet) | 100 m | 100 MHz | UTP | Obsoleto, no usar en instalaciones nuevas |
+| Cat5e | 1 Gbps (1000BASE-T) | 100 m | 100 MHz | UTP | TIA-568-B, mínimo aceptable hoy |
+| Cat6 | 1 Gbps / 10 Gbps | 100 m (1 Gbps) / 55 m (10 Gbps) | 250 MHz | UTP/STP | TIA-568-C |
+| Cat6a | 10 Gbps | 100 m | 500 MHz | STP/F-UTP | TIA-568-C, recomendado en instalaciones nuevas |
+| Cat7 | 10 Gbps | 100 m | 600 MHz | S/FTP (blindaje por par) | ISO/IEC 11801, conector GG45/TERA |
+| Cat7a | 10-40 Gbps | 50-100 m según uso | 1000 MHz | S/FTP | ISO/IEC 11801, poco implantado |
+| Cat8 | 25/40 Gbps | 30 m | 2000 MHz | S/FTP | TIA-568-C.2-1, uso en datacenter |
+
+!!! note
+    El límite de 100 m solo aplica a la velocidad nominal de cada categoría: Cat6 baja a 55 m a 10 Gbps y Cat8 se queda en 30 m. Cat7 requiere conectores GG45/TERA para aprovechar el blindaje por par; con RJ45 estándar se pierde esa ventaja. La categoría del cable no garantiza por sí sola la velocidad: NIC, switch y conector deben ser de categoría equivalente. La atenuación y el crosstalk (NEXT) mejoran progresivamente de Cat5e a Cat8.
+
+
 ### SFP / SFP+ (fibra óptica)
 
 En entornos de servidor y redes de alta velocidad se usan módulos **SFP** (*Small Form-factor Pluggable*) que permiten conectar cables de fibra óptica. No es habitual en equipos de consumo pero sí en switches de red y servidores.
+
+<figure markdown="span" align="center">
+  ![Conector Fibra Óptica](./imgs/hardware/conector_fibraOptica.png){ width="75%" }
+  <figcaption>Conector Fibra Óptica</figcaption>
+</figure>
+
 
 ---
 
@@ -406,7 +456,7 @@ El **tipo de panel** determina la calidad de imagen, los ángulos de visión, el
 <!-- IMG: comparativa ángulos de visión IPS vs TN vs VA -->
 <figure markdown="span" align="center">
   ![Tipos de panel](./imgs/hardware/monitor_tipos_panel.png){ width="80%" }
-  <figcaption>Comparativa de tipos de panel: TN, IPS, VA y OLED en términos de rendimiento</figcaption>
+  <figcaption>Comparativa de tipos de panel: TN, IPS y VA en términos de rendimiento</figcaption>
 </figure>
 
 **TN (Twisted Nematic)**
@@ -486,7 +536,8 @@ El tamaño del monitor se mide en pulgadas en diagonal. Para trabajo de desarrol
 
 <!-- IMG: tabla visual resumen de todos los conectores con fotografía de cada uno -->
 <figure markdown="span" align="center">
-  ![Resumen conectores](./imgs/hardware/resumen_conectores.png){ width="95%" }
+  ![Resumen conectores](./imgs/hardware/conectores_externos_1.png){ width="95%" }
+  ![Resumen conectores](./imgs/hardware/conectores_externos_2.png){ width="95%" }
   <figcaption>Resumen visual de los conectores externos más importantes en un equipo moderno</figcaption>
 </figure>
 
