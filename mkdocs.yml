@@ -67,88 +67,88 @@ nav:
     - 01_08_fuentes_alimentacion.md
     - 01_09_arranque_diagnostico.md
     - 01_10_ejercicio_integrador.md
-  - Fundamentos de redes:
-    - 02_01_introduccion.md
-    - 02_02_tipos_red.md
-    - 02_03_topologias_red.md
-  - Direccionamiento IP y subnetting:
-    - 03_01_introduccion.md
-  - Simulación de redes con Packet Tracer:
-    - 04_01_introduccion.md
-  - Virtualización e instalación de SSOO:
-    - 05_01_introduccion.md
+  # - Fundamentos de redes:
+  #   - 02_01_introduccion.md
+  #   - 02_02_tipos_red.md
+  #   - 02_03_topologias_red.md
+  # - Direccionamiento IP y subnetting:
+  #   - 03_01_introduccion.md
+  # - Simulación de redes con Packet Tracer:
+  #   - 04_01_introduccion.md
+  # - Virtualización e instalación de SSOO:
+  #   - 05_01_introduccion.md
 
 
-  - Introducción a los Sistemas Operativos de Servidor:
-    - 05_01_introducción.md
-    - 05_02_arquitectura_cliente_servidor.md
-    - 05_03_funciones_SO.md
-    - 05_04_sistemas_operativos_servidor.md
-    - 05_05_recordatorio_red.md
-  - Instalación de sistemas operativos de servidor privativos:
-    - 06_01_instalacion_SO_introduccion.md
-    - 06_02_instalacion_windows_server.md
-    - 06_03_config_basica.md
-    - 06_04_documentar_instalacion.md
-    - 06_05_administrar_discos.md
-    - 06_06_dominio.md
-  - Administración de usuarios y grupos en Windows Server:
-    - 07_01_objetos_dominios.md
-    - 07_02_usuarios.md
-    - 07_03_grupos.md
-    - 07_04_equipos.md
-    - 07_05_unidades_organizativas.md
-    - 07_06_herramientas_administracion.md
-    - 07_07_perfiles_usuarios.md
-  - Gestión de recursos compartidos en Windows Server:
-    - 08_01_permisos_derechos.md
-    - 08_02_servidor_archivos.md
-    - 08_03_compartir_impresoras.md
-  - Directivas de grupo en Windows Server:
-    - 09_01_introduccion_directivas.md
-    - 09_02_creacion_directivas.md
-    - 09_03_herencia_directivas.md
-    - 09_04_configuacion_directivas_comunes.md
-    - 09_05_verificacion_problemas.md
-  - Configuraciones avanzadas y adicionales:
-    - 09_11_configuraciones_adicionales.md
-    - 09_12_carpetas_compartidas_ocultas.md
-    - 09_13_cuotas_discos.md
-    - 09_14_servidor_dhcp.md
-    - 09_15_escritorio_remoto.md
-    - 09_16_redes_virtuales_VPN.md
-    - 09_17_rsat.md
-    - 09_18_backups.md
-    - 09_19_controlador_secundario.md
-    - 09_20_supervision_monitorizacion.md
-    - 09_21_servicios.md
-    - 09_22_actualizacion_despliegue.md  
+  # - Introducción a los Sistemas Operativos de Servidor:
+  #   - 05_01_introducción.md
+  #   - 05_02_arquitectura_cliente_servidor.md
+  #   - 05_03_funciones_SO.md
+  #   - 05_04_sistemas_operativos_servidor.md
+  #   - 05_05_recordatorio_red.md
+  # - Instalación de sistemas operativos de servidor privativos:
+  #   - 06_01_instalacion_SO_introduccion.md
+  #   - 06_02_instalacion_windows_server.md
+  #   - 06_03_config_basica.md
+  #   - 06_04_documentar_instalacion.md
+  #   - 06_05_administrar_discos.md
+  #   - 06_06_dominio.md
+  # - Administración de usuarios y grupos en Windows Server:
+  #   - 07_01_objetos_dominios.md
+  #   - 07_02_usuarios.md
+  #   - 07_03_grupos.md
+  #   - 07_04_equipos.md
+  #   - 07_05_unidades_organizativas.md
+  #   - 07_06_herramientas_administracion.md
+  #   - 07_07_perfiles_usuarios.md
+  # - Gestión de recursos compartidos en Windows Server:
+  #   - 08_01_permisos_derechos.md
+  #   - 08_02_servidor_archivos.md
+  #   - 08_03_compartir_impresoras.md
+  # - Directivas de grupo en Windows Server:
+  #   - 09_01_introduccion_directivas.md
+  #   - 09_02_creacion_directivas.md
+  #   - 09_03_herencia_directivas.md
+  #   - 09_04_configuacion_directivas_comunes.md
+  #   - 09_05_verificacion_problemas.md
+  # - Configuraciones avanzadas y adicionales:
+  #   - 09_11_configuraciones_adicionales.md
+  #   - 09_12_carpetas_compartidas_ocultas.md
+  #   - 09_13_cuotas_discos.md
+  #   - 09_14_servidor_dhcp.md
+  #   - 09_15_escritorio_remoto.md
+  #   - 09_16_redes_virtuales_VPN.md
+  #   - 09_17_rsat.md
+  #   - 09_18_backups.md
+  #   - 09_19_controlador_secundario.md
+  #   - 09_20_supervision_monitorizacion.md
+  #   - 09_21_servicios.md
+  #   - 09_22_actualizacion_despliegue.md  
 
-  - Fundamentos de la Línea de Comandos en Linux:
-    - 10_01_introducciom.md
-    - 10_02_conceptos_basicos.md
-    - 10_03_comprendiendo_almacenamiento.md
-    - 10_04_rutas_absolutas_relativas.md
-    - 10_05_linea_comandos_linux.md
-    - 10_06_comandos_basicos_alias.md
-    - 10_07_gestion_directorios.md
-    - 10_08_gestion_ficheros.md
-    - 10_09_visualizacion_contenido.md
-    - 10_10_redireccionamiento_tuberias.md
-    - 10_11_procesamiento_avanzado_texto.md
+  # - Fundamentos de la Línea de Comandos en Linux:
+  #   - 10_01_introducciom.md
+  #   - 10_02_conceptos_basicos.md
+  #   - 10_03_comprendiendo_almacenamiento.md
+  #   - 10_04_rutas_absolutas_relativas.md
+  #   - 10_05_linea_comandos_linux.md
+  #   - 10_06_comandos_basicos_alias.md
+  #   - 10_07_gestion_directorios.md
+  #   - 10_08_gestion_ficheros.md
+  #   - 10_09_visualizacion_contenido.md
+  #   - 10_10_redireccionamiento_tuberias.md
+  #   - 10_11_procesamiento_avanzado_texto.md
 
-  - Administración de usuarios y permisos en Linux:
-    - 11_01_usuarios_grupos_linux.md
-    - 11_02_gestion_entorno_grafico.md
-    - 11_03_gestion_linea_comandos.md
-    - 11_04_sistema_permisos_ugo.md
-    - 11_05_permisos_umask.md
+  # - Administración de usuarios y permisos en Linux:
+  #   - 11_01_usuarios_grupos_linux.md
+  #   - 11_02_gestion_entorno_grafico.md
+  #   - 11_03_gestion_linea_comandos.md
+  #   - 11_04_sistema_permisos_ugo.md
+  #   - 11_05_permisos_umask.md
 
-  - Scripts de administración en Linux:
-    - 12_01_fundamentos_scripts.md
-    - 12_02_gestion_datos_comunicacion.md
-    - 12_03_logica_aritmetica.md
-    - 12_04_control_flujo.md
-    - 12_05_bucles.md
-    - 12_06_avanzada_modularidad.md
-    - 12_07_anexos.md
+  # - Scripts de administración en Linux:
+  #   - 12_01_fundamentos_scripts.md
+  #   - 12_02_gestion_datos_comunicacion.md
+  #   - 12_03_logica_aritmetica.md
+  #   - 12_04_control_flujo.md
+  #   - 12_05_bucles.md
+  #   - 12_06_avanzada_modularidad.md
+  #   - 12_07_anexos.md
