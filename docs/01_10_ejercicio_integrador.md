@@ -7,6 +7,7 @@ Mi propuesta es plantear **tres escenarios de montaje** con presupuestos diferen
 - **Escenario C** — Servidor de aula / workstation (~1.500€)
 
 Para cada escenario el alumno debe:
+
 1. Elegir CPU → identificar socket y chipset
 2. Elegir placa base compatible
 3. Elegir RAM compatible (tipo, velocidad, dual channel)
