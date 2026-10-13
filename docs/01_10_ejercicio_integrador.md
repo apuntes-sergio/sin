@@ -3,8 +3,8 @@ Este ejercicio integrador es el cierre de la UD01 y debe conectar todo lo visto.
 Mi propuesta es plantear **tres escenarios de montaje** con presupuestos diferentes, donde el alumno tiene que elegir y justificar cada componente verificando compatibilidades:
 
 - **Escenario A** — Equipo de desarrollo básico (~600€)
-- **Escenario B** — Equipo de desarrollo con virtualización (~1.000€)
-- **Escenario C** — Servidor de aula / workstation (~1.500€)
+- **Escenario B** — Equipo de desarrollo con virtualización (~1.200€)
+- **Escenario C** — Servidor de aula / workstation (~2.000€)
 
 Para cada escenario el alumno debe:
 
