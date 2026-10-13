@@ -15,4 +15,3 @@ Para cada escenario el alumno debe:
 6. Verificar compatibilidades con PCPartPicker
 7. Documentar las decisiones justificando cada elección
 
-¿Lo ves bien así o cambias algo? ¿Quieres añadir un escenario Apple Silicon o Snapdragon para que reflexionen sobre esas plataformas?
