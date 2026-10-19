@@ -5,7 +5,9 @@ description: UD01 - Hardware y Arquitectura
 
 Un **sistema informático** es un conjunto de elementos interrelacionados cuyo objetivo es almacenar, procesar y transmitir información de forma automática. No es simplemente un ordenador: es la combinación de hardware, software y las personas que lo utilizan trabajando de forma coordinada.
 
+Antes de imagen
 ![Sistema informático](./imgs/hardware/Computer-System-Architecture-1.jpg){ width="70%" }
+después de imagen
 
 <figure markdown="span" align="center">
   ![Sistema informático](./imgs/hardware/Computer-System-Architecture-1.jpg){ width="70%" }
