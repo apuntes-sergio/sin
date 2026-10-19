@@ -67,28 +67,28 @@ nav:
     - 01_08_fuentes_alimentacion.md
     - 01_09_arranque_diagnostico.md
     - 01_10_ejercicio_integrador.md
-  # - Fundamentos de redes:
-  #   - 02_01_introduccion.md
-  #   - 02_02_tipos_red.md
-  #   - 02_03_topologias_red.md
-  #   - 02_04_medios_transmision.md
-  #   - 02_05_dispositivos_interconexion.md
-  #   - 02_06_modelo_osi_tcpip.md
-  # - Direccionamiento IP y subnetting:
-  #   - 03_01_direccion_ip_clases.md
-  #   - 03_02_ip_publica_privada_nat.md
-  #   - 03_03_mascara_cidr.md
-  #   - 03_04_calculo_subredes.md
-  #   - 03_05_vlsm.md
-  #   - 03_06_ipv6_ipcalc.md
-  # - Simulación de redes con Packet Tracer:
-  #   - 04_01_introduccion_packet_tracer.md
-  #   - 04_02_primera_red.md
-  #   - 04_03_ejercicios_lan.md
-  #   - 04_04_router_gateway.md
-  #   - 04_05_ejercicios_router.md
-  #   - 04_06_proyecto_isca_dam.md
-  #   - 04_07_verificacion_documentacion.md
+  - Fundamentos de redes:
+    - 02_01_introduccion.md
+    - 02_02_tipos_red.md
+    - 02_03_topologias_red.md
+    - 02_04_medios_transmision.md
+    - 02_05_dispositivos_interconexion.md
+    - 02_06_modelo_osi_tcpip.md
+  - Direccionamiento IP y subnetting:
+    - 03_01_direccion_ip_clases.md
+    - 03_02_ip_publica_privada_nat.md
+    - 03_03_mascara_cidr.md
+    - 03_04_calculo_subredes.md
+    - 03_05_vlsm.md
+    - 03_06_ipv6_ipcalc.md
+  - Simulación de redes con Packet Tracer:
+    - 04_01_introduccion_packet_tracer.md
+    - 04_02_primera_red.md
+    - 04_03_ejercicios_lan.md
+    - 04_04_router_gateway.md
+    - 04_05_ejercicios_router.md
+    - 04_06_proyecto_isca_dam.md
+    - 04_07_verificacion_documentacion.md
 
 
   # - Virtualización e instalación de SSOO:
