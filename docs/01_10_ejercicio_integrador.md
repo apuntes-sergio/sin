@@ -1,3 +1,8 @@
+---
+title: Ejercicio Integrador
+description: UD01 - Hardware y Arquitectura
+---
+
 Este ejercicio integrador es el cierre de la UD01 y debe conectar todo lo visto. Antes de generarlo, déjame confirmar el enfoque:
 
 Mi propuesta es plantear **tres escenarios de montaje** con presupuestos diferentes, donde el alumno tiene que elegir y justificar cada componente verificando compatibilidades:

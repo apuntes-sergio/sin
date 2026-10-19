@@ -25,10 +25,12 @@ En una **topología en bus**, todos los dispositivos están conectados a un úni
 Para evitar que los datos reboten infinitamente por el cable, en los extremos del bus se colocan **terminadores** que absorben la señal.
 
 **Ventajas:**
+
 - Muy sencilla y económica de implementar: solo necesita un cable.
 - Fácil de añadir nuevos dispositivos.
 
 **Inconvenientes:**
+
 - Si el cable central falla, **toda la red deja de funcionar**.
 - Solo un dispositivo puede transmitir a la vez. Si varios intentan transmitir simultáneamente se produce una **colisión** y los datos se corrompen.
 - El rendimiento cae drásticamente a medida que aumenta el número de dispositivos.
@@ -49,11 +51,13 @@ En una **topología en anillo**, cada dispositivo está conectado exactamente a 
 Para controlar quién puede transmitir en cada momento y evitar colisiones, se usa un mecanismo llamado **token** (testigo): un paquete especial que circula por el anillo y solo quien lo tiene puede transmitir datos.
 
 **Ventajas:**
+
 - Sin colisiones gracias al mecanismo de token.
 - Rendimiento predecible y constante.
 - Funciona bien con muchos dispositivos.
 
 **Inconvenientes:**
+
 - Si un dispositivo o enlace falla, **toda la red puede verse afectada** (aunque los anillos dobles lo mitigan).
 - Añadir o retirar dispositivos interrumpe la red.
 - Más compleja de gestionar que bus o estrella.
@@ -71,12 +75,14 @@ La **topología en estrella** es la dominante en las redes LAN modernas. Todos l
 </figure>
 
 **Ventajas:**
+
 - Si un cable o un dispositivo falla, **el resto de la red sigue funcionando** perfectamente. Solo el dispositivo afectado pierde conectividad.
 - Muy fácil de diagnosticar averías: si un equipo no tiene red, el problema está en su cable o en su puerto del switch.
 - Fácil de añadir nuevos dispositivos sin interrumpir la red.
 - Alto rendimiento: con un switch moderno, cada par de dispositivos tiene su propio canal de comunicación dedicado y no comparte ancho de banda.
 
 **Inconvenientes:**
+
 - Si el **dispositivo central falla**, toda la red deja de funcionar.
 - Requiere más cable que el bus (un cable por dispositivo en lugar de uno compartido).
 - El coste del switch central es un elemento adicional.
@@ -97,11 +103,13 @@ En una **topología en malla**, cada dispositivo está conectado directamente a 
 </figure>
 
 **Ventajas:**
+
 - **Máxima redundancia y tolerancia a fallos**: si un enlace falla, los datos pueden llegar al destino por rutas alternativas.
 - Sin punto único de fallo.
 - Alto rendimiento: múltiples rutas disponibles simultáneamente.
 
 **Inconvenientes:**
+
 - Muy costosa y compleja: el número de enlaces crece exponencialmente con el número de nodos.
 - Difícil de gestionar y mantener.
 
@@ -122,15 +130,17 @@ La **topología en árbol** es una extensión jerárquica de la estrella. Existe
 </figure>
 
 **Ventajas:**
+
 - Escalable: se pueden añadir nuevas ramas sin afectar al resto.
 - Bien organizada y fácil de gestionar por segmentos.
 - Permite segmentar la red por departamentos o plantas.
 
 **Inconvenientes:**
+
 - Si falla un switch intermedio, todos los dispositivos conectados a él quedan sin red.
 - Más compleja que una estrella simple.
 
-**Estado actual:** Es la topología más habitual en redes corporativas medianas y grandes. Una empresa con varias plantas puede tener un switch por planta (nivel de acceso), conectados a switches de distribución por planta, que a su vez se conectan al switch o router principal (núcleo). En el proyecto de este curso, la red de la empresa ficticia usará una topología en árbol.
+**Estado actual:** Es la **topología más habitual** en redes corporativas medianas y grandes. Una empresa con varias plantas puede tener un switch por planta (nivel de acceso), conectados a switches de distribución por planta, que a su vez se conectan al switch o router principal (núcleo). En el proyecto de este curso, la red de la empresa ficticia usará una topología en árbol.
 
 ## Topología híbrida
 
@@ -165,16 +175,14 @@ En la práctica, la mayoría de redes reales son **híbridas**: combinan element
 
 **Desarrollo:**
 
-1. El profesor pregunta: ¿qué topología creéis que tiene la red de esta aula? ¿Y la del instituto completo?
+1. ¿qué topología creéis que tiene la red de esta aula? ¿Y la del instituto completo?
 
-2. Por grupos de 3-4, los alumnos intentan dibujar en papel el esquema de red del aula tal como la ven: ¿hay cables? ¿Dónde van? ¿Hay algún dispositivo central visible (switch, router, patch panel)?
+2. Dibujar en papel o en la pizarra el esquema de red del aula tal como la ven: ¿hay cables? ¿Dónde van? ¿Hay algún dispositivo central visible (switch, router, patch panel)?
 
-3. Puesta en común: cada grupo explica su esquema. El profesor muestra o describe la topología real del aula y del centro, identificando:
+3. Puesta en común: sobre la topología real del aula y del centro, identificando:
     - El switch del aula y los cables que van a cada equipo → **estrella**
     - El switch del aula conectado al switch de planta → **árbol**
     - La conexión del centro al operador de internet → **WAN**
 
 4. Reflexión final: ¿qué pasaría si el switch central del aula se estropeara? ¿Y si se rompiera el cable de un solo equipo?
 
-!!! tip "Para el profesor"
-    Si es posible, abre el armario de red del aula o muestra una fotografía del patch panel y el switch para que los alumnos vean físicamente la topología en estrella. Ver el hardware real refuerza enormemente la comprensión del concepto.

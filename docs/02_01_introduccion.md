@@ -62,19 +62,16 @@ Para que una red funcione necesita, como mínimo, tres elementos:
 
 ### 🖥️ Actividad conjunta: las redes que ya usamos
 
-**Duración:** 10 minutos  
-**Dinámica:** debate guiado por el profesor
+**objetivo**: identificar que las redes no son algo abstracto sino que forman parte de su vida cotidiana.
 
-Antes de estudiar cómo funcionan las redes, reflexionamos sobre cuántas redes usamos sin darnos cuenta.
-
-El profesor pregunta al grupo:
+Antes de estudiar cómo funcionan las redes, reflexionamos sobre cuántas redes usamos sin darnos cuenta:
 
 1. ¿Cuántas redes diferentes has usado hoy antes de llegar al instituto?
 2. ¿Qué recursos compartes en red en tu casa?
 3. ¿Qué pasaría en tu trabajo habitual si se cayera la red durante 1 hora? ¿Y durante 1 día?
 4. ¿Puedes pensar en algún dispositivo "inteligente" de tu casa que use la red para funcionar?
 
-El objetivo es que los alumnos identifiquen que las redes no son algo abstracto sino que forman parte de su vida cotidiana.
+
 
 ---
 
@@ -88,6 +85,7 @@ Elabora un documento con las siguientes secciones:
 **1. Redes en mi hogar**
 
 Identifica y describe las redes que tienes en tu casa:
+
 - ¿Tienes red Wi-Fi? ¿De qué operador? ¿Sabes el modelo del router?
 - ¿Hay algún dispositivo conectado por cable? ¿Cuál?
 - ¿Qué dispositivos están conectados a tu red doméstica? Haz una lista lo más completa posible (ordenadores, móviles, tablets, smart TV, consolas, altavoces inteligentes, bombillas, cámaras...)

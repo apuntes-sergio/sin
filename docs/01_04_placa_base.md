@@ -217,6 +217,7 @@ Además, los slots PCIe tienen sus propios conectores de alimentación para tarj
 **BIOS** (*Basic Input/Output System*) es el firmware de la placa base: el software más básico del sistema, grabado en un chip de la placa, que se ejecuta nada más encender el ordenador antes de que cargue el sistema operativo.
 
 Sus funciones son:
+
 - Inicializar y verificar todos los componentes del sistema (POST)
 - Configurar parámetros del hardware: frecuencias, voltajes, orden de arranque
 - Proporcionar una interfaz básica para modificar esa configuración
