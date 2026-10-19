@@ -193,9 +193,6 @@ AND resultado:    192.168.1.0    →  11000000.10101000.00000001.00000000
 
 ### 🖥️ Actividad conjunta: elige la máscara correcta
 
-**Duración:** 15 minutos
-**Dinámica:** resolución individual + puesta en común
-
 Para cada escenario, indica qué máscara (CIDR y decimal) usarías y cuántos hosts quedan disponibles. Justifica por qué no usas la máscara por defecto de la clase.
 
 **Escenario 1:** Departamento de desarrollo con 12 programadores. Red: `192.168.10.0`

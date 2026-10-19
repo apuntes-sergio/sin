@@ -163,9 +163,6 @@ Con PAT, una oficina con 50 equipos puede funcionar perfectamente con una sola I
 
 ### 🖥️ Actividad conjunta: ¿pública o privada?
 
-**Duración:** 10 minutos
-**Dinámica:** individual + corrección en grupo
-
 **Parte 1:** Clasifica cada dirección como pública, privada o especial, e indica el rango al que pertenece:
 
 | Dirección IP | Tipo | Rango / Motivo |

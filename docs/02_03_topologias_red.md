@@ -168,9 +168,6 @@ En la práctica, la mayoría de redes reales son **híbridas**: combinan element
 
 ### 🖥️ Actividad conjunta: dibuja la topología de nuestra red
 
-**Duración:** 15 minutos
-**Dinámica:** trabajo en grupo + puesta en común
-
 **Objetivo:** identificar la topología real de la red del aula y del instituto.
 
 **Desarrollo:**

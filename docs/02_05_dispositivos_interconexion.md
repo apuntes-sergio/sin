@@ -20,6 +20,7 @@ El **hub** es el dispositivo de interconexión más sencillo y también el más 
 Esto tiene una consecuencia importante: todos los equipos conectados a un hub comparten el mismo **dominio de colisión**. Si dos equipos intentan enviar datos al mismo tiempo, los paquetes chocan y se corrompen (colisión), y ambos equipos tienen que esperar un tiempo aleatorio antes de reintentar. Con pocos equipos y tráfico bajo esto es tolerable, pero el rendimiento cae drásticamente a medida que se añaden más dispositivos.
 
 **Características del hub:**
+
 - Opera en la **capa 1** (capa física) del modelo OSI — no entiende de direcciones, solo amplifica y redistribuye señales eléctricas.
 - No tiene inteligencia: no sabe qué equipo está conectado en cada puerto.
 - Crea un único dominio de colisión para todos los puertos.
@@ -52,6 +53,7 @@ Cuando el switch arranca, su **tabla MAC** (también llamada tabla CAM) está va
 Este proceso de aprendizaje es automático y muy rápido. En segundos, el switch tiene mapeada toda la red.
 
 **Características del switch:**
+
 - Opera en la **capa 2** (capa de enlace de datos) del modelo OSI.
 - Usa direcciones **MAC** para tomar decisiones de reenvío.
 - Cada par de puertos tiene su propio **dominio de colisión** → prácticamente no hay colisiones.
@@ -100,9 +102,9 @@ El router toma decisiones de reenvío basándose en **direcciones IP** (no en di
 
 ### Routers domésticos vs routers profesionales
 
-Un router doméstico (el que pone el operador en casa) es en realidad un dispositivo multifunción que integra router + switch + punto de acceso Wi-Fi + servidor DHCP + firewall básico en un solo aparato.
+Un router **doméstico** (el que pone el operador en casa) es en realidad un dispositivo multifunción que integra **router + switch + punto de acceso Wi-Fi + servidor DHCP + firewall básico** en un solo aparato.
 
-Un router profesional (Cisco, MikroTik, Juniper) es un dispositivo dedicado únicamente al enrutamiento, configurable completamente por línea de comandos, capaz de gestionar tablas de enrutamiento con millones de entradas y manejar decenas de Gbps de tráfico.
+Un router **profesional** (Cisco, MikroTik, Juniper) es un dispositivo dedicado **únicamente al enrutamiento**, configurable completamente por línea de comandos, capaz de gestionar tablas de enrutamiento con millones de entradas y manejar decenas de Gbps de tráfico.
 
 <!-- IMG: fotografía comparativa router doméstico (TP-Link, ASUS) vs router profesional Cisco o MikroTik -->
 <figure markdown="span" align="center">
@@ -182,7 +184,7 @@ Un **switch de capa 3** combina las funciones de switch y router: puede enrutar 
 
 ### 🖥️ Actividad conjunta: identificamos los dispositivos del aula
 
-1. El profesor muestra físicamente (o en fotografía si no son accesibles) los dispositivos de red del aula: switch del armario de red, router del centro, APs del techo o pared.
+1. Veamos físicamente los dispositivos de red del aula: switch del armario de red, router del centro, APs del techo o pared.
 
 2. los dispositivos de red del aula:
     - ¿Cuántos switches ves o sabes que hay en el aula/planta?
@@ -190,7 +192,7 @@ Un **switch de capa 3** combina las funciones de switch y router: puede enrutar 
     - ¿Hay APs en el aula o en el pasillo? ¿De qué marca son?
     - Si el switch del aula se estropea, ¿qué deja de funcionar? ¿Y si es el router?
 
-3. Ddibuja en la pizarra el esquema completo hub→switch→router→internet con los dispositivos reales del centro.
+3. Ddibuja en la pizarra el esquema completo hub→switch→router→internet con los dispositivos reales del centro. (ya hecho)
 
 ---
 

@@ -135,9 +135,6 @@ Este problema llevó al desarrollo del **subnetting** (división de redes en sub
 
 ### 🖥️ Actividad conjunta: identifica la clase de estas IPs
 
-**Duración:** 10 minutos
-**Dinámica:** respuesta individual + corrección en grupo
-
 Para cada dirección IP, indica: la clase a la que pertenece, si podría ser una dirección de host válida, y la máscara de red por defecto.
 
 | Dirección IP | ¿Clase? | ¿Host válido? | Máscara por defecto |

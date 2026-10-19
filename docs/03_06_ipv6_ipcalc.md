@@ -193,9 +193,6 @@ ipcalc 10.0.0.0/23     # Calcular parámetros de una subred
 
 ### 🖥️ Actividad conjunta: verificamos nuestros cálculos con ipcalc
 
-**Duración:** 15 minutos
-**Dinámica:** práctica en el equipo
-
 1. Abre una terminal en Linux (o la web jodies.de/ipcalc si estás en Windows).
 
 2. Verifica con ipcalc los resultados del **Ejercicio A del punto 4**:

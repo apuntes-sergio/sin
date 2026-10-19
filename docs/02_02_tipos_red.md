@@ -126,23 +126,16 @@ Además de PAN, LAN, MAN y WAN, existen otros tipos de red que conviene conocer 
 
 ### 🖥️ Actividad conjunta: ¿qué redes tenemos a nuestro alrededor?
 
-**Duración:** 15 minutos
-**Dinámica:** exploración guiada + puesta en común
-
 El objetivo es identificar los tipos de red presentes en el propio instituto en este momento.
 
 **Parte 1 — Individualmente (5 min):**
-
-Cada alumno responde en su cuaderno:
 
 1. ¿A qué tipo de red pertenece la red del aula? ¿Por qué?
 2. ¿Cuántas redes Wi-Fi ves disponibles desde tu dispositivo ahora mismo? ¿Cuáles crees que son del instituto y cuáles de otros edificios o personas?
 3. ¿Qué dispositivos del aula están conectados en red? ¿Cómo lo sabes?
 4. Cuando accedes a internet desde el aula, ¿por cuántos tipos de red crees que pasan tus datos antes de llegar al servidor destino?
 
-**Parte 2 — Puesta en común (10 min):**
+**Parte 2 — Puesta en común**
 
-El profesor recoge las respuestas y las debate con el grupo. Se dibuja en la pizarra el esquema de red del instituto: desde el dispositivo del alumno hasta internet, pasando por el switch del aula, el router del centro, la línea del operador y la WAN.
-
-!!! tip "Para el profesor"
-    Es un buen momento para mostrar en el proyector `ipconfig` (Windows) o `ip a` (Linux) para ver la dirección IP asignada al equipo dentro de la LAN del aula. Conecta directamente con el tema de direccionamiento que veremos en UD03.
+1. Puesta en común de soluciones
+2. Cómo es la red de un centro educativo

@@ -233,11 +233,6 @@ Además de Wi-Fi y Bluetooth existen otras tecnologías inalámbricas relevantes
 
 ### 🖥️ Actividad conjunta: identificamos los medios de transmisión del aula
 
-**Duración:** 10 minutos
-**Dinámica:** observación directa + debate
-
-**Desarrollo:**
-
 1. Oobservar el aula y responder:
     - ¿Qué medios de transmisión guiados ves? ¿Puedes identificar la categoría del cable?
     - ¿Hay medios inalámbricos activos en este momento? ¿Cuáles?
