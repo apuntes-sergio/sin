@@ -1,0 +1,1827 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD03 - Direccionamiento IP y subnetting">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/03_04_calculo_subredes/">
+      
+      
+        <link rel="prev" href="../03_03_mascara_cidr/">
+      
+      
+        <link rel="next" href="../03_05_vlsm/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Cálculo de subredes - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#los-cuatro-valores-fundamentales-de-una-subred" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cálculo de subredes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#los-cuatro-valores-fundamentales-de-una-subred" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los cuatro valores fundamentales de una subred
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-de-calculo-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Método de cálculo paso a paso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método de cálculo paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-calcular-el-tamano-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1: Calcular el tamaño del bloque
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-encontrar-la-direccion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 2: Encontrar la dirección de red
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-calcular-el-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 3: Calcular el broadcast
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-rango-de-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4: Rango de hosts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-resueltos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplos resueltos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos resueltos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-192168110024" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 1: 192.168.1.100/24
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-192168110026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 2: 192.168.1.100/26
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-3-17216520025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 3: 172.16.5.200/25
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-4-1005013023-mascara-en-el-tercer-octeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 4: 10.0.50.130/23 (máscara en el tercer octeto)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuantas-subredes-caben-en-una-red-mayor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuántas subredes caben en una red mayor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios de cálculo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejercicios de cálculo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejercicio-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejercicio-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio B
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#los-cuatro-valores-fundamentales-de-una-subred" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los cuatro valores fundamentales de una subred
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-de-calculo-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Método de cálculo paso a paso
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método de cálculo paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-calcular-el-tamano-del-bloque" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1: Calcular el tamaño del bloque
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-encontrar-la-direccion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 2: Encontrar la dirección de red
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-calcular-el-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 3: Calcular el broadcast
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-rango-de-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4: Rango de hosts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-resueltos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplos resueltos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos resueltos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-192168110024" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 1: 192.168.1.100/24
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-192168110026" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 2: 192.168.1.100/26
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-3-17216520025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 3: 172.16.5.200/25
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-4-1005013023-mascara-en-el-tercer-octeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 4: 10.0.50.130/23 (máscara en el tercer octeto)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuantas-subredes-caben-en-una-red-mayor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuántas subredes caben en una red mayor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios de cálculo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejercicios de cálculo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejercicio-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejercicio-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio B
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Cálculo de subredes</h1>
+
+<p>Ya sabemos qué es una máscara de subred y cómo elegirla según el número de equipos. Ahora vamos a aprender a <strong>calcular todos los parámetros de una subred</strong> a partir de una dirección IP y su máscara: la dirección de red, el rango de hosts válidos, la dirección de broadcast y el número de hosts utilizables.</p>
+<p>Este es el cálculo que haremos constantemente al diseñar redes: cuando asignamos la red <code>192.168.10.0/26</code> a un departamento, necesitamos saber exactamente qué IPs podemos asignar a los equipos, cuál es la dirección de broadcast y cuántos equipos caben como máximo.</p>
+<h2 id="los-cuatro-valores-fundamentales-de-una-subred">Los cuatro valores fundamentales de una subred</h2>
+<p>Para cualquier subred, necesitamos calcular cuatro valores:</p>
+<p><strong>1. Dirección de red</strong>: la primera dirección del bloque. Todos los bits de host a 0. No se puede asignar a ningún dispositivo — identifica la red en sí.</p>
+<p><strong>2. Primera dirección de host</strong>: la dirección de red + 1. El primer dispositivo que podemos configurar.</p>
+<p><strong>3. Última dirección de host</strong>: la dirección de broadcast - 1. El último dispositivo que podemos configurar.</p>
+<p><strong>4. Dirección de broadcast</strong>: la última dirección del bloque. Todos los bits de host a 1. No se puede asignar a ningún dispositivo — se usa para enviar mensajes a todos los equipos de la red simultáneamente.</p>
+<!-- IMG: diagrama de un bloque de subred mostrando los 4 valores con colores distintos -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/subred_cuatro_valores.png" data-desc-position="bottom"><img alt="Valores de una subred" src="../imgs/redes/subred_cuatro_valores.png" width="90%"></a>
+<br>
+<figcaption>Los cuatro valores fundamentales de cualquier subred: red, primer host, último host y broadcast</figcaption>
+</figure>
+<h2 id="metodo-de-calculo-paso-a-paso">Método de cálculo paso a paso</h2>
+<p>El método más claro para calcular una subred es trabajar con el <strong>tamaño del bloque</strong>, que es simplemente el número total de direcciones del bloque (2ⁿ, donde n son los bits de host).</p>
+<h3 id="paso-1-calcular-el-tamano-del-bloque">Paso 1: Calcular el tamaño del bloque</h3>
+<p>El tamaño del bloque = <strong>2^(bits de host)</strong> = <strong>2^(32 - prefijo CIDR)</strong></p>
+<ul>
+<li>Para <strong>/24</strong>: bits de host = 32 - 24 = 8 → tamaño = 2⁸ = <strong>256 direcciones</strong></li>
+<li>Para <strong>/26</strong>: bits de host = 32 - 26 = 6 → tamaño = 2⁶ = <strong>64 direcciones</strong></li>
+<li>Para <strong>/28</strong>: bits de host = 32 - 28 = 4 → tamaño = 2⁴ = <strong>16 direcciones</strong></li>
+</ul>
+<h3 id="paso-2-encontrar-la-direccion-de-red">Paso 2: Encontrar la dirección de red</h3>
+<p>La dirección de red es el inicio del bloque. Los bits de host son todos 0.</p>
+<p>Para encontrarla rápidamente: el <strong>octeto donde cambia la máscara</strong> es el clave. La dirección de red en ese octeto es el múltiplo del tamaño de bloque más cercano por debajo de la IP dada.</p>
+<h3 id="paso-3-calcular-el-broadcast">Paso 3: Calcular el broadcast</h3>
+<p>Broadcast = dirección de red + tamaño del bloque - 1</p>
+<h3 id="paso-4-rango-de-hosts">Paso 4: Rango de hosts</h3>
+<ul>
+<li>Primera IP de host = dirección de red + 1</li>
+<li>Última IP de host = broadcast - 1</li>
+<li>Número de hosts = tamaño del bloque - 2</li>
+</ul>
+<hr>
+<h2 id="ejemplos-resueltos">Ejemplos resueltos</h2>
+<h3 id="ejemplo-1-192168110024">Ejemplo 1: <code>192.168.1.100/24</code></h3>
+<p><strong>Paso 1:</strong> Tamaño del bloque = 2^(32-24) = 2⁸ = 256</p>
+<p><strong>Paso 2:</strong> La máscara /24 afecta al cuarto octeto completamente. La dirección de red es <code>192.168.1.0</code> (todos los bits del cuarto octeto a 0).</p>
+<p><strong>Paso 3:</strong> Broadcast = <code>192.168.1.0</code> + 256 - 1 = <code>192.168.1.255</code></p>
+<p><strong>Paso 4:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Dirección de red:      192.168.1.0
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Primera IP de host:    192.168.1.1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Última IP de host:     192.168.1.254
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Broadcast:             192.168.1.255
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Hosts utilizables:     254
+</span></code></pre></div><p></p>
+<hr>
+<h3 id="ejemplo-2-192168110026">Ejemplo 2: <code>192.168.1.100/26</code></h3>
+<p><strong>Paso 1:</strong> Tamaño del bloque = 2^(32-26) = 2⁶ = 64</p>
+<p><strong>Paso 2:</strong> La máscara /26 actúa sobre el cuarto octeto. Los bloques de 64 en el cuarto octeto empiezan en: 0, 64, 128, 192...</p>
+<p>La IP es <code>192.168.1.100</code> → el 100 está entre 64 y 128 → el bloque empieza en <strong>64</strong>.</p>
+<p>Dirección de red: <code>192.168.1.64</code></p>
+<p><strong>Paso 3:</strong> Broadcast = <code>192.168.1.64</code> + 64 - 1 = <code>192.168.1.127</code></p>
+<p><strong>Paso 4:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Dirección de red:      192.168.1.64
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Primera IP de host:    192.168.1.65
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Última IP de host:     192.168.1.126
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Broadcast:             192.168.1.127
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Hosts utilizables:     62
+</span></code></pre></div><p></p>
+<!-- IMG: diagrama del bloque /26 mostrando los 64 bloques y dónde cae la IP 100 -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/subred_bloque_26.png" data-desc-position="bottom"><img alt="Bloque /26" src="../imgs/redes/subred_bloque_26.png" width="75%"></a>
+<br>
+<figcaption>La IP 192.168.1.100/26 pertenece al bloque que va de .64 a .127</figcaption>
+</figure>
+<hr>
+<h3 id="ejemplo-3-17216520025">Ejemplo 3: <code>172.16.5.200/25</code></h3>
+<p><strong>Paso 1:</strong> Tamaño del bloque = 2^(32-25) = 2⁷ = 128</p>
+<p><strong>Paso 2:</strong> Bloques de 128 en el cuarto octeto: 0, 128...
+La IP es <code>172.16.5.200</code> → el 200 está entre 128 y 256 → el bloque empieza en <strong>128</strong>.
+Dirección de red: <code>172.16.5.128</code></p>
+<p><strong>Paso 3:</strong> Broadcast = <code>172.16.5.128</code> + 128 - 1 = <code>172.16.5.255</code></p>
+<p><strong>Paso 4:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Dirección de red:      172.16.5.128
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Primera IP de host:    172.16.5.129
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Última IP de host:     172.16.5.254
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Broadcast:             172.16.5.255
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Hosts utilizables:     126
+</span></code></pre></div><p></p>
+<hr>
+<h3 id="ejemplo-4-1005013023-mascara-en-el-tercer-octeto">Ejemplo 4: <code>10.0.50.130/23</code> (máscara en el tercer octeto)</h3>
+<p>Cuando la máscara no cae en un límite de octeto "limpio" como /8, /16, /24, el cálculo requiere prestar atención al octeto correcto.</p>
+<p><strong>Paso 1:</strong> Tamaño del bloque = 2^(32-23) = 2⁹ = 512</p>
+<p>Con 512 direcciones y siendo el cuarto octeto de 256, el bloque se extiende por <strong>dos octetos completos del cuarto</strong>, lo que significa que el bloque actúa sobre el <strong>tercer octeto</strong> (en pasos de 2).</p>
+<p><strong>Paso 2:</strong> Bloques de 2 en el tercer octeto: 0, 2, 4, ..., 50, 52...
+La IP es <code>10.0.50.130</code> → el tercer octeto es 50, que es múltiplo de 2 → el bloque empieza en el tercer octeto = <strong>50</strong>.
+Dirección de red: <code>10.0.50.0</code></p>
+<p><strong>Paso 3:</strong> Broadcast = <code>10.0.50.0</code> + 512 - 1:
+- El bloque de 512 abarca <code>10.0.50.0</code> hasta <code>10.0.51.255</code>
+- Broadcast: <code>10.0.51.255</code></p>
+<p><strong>Paso 4:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Dirección de red:      10.0.50.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Primera IP de host:    10.0.50.1
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Última IP de host:     10.0.51.254
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Broadcast:             10.0.51.255
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Hosts utilizables:     510
+</span></code></pre></div><p></p>
+<div class="admonition tip">
+<p class="admonition-title">Truco para /23, /22, /21...</p>
+<p>Cuando la máscara actúa sobre el tercer octeto, el tamaño del bloque en ese octeto es:
+- /23 → bloques de 2 en el tercer octeto (512 IPs en total)
+- /22 → bloques de 4 en el tercer octeto (1024 IPs en total)
+- /21 → bloques de 8 en el tercer octeto (2048 IPs en total)</p>
+<p>La dirección de red siempre es el múltiplo del tamaño de bloque más cercano por debajo del valor del octeto.</p>
+</div>
+<hr>
+<h2 id="cuantas-subredes-caben-en-una-red-mayor">Cuántas subredes caben en una red mayor</h2>
+<p>Otro cálculo habitual es determinar cuántas subredes de un tamaño determinado caben dentro de una red mayor. La fórmula es sencilla:</p>
+<p><strong>Número de subredes = 2^(bits de subred añadidos)</strong></p>
+<p>Si partimos de una red /24 y la dividimos en subredes /26:</p>
+<ul>
+<li>Bits de host originales: 8 (para /24)</li>
+<li>Bits de host en la subred: 6 (para /26)</li>
+<li>Bits "robados" para hacer subredes: 8 - 6 = 2</li>
+<li>Número de subredes: 2² = <strong>4 subredes /26</strong></li>
+</ul>
+<!-- IMG: diagrama mostrando una red /24 dividida en 4 subredes /26 -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/subred_division_24_26.png" data-desc-position="bottom"><img alt="División /24 en /26" src="../imgs/redes/subred_division_24_26.png" width="80%"></a>
+<br>
+<figcaption>Una red /24 dividida en 4 subredes /26 de 62 hosts cada una</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: dividir 192.168.1.0/24 en subredes /26</p>
+<p></p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Subred 1:  192.168.1.0/26    hosts: .1 - .62    broadcast: .63
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Subred 2:  192.168.1.64/26   hosts: .65 - .126  broadcast: .127
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Subred 3:  192.168.1.128/26  hosts: .129 - .190 broadcast: .191
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Subred 4:  192.168.1.192/26  hosts: .193 - .254 broadcast: .255
+</span></code></pre></div>
+4 subredes × 62 hosts = 248 hosts utilizables (vs 254 con una sola /24).
+El pequeño "coste" de hacer subredes es perder 6 direcciones (4 de red + 4 de broadcast - 2 originales).<p></p>
+</div>
+<hr>
+<h2 id="ejercicios-de-calculo">Ejercicios de cálculo</h2>
+<h3 id="ejercicio-a">Ejercicio A</h3>
+<p>Calcula todos los parámetros de las siguientes subredes:</p>
+<ol>
+<li><code>192.168.5.75/27</code></li>
+<li><code>10.10.10.10/8</code></li>
+<li><code>172.16.100.200/20</code></li>
+<li><code>192.168.1.50/30</code></li>
+</ol>
+<details>
+<summary>Solución</summary>
+<p><strong>1. <code>192.168.5.75/27</code></strong></p>
+<ul>
+<li>Tamaño bloque: 2^(32-27) = 2⁵ = 32</li>
+<li>Bloques de 32 en el 4º octeto: 0, 32, 64, 96... → 75 está entre 64 y 96 → empieza en 64
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Dirección de red:      192.168.5.64
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Primera IP de host:    192.168.5.65
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Última IP de host:     192.168.5.94
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Broadcast:             192.168.5.95
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Hosts utilizables:     30
+</span></code></pre></div></li>
+</ul>
+<p><strong>2. <code>10.10.10.10/8</code></strong></p>
+<ul>
+<li>Tamaño bloque: 2^(32-8) = 2²⁴ = 16.777.216</li>
+<li>La máscara /8 actúa sobre el primer octeto. Dirección de red: 10.0.0.0
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Dirección de red:      10.0.0.0
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Primera IP de host:    10.0.0.1
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Última IP de host:     10.255.255.254
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Broadcast:             10.255.255.255
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Hosts utilizables:     16.777.214
+</span></code></pre></div></li>
+</ul>
+<p><strong>3. <code>172.16.100.200/20</code></strong></p>
+<ul>
+<li>Tamaño bloque: 2^(32-20) = 2¹² = 4096</li>
+<li>Con 4096 IPs, el bloque actúa sobre el tercer octeto en pasos de 16 (4096 / 256 = 16)</li>
+<li>Bloques de 16 en el 3º octeto: 0, 16, 32, ..., 96, 112... → 100 está entre 96 y 112 → empieza en 96
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Dirección de red:      172.16.96.0
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Primera IP de host:    172.16.96.1
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Última IP de host:     172.16.111.254
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Broadcast:             172.16.111.255
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Hosts utilizables:     4094
+</span></code></pre></div></li>
+</ul>
+<p><strong>4. <code>192.168.1.50/30</code></strong></p>
+<ul>
+<li>Tamaño bloque: 2^(32-30) = 2² = 4</li>
+<li>Bloques de 4 en el 4º octeto: 0, 4, 8, ..., 48, 52... → 50 está entre 48 y 52 → empieza en 48
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Dirección de red:      192.168.1.48
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Primera IP de host:    192.168.1.49
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Última IP de host:     192.168.1.50
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Broadcast:             192.168.1.51
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Hosts utilizables:     2
+</span></code></pre></div>
+Esta es una subred /30 típica para un enlace punto a punto entre dos routers.</li>
+</ul>
+</details>
+<h3 id="ejercicio-b">Ejercicio B</h3>
+<p>La empresa <em>TechSolutions S.L.</em> tiene asignada la red <code>192.168.50.0/24</code>. Necesita dividirla en subredes para sus departamentos:</p>
+<ul>
+<li>Desarrollo: 40 equipos</li>
+<li>Administración: 15 equipos</li>
+<li>Dirección: 5 equipos</li>
+<li>
+<p>Servidores: 8 equipos</p>
+</li>
+<li>
+<p>¿Qué máscara usarías para cada departamento?</p>
+</li>
+<li>¿Cabrían todas las subredes dentro de la red <code>192.168.50.0/24</code>?</li>
+<li>Asigna una subred concreta a cada departamento sin solapamiento.</li>
+</ul>
+<details>
+<summary>Solución</summary>
+<p><strong>1. Máscara por departamento:</strong></p>
+<ul>
+<li>Desarrollo (40 eq. + margen) → ~50 hosts → /26 (62 hosts) ✓</li>
+<li>Administración (15 eq. + margen) → ~20 hosts → /27 (30 hosts) ✓</li>
+<li>Dirección (5 eq. + margen) → ~8 hosts → /28 (14 hosts) ✓</li>
+<li>Servidores (8 eq. + margen) → ~10 hosts → /28 (14 hosts) ✓</li>
+</ul>
+<p><strong>2. ¿Caben en /24?</strong></p>
+<ul>
+<li>Desarrollo /26: 64 direcciones</li>
+<li>Administración /27: 32 direcciones</li>
+<li>Dirección /28: 16 direcciones</li>
+<li>Servidores /28: 16 direcciones</li>
+<li>Total: 64 + 32 + 16 + 16 = <strong>128 direcciones</strong> de las 256 disponibles en /24 ✓</li>
+</ul>
+<p><strong>3. Asignación sin solapamiento:</strong>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Desarrollo:      192.168.50.0/26   hosts: .1 - .62    broadcast: .63
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Administración:  192.168.50.64/27  hosts: .65 - .94   broadcast: .95
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Dirección:       192.168.50.96/28  hosts: .97 - .110  broadcast: .111
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Servidores:      192.168.50.112/28 hosts: .113 - .126 broadcast: .127
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>Libre:           192.168.50.128 - 192.168.50.255 (128 dir. para futuras subredes)
+</span></code></pre></div><p></p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../03_03_mascara_cidr/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: La máscara de subred y notación CIDR">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                La máscara de subred y notación CIDR
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03_05_vlsm/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: VLSM — Subredes de tamaño variable">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                VLSM — Subredes de tamaño variable
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,1703 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD04 - Simulación de redes con Packet Tracer">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/04_03_ejercicios_lan/">
+      
+      
+        <link rel="prev" href="../04_02_primera_red/">
+      
+      
+        <link rel="next" href="../04_04_router_gateway/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Ejercicios de redes LAN - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ejercicio-1-red-de-un-departamento-pequeno" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ejercicios de redes LAN
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-red-de-un-departamento-pequeno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 1 — Red de un departamento pequeño
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-dos-departamentos-una-misma-red-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 2 — Dos departamentos, una misma red física
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-red-con-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 3 — Red con servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-4-deteccion-y-correccion-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 4 — Detección y corrección de errores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practica-para-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Práctica para entregar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-red-de-un-departamento-pequeno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 1 — Red de un departamento pequeño
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-dos-departamentos-una-misma-red-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 2 — Dos departamentos, una misma red física
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-red-con-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 3 — Red con servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-4-deteccion-y-correccion-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicio 4 — Detección y corrección de errores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practica-para-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Práctica para entregar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Ejercicios de redes LAN</h1>
+
+<p>Ya sabemos montar una red sencilla y verificar su conectividad. Ahora vamos a practicar con escenarios más realistas que nos preparan para el proyecto final. Estos ejercicios combinan todo lo visto hasta ahora: subnetting, elección de máscara, configuración de IPs y verificación con ping.</p>
+<p>En cada ejercicio el proceso es siempre el mismo:</p>
+<ol>
+<li><strong>Analizar</strong> los requisitos (cuántos equipos, qué red usar)</li>
+<li><strong>Calcular</strong> la máscara adecuada según el número de equipos</li>
+<li><strong>Montar</strong> la topología en Packet Tracer</li>
+<li><strong>Configurar</strong> las IPs de cada dispositivo</li>
+<li><strong>Verificar</strong> la conectividad con ping e ipconfig</li>
+</ol>
+<h2 id="ejercicio-1-red-de-un-departamento-pequeno">Ejercicio 1 — Red de un departamento pequeño</h2>
+<p><strong>Escenario:</strong> El departamento de Administración de TechSolutions S.L. tiene 6 equipos que necesitan estar en red. Usaremos el bloque <code>192.168.10.0</code>.</p>
+<p><strong>Paso 1 — Elegir la máscara:</strong></p>
+<p>6 equipos → con margen → ~8 hosts → 2⁴ = 16 → 14 hosts utilizables → <strong>/28</strong> (255.255.255.240)</p>
+<p><strong>Paso 2 — Calcular la subred:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Red:            192.168.10.0/28
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Primer host:    192.168.10.1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Último host:    192.168.10.14
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Broadcast:      192.168.10.15
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Hosts útiles:   14
+</span></code></pre></div>
+<p><strong>Paso 3 — Asignación de IPs:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dispositivo</th>
+<th>IP</th>
+<th>Máscara</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC-Admin1</td>
+<td>192.168.10.1</td>
+<td>255.255.255.240</td>
+</tr>
+<tr>
+<td>PC-Admin2</td>
+<td>192.168.10.2</td>
+<td>255.255.255.240</td>
+</tr>
+<tr>
+<td>PC-Admin3</td>
+<td>192.168.10.3</td>
+<td>255.255.255.240</td>
+</tr>
+<tr>
+<td>PC-Admin4</td>
+<td>192.168.10.4</td>
+<td>255.255.255.240</td>
+</tr>
+<tr>
+<td>PC-Admin5</td>
+<td>192.168.10.5</td>
+<td>255.255.255.240</td>
+</tr>
+<tr>
+<td>PC-Admin6</td>
+<td>192.168.10.6</td>
+<td>255.255.255.240</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monta esta red en Packet Tracer y verifica:</strong></p>
+<ul>
+<li><code>ping</code> desde PC-Admin1 a PC-Admin6 → debe funcionar</li>
+<li><code>ping 192.168.10.15</code> desde cualquier PC → debe fallar (es el broadcast, no un host)</li>
+<li><code>ping 192.168.10.20</code> desde cualquier PC → debe fallar (fuera de la subred)</li>
+</ul>
+<!-- IMG: captura de PT con el ejercicio 1 montado y el ping funcionando -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="./imgs/packet_tracer/pt_ejercicio1_admin.png" data-desc-position="bottom"><img alt="Ejercicio 1 PT" src="./imgs/packet_tracer/pt_ejercicio1_admin.png" width="80%"></a>
+<br>
+<figcaption>Red del departamento de Administración con 6 PCs y 1 switch</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">¿Por qué falla el ping a 192.168.10.15?</p>
+<p>Porque <code>.15</code> es la dirección de <strong>broadcast</strong> de esta subred /28. Las direcciones de broadcast no se asignan a hosts y no responden a ping — están reservadas para enviar mensajes a todos los dispositivos de la red simultáneamente.</p>
+</div>
+<hr>
+<h2 id="ejercicio-2-dos-departamentos-una-misma-red-fisica">Ejercicio 2 — Dos departamentos, una misma red física</h2>
+<p><strong>Escenario:</strong> TechSolutions tiene Desarrollo (8 PCs) y Dirección (3 PCs) en la misma planta. Comparten el mismo switch pero queremos organizarlos en subredes separadas usando el bloque <code>172.16.0.0</code>.</p>
+<p><strong>Paso 1 — Calcular subredes:</strong></p>
+<ul>
+<li>Desarrollo: 8 PCs → /28 (14 hosts) → <code>172.16.0.0/28</code> → hosts: <code>.1</code>–<code>.14</code></li>
+<li>Dirección: 3 PCs → /29 (6 hosts) → <code>172.16.0.16/29</code> → hosts: <code>.17</code>–<code>.22</code></li>
+</ul>
+<p><strong>Paso 2 — Asignación:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dispositivo</th>
+<th>IP</th>
+<th>Máscara</th>
+<th>Subred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC-Dev1</td>
+<td>172.16.0.1</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev2</td>
+<td>172.16.0.2</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev3</td>
+<td>172.16.0.3</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev4</td>
+<td>172.16.0.4</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev5</td>
+<td>172.16.0.5</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev6</td>
+<td>172.16.0.6</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev7</td>
+<td>172.16.0.7</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dev8</td>
+<td>172.16.0.8</td>
+<td>255.255.255.240</td>
+<td>Desarrollo</td>
+</tr>
+<tr>
+<td>PC-Dir1</td>
+<td>172.16.0.17</td>
+<td>255.255.255.248</td>
+<td>Dirección</td>
+</tr>
+<tr>
+<td>PC-Dir2</td>
+<td>172.16.0.18</td>
+<td>255.255.255.248</td>
+<td>Dirección</td>
+</tr>
+<tr>
+<td>PC-Dir3</td>
+<td>172.16.0.19</td>
+<td>255.255.255.248</td>
+<td>Dirección</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monta esta red y verifica:</strong></p>
+<ul>
+<li>Ping entre PC-Dev1 y PC-Dev8 → ✅ debe funcionar (misma subred)</li>
+<li>Ping entre PC-Dir1 y PC-Dir3 → ✅ debe funcionar (misma subred)</li>
+<li>Ping entre PC-Dev1 y PC-Dir1 → ❌ debe fallar (subredes distintas, no hay router)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué falla el ping entre subredes aunque estén en el mismo switch?</p>
+<p>Aunque los dos grupos de PCs están físicamente conectados al mismo switch, sus IPs pertenecen a <strong>redes lógicas diferentes</strong>. El switch trabaja en capa 2 (MAC) y reenvía tramas, pero para comunicar redes distintas se necesita un dispositivo de capa 3: el <strong>router</strong>. Lo veremos en el punto 4.</p>
+</div>
+<hr>
+<h2 id="ejercicio-3-red-con-servidor">Ejercicio 3 — Red con servidor</h2>
+<p><strong>Escenario:</strong> El departamento de Servidores tiene 4 servidores físicos y 2 PCs de administración. Red disponible: <code>10.0.1.0</code>. Necesitan todos estar en la misma subred.</p>
+<p><strong>Paso 1 — Calcular:</strong></p>
+<p>6 equipos → /28 (14 hosts útiles) → <code>10.0.1.0/28</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Red:        10.0.1.0/28
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Hosts:      10.0.1.1 – 10.0.1.14
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Broadcast:  10.0.1.15
+</span></code></pre></div>
+<p><strong>Paso 2 — Asignación (por convención, los servidores tienen IPs bajas y los PCs IPs más altas):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dispositivo</th>
+<th>Tipo</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servidor-Web</td>
+<td>Server</td>
+<td>10.0.1.1</td>
+</tr>
+<tr>
+<td>Servidor-BD</td>
+<td>Server</td>
+<td>10.0.1.2</td>
+</tr>
+<tr>
+<td>Servidor-Files</td>
+<td>Server</td>
+<td>10.0.1.3</td>
+</tr>
+<tr>
+<td>Servidor-DHCP</td>
+<td>Server</td>
+<td>10.0.1.4</td>
+</tr>
+<tr>
+<td>PC-Admin1</td>
+<td>PC</td>
+<td>10.0.1.10</td>
+</tr>
+<tr>
+<td>PC-Admin2</td>
+<td>PC</td>
+<td>10.0.1.11</td>
+</tr>
+</tbody>
+</table>
+<p><strong>En Packet Tracer:</strong></p>
+<p>Para añadir un servidor: panel de dispositivos → <strong>End Devices</strong> → <strong>Server</strong>. Un servidor en PT tiene las mismas pestañas que un PC más la pestaña <strong>Services</strong> donde se pueden activar servicios (HTTP, DNS, DHCP...).</p>
+<p><strong>Verifica:</strong></p>
+<ul>
+<li>Ping desde PC-Admin1 a Servidor-Web → ✅</li>
+<li>Ping desde Servidor-Web a Servidor-BD → ✅</li>
+<li>Ping desde PC-Admin1 a <code>10.0.1.15</code> → ❌ (broadcast)</li>
+</ul>
+<!-- IMG: captura del ejercicio 3 con servidores y PCs de administración -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="./imgs/packet_tracer/pt_ejercicio3_servidores.png" data-desc-position="bottom"><img alt="Ejercicio 3 servidores" src="./imgs/packet_tracer/pt_ejercicio3_servidores.png" width="80%"></a>
+<br>
+<figcaption>Red de servidores: 4 servidores y 2 PCs de administración en la misma subred /28</figcaption>
+</figure>
+<hr>
+<h2 id="ejercicio-4-deteccion-y-correccion-de-errores">Ejercicio 4 — Detección y corrección de errores</h2>
+<p><strong>Escenario:</strong> Te entregan un fichero <code>.pkt</code> con una red mal configurada. Tienes que identificar los errores y corregirlos.</p>
+<p>La red debería tener 4 PCs en la red <code>192.168.5.0/26</code> pero hay varios problemas. Descarga el fichero de Aules (<code>ud04_red_errores.pkt</code>) y encuentra qué está mal.</p>
+<p><strong>Posibles errores que puede haber (no todos están presentes):</strong></p>
+<ul>
+<li>IP de un PC fuera del rango de la subred</li>
+<li>Máscara incorrecta en algún PC</li>
+<li>IP duplicada (dos PCs con la misma IP)</li>
+<li>Cable desconectado o tipo de cable incorrecto</li>
+<li>IP de broadcast asignada a un host</li>
+</ul>
+<p><strong>Proceso de diagnóstico:</strong></p>
+<ol>
+<li>Revisa visualmente los indicadores de enlace — ¿hay alguno en rojo?</li>
+<li>Haz <code>ipconfig</code> en cada PC y anota las IPs y máscaras.</li>
+<li>Calcula manualmente el rango válido de la subred <code>/26</code>:<ul>
+<li>Red: <code>192.168.5.0</code></li>
+<li>Hosts válidos: <code>192.168.5.1</code> – <code>192.168.5.62</code></li>
+<li>Broadcast: <code>192.168.5.63</code></li>
+</ul>
+</li>
+<li>Verifica si alguna IP está fuera de rango o si hay duplicadas.</li>
+<li>Haz ping entre todos los pares de PCs y anota cuáles fallan.</li>
+<li>Corrige los errores uno a uno y verifica después de cada corrección.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Metodología de diagnóstico</p>
+<p>Siempre de lo más simple a lo más complejo: primero verifica los cables (capa física), después las IPs y máscaras (capa red), y finalmente la configuración lógica. El mismo proceso que seguiremos en redes reales con Windows Server.</p>
+</div>
+<hr>
+<h2 id="practica-para-entregar">Práctica para entregar</h2>
+<p><strong>Fichero:</strong> <code>ud04_practica03.pkt</code>
+<strong>Entrega:</strong> Aules</p>
+<p>Diseña y monta en Packet Tracer la siguiente red:</p>
+<p><strong>Red de TechSolutions S.L. — Planta 1</strong></p>
+<p>La planta 1 tiene dos departamentos que comparten el bloque de red <code>192.168.20.0/24</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Departamento</th>
+<th>Equipos</th>
+<th>Subred a usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contabilidad</td>
+<td>10 PCs</td>
+<td>Primera subred /27 del bloque</td>
+</tr>
+<tr>
+<td>RRHH</td>
+<td>5 PCs</td>
+<td>Segunda subred /27 del bloque</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Requisitos:</strong></p>
+<ol>
+<li>Calcula las dos subredes /27 dentro de <code>192.168.20.0/24</code> e indica: dirección de red, rango de hosts y broadcast de cada una.</li>
+<li>Monta ambas subredes en Packet Tracer con un switch por departamento.</li>
+<li>Asigna IPs a todos los PCs y renómbralos correctamente.</li>
+<li>Verifica con ping:<ul>
+<li>Ping entre PCs del mismo departamento → debe funcionar ✅</li>
+<li>Ping entre un PC de Contabilidad y uno de RRHH → debe fallar ❌ (sin router)</li>
+</ul>
+</li>
+<li>Adjunta capturas de pantalla de los pings de verificación.</li>
+</ol>
+<p><strong>Documento Word/PDF con:</strong></p>
+<ul>
+<li>Tabla de subredes calculadas (red, primer host, último host, broadcast)</li>
+<li>Tabla de asignación de IPs a cada PC</li>
+<li>Capturas de los pings de verificación</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Criterios de evaluación</p>
+<ul>
+<li>Cálculo correcto de las dos subredes (3 puntos)</li>
+<li>Red montada correctamente en PT con dispositivos renombrados (3 puntos)</li>
+<li>Pings de verificación correctos (2 puntos)</li>
+<li>Documento con tabla de subredes e IPs (2 puntos)</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../04_02_primera_red/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Primera red en Packet Tracer">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Primera red en Packet Tracer
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04_04_router_gateway/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: El router — Gateway y conexión entre subredes">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                El router — Gateway y conexión entre subredes
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

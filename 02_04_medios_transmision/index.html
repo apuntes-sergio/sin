@@ -1,0 +1,2068 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD02 - Fundamentos de redes">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/02_04_medios_transmision/">
+      
+      
+        <link rel="prev" href="../02_03_topologias_red/">
+      
+      
+        <link rel="next" href="../02_05_dispositivos_interconexion/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Medios de transmisión - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#medios-guiados-el-cable" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Medios de transmisión
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#medios-guiados-el-cable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medios guiados: el cable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Medios guiados: el cable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cable-de-par-trenzado-utpstp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cable de par trenzado (UTP/STP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorias-de-cable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Categorías de cable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-conector-rj-45-y-los-estandares-de-crimpado" class="md-nav__link">
+    <span class="md-ellipsis">
+      El conector RJ-45 y los estándares de crimpado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fibra-optica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fibra óptica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cable-coaxial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cable coaxial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medios-no-guiados-comunicaciones-inalambricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medios no guiados: comunicaciones inalámbricas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Medios no guiados: comunicaciones inalámbricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wi-fi-ieee-80211" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wi-Fi (IEEE 802.11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferencias-entre-las-bandas-de-frecuencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferencias entre las bandas de frecuencia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bluetooth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otras-tecnologias-inalambricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otras tecnologías inalámbricas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparativa-de-medios-de-transmision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparativa de medios de transmisión
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-identificamos-los-medios-de-transmision-del-aula" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: identificamos los medios de transmisión del aula
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#medios-guiados-el-cable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medios guiados: el cable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Medios guiados: el cable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cable-de-par-trenzado-utpstp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cable de par trenzado (UTP/STP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorias-de-cable" class="md-nav__link">
+    <span class="md-ellipsis">
+      Categorías de cable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-conector-rj-45-y-los-estandares-de-crimpado" class="md-nav__link">
+    <span class="md-ellipsis">
+      El conector RJ-45 y los estándares de crimpado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fibra-optica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fibra óptica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cable-coaxial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cable coaxial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medios-no-guiados-comunicaciones-inalambricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medios no guiados: comunicaciones inalámbricas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Medios no guiados: comunicaciones inalámbricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wi-fi-ieee-80211" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wi-Fi (IEEE 802.11)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferencias-entre-las-bandas-de-frecuencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferencias entre las bandas de frecuencia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bluetooth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otras-tecnologias-inalambricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otras tecnologías inalámbricas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparativa-de-medios-de-transmision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparativa de medios de transmisión
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-identificamos-los-medios-de-transmision-del-aula" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: identificamos los medios de transmisión del aula
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Medios de transmisión</h1>
+
+<p>Para que dos dispositivos puedan comunicarse en red necesitan un <strong>medio de transmisión</strong>: el canal físico por el que viajan los datos de un punto a otro. Podemos hacer una analogía con las carreteras: igual que los vehículos necesitan una carretera para desplazarse, los datos necesitan un medio de transmisión para viajar entre dispositivos.</p>
+<p>Los medios de transmisión se dividen en dos grandes categorías:</p>
+<ul>
+<li><strong>Medios guiados</strong> (o cableados): los datos viajan por un soporte físico concreto — un cable. La señal está "guiada" y confinada dentro del cable.</li>
+<li><strong>Medios no guiados</strong> (o inalámbricos): los datos viajan a través del aire (o el vacío) en forma de ondas electromagnéticas. No hay ningún soporte físico que los guíe.</li>
+</ul>
+<p>Cada categoría tiene sus propias tecnologías, velocidades, ventajas e inconvenientes, y la elección entre una y otra depende del contexto: distancia, entorno, coste, velocidad requerida y necesidad de movilidad.</p>
+<h2 id="medios-guiados-el-cable">Medios guiados: el cable</h2>
+<h3 id="cable-de-par-trenzado-utpstp">Cable de par trenzado (UTP/STP)</h3>
+<p>El <strong>cable de par trenzado</strong> es el medio de transmisión más usado en redes LAN. Está compuesto por pares de hilos de cobre trenzados entre sí. El trenzado no es decorativo: tiene una función técnica importante — reduce las interferencias electromagnéticas entre pares (<em>crosstalk</em>) y las interferencias externas.</p>
+<!-- IMG: fotografía de cable UTP Cat6 con el recubrimiento pelado mostrando los 4 pares de colores -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/cable_utp_cat6.png" data-desc-position="bottom"><img alt="Cable UTP Cat6" src="../imgs/redes/cable_utp_cat6.png" width="65%"></a>
+<br>
+<figcaption>Cable UTP Cat6 con sus 4 pares trenzados de colores. El trenzado reduce las interferencias electromagnéticas</figcaption>
+</figure>
+<p>Existen dos variantes según si tienen blindaje adicional:</p>
+<ul>
+<li><strong>UTP</strong> (<em>Unshielded Twisted Pair</em>): sin blindaje adicional. Es el más común en instalaciones de oficina y hogar por su bajo coste y facilidad de instalación.</li>
+<li><strong>STP</strong> (<em>Shielded Twisted Pair</em>): con una malla metálica que rodea los pares para mayor protección frente a interferencias. Se usa en entornos industriales o con alta presencia de interferencias electromagnéticas (motores, maquinaria).</li>
+<li><strong>FTP</strong> (<em>Foiled Twisted Pair</em>): con una lámina de aluminio alrededor de todos los pares (sin blindaje individual). Punto intermedio entre UTP y STP.</li>
+</ul>
+<!-- IMG: comparativa sección transversal UTP vs FTP vs STP mostrando las capas de blindaje -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/cable_utp_ftp_stp.png" data-desc-position="bottom"><img alt="UTP vs FTP vs STP" src="../imgs/redes/cable_utp_ftp_stp.png" width="70%"></a>
+<br>
+<figcaption>Sección transversal comparativa: UTP (sin blindaje), FTP (lámina) y STP (malla individual por par)</figcaption>
+</figure>
+<h3 id="categorias-de-cable">Categorías de cable</h3>
+<p>Los cables de par trenzado se clasifican en <strong>categorías</strong> (Cat) que determinan su ancho de banda y la velocidad máxima que pueden soportar. A mayor categoría, mayor rendimiento:</p>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Ancho de banda</th>
+<th>Velocidad máxima</th>
+<th>Distancia máxima</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cat5</td>
+<td>100 MHz</td>
+<td>100 Mbps</td>
+<td>100 m</td>
+<td>Obsoleto</td>
+</tr>
+<tr>
+<td>Cat5e</td>
+<td>100 MHz</td>
+<td>1 Gbps</td>
+<td>100 m</td>
+<td>Instalaciones antiguas, aún funcional</td>
+</tr>
+<tr>
+<td>Cat6</td>
+<td>250 MHz</td>
+<td>1 Gbps / 10 Gbps*</td>
+<td>100 m / 55 m*</td>
+<td><strong>Estándar actual en oficinas</strong></td>
+</tr>
+<tr>
+<td>Cat6A</td>
+<td>500 MHz</td>
+<td>10 Gbps</td>
+<td>100 m</td>
+<td>Instalaciones de alto rendimiento</td>
+</tr>
+<tr>
+<td>Cat7</td>
+<td>600 MHz</td>
+<td>10 Gbps</td>
+<td>100 m</td>
+<td>Centros de datos, uso profesional</td>
+</tr>
+<tr>
+<td>Cat8</td>
+<td>2000 MHz</td>
+<td>25-40 Gbps</td>
+<td>30 m</td>
+<td>Centros de datos, rack a rack</td>
+</tr>
+</tbody>
+</table>
+<p>*Cat6 soporta 10 Gbps pero solo hasta 55 metros de distancia.</p>
+<div class="admonition info">
+<p class="admonition-title">¿Qué categoría necesito?</p>
+<p>Para una instalación nueva en una oficina o aula, <strong>Cat6</strong> es la elección correcta en 2025: soporta Gigabit Ethernet a 100 metros sin problemas y tiene margen para 10 Gbps en distancias cortas. Cat5e es suficiente si la instalación ya existe y no hay presupuesto para renovarla. Cat6A solo se justifica si necesitas 10 Gbps garantizados a distancias superiores a 55 metros.</p>
+</div>
+<h3 id="el-conector-rj-45-y-los-estandares-de-crimpado">El conector RJ-45 y los estándares de crimpado</h3>
+<p>El cable de par trenzado se termina con un conector <strong>RJ-45</strong> en cada extremo. El RJ-45 tiene 8 pines, uno por cada hilo del cable (4 pares × 2 hilos = 8 hilos).</p>
+<!-- IMG: fotografía conector RJ-45 macho con los 8 pines visibles y los colores de los hilos -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/conector_rj45_detalle.png" data-desc-position="bottom"><img alt="Conector RJ-45" src="../imgs/redes/conector_rj45_detalle.png" width="55%"></a>
+<br>
+<figcaption>Conector RJ-45: 8 pines para los 8 hilos del cable. El orden de los colores determina el estándar</figcaption>
+</figure>
+<p>El orden en que se insertan los hilos en el conector sigue un estándar. Existen dos estándares principales, definidos por la norma <strong>TIA/EIA-568</strong>:</p>
+<ul>
+<li><strong>T568A</strong>: verde-blanco, verde, naranja-blanco, azul, azul-blanco, naranja, marrón-blanco, marrón</li>
+<li><strong>T568B</strong>: naranja-blanco, naranja, verde-blanco, azul, azul-blanco, verde, marrón-blanco, marrón</li>
+</ul>
+<!-- IMG: diagrama comparativo orden de pines T568A vs T568B con los colores de cada hilo -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/rj45_t568a_t568b.png" data-desc-position="bottom"><img alt="T568A vs T568B" src="../imgs/redes/rj45_t568a_t568b.png" width="70%"></a>
+<br>
+<figcaption>Estándares de crimpado T568A y T568B: el orden de los hilos determina el tipo de cable</figcaption>
+</figure>
+<p>Dependiendo de cómo se crimpa cada extremo del cable, obtenemos diferentes tipos de cable:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de cable</th>
+<th>Extremo A</th>
+<th>Extremo B</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Directo</strong> (<em>straight-through</em>)</td>
+<td>T568B</td>
+<td>T568B</td>
+<td>Equipo → Switch, PC → Router</td>
+</tr>
+<tr>
+<td><strong>Cruzado</strong> (<em>crossover</em>)</td>
+<td>T568A</td>
+<td>T568B</td>
+<td>PC → PC, Switch → Switch (sin uplink)</td>
+</tr>
+<tr>
+<td><strong>Rollover</strong> (<em>consola</em>)</td>
+<td>T568B</td>
+<td>Invertido</td>
+<td>Consola de administración de routers Cisco</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">¿Necesito cable cruzado hoy en día?</p>
+<p>Los switches y tarjetas de red modernas implementan <strong>Auto-MDIX</strong>: detectan automáticamente el tipo de cable conectado y se adaptan. Esto significa que con un cable directo puedes conectar dos PCs directamente sin necesidad de cable cruzado. Sin embargo, sigue siendo importante conocer la diferencia para trabajar con equipos más antiguos.</p>
+</div>
+<h3 id="fibra-optica">Fibra óptica</h3>
+<p>La <strong>fibra óptica</strong> transmite datos mediante <strong>pulsos de luz</strong> en lugar de señales eléctricas. El núcleo del cable es un filamento de vidrio o plástico extremadamente puro por el que viaja la luz, rodeado de una cubierta que la refleja hacia el interior (<em>revestimiento</em>) y varias capas de protección exterior.</p>
+<!-- IMG: diagrama sección transversal de una fibra óptica mostrando núcleo, revestimiento y cubierta protectora -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/fibra_optica_seccion.png" data-desc-position="bottom"><img alt="Sección fibra óptica" src="../imgs/redes/fibra_optica_seccion.png" width="65%"></a>
+<br>
+<figcaption>Sección transversal de una fibra óptica: núcleo de vidrio, revestimiento reflectante y capas de protección</figcaption>
+</figure>
+<p>Las ventajas de la fibra óptica sobre el cable de cobre son significativas:</p>
+<ul>
+<li><strong>Velocidad</strong>: puede transmitir a velocidades de <strong>Tbps</strong> en instalaciones de operador.</li>
+<li><strong>Distancia</strong>: sin repetidores puede llegar a decenas o incluso cientos de kilómetros, frente a los 100 metros del UTP.</li>
+<li><strong>Inmunidad a interferencias electromagnéticas</strong>: al usar luz en lugar de electricidad, no le afectan los campos electromagnéticos.</li>
+<li><strong>Seguridad</strong>: es muy difícil interceptar la señal sin que se note físicamente.</li>
+<li><strong>Sin problemas de tierra eléctrica</strong>: ideal para conectar edificios separados donde el diferencial de potencial eléctrico podría dañar equipos.</li>
+</ul>
+<p>Existen dos tipos principales de fibra óptica:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Diámetro núcleo</th>
+<th>Transmisión</th>
+<th>Distancia</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monomodo</strong> (SMF)</td>
+<td>8-10 µm</td>
+<td>Un solo rayo de luz</td>
+<td>Hasta cientos de km</td>
+<td>Redes de operador, enlaces entre edificios</td>
+</tr>
+<tr>
+<td><strong>Multimodo</strong> (MMF)</td>
+<td>50-62,5 µm</td>
+<td>Múltiples rayos</td>
+<td>Hasta 2 km</td>
+<td>Centros de datos, backbone de campus</td>
+</tr>
+</tbody>
+</table>
+<!-- IMG: comparativa sección núcleo monomodo vs multimodo con los rayos de luz representados -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/fibra_monomodo_multimodo.png" data-desc-position="bottom"><img alt="Monomodo vs Multimodo" src="../imgs/redes/fibra_monomodo_multimodo.png" width="70%"></a>
+<br>
+<figcaption>Fibra monomodo (izquierda): un solo rayo, largas distancias. Multimodo (derecha): múltiples rayos, distancias medias</figcaption>
+</figure>
+<p>Los conectores más habituales en fibra óptica son <strong>SC</strong>, <strong>LC</strong> y <strong>ST</strong>. En instalaciones modernas de centros de datos predomina el <strong>LC</strong> por su tamaño compacto.</p>
+<!-- IMG: fotografía conectores de fibra SC, LC y ST comparados -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/fibra_conectores_sc_lc_st.png" data-desc-position="bottom"><img alt="Conectores fibra óptica" src="../imgs/redes/fibra_conectores_sc_lc_st.png" width="65%"></a>
+<br>
+<figcaption>Conectores de fibra óptica: SC, LC, FC y ST (derecha)</figcaption>
+</figure>
+<p><strong>¿Cuándo usar fibra óptica en lugar de UTP?</strong></p>
+<ul>
+<li>Cuando la distancia supera los 100 metros</li>
+<li>Para conectar edificios entre sí</li>
+<li>En el backbone (troncal) de redes corporativas que necesitan alta velocidad</li>
+<li>En entornos con alta interferencia electromagnética</li>
+<li>Cuando la seguridad física de la transmisión es crítica</li>
+</ul>
+<h3 id="cable-coaxial">Cable coaxial</h3>
+<p>El <strong>cable coaxial</strong> fue el estándar en redes Ethernet durante los años 80 y 90. Hoy está prácticamente desaparecido de las redes LAN, aunque todavía se usa en:</p>
+<ul>
+<li>Televisión por cable y antena</li>
+<li>Algunas instalaciones de telecomunicaciones</li>
+</ul>
+<p>No lo estudiaremos en detalle por su irrelevancia en instalaciones modernas.</p>
+<hr>
+<h2 id="medios-no-guiados-comunicaciones-inalambricas">Medios no guiados: comunicaciones inalámbricas</h2>
+<p>Los medios inalámbricos transmiten datos mediante <strong>ondas electromagnéticas</strong> que se propagan por el aire. No necesitan ningún cable físico, lo que permite la movilidad de los dispositivos. La contrapartida es que la señal puede verse afectada por obstáculos, interferencias y la distancia.</p>
+<h3 id="wi-fi-ieee-80211">Wi-Fi (IEEE 802.11)</h3>
+<p><strong>Wi-Fi</strong> es el estándar de comunicación inalámbrica para redes LAN. Usa el estándar <strong>IEEE 802.11</strong> y opera principalmente en las bandas de frecuencia de <strong>2,4 GHz</strong> y <strong>5 GHz</strong> (y también 6 GHz en las versiones más recientes).</p>
+<!-- IMG: fotografía de un router Wi-Fi doméstico con sus antenas -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/wifi_router_domestico.png" data-desc-position="bottom"><img alt="Router Wi-Fi" src="../imgs/redes/wifi_router_domestico.png" width="55%"></a>
+<br>
+<figcaption>Router Wi-Fi doméstico. Las antenas transmiten en las bandas de 2,4 GHz y 5 GHz simultáneamente (dual band)</figcaption>
+</figure>
+<p>La evolución de Wi-Fi a lo largo de los años ha sido notable. Cada nueva generación (identificada por un número de generación desde Wi-Fi 4) mejora la velocidad, la eficiencia y la capacidad para gestionar múltiples dispositivos:</p>
+<table>
+<thead>
+<tr>
+<th>Estándar</th>
+<th>Generación</th>
+<th>Año</th>
+<th>Banda</th>
+<th>Velocidad máx. teórica</th>
+<th>Característica clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.11b</td>
+<td>—</td>
+<td>1999</td>
+<td>2,4 GHz</td>
+<td>11 Mbps</td>
+<td>Primera Wi-Fi masiva</td>
+</tr>
+<tr>
+<td>802.11g</td>
+<td>—</td>
+<td>2003</td>
+<td>2,4 GHz</td>
+<td>54 Mbps</td>
+<td>Mejora de velocidad</td>
+</tr>
+<tr>
+<td>802.11n</td>
+<td><strong>Wi-Fi 4</strong></td>
+<td>2009</td>
+<td>2,4 / 5 GHz</td>
+<td>600 Mbps</td>
+<td>MIMO, dual band</td>
+</tr>
+<tr>
+<td>802.11ac</td>
+<td><strong>Wi-Fi 5</strong></td>
+<td>2013</td>
+<td>5 GHz</td>
+<td>3,5 Gbps</td>
+<td>MU-MIMO, beamforming</td>
+</tr>
+<tr>
+<td>802.11ax</td>
+<td><strong>Wi-Fi 6</strong></td>
+<td>2019</td>
+<td>2,4 / 5 GHz</td>
+<td>9,6 Gbps</td>
+<td>OFDMA, eficiencia en entornos densos</td>
+</tr>
+<tr>
+<td>802.11ax</td>
+<td><strong>Wi-Fi 6E</strong></td>
+<td>2021</td>
+<td>2,4 / 5 / 6 GHz</td>
+<td>9,6 Gbps</td>
+<td>Banda de 6 GHz, menos congestión</td>
+</tr>
+<tr>
+<td>802.11be</td>
+<td><strong>Wi-Fi 7</strong></td>
+<td>2024</td>
+<td>2,4 / 5 / 6 GHz</td>
+<td>46 Gbps</td>
+<td>Multi-Link Operation, latencia mínima</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diferencias-entre-las-bandas-de-frecuencia">Diferencias entre las bandas de frecuencia</h3>
+<p>Una de las decisiones más importantes en Wi-Fi es a qué banda conectarse:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>2,4 GHz</th>
+<th>5 GHz</th>
+<th>6 GHz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cobertura</strong></td>
+<td>Mayor (llega más lejos y atraviesa mejor los obstáculos)</td>
+<td>Menor</td>
+<td>Menor</td>
+</tr>
+<tr>
+<td><strong>Velocidad</strong></td>
+<td>Menor</td>
+<td>Mayor</td>
+<td>Mayor</td>
+</tr>
+<tr>
+<td><strong>Congestión</strong></td>
+<td>Alta (comparte con Bluetooth, microondas, zigbee...)</td>
+<td>Media</td>
+<td>Baja (banda nueva, pocos dispositivos)</td>
+</tr>
+<tr>
+<td><strong>Penetración en paredes</strong></td>
+<td>Buena</td>
+<td>Media</td>
+<td>Baja</td>
+</tr>
+<tr>
+<td><strong>Uso recomendado</strong></td>
+<td>Dispositivos lejanos, IoT</td>
+<td>Dispositivos cercanos que necesitan velocidad</td>
+<td>Dispositivos muy cercanos, alta densidad</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">¿A cuál de las dos bandas me conecto?</p>
+<p>Si estás cerca del router y necesitas velocidad (streaming, videollamadas, trabajo), conéctate a <strong>5 GHz</strong>. Si estás lejos o hay muchas paredes de por medio, <strong>2,4 GHz</strong> te dará más alcance aunque menos velocidad. Los routers modernos (<em>dual band</em> o <em>tri band</em>) emiten en ambas bandas simultáneamente y algunos tienen función de <em>band steering</em> que conecta automáticamente el dispositivo a la banda más conveniente.</p>
+</div>
+<h3 id="bluetooth">Bluetooth</h3>
+<p><strong>Bluetooth</strong> es la tecnología inalámbrica de corto alcance más universal para redes PAN. Opera en la banda de <strong>2,4 GHz</strong> y está presente en prácticamente cualquier dispositivo electrónico moderno.</p>
+<table>
+<thead>
+<tr>
+<th>Versión</th>
+<th>Año</th>
+<th>Velocidad máx.</th>
+<th>Alcance</th>
+<th>Mejora principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bluetooth 4.0</td>
+<td>2010</td>
+<td>24 Mbps</td>
+<td>50 m</td>
+<td>BLE (Bluetooth Low Energy)</td>
+</tr>
+<tr>
+<td>Bluetooth 4.2</td>
+<td>2014</td>
+<td>24 Mbps</td>
+<td>50 m</td>
+<td>Mayor seguridad, IPv6</td>
+</tr>
+<tr>
+<td>Bluetooth 5.0</td>
+<td>2016</td>
+<td>48 Mbps</td>
+<td>240 m</td>
+<td>Doble velocidad, cuádruple alcance</td>
+</tr>
+<tr>
+<td>Bluetooth 5.2</td>
+<td>2020</td>
+<td>48 Mbps</td>
+<td>240 m</td>
+<td>LE Audio, audio multistream</td>
+</tr>
+<tr>
+<td>Bluetooth 5.4</td>
+<td>2023</td>
+<td>48 Mbps</td>
+<td>240 m</td>
+<td>Broadcast sin emparejamiento</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BLE</strong> (<em>Bluetooth Low Energy</em>), introducido en Bluetooth 4.0, es una variante de muy bajo consumo energético diseñada para dispositivos IoT, sensores y wearables que necesitan durar meses o años con una sola batería.</p>
+<h3 id="otras-tecnologias-inalambricas">Otras tecnologías inalámbricas</h3>
+<p>Además de Wi-Fi y Bluetooth existen otras tecnologías inalámbricas relevantes:</p>
+<p><strong>Zigbee y Z-Wave</strong>: tecnologías de muy bajo consumo para redes de domótica e IoT. Permiten crear mallas de sensores y actuadores (luces, termostatos, sensores de movimiento) con baterías que duran años.</p>
+<p><strong>NFC</strong> (<em>Near Field Communication</em>): comunicación a distancias de menos de 20 cm. Pagos contactless, intercambio de datos entre móviles, etiquetas inteligentes.</p>
+<p><strong>5G</strong>: la quinta generación de redes móviles. Aunque es una tecnología de red celular (no Wi-Fi), cada vez más se usa como alternativa a la fibra en hogares y empresas mediante módems 5G.</p>
+<p><strong>Comunicaciones por satélite</strong>: para zonas sin cobertura de fibra o cable. <strong>Starlink</strong> (SpaceX) ha democratizado el acceso satelital de baja latencia con su constelación de satélites en órbita baja (LEO).</p>
+<hr>
+<h2 id="comparativa-de-medios-de-transmision">Comparativa de medios de transmisión</h2>
+<table>
+<thead>
+<tr>
+<th>Medio</th>
+<th>Velocidad</th>
+<th>Distancia</th>
+<th>Interferencias</th>
+<th>Movilidad</th>
+<th>Coste instalación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UTP Cat6</td>
+<td>1-10 Gbps</td>
+<td>100 m</td>
+<td>Moderada</td>
+<td>No</td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>UTP Cat6A</td>
+<td>10 Gbps</td>
+<td>100 m</td>
+<td>Baja (blindado)</td>
+<td>No</td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>Fibra monomodo</td>
+<td>Tbps</td>
+<td>Cientos km</td>
+<td>Ninguna</td>
+<td>No</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td>Fibra multimodo</td>
+<td>100 Gbps</td>
+<td>2 km</td>
+<td>Ninguna</td>
+<td>No</td>
+<td>Medio-alto</td>
+</tr>
+<tr>
+<td>Wi-Fi 6</td>
+<td>hasta 9,6 Gbps*</td>
+<td>~50-100 m</td>
+<td>Alta (2,4 GHz)</td>
+<td><strong>Sí</strong></td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>Wi-Fi 7</td>
+<td>hasta 46 Gbps*</td>
+<td>~50-100 m</td>
+<td>Media</td>
+<td><strong>Sí</strong></td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>Bluetooth 5.0</td>
+<td>48 Mbps</td>
+<td>240 m</td>
+<td>Media</td>
+<td><strong>Sí</strong></td>
+<td>Muy bajo</td>
+</tr>
+</tbody>
+</table>
+<p>*Velocidades teóricas máximas en condiciones ideales. En la práctica, la velocidad real de Wi-Fi es significativamente menor.</p>
+<hr>
+<h2 id="actividad-en-clase">Actividad en clase</h2>
+<h3 id="actividad-conjunta-identificamos-los-medios-de-transmision-del-aula">🖥️ Actividad conjunta: identificamos los medios de transmisión del aula</h3>
+<ol>
+<li>
+<p>Oobservar el aula y responder:</p>
+<ul>
+<li>¿Qué medios de transmisión guiados ves? ¿Puedes identificar la categoría del cable?</li>
+<li>¿Hay medios inalámbricos activos en este momento? ¿Cuáles?</li>
+<li>¿Los equipos del aula usan cable o Wi-Fi para conectarse a la red?</li>
+</ul>
+</li>
+<li>
+<p>Debate: ¿por qué creéis que los equipos del aula usan cable en lugar de Wi-Fi? ¿Qué ventajas tiene el cable en este contexto?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../02_03_topologias_red/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Topologías de red">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Topologías de red
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02_05_dispositivos_interconexion/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Dispositivos de interconexión">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Dispositivos de interconexión
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

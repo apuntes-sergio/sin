@@ -1,0 +1,1771 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD04 - Simulación de redes con Packet Tracer">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/04_01_introduccion_packet_tracer/">
+      
+      
+        <link rel="prev" href="../03_06_ipv6_ipcalc/">
+      
+      
+        <link rel="next" href="../04_02_primera_red/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Introducción a Packet Tracer - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#instalacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción a Packet Tracer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-interfaz-de-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      La interfaz de Packet Tracer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La interfaz de Packet Tracer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-area-de-trabajo-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Área de trabajo (Workspace)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-barra-de-herramientas-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Barra de herramientas principal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-panel-de-dispositivos-device-type-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Panel de dispositivos (Device Type Box)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-panel-de-seleccion-de-dispositivos-device-specific-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Panel de selección de dispositivos (Device-Specific Selection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-modos-de-operacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Modos de operación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-cable-en-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de cable en Packet Tracer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicadores-de-estado-de-los-enlaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicadores de estado de los enlaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactuar-con-los-dispositivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactuar con los dispositivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-exploramos-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: exploramos Packet Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-interfaz-de-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      La interfaz de Packet Tracer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La interfaz de Packet Tracer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-area-de-trabajo-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Área de trabajo (Workspace)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-barra-de-herramientas-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Barra de herramientas principal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-panel-de-dispositivos-device-type-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Panel de dispositivos (Device Type Box)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-panel-de-seleccion-de-dispositivos-device-specific-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Panel de selección de dispositivos (Device-Specific Selection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-modos-de-operacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Modos de operación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-cable-en-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de cable en Packet Tracer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicadores-de-estado-de-los-enlaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicadores de estado de los enlaces
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactuar-con-los-dispositivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactuar con los dispositivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-exploramos-packet-tracer" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: exploramos Packet Tracer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Introducción a Packet Tracer</h1>
+
+<p>Hasta ahora hemos estudiado cómo funcionan las redes de forma teórica: tipos de red, topologías, medios de transmisión, dispositivos y direccionamiento IP. Ahora llega el momento de <strong>poner en práctica</strong> todo ese conocimiento montando redes reales de forma simulada.</p>
+<p><strong>Cisco Packet Tracer</strong> es un simulador de redes desarrollado por Cisco Systems que nos permite diseñar, configurar y verificar redes completas sin necesidad de hardware físico. Podemos añadir switches, routers, ordenadores, servidores y cables virtuales, configurar IPs, hacer ping entre equipos y ver cómo fluye el tráfico — todo desde el ordenador del aula.</p>
+<p>Es la herramienta estándar en la enseñanza de redes a nivel mundial y, aunque simula principalmente dispositivos Cisco, los conceptos que aprenderemos (direccionamiento IP, subnetting, routing básico) son universales y aplicables a cualquier fabricante.</p>
+<!-- IMG: captura de pantalla de Packet Tracer con una red sencilla ya montada -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/packet_tracer/pt_interfaz_general.png" data-desc-position="bottom"><img alt="Packet Tracer interfaz" src="../imgs/packet_tracer/pt_interfaz_general.png" width="90%"></a>
+<br>
+<figcaption>Interfaz principal de Cisco Packet Tracer con una red de ejemplo</figcaption>
+</figure>
+<h2 id="instalacion">Instalación</h2>
+<p>Packet Tracer es <strong>gratuito</strong> pero requiere una cuenta en Cisco Networking Academy:</p>
+<ol>
+<li>Accede a <a href="https://www.netacad.com">netacad.com</a> y crea una cuenta gratuita con tu correo del centro.</li>
+<li>Una vez registrado, ve a <strong>Recursos → Descargar Packet Tracer</strong>.</li>
+<li>Descarga la versión para tu sistema operativo (Windows, Linux o macOS).</li>
+<li>Instala y al abrir por primera vez inicia sesión con tu cuenta NetAcad.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Versión del aula</p>
+<p>En los equipos del aula ya está instalado Packet Tracer. Solo necesitas iniciar sesión con tu cuenta NetAcad la primera vez. Si no tienes cuenta, créala antes de la clase práctica.</p>
+</div>
+<h2 id="la-interfaz-de-packet-tracer">La interfaz de Packet Tracer</h2>
+<p>La interfaz de Packet Tracer se divide en varias zonas que conviene conocer desde el principio:</p>
+<!-- IMG: captura anotada de la interfaz de PT con las zonas numeradas -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/packet_tracer/pt_zonas_interfaz.png" data-desc-position="bottom"><img alt="Zonas interfaz PT" src="../imgs/packet_tracer/pt_zonas_interfaz.png" width="90%"></a>
+<br>
+<figcaption>Zonas principales de la interfaz de Packet Tracer</figcaption>
+</figure>
+<h3 id="1-area-de-trabajo-workspace">1. Área de trabajo (Workspace)</h3>
+<p>Es el espacio central donde diseñamos la red. Aquí arrastramos los dispositivos, los conectamos con cables y los organizamos visualmente. Tiene dos modos:</p>
+<ul>
+<li><strong>Modo Lógico</strong> (<em>Logical</em>): vista del esquema lógico de la red — la que usaremos principalmente.</li>
+<li><strong>Modo Físico</strong> (<em>Physical</em>): representación de los dispositivos en un espacio físico (edificio, ciudad...). Menos relevante para nuestro curso.</li>
+</ul>
+<h3 id="2-barra-de-herramientas-principal">2. Barra de herramientas principal</h3>
+<p>En la parte superior, con las funciones habituales: nuevo, abrir, guardar, deshacer, rehacer. También incluye el zoom y la opción de añadir notas al esquema.</p>
+<h3 id="3-panel-de-dispositivos-device-type-box">3. Panel de dispositivos (Device Type Box)</h3>
+<p>En la parte inferior izquierda. Aquí están todos los dispositivos disponibles organizados por categorías:</p>
+<!-- IMG: captura del panel de dispositivos con las categorías marcadas -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/packet_tracer/pt_panel_dispositivos.png" data-desc-position="bottom"><img alt="Panel dispositivos PT" src="../imgs/packet_tracer/pt_panel_dispositivos.png" width="80%"></a>
+<br>
+<figcaption>Panel de dispositivos: categorías de hardware disponibles en Packet Tracer</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Icono</th>
+<th>Categoría</th>
+<th>Dispositivos principales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🖧</td>
+<td><strong>Routers</strong></td>
+<td>Router-PT, 1941, 2901, 4321</td>
+</tr>
+<tr>
+<td>🔀</td>
+<td><strong>Switches</strong></td>
+<td>Switch-PT, 2960, 3560</td>
+</tr>
+<tr>
+<td>🖥️</td>
+<td><strong>End Devices</strong></td>
+<td>PC, laptop, servidor, smartphone, tablet</td>
+</tr>
+<tr>
+<td>☁️</td>
+<td><strong>Network Cloud</strong></td>
+<td>Nube (para simular internet o WAN)</td>
+</tr>
+<tr>
+<td>📡</td>
+<td><strong>Wireless Devices</strong></td>
+<td>Access Point, router inalámbrico</td>
+</tr>
+<tr>
+<td>🔌</td>
+<td><strong>Connections</strong></td>
+<td>Tipos de cable para conectar dispositivos</td>
+</tr>
+<tr>
+<td>📦</td>
+<td><strong>IoT</strong></td>
+<td>Sensores, actuadores, dispositivos IoT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-panel-de-seleccion-de-dispositivos-device-specific-selection">4. Panel de selección de dispositivos (Device-Specific Selection)</h3>
+<p>Al hacer clic en una categoría del panel inferior izquierdo, aquí aparecen los modelos concretos disponibles. Por ejemplo, al seleccionar Switches aparecen el Switch-PT genérico, el Cisco 2960, el 3560...</p>
+<h3 id="5-modos-de-operacion">5. Modos de operación</h3>
+<p>En la esquina inferior derecha hay dos modos importantes:</p>
+<ul>
+<li><strong>Realtime</strong> (tiempo real): la red funciona como una red real. Los pings y el tráfico ocurren en tiempo real.</li>
+<li><strong>Simulation</strong> (simulación): podemos ver los paquetes moviéndose por la red paso a paso, lo que es muy útil para entender qué está pasando. Permite pausar y avanzar fotograma a fotograma.</li>
+</ul>
+<h2 id="tipos-de-cable-en-packet-tracer">Tipos de cable en Packet Tracer</h2>
+<p>Elegir el cable correcto es fundamental. En Packet Tracer hay varios tipos:</p>
+<!-- IMG: panel de tipos de cable de PT con cada tipo identificado -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/packet_tracer/pt_tipos_cable.png" data-desc-position="bottom"><img alt="Tipos de cable PT" src="../imgs/packet_tracer/pt_tipos_cable.png" width="80%"></a>
+<br>
+<figcaption>Tipos de cable disponibles en Packet Tracer</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Cable</th>
+<th>Color</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automatic</strong></td>
+<td>Rayo Naranja</td>
+<td>PT elige el cable correcto automáticamente ⭐</td>
+</tr>
+<tr>
+<td><strong>Console</strong></td>
+<td>Azul celeste</td>
+<td>Configuración de router/switch desde un PC por consola</td>
+</tr>
+<tr>
+<td><strong>Copper Straight-Through</strong></td>
+<td>Negro sólido</td>
+<td>PC → Switch, Switch → Router (dispositivos diferentes)</td>
+</tr>
+<tr>
+<td><strong>Copper Cross-Over</strong></td>
+<td>Negro discontinuo</td>
+<td>PC → PC, Switch → Switch (mismo tipo)</td>
+</tr>
+<tr>
+<td><strong>Fiber</strong></td>
+<td>Naranja</td>
+<td>Conexiones de fibra óptica entre switches o routers</td>
+</tr>
+<tr>
+<td><strong>Serial DCE/DTE</strong></td>
+<td>Rojo reloj</td>
+<td>Enlace WAN entre routers (simulación de conexión a operador)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Uso de 'Automatic' al principio</p>
+<p>El cable <strong>Automatic</strong> (rayo rojo) detecta automáticamente qué tipo de cable necesitas según los dispositivos que conectas. Es la opción más cómoda para empezar y evita el error de poner un cable cruzado donde debería ir uno directo. No obstante es bueno que selecciones el tipo de cabla para ser consciente de qué estas usando y no dejar que las cosas se hagan sin entener el porque.</p>
+</div>
+<h2 id="indicadores-de-estado-de-los-enlaces">Indicadores de estado de los enlaces</h2>
+<p>Cuando conectamos dos dispositivos con un cable, aparecen dos puntos de colores en cada extremo del enlace que indican el estado de la conexión:</p>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 Verde</td>
+<td>El enlace está activo y funcionando correctamente</td>
+</tr>
+<tr>
+<td>🔴 Rojo</td>
+<td>El enlace está caído (dispositivo apagado, cable incorrecto, puerto bloqueado)</td>
+</tr>
+<tr>
+<td>🟠 Naranja</td>
+<td>El enlace está en proceso de activarse (STP convergiendo, unos segundos)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">El naranja es normal al conectar switches</p>
+<p>Al conectar switches en Packet Tracer, los enlaces pasan por el estado naranja durante unos segundos. Es el protocolo <strong>STP</strong> (<em>Spanning Tree Protocol</em>) convergiendo para evitar bucles en la red. Espera a que se pongan verdes antes de hacer pruebas de ping.</p>
+</div>
+<h2 id="interactuar-con-los-dispositivos">Interactuar con los dispositivos</h2>
+<p>Para configurar un dispositivo, hacemos <strong>doble clic</strong> sobre él. Se abre una ventana con varias pestañas:</p>
+<!-- IMG: captura de la ventana de configuración de un PC en PT con las pestañas marcadas -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/packet_tracer/pt_config_pc.png" data-desc-position="bottom"><img alt="Configuración dispositivo PT" src="../imgs/packet_tracer/pt_config_pc.png" width="95%"></a>
+<br>
+<figcaption>Ventana de configuración de un PC en Packet Tracer: pestañas Physical, Config y Desktop</figcaption>
+</figure>
+<p><strong>En un PC (End Device):</strong></p>
+<ul>
+<li><strong>Physical</strong>: vista física del dispositivo. Permite añadir o quitar módulos (tarjetas de red, etc.).</li>
+<li><strong>Config</strong>: configuración básica mediante formularios (IP, máscara, gateway, DNS). La forma más sencilla de configurar.</li>
+<li><strong>Desktop</strong>: simula el escritorio del PC. Incluye herramientas muy útiles:</li>
+<li><strong>IP Configuration</strong>: asignar IP, máscara y gateway por formulario</li>
+<li><strong>Command Prompt</strong>: terminal para ejecutar <code>ping</code>, <code>ipconfig</code>, <code>tracert</code>...</li>
+<li><strong>Web Browser</strong>: navegador para probar servidores web simulados</li>
+</ul>
+<p><strong>En un Switch o Router:</strong></p>
+<ul>
+<li><strong>Physical</strong>: vista física</li>
+<li><strong>Config</strong>: configuración básica</li>
+<li><strong>CLI</strong>: interfaz de línea de comandos (Command Line Interface). Aquí se configura el dispositivo con comandos IOS de Cisco. Lo veremos en los puntos siguientes.</li>
+</ul>
+<hr>
+<h2 id="actividad-en-clase">Actividad en clase</h2>
+<h3 id="actividad-conjunta-exploramos-packet-tracer">🖥️ Actividad conjunta: exploramos Packet Tracer</h3>
+<p><strong>Duración:</strong> 30 minutos
+<strong>Dinámica:</strong> práctica guiada por el profesor</p>
+<p><strong>Parte 1 — Familiarizarse con la interfaz (10 min):</strong></p>
+<ol>
+<li>Abre Packet Tracer e inicia sesión con tu cuenta NetAcad.</li>
+<li>Explora el panel de dispositivos: haz clic en cada categoría e identifica qué dispositivos hay disponibles.</li>
+<li>Arrastra al área de trabajo: 2 PCs, 1 Switch y 1 Router. No los conectes todavía.</li>
+<li>Haz doble clic en cada dispositivo y explora sus pestañas (Physical, Config, Desktop/CLI).</li>
+<li>Borra el área de trabajo (Edit → Select All → Delete) y empieza de nuevo.</li>
+</ol>
+<p><strong>Parte 2 — Primera conexión (20 min):</strong></p>
+<ol>
+<li>Añade 2 PCs y 1 Switch al área de trabajo.</li>
+<li>Conecta PC0 al Switch usando el cable <strong>negro</strong> o Cable Ethernet Directo <strong><em>(Copper Straight-Through)</em></strong>.</li>
+<li>Conecta PC1 al Switch usando el cable <strong>negro</strong>.</li>
+<li>Observa los indicadores de enlace: ¿de qué color son? ¿Cambian con el tiempo?</li>
+<li>Haz doble clic en PC0 → Desktop → IP Configuration y asigna:<ul>
+<li>IP Address: <code>192.168.1.10</code></li>
+<li>Subnet Mask: <code>255.255.255.0</code></li>
+<li>No pongas gateway todavía</li>
+</ul>
+</li>
+<li>Haz doble clic en PC1 → Desktop → IP Configuration y asigna:<ul>
+<li>IP Address: <code>192.168.1.20</code></li>
+<li>Subnet Mask: <code>255.255.255.0</code></li>
+</ul>
+</li>
+<li>En PC0 → Desktop → Command Prompt, ejecuta:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ping 192.168.1.20
+</span></code></pre></div></li>
+<li>¿Funciona el ping? ¿Cuántos paquetes se envían y cuántos llegan?</li>
+<li>Prueba el <strong>modo Simulation</strong>: haz el ping de nuevo y observa cómo se mueven los paquetes por la red fotograma a fotograma.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Guarda siempre tu trabajo</p>
+<p>Packet Tracer guarda los proyectos con extensión <code>.pkt</code>. Guarda tu primer proyecto como <code>ud04_practica01.pkt</code> y súbelo a Aules cuando lo pidas el profesor.</p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../03_06_ipv6_ipcalc/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: IPv6 e ipcalc">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                IPv6 e ipcalc
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04_02_primera_red/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Primera red en Packet Tracer">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Primera red en Packet Tracer
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
