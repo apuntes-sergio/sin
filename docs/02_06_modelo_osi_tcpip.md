@@ -131,23 +131,53 @@ En el destino, el proceso se invierte: cada capa elimina su cabecera y pasa los 
 
 Se presentan los siguientes escenarios. Identificar en qué capa del modelo OSI/TCP-IP está probablemente el problema:
 
-**Caso 1:** Un equipo está conectado al switch con el cable bien enchufado, pero el LED del puerto del switch no se enciende.
-*(Pista: ¿el problema es eléctrico/físico o de configuración?)*
+---
 
-**Caso 2:** Dos equipos están en la misma red y el ping entre ellos funciona, pero uno no puede acceder a carpetas compartidas del otro.
-*(Pista: el ping usa ICMP en capa 3. Las carpetas compartidas usan protocolos de capa más alta.)*
-
-**Caso 3:** Un equipo puede navegar por internet pero no puede enviar correos electrónicos.
-*(Pista: ¿el problema es de conectividad general o de un protocolo específico?)*
-
-**Caso 4:** Al acceder a una web, el navegador muestra "ERR_SSL_PROTOCOL_ERROR".
-*(Pista: SSL/TLS está en la capa de presentación del modelo OSI.)*
-
-**Puesta en común:** el profesor resuelve cada caso indicando en qué capa está el problema y qué herramienta usaríamos para diagnosticarlo (ping, tracert, Wireshark, telnet al puerto...).
-
-??? tip "Ayuda"
+!!! tip "Ayuda"
    
     <figure markdown="span" align="center">
       ![Encapsulación de datos](./imgs/redes/redes_identificar_problemas.png){ width="95%" }
       <figcaption>Grafico para identificar dóndo están los problemas de red</figcaption>
     </figure>
+
+---
+
+
+??? Question "Caso 1: Un equipo está conectado al switch con el cable bien enchufado, pero el LED del puerto del switch no se enciende. *(Pista: ¿el problema es eléctrico/físico o de configuración?)* "
+
+    *Un equipo está conectado al switch con el cable bien enchufado, pero el LED del puerto del switch no se enciende.*
+
+    * **Capa del Modelo OSI:** **Capa 1 – Capa Física**
+    * **Capa del Modelo TCP/IP:** **Capa de Acceso a la Red** *(o Capa Física/Enlace)*
+    * **Justificación:** Los LEDs de enlace del switch indican la detección de una señal eléctrica, óptica o electromagnética en el medio. Si el LED no se enciende, significa que no hay transmisión ni detección de señal física a través del cable. El problema se debe probablemente a un cable defectuoso, un puerto del switch/tarjeta de red averiado o una falta de alimentación eléctrica.
+
+
+??? Question "Caso 2: Dos equipos están en la misma red y el ping entre ellos funciona, pero uno no puede acceder a carpetas compartidas del otro. *(Pista: el ping usa ICMP en capa 3. Las carpetas compartidas usan protocolos de capa más alta.)*"
+
+    *Dos equipos están en la misma red y el ping entre ellos funciona, pero uno no puede acceder a carpetas compartidas del otro.*
+
+    * **Capa del Modelo OSI:** **Capa 7 – Capa de Aplicación** *(o Capa 5 – Sesión / Capa 6 – Presentación, dependiendo del protocolo de red)*
+    * **Capa del Modelo TCP/IP:** **Capa de Aplicación**
+    * **Justificación:** Dado que el comando `ping` (protocolo ICMP en la Capa 3 de OSI / Capa de Red o Internet) responde correctamente, queda demostrado que existe conectividad IP y física funcional entre ambos equipos. El fallo al compartir archivos se debe a protocolos de nivel superior como **SMB** (Server Message Block) o **NFS**, a permisos de usuario/carpetas no configurados, o a un bloqueo específico en el firewall del sistema operativo para ese servicio.
+
+
+??? Question "*Caso 3: Un equipo puede navegar por internet pero no puede enviar correos electrónicos. *(Pista: ¿el problema es de conectividad general o de un protocolo específico?)*"
+
+    *Un equipo puede navegar por internet pero no puede enviar correos electrónicos.*
+
+    * **Capa del Modelo OSI:** **Capa 7 – Capa de Aplicación**
+    * **Capa del Modelo TCP/IP:** **Capa de Aplicación**
+    * **Justificación:** La navegación web funcional demuestra que las capas inferiores (Física, Enlace, Red y Transporte) están operativas y existe resolución DNS. El problema reside exclusivamente en el servicio de correo saliente, afectando al protocolo específico de envío (**SMTP**, puerto 25, 465 o 587) o a la configuración de autenticación del cliente de correo.
+
+??? Question "Caso 4: Al acceder a una web, el navegador muestra "ERR_SSL_PROTOCOL_ERROR". *(Pista: SSL/TLS está en la capa de presentación del modelo OSI.)*"
+
+    *Al acceder a una web, el navegador muestra "ERR_SSL_PROTOCOL_ERROR".*
+
+    * **Capa del Modelo OSI:** **Capa 6 – Capa de Presentación**
+    * **Capa del Modelo TCP/IP:** **Capa de Aplicación**
+    * **Justificación:** El error está directamente relacionado con **TLS/SSL**, que en el modelo OSI opera tradicionalmente en la **Capa de Presentación** al encargarse del cifrado, descifrado, formato de datos y negociación de certificados de seguridad. La conexión TCP subyacente funciona, pero falla el protocolo de cifrado para entregar el contenido HTTP al usuario.    
+
+---
+
+
+
