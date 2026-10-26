@@ -113,11 +113,6 @@ Con PAT, una oficina con 50 equipos puede funcionar perfectamente con una sola I
 !!! example "Port forwarding: abrir un puerto para recibir conexiones"
     Si quieres que tu servidor web casero sea accesible desde internet, necesitas configurar **port forwarding** en el router: "cuando llegue una conexión al puerto 80 de la IP pública, reenvíala al equipo `192.168.1.100`". Sin esta configuración, el router no sabe a qué equipo interno debe enviar las conexiones entrantes que nadie ha solicitado. En el proyecto del curso, cuando configuremos el servidor Windows para acceso remoto, necesitaremos entender este concepto.
 
-## Resumen: pública vs privada
-
-
-
-## Resumen IP
 
 ## Resumen IP
 

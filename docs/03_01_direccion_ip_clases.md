@@ -68,8 +68,10 @@ Una red de clase A puede albergar más de 16 millones de dispositivos. Fueron as
 
 !!! info "¿Por qué se resta 2 a los hosts?"
     En cualquier red siempre se reservan dos direcciones que no se pueden asignar a dispositivos:
+
     - La **dirección de red** (todos los bits de host a 0): identifica la red en sí. Ej: `10.0.0.0`
     - La **dirección de broadcast** (todos los bits de host a 1): se usa para enviar un mensaje a todos los dispositivos de la red. Ej: `10.255.255.255`
+    
     Por eso el número de hosts utilizables siempre es el total menos 2.
 
 ### Clase B
