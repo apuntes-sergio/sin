@@ -82,9 +82,8 @@ Hosts utilizables:     254
 
 **Paso 2:** La máscara /26 actúa sobre el cuarto octeto. Los bloques de 64 en el cuarto octeto empiezan en: 0, 64, 128, 192...
 
-La IP es `192.168.1.100` → el 100 está entre 64 y 128 → el bloque empieza en **64**.
-
-Dirección de red: `192.168.1.64`
+- La IP es `192.168.1.100` → el 100 está entre 64 y 128 → el bloque empieza en **64**.
+- Dirección de red: `192.168.1.64`
 
 **Paso 3:** Broadcast = `192.168.1.64` + 64 - 1 = `192.168.1.127`
 
@@ -110,8 +109,9 @@ Hosts utilizables:     62
 **Paso 1:** Tamaño del bloque = 2^(32-25) = 2⁷ = 128
 
 **Paso 2:** Bloques de 128 en el cuarto octeto: 0, 128...
-La IP es `172.16.5.200` → el 200 está entre 128 y 256 → el bloque empieza en **128**.
-Dirección de red: `172.16.5.128`
+
+- La IP es `172.16.5.200` → el 200 está entre 128 y 256 → el bloque empieza en **128**.
+- Dirección de red: `172.16.5.128`
 
 **Paso 3:** Broadcast = `172.16.5.128` + 128 - 1 = `172.16.5.255`
 
@@ -135,10 +135,12 @@ Cuando la máscara no cae en un límite de octeto "limpio" como /8, /16, /24, el
 Con 512 direcciones y siendo el cuarto octeto de 256, el bloque se extiende por **dos octetos completos del cuarto**, lo que significa que el bloque actúa sobre el **tercer octeto** (en pasos de 2).
 
 **Paso 2:** Bloques de 2 en el tercer octeto: 0, 2, 4, ..., 50, 52...
-La IP es `10.0.50.130` → el tercer octeto es 50, que es múltiplo de 2 → el bloque empieza en el tercer octeto = **50**.
-Dirección de red: `10.0.50.0`
+
+- La IP es `10.0.50.130` → el tercer octeto es 50, que es múltiplo de 2 → el bloque empieza en el tercer octeto = **50**.
+- Dirección de red: `10.0.50.0`
 
 **Paso 3:** Broadcast = `10.0.50.0` + 512 - 1:
+
 - El bloque de 512 abarca `10.0.50.0` hasta `10.0.51.255`
 - Broadcast: `10.0.51.255`
 

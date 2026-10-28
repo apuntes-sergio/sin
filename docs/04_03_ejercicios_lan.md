@@ -15,7 +15,7 @@ En cada ejercicio el proceso es siempre el mismo:
 
 ## Ejercicio 1 — Red de un departamento pequeño
 
-**Escenario:** El departamento de Administración de TechSolutions S.L. tiene 6 equipos que necesitan estar en red. Usaremos el bloque `192.168.10.0`.
+**Escenario:** El departamento de Administración de ***TechSolutions S.L.*** tiene 6 equipos que necesitan estar en red. Usaremos el bloque `192.168.10.0`.
 
 **Paso 1 — Elegir la máscara:**
 
@@ -45,7 +45,7 @@ Hosts útiles:   14
 **Monta esta red en Packet Tracer y verifica:**
 
 - `ping` desde PC-Admin1 a PC-Admin6 → debe funcionar
-- `ping 192.168.10.15` desde cualquier PC → debe fallar (es el broadcast, no un host)
+- `ping 192.168.10.15` desde cualquier PC → responde de forma incoherente (es el broadcast, no un host)
 - `ping 192.168.10.20` desde cualquier PC → debe fallar (fuera de la subred)
 
 <!-- IMG: captura de PT con el ejercicio 1 montado y el ping funcionando -->
@@ -55,7 +55,7 @@ Hosts útiles:   14
 </figure>
 
 !!! example "¿Por qué falla el ping a 192.168.10.15?"
-    Porque `.15` es la dirección de **broadcast** de esta subred /28. Las direcciones de broadcast no se asignan a hosts y no responden a ping — están reservadas para enviar mensajes a todos los dispositivos de la red simultáneamente.
+    Porque `.15` es la dirección de **broadcast** de esta subred /28. Las direcciones de broadcast no se asignan a hosts y responden de forma masiva a ping — están reservadas para enviar mensajes a todos los dispositivos de la red simultáneamente.
 
 ---
 
@@ -122,7 +122,9 @@ Broadcast:  10.0.1.15
 
 **En Packet Tracer:**
 
-Para añadir un servidor: panel de dispositivos → **End Devices** → **Server**. Un servidor en PT tiene las mismas pestañas que un PC más la pestaña **Services** donde se pueden activar servicios (HTTP, DNS, DHCP...).
+Para añadir un servidor: panel de dispositivos → **End Devices** → **Server**. Un servidor en PT tiene las mismas pestañas que un PC más la pestaña **Services** donde se pueden activar servicios (HTTP, DNS, DHCP...). 
+
+> Si has usado el Switch 2960 verás que tiene 2 tarjetas GigaByte. Investiga cómo sacar el máximo provecho y decide a qué servidores conectarlas
 
 **Verifica:**
 
@@ -140,11 +142,13 @@ Para añadir un servidor: panel de dispositivos → **End Devices** → **Server
 
 ## Ejercicio 4 — Detección y corrección de errores
 
-**Escenario:** Te entregan un fichero `.pkt` con una red mal configurada. Tienes que identificar los errores y corregirlos.
+**Escenario:** Imagina que te entregan un fichero `.pkt` con una red mal configurada. Tienes que identificar los errores y corregirlos.
 
-La red debería tener 4 PCs en la red `192.168.5.0/26` pero hay varios problemas. Descarga el fichero de Aules (`ud04_red_errores.pkt`) y encuentra qué está mal.
+La red debería tener 4 PCs en la red `192.168.5.0/26` pero hay varios problemas. 
 
-**Posibles errores que puede haber (no todos están presentes):**
+> Genera un fichero con errores y lo envias a unos de tus compañeros...
+
+**Posibles errores que puede haber (no todos tienen porque estar presentes):**
 
 - IP de un PC fuera del rango de la subred
 - Máscara incorrecta en algún PC
@@ -167,42 +171,4 @@ La red debería tener 4 PCs en la red `192.168.5.0/26` pero hay varios problemas
 !!! tip "Metodología de diagnóstico"
     Siempre de lo más simple a lo más complejo: primero verifica los cables (capa física), después las IPs y máscaras (capa red), y finalmente la configuración lógica. El mismo proceso que seguiremos en redes reales con Windows Server.
 
----
 
-## Práctica para entregar
-
-**Fichero:** `ud04_practica03.pkt`
-**Entrega:** Aules
-
-Diseña y monta en Packet Tracer la siguiente red:
-
-**Red de TechSolutions S.L. — Planta 1**
-
-La planta 1 tiene dos departamentos que comparten el bloque de red `192.168.20.0/24`:
-
-| Departamento | Equipos | Subred a usar |
-|-------------|---------|---------------|
-| Contabilidad | 10 PCs | Primera subred /27 del bloque |
-| RRHH | 5 PCs | Segunda subred /27 del bloque |
-
-**Requisitos:**
-
-1. Calcula las dos subredes /27 dentro de `192.168.20.0/24` e indica: dirección de red, rango de hosts y broadcast de cada una.
-2. Monta ambas subredes en Packet Tracer con un switch por departamento.
-3. Asigna IPs a todos los PCs y renómbralos correctamente.
-4. Verifica con ping:
-    - Ping entre PCs del mismo departamento → debe funcionar ✅
-    - Ping entre un PC de Contabilidad y uno de RRHH → debe fallar ❌ (sin router)
-5. Adjunta capturas de pantalla de los pings de verificación.
-
-**Documento Word/PDF con:**
-
-- Tabla de subredes calculadas (red, primer host, último host, broadcast)
-- Tabla de asignación de IPs a cada PC
-- Capturas de los pings de verificación
-
-!!! info "Criterios de evaluación"
-    - Cálculo correcto de las dos subredes (3 puntos)
-    - Red montada correctamente en PT con dispositivos renombrados (3 puntos)
-    - Pings de verificación correctos (2 puntos)
-    - Documento con tabla de subredes e IPs (2 puntos)
