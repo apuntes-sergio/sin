@@ -1,0 +1,1984 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD02 - Fundamentos de redes">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/02_05_dispositivos_interconexion/">
+      
+      
+        <link rel="prev" href="../02_04_medios_transmision/">
+      
+      
+        <link rel="next" href="../02_06_modelo_osi_tcpip/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Dispositivos de interconexión - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#el-hub-concentrador" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dispositivos de interconexión
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-hub-concentrador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El hub (concentrador)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-switch-conmutador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El switch (conmutador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El switch (conmutador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-funciona-el-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Cómo funciona el switch?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-router-enrutador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El router (enrutador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El router (enrutador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funciones-principales-del-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones principales del router
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routers-domesticos-vs-routers-profesionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routers domésticos vs routers profesionales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-punto-de-acceso-wi-fi-access-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      El punto de acceso Wi-Fi (Access Point)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El punto de acceso Wi-Fi (Access Point)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-wi-fi-domestico-vs-access-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router Wi-Fi doméstico vs Access Point
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-de-un-ap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características de un AP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otros-dispositivos-de-red-relevantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otros dispositivos de red relevantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otros dispositivos de red relevantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Módem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repetidor-wi-fi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repetidor Wi-Fi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-l3-capa-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch L3 (capa 3)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparativa-resumen-de-dispositivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparativa resumen de dispositivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase-y-actividad-para-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase y actividad para entregar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase y actividad para entregar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-identificamos-los-dispositivos-del-aula" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: identificamos los dispositivos del aula
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-para-entregar-inventario-de-red-de-nuestra-empresa" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Actividad para entregar: inventario de red de nuestra empresa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-hub-concentrador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El hub (concentrador)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-switch-conmutador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El switch (conmutador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El switch (conmutador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-funciona-el-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Cómo funciona el switch?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-router-enrutador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El router (enrutador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El router (enrutador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funciones-principales-del-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones principales del router
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routers-domesticos-vs-routers-profesionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routers domésticos vs routers profesionales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-punto-de-acceso-wi-fi-access-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      El punto de acceso Wi-Fi (Access Point)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El punto de acceso Wi-Fi (Access Point)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-wi-fi-domestico-vs-access-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router Wi-Fi doméstico vs Access Point
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-de-un-ap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características de un AP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otros-dispositivos-de-red-relevantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otros dispositivos de red relevantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otros dispositivos de red relevantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Módem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repetidor-wi-fi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repetidor Wi-Fi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-l3-capa-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch L3 (capa 3)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparativa-resumen-de-dispositivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparativa resumen de dispositivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase-y-actividad-para-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase y actividad para entregar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase y actividad para entregar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-conjunta-identificamos-los-dispositivos-del-aula" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Actividad conjunta: identificamos los dispositivos del aula
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-para-entregar-inventario-de-red-de-nuestra-empresa" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Actividad para entregar: inventario de red de nuestra empresa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Dispositivos de interconexión</h1>
+
+<p>Hasta ahora hemos visto los medios físicos por los que viajan los datos y los tipos de red según su extensión. Pero para que una red funcione no basta con conectar cables: necesitamos dispositivos especializados que gestionen el tráfico, dirijan los datos hacia su destino y conecten unas redes con otras. Estos dispositivos son los <strong>elementos activos</strong> de la red — a diferencia de los cables, que son elementos pasivos.</p>
+<p>Entender qué hace cada dispositivo y en qué se diferencia de los demás es fundamental para poder diseñar, montar y diagnosticar redes, que es exactamente lo que haremos en las siguientes unidades con Packet Tracer y con el proyecto de la empresa.</p>
+<h2 id="el-hub-concentrador">El hub (concentrador)</h2>
+<p>El <strong>hub</strong> es el dispositivo de interconexión más sencillo y también el más antiguo de los que veremos. Permite conectar varios equipos en una red de estrella física, pero su funcionamiento interno es muy primitivo: cuando recibe un paquete de datos por uno de sus puertos, lo <strong>reenvía por todos los demás puertos simultáneamente</strong>, sin importar a quién va dirigido.</p>
+<!-- IMG: fotografía de un hub de red de 8 puertos, preferiblemente antiguo -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/hub_red.png" data-desc-position="bottom"><img alt="Hub de red" src="../imgs/redes/hub_red.png" width="55%"></a>
+<br>
+<figcaption>Hub de red: reenvía los datos recibidos por todos sus puertos simultáneamente</figcaption>
+</figure>
+<p>Esto tiene una consecuencia importante: todos los equipos conectados a un hub comparten el mismo <strong>dominio de colisión</strong>. Si dos equipos intentan enviar datos al mismo tiempo, los paquetes chocan y se corrompen (colisión), y ambos equipos tienen que esperar un tiempo aleatorio antes de reintentar. Con pocos equipos y tráfico bajo esto es tolerable, pero el rendimiento cae drásticamente a medida que se añaden más dispositivos.</p>
+<p><strong>Características del hub:</strong></p>
+<ul>
+<li>Opera en la <strong>capa 1</strong> (capa física) del modelo OSI — no entiende de direcciones, solo amplifica y redistribuye señales eléctricas.</li>
+<li>No tiene inteligencia: no sabe qué equipo está conectado en cada puerto.</li>
+<li>Crea un único dominio de colisión para todos los puertos.</li>
+<li>Velocidades típicas: 10 Mbps o 100 Mbps (nunca Gigabit).</li>
+</ul>
+<p><strong>Estado actual:</strong> Los hubs están completamente <strong>obsoletos</strong> y han desaparecido del mercado. Se sustituyeron por los switches en los años 90. Hoy solo se encuentran en museos, laboratorios de telecomunicaciones y en el almacén de algún instituto que no ha renovado el equipamiento en 25 años. Los mencionamos aquí porque aparecen en la teoría de redes y es importante entender por qué el switch los superó.</p>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué el hub fue reemplazado?</p>
+<p>Con un hub, si tienes 10 equipos conectados a 100 Mbps, todos comparten esos 100 Mbps. Si dos equipos transmiten a la vez, hay colisión y ambos tienen que repetir. Con un switch, cada par de equipos tiene su propio canal de 100 Mbps dedicado y no hay colisiones. La diferencia de rendimiento es enorme.</p>
+</div>
+<h2 id="el-switch-conmutador">El switch (conmutador)</h2>
+<p>El <strong>switch</strong> es el dispositivo central de cualquier red LAN moderna. A diferencia del hub, el switch es <strong>inteligente</strong>: aprende qué dispositivo está conectado en cada puerto leyendo las <strong>direcciones MAC</strong> de los paquetes que recibe, y usa esa información para enviar cada paquete únicamente al puerto donde está el destinatario.</p>
+<!-- IMG: fotografía de un switch gestionable de 24 puertos en rack, y un switch doméstico de 8 puertos -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/switch_red.png" data-desc-position="bottom"><img alt="Switch de red" src="../imgs/redes/switch_red.png" width="70%"></a>
+<br>
+<figcaption>Switch doméstico de 8 puertos (izquierda) y switch gestionable de 24 puertos para rack (derecha)</figcaption>
+</figure>
+<h3 id="como-funciona-el-switch">¿Cómo funciona el switch?</h3>
+<p>Cuando el switch arranca, su <strong>tabla MAC</strong> (también llamada tabla CAM) está vacía. A medida que los equipos van enviando datos, el switch aprende:</p>
+<ol>
+<li>El equipo A envía un paquete al equipo B. El switch ve que el paquete viene del puerto 1 y que la dirección MAC de origen es la de A → anota: "la MAC de A está en el puerto 1".</li>
+<li>El switch no sabe aún dónde está B → reenvía el paquete por todos los puertos excepto el 1 (esto se llama <strong>flooding</strong>).</li>
+<li>B responde. El switch ve que la respuesta viene del puerto 3 → anota: "la MAC de B está en el puerto 3".</li>
+<li>A partir de ahora, cualquier paquete de A para B va directamente al puerto 3 sin molestar a los demás.</li>
+</ol>
+<p>Este proceso de aprendizaje es automático y muy rápido. En segundos, el switch tiene mapeada toda la red.</p>
+<p><strong>Características del switch:</strong></p>
+<ul>
+<li>Opera en la <strong>capa 2</strong> (capa de enlace de datos) del modelo OSI.</li>
+<li>Usa direcciones <strong>MAC</strong> para tomar decisiones de reenvío.</li>
+<li>Cada par de puertos tiene su propio <strong>dominio de colisión</strong> → prácticamente no hay colisiones.</li>
+<li>Soporta comunicación <strong>full-duplex</strong>: puede enviar y recibir simultáneamente en cada puerto.</li>
+<li>Velocidades típicas: 100 Mbps, <strong>1 Gbps</strong> (estándar actual), 2,5 Gbps, 10 Gbps.</li>
+</ul>
+<h3 id="tipos-de-switch">Tipos de switch</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Características</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No gestionable</strong> (<em>unmanaged</em>)</td>
+<td>Plug &amp; play, sin configuración, económico</td>
+<td>Doméstico, pequeñas oficinas</td>
+</tr>
+<tr>
+<td><strong>Gestionable</strong> (<em>managed</em>)</td>
+<td>Configurable por web/CLI, soporta VLANs, QoS, monitorización</td>
+<td>Empresas, centros de datos</td>
+</tr>
+<tr>
+<td><strong>PoE</strong> (<em>Power over Ethernet</em>)</td>
+<td>Alimenta dispositivos por el cable de red (cámaras, APs, teléfonos IP)</td>
+<td>Instalaciones con cámaras o APs</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">El switch en el proyecto del curso</p>
+<p>En el proyecto de la empresa que montaremos, el switch es el corazón de la red LAN. Todos los equipos (servidor Windows, clientes, impresoras) se conectarán al switch. Cuando en Packet Tracer diseñemos la red, el switch central será el primer dispositivo que colocaremos.</p>
+</div>
+<h2 id="el-router-enrutador">El router (enrutador)</h2>
+<p>El <strong>router</strong> es el dispositivo que conecta redes diferentes entre sí. Mientras el switch conecta equipos dentro de la misma red, el router conecta la red local (LAN) con otras redes: otra LAN, una WAN o internet.</p>
+<p>El router toma decisiones de reenvío basándose en <strong>direcciones IP</strong> (no en direcciones MAC como el switch). Para cada paquete que llega, consulta su <strong>tabla de enrutamiento</strong> y decide por qué interfaz reenviarlo para que llegue a su destino.</p>
+<!-- IMG: diagrama de un router conectando la LAN de una empresa con internet (WAN) -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/router_conexion.png" data-desc-position="bottom"><img alt="Router" src="../imgs/redes/router_conexion.png" width="70%"></a>
+<br>
+<figcaption>El router conecta la red local (LAN) con internet (WAN) y gestiona el tráfico entre ambas</figcaption>
+</figure>
+<h3 id="funciones-principales-del-router">Funciones principales del router</h3>
+<p><strong>Enrutamiento</strong>: decide el mejor camino para que cada paquete llegue a su destino, aunque haya que pasar por varios routers intermedios.</p>
+<p><strong>NAT</strong> (<em>Network Address Translation</em>): traduce las direcciones IP privadas de los equipos de la LAN a la dirección IP pública que tiene el router en internet. Esto es lo que permite que todos los equipos de una casa u oficina compartan una sola IP pública.</p>
+<p><strong>DHCP</strong>: la mayoría de routers domésticos incluyen un servidor DHCP que asigna automáticamente direcciones IP a los equipos que se conectan.</p>
+<p><strong>Firewall básico</strong>: filtran el tráfico entrante y saliente, bloqueando conexiones no solicitadas desde internet.</p>
+<p><strong>Características del router:</strong></p>
+<ul>
+<li>Opera en la <strong>capa 3</strong> (capa de red) del modelo OSI.</li>
+<li>Usa direcciones <strong>IP</strong> para tomar decisiones de reenvío.</li>
+<li>Separa dominios de <strong>broadcast</strong>: los paquetes de broadcast de la LAN no salen por el router hacia internet.</li>
+<li>Puede conectar redes con tecnologías diferentes (Ethernet, Wi-Fi, fibra, 4G...).</li>
+</ul>
+<h3 id="routers-domesticos-vs-routers-profesionales">Routers domésticos vs routers profesionales</h3>
+<p>Un router <strong>doméstico</strong> (el que pone el operador en casa) es en realidad un dispositivo multifunción que integra <strong>router + switch + punto de acceso Wi-Fi + servidor DHCP + firewall básico</strong> en un solo aparato.</p>
+<p>Un router <strong>profesional</strong> (Cisco, MikroTik, Juniper) es un dispositivo dedicado <strong>únicamente al enrutamiento</strong>, configurable completamente por línea de comandos, capaz de gestionar tablas de enrutamiento con millones de entradas y manejar decenas de Gbps de tráfico.</p>
+<!-- IMG: fotografía comparativa router doméstico (TP-Link, ASUS) vs router profesional Cisco o MikroTik -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/router_domestico_profesional.png" data-desc-position="bottom"><img alt="Router doméstico vs profesional" src="../imgs/redes/router_domestico_profesional.png" width="75%"></a>
+<br>
+<figcaption>Router doméstico (izquierda): todo en uno. Router profesional Cisco (derecha): solo enrutamiento, máximo rendimiento</figcaption>
+</figure>
+<h2 id="el-punto-de-acceso-wi-fi-access-point">El punto de acceso Wi-Fi (Access Point)</h2>
+<p>Un <strong>punto de acceso</strong> (<em>Access Point</em> o AP) es el dispositivo que permite a los equipos inalámbricos conectarse a la red cableada. Actúa como puente entre el mundo Wi-Fi y el mundo Ethernet.</p>
+<p>Un AP se conecta mediante cable Ethernet al switch de la red y emite una o varias redes Wi-Fi (SSIDs) a las que se pueden conectar los dispositivos inalámbricos. Desde el punto de vista de la red, un equipo conectado por Wi-Fi al AP es equivalente a uno conectado por cable al switch.</p>
+<!-- IMG: fotografía de un AP de techo tipo Ubiquiti UniFi o TP-Link EAP instalado en el techo -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/access_point_techo.png" data-desc-position="bottom"><img alt="Access Point" src="../imgs/redes/access_point_techo.png" width="55%"></a>
+<br>
+<figcaption>Punto de acceso Wi-Fi de techo (Ubiquiti UniFi). Se alimenta por PoE desde el switch sin necesidad de cable de corriente</figcaption>
+</figure>
+<h3 id="router-wi-fi-domestico-vs-access-point">Router Wi-Fi doméstico vs Access Point</h3>
+<p>Es importante distinguir entre el router Wi-Fi que pone el operador en casa y un AP puro:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Router Wi-Fi doméstico</th>
+<th>Access Point puro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Función</strong></td>
+<td>Router + switch + AP + DHCP + firewall</td>
+<td>Solo AP (punto de acceso inalámbrico)</td>
+</tr>
+<tr>
+<td><strong>Conexión</strong></td>
+<td>Se conecta a la línea del operador</td>
+<td>Se conecta al switch de la red existente</td>
+</tr>
+<tr>
+<td><strong>Configura DHCP</strong></td>
+<td>Sí</td>
+<td>No (lo gestiona el router)</td>
+</tr>
+<tr>
+<td><strong>Uso típico</strong></td>
+<td>Hogares, pequeñas oficinas</td>
+<td>Empresas con múltiples APs, campus</td>
+</tr>
+</tbody>
+</table>
+<p>En una empresa mediana o grande, lo habitual es tener un router profesional, un switch central y varios APs repartidos por el edificio para dar cobertura Wi-Fi en todas las zonas, todos gestionados de forma centralizada.</p>
+<h3 id="caracteristicas-de-un-ap">Características de un AP</h3>
+<ul>
+<li><strong>SSID</strong>: el nombre de la red Wi-Fi que emite.</li>
+<li><strong>Bandas</strong>: 2,4 GHz, 5 GHz, 6 GHz (según el estándar Wi-Fi que soporte).</li>
+<li><strong>Número de clientes simultáneos</strong>: un AP doméstico soporta ~30-50 clientes; uno profesional puede gestionar 200+.</li>
+<li><strong>PoE</strong>: los APs profesionales se alimentan por el cable de red (Power over Ethernet) sin necesidad de enchufe.</li>
+<li><strong>Roaming</strong>: en instalaciones con varios APs, los dispositivos pueden moverse por el edificio y cambiar automáticamente al AP con mejor señal sin perder la conexión.</li>
+</ul>
+<h2 id="otros-dispositivos-de-red-relevantes">Otros dispositivos de red relevantes</h2>
+<h3 id="modem">Módem</h3>
+<p>El <strong>módem</strong> (<em>modulator-demodulator</em>) convierte la señal digital de la red local en la señal analógica o digital que usa la línea del operador (ADSL, fibra, cable coaxial, 4G...) y viceversa. En instalaciones domésticas modernas, el módem y el router suelen estar integrados en el mismo dispositivo (el "router" que instala el técnico del operador).</p>
+<h3 id="repetidor-wi-fi">Repetidor Wi-Fi</h3>
+<p>Un <strong>repetidor</strong> o <strong>extensor Wi-Fi</strong> recibe la señal Wi-Fi de un router y la reemite amplificada, extendiendo la cobertura. Es una solución económica pero con inconvenientes: reduce el ancho de banda a la mitad (parte de la señal se usa para comunicarse con el router) y crea una segunda red con SSID diferente o el mismo pero con mala gestión del roaming.</p>
+<p>Para instalaciones donde la cobertura es crítica, es preferible un sistema de APs cableados o un sistema Wi-Fi Mesh.</p>
+<h3 id="switch-l3-capa-3">Switch L3 (capa 3)</h3>
+<p>Un <strong>switch de capa 3</strong> combina las funciones de switch y router: puede enrutar tráfico entre VLANs sin necesidad de un router externo. Se usa en redes corporativas medianas y grandes donde hay múltiples VLANs y se necesita enrutamiento de alto rendimiento entre ellas.</p>
+<hr>
+<h2 id="comparativa-resumen-de-dispositivos">Comparativa resumen de dispositivos</h2>
+<!-- IMG: diagrama comparativo mostrando hub, switch y router con sus capas OSI y dominios -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/redes/comparativa_dispositivos_red.png" data-desc-position="bottom"><img alt="Comparativa dispositivos" src="../imgs/redes/comparativa_dispositivos_red.png" width="85%"></a>
+<br>
+<figcaption>Comparativa de dispositivos: capa OSI donde operan, qué dirección usan y qué dominios crean</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Dispositivo</th>
+<th>Capa OSI</th>
+<th>Dirección usada</th>
+<th>Dominio colisión</th>
+<th>Dominio broadcast</th>
+<th>Inteligente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hub</strong></td>
+<td>Capa 1</td>
+<td>Ninguna</td>
+<td>1 para todos</td>
+<td>1 para todos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Switch</strong></td>
+<td>Capa 2</td>
+<td>MAC</td>
+<td>1 por puerto</td>
+<td>1 para todos</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>Router</strong></td>
+<td>Capa 3</td>
+<td>IP</td>
+<td>1 por puerto</td>
+<td>1 por interfaz</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>Access Point</strong></td>
+<td>Capa 2</td>
+<td>MAC</td>
+<td>— (inalámbrico)</td>
+<td>Comparte con LAN</td>
+<td>Sí</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="actividad-en-clase-y-actividad-para-entregar">Actividad en clase y actividad para entregar</h2>
+<h3 id="actividad-conjunta-identificamos-los-dispositivos-del-aula">🖥️ Actividad conjunta: identificamos los dispositivos del aula</h3>
+<ol>
+<li>
+<p>Veamos físicamente los dispositivos de red del aula: switch del armario de red, router del centro, APs del techo o pared.</p>
+</li>
+<li>
+<p>los dispositivos de red del aula:</p>
+<ul>
+<li>¿Cuántos switches ves o sabes que hay en el aula/planta?</li>
+<li>¿Dónde está el router del centro? ¿Qué conecta?</li>
+<li>¿Hay APs en el aula o en el pasillo? ¿De qué marca son?</li>
+<li>Si el switch del aula se estropea, ¿qué deja de funcionar? ¿Y si es el router?</li>
+</ul>
+</li>
+<li>
+<p>Ddibuja en la pizarra el esquema completo hub→switch→router→internet con los dispositivos reales del centro. (ya hecho)</p>
+</li>
+</ol>
+<hr>
+<h3 id="actividad-para-entregar-inventario-de-red-de-nuestra-empresa">📄 Actividad para entregar: inventario de red de nuestra empresa</h3>
+<p><strong>Formato:</strong> Documento Word/PDF
+<strong>Entrega:</strong> Fecha indicada por el profesor</p>
+<p>Esta actividad cierra los puntos 1 al 5 de la UD02. Vamos a hacer un inventario completo de la red de la empresa ficticia <strong>TechSolutions S.L.</strong> que usaremos en el proyecto del curso, eligiendo los dispositivos reales que compraríamos.</p>
+<p><strong>Contexto de la empresa:</strong></p>
+<p>TechSolutions S.L. tiene una oficina con las siguientes características:</p>
+<ul>
+<li>3 departamentos: Desarrollo (8 puestos), Administración (4 puestos) y Dirección (2 puestos)</li>
+<li>1 sala de servidores con 2 servidores</li>
+<li>Necesita cobertura Wi-Fi en toda la oficina</li>
+<li>Tiene conexión a internet de fibra óptica de 1 Gbps</li>
+</ul>
+<p><strong>Parte 1 — Análisis de necesidades</strong></p>
+<p>Responde a las siguientes preguntas antes de elegir los dispositivos:</p>
+<ol>
+<li>¿Cuántos equipos necesitan conectividad de red en total (incluyendo servidores)?</li>
+<li>¿Qué tipo de red es esta según su extensión geográfica?</li>
+<li>¿Qué topología física usarías para conectar los equipos? ¿Por qué?</li>
+<li>¿Necesitas un solo switch o varios? Razona tu respuesta.</li>
+<li>¿Qué categoría de cable UTP usarías para el cableado? ¿Por qué?</li>
+</ol>
+<p><strong>Parte 2 — Elección de dispositivos</strong></p>
+<p>Busca en PCComponentes o Amazon los siguientes dispositivos reales para la empresa. Para cada uno indica: marca y modelo, precio, características principales (puertos, velocidad, estándar Wi-Fi si aplica) y URL del producto.</p>
+<table>
+<thead>
+<tr>
+<th>Dispositivo</th>
+<th>Función en la empresa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Switch principal</td>
+<td>Conectar todos los equipos de la oficina</td>
+</tr>
+<tr>
+<td>Switch secundario (opcional)</td>
+<td>Si decides segmentar por departamento</td>
+</tr>
+<tr>
+<td>Router</td>
+<td>Conectar la LAN con internet</td>
+</tr>
+<tr>
+<td>Access Point (×2)</td>
+<td>Cobertura Wi-Fi en la oficina</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parte 3 — Esquema de red</strong></p>
+<p>Dibuja a mano o con cualquier herramienta (draw.io, PowerPoint, papel escaneado) el esquema físico de la red de TechSolutions S.L. El esquema debe incluir:</p>
+<ul>
+<li>Los equipos de cada departamento</li>
+<li>Los switches y cómo se conectan entre sí</li>
+<li>El router y su conexión con internet</li>
+<li>Los APs y su posición aproximada en la oficina</li>
+<li>El tipo de medio de transmisión en cada tramo (cable UTP, fibra, Wi-Fi)</li>
+</ul>
+<p><strong>Parte 4 — Presupuesto total</strong></p>
+<p>Elabora una tabla con el coste total de los dispositivos de red elegidos (sin incluir el cableado ni los equipos de usuario).</p>
+<div class="admonition info">
+<p class="admonition-title">Criterios de evaluación</p>
+<ul>
+<li>Parte 1: coherencia del análisis de necesidades (2 puntos)</li>
+<li>Parte 2: elección justificada de dispositivos reales con URLs (4 puntos)</li>
+<li>Parte 3: esquema completo, claro e identificado (3 puntos)</li>
+<li>Parte 4: presupuesto correcto (1 punto)</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../02_04_medios_transmision/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Medios de transmisión">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Medios de transmisión
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02_06_modelo_osi_tcpip/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Modelos de referencia OSI y TCP/IP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Modelos de referencia OSI y TCP/IP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
