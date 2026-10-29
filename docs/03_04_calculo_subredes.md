@@ -37,6 +37,7 @@ El tamaño del bloque = **2^(bits de host)** = **2^(32 - prefijo CIDR)**
 - Para **/26**: bits de host = 32 - 26 = 6 → tamaño = 2⁶ = **64 direcciones**
 - Para **/28**: bits de host = 32 - 28 = 4 → tamaño = 2⁴ = **16 direcciones**
 
+
 ### Paso 2: Encontrar la dirección de red
 
 La dirección de red es el inicio del bloque. Los bits de host son todos 0.
@@ -53,6 +54,15 @@ Broadcast = dirección de red + tamaño del bloque - 1
 - Última IP de host = broadcast - 1
 - Número de hosts = tamaño del bloque - 2
 
+
+!!! tip "Número de redes y hosts según la máscara"
+
+    Observa la siguiente tabla que establece una correspondencia entre la máscara, la dirección de red, la cantidad de subredes posibles y cantidad de hosts para cada una de las subredes.
+
+    <figure markdown="span" align="center">
+      ![Tamaño de bloque](./imgs/redes/division_redes_hosts.png){ width="90%" }
+      <figcaption>División de número de redes y hosts según la máscara</figcaption>
+    </figure>
 ---
 
 ## Ejemplos resueltos
@@ -85,16 +95,29 @@ Hosts utilizables:     254
 - La IP es `192.168.1.100` → el 100 está entre 64 y 128 → el bloque empieza en **64**.
 - Dirección de red: `192.168.1.64`
 
+!!! note "Bloques posible con 2 bits: "
+
+    Usando 2 bits, podemos tener 4 bloques: 
+
+    ```
+    00 000000  --> 0
+    01 000000  --> 64
+    10 000000  --> 128
+    11 000000  --> 192 
+    ```
+
+
 **Paso 3:** Broadcast = `192.168.1.64` + 64 - 1 = `192.168.1.127`
 
 **Paso 4:**
 ```
-Dirección de red:      192.168.1.64
+Dirección de red:      192.168.1.64                    (64 = 01000000)
 Primera IP de host:    192.168.1.65
 Última IP de host:     192.168.1.126
 Broadcast:             192.168.1.127
 Hosts utilizables:     62
 ```
+
 
 <!-- IMG: diagrama del bloque /26 mostrando los 64 bloques y dónde cae la IP 100 -->
 <figure markdown="span" align="center">
@@ -154,7 +177,8 @@ Hosts utilizables:     510
 ```
 
 !!! tip "Truco para /23, /22, /21..."
-    Cuando la máscara actúa sobre el tercer octeto, el tamaño del bloque en ese octeto es:
+    Recuerda que cuando la máscara actúa sobre el tercer octeto, el tamaño del bloque en ese octeto es:
+
     - /23 → bloques de 2 en el tercer octeto (512 IPs en total)
     - /22 → bloques de 4 en el tercer octeto (1024 IPs en total)
     - /21 → bloques de 8 en el tercer octeto (2048 IPs en total)
