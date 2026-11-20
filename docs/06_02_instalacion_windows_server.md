@@ -1,429 +1,190 @@
 ---
-title: Instalación de Windows Server
-description:  Instalación de sistemas operativos de servidor privativos - Windows Server
+title: Instalación de Windows Server 2025
+description: UD06 - Windows Server. instalación y configuración
 ---
 
-El **sistema operativo (SO)** es el componente esencial que permite que el hardware de un equipo funcione correctamente y que el usuario pueda interactuar con él. La elección del sistema operativo influye directamente en:
+Instalar un servidor se parece mucho a instalar Windows en un PC, pero con tres diferencias que importan: se instala **una vez y debe durar años**, reinstalarlo tiene consecuencias para toda la red, y hay que decidir **qué modo** (con o sin interfaz gráfica) antes de empezar, porque no se puede cambiar después. Por eso conviene **preparar bien la máquina antes de instalar**.
 
-- La **compatibilidad con el software** disponible  
-- El **rendimiento y aprovechamiento del hardware**  
-- La **experiencia de usuario** y las funcionalidades accesibles  
-- La **seguridad** y la **estabilidad** del sistema
+Este apartado describe la secuencia completa, con el motivo de cada decisión. Se explica con una máquina virtual en VirtualBox, pero el proceso es el mismo en un servidor físico, salvo en la preparación del hardware.
 
-!!!Example 
-    
-    Ejemplo: Un sistema operativo ligero como Linux puede aprovechar mejor recursos limitados, mientras que Windows ofrece mayor compatibilidad con software comercial.
+## Antes de empezar
 
+### La ISO de evaluación
 
-## Elección del sistema operativo
+Microsoft ofrece Windows Server 2025 en su **Centro de evaluación** para probarlo sin licencia durante unos 180 días:
 
-Cambiar de sistema operativo no es una tarea trivial. Implica:
+> [Descargar Windows Server 2025 (Centro de evaluación de Microsoft)](https://www.microsoft.com/es-es/evalcenter/download-windows-server-2025)
 
-- Instalar el nuevo sistema  
-- Configurar el entorno y los servicios  
-- Instalar y adaptar el software necesario  
-- Migrar datos y perfiles de usuario  
-- Verificar compatibilidad con periféricos y redes
+El formulario pide datos de registro. Elige **ISO** y, si te deja elegir, el idioma **español**.
 
-Por ello, es crucial **elegir el sistema operativo que mejor se adapte a las necesidades del usuario o del entorno**, ya sea en un equipo personal, empresarial o servidor.
+!!! tip "Elige el idioma con cuidado"
+    Los nombres de menús, carpetas y roles cambian entre español e inglés. Mantén el mismo idioma en servidor y clientes para no perderte.
 
-### Requisitos del hardware
+### Recursos del equipo
 
-Antes de instalar un sistema operativo, hay que evaluar cuidadosamente el equipo:
+| Recurso | Mínimo oficial (aprox.) | Recomendado para laboratorio |
+|---------|-------------------------|------------------------------|
+| RAM | ~2 GB con Desktop Experience | **4 GB** |
+| CPU | 1 núcleo | **2 vCPU** |
+| Disco | ~32 GB | **60 GB** (dinámico, si es virtual) |
 
-- ¿Cumple los **requisitos mínimos** del sistema?  
-- ¿Tiene recursos suficientes para un funcionamiento **fluido y estable**?  
-- ¿Es compatible con los **controladores (drivers)** necesarios?
+!!! note "Verifica los mínimos"
+    Los requisitos oficiales se actualizan: consúltalos en la documentación de Microsoft. Para un controlador de dominio con interfaz gráfica, 4 GB es un valor cómodo.
 
-!!!Note
+!!! warning "Haz bien la cuenta de RAM"
+    Si el laboratorio es virtual, suma la RAM de todas las MV que vayan a estar encendidas a la vez **más una reserva de unos 4 GB para el anfitrión**. Revisa el dimensionado visto en la UD05.
 
-    Instalar un sistema en un equipo con recursos limitados puede provocar lentitud, errores o incluso fallos de instalación.
+## Crear la máquina virtual
 
+Si instalas en VirtualBox, esta es la secuencia:
 
-### Planificación de la instalación
+<!-- IMG NUEVA: una captura por paso, en ./imgs/instalacion/ -->
 
-Una vez elegido el sistema operativo, especialmente en entornos de servidor, es fundamental **planificar la instalación**:
+1. Pulsa **Nueva**, escribe un **nombre** para la MV y selecciona la **ISO**.
+2. **Tipo:** *Microsoft Windows*. **Versión:** *Windows 2025 (64-bit)* si aparece; si no, *Windows 2022 (64-bit)*.
+3. Marca **Omitir instalación desatendida**. Así se ve el instalador real, que es lo que se encuentra en un servidor de verdad.
+4. **Hardware:** RAM y CPU según la tabla anterior. Marca **Habilitar EFI**.
+5. **Disco:** 60 GB, reservado dinámicamente.
+6. Pulsa **Finalizar**, pero **no arranques todavía**.
 
-- Definir el **tipo de instalación** (limpia, dual boot, virtualizada)  
-- Preparar el **disco duro** (particiones, formato de archivos)  
-- Establecer políticas de **seguridad y usuarios**  
-- Documentar cada paso para facilitar el mantenimiento posterior  
-- Realizar pruebas de funcionamiento y rendimiento
+### Adaptadores de red
 
-!!!Note
-    
-    Una instalación bien planificada evita problemas futuros y garantiza una base sólida para el sistema.
+El número y el modo de los adaptadores dependen del **papel que tendrá el servidor**. Decídelo antes de arrancar:
 
-Detallamos a continuación los aspectos a tener en cuenta en la planificación. 
-
-### Elección de la versión y edición del sistema operativo
-
-El primer paso en cualquier instalación es decidir qué sistema operativo vamos a utilizar, teniendo en cuenta las necesidades reales de la empresa. Si optamos por un entorno Windows, es fundamental conocer las versiones disponibles y asegurarnos de que el hardware cumple sobradamente con los requisitos técnicos.
-
-Las versiones más comunes de Windows Server son:
-
-- Windows Server 2019  
-- Windows Server 2022  
-- Windows Server 2025  
-
-Lo habitual es instalar la versión más reciente disponible, siempre que sea compatible con el hardware y el software que vamos a utilizar. Sin embargo, también es importante elegir la **edición adecuada** dentro de cada versión (Standard, Datacenter, Essentials, etc.), ya que cada una ofrece características distintas y precios diferentes.
+| Papel del servidor | Adaptadores | Modos habituales |
+|--------------------|:-----------:|------------------|
+| Servidor de una sola red (dominio, archivos…) | 1 | Red interna, o NAT si necesita Internet |
+| Servidor que da Internet a una red interna (router) | 2 | Uno hacia Internet (NAT o puente) y otro en red interna |
+| Servidor que conecta varias redes internas | 3 o más | Uno hacia Internet y uno en red interna por cada red |
 
 <figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/Pantalla-de-instalacion-de-Windows-Server-2025-1.png){ width="70%"}
-  <figcaption>Windows Server 2025 selección de versión</figcaption>
+  ![Adaptadores de red de la MV](./imgs/instalacion/vbox_adaptadores.png){ width="70%" }
+  <figcaption>Configuración de los adaptadores de red en VirtualBox</figcaption>
 </figure>
 
-No tiene sentido pagar por una edición como Datacenter si no vamos a aprovechar sus ventajas, como la virtualización ilimitada o el almacenamiento definido por software. La elección debe responder tanto a las necesidades actuales como a las previsiones de crecimiento a medio plazo.
+<!-- IMG NUEVA: vbox_adaptadores.png — Configuración > Red con los adaptadores de la MV -->
 
-### Pasos previos a la instalación
+!!! tip "Apunta las MAC"
+    En *Avanzadas* de cada adaptador aparece su **dirección MAC**. Dentro de Windows las tarjetas se llamarán *Ethernet*, *Ethernet 2*, etc., y es fácil confundir cuál es cuál. La MAC es la forma segura de distinguirlas al configurarlas.
 
-Instalar un sistema operativo en un servidor no es una tarea que se deba hacer a la ligera. El servidor será el núcleo de la red, por lo que hay que tener muy claro qué uso se le va a dar y qué cambios podrían surgir en el futuro. Tanto si se trata de una instalación nueva como de una actualización, es imprescindible planificar bien el proceso.
+!!! warning "Los nombres de las redes internas deben coincidir"
+    El nombre de una red interna distingue mayúsculas de minúsculas y debe escribirse **igual** en todas las MV que se conecten a ella. Si no, no se verán.
 
-Planificar significa:
+### Orden de arranque
 
-- Definir las tareas a realizar  
-- Estimar el tiempo necesario  
-- Asignar los recursos humanos y técnicos adecuados  
+En *Sistema → Placa base* comprueba que el orden es **Óptica, Disco duro**. Así la MV arranca desde la ISO la primera vez y desde el disco las siguientes.
 
-Los pasos previos más habituales incluyen:
+## Instalar Windows Server 2025
 
-1. **Copia de seguridad**: Si el equipo ya contiene datos importantes, hay que hacer una copia antes de comenzar. En nuestro caso, al tratarse de una instalación nueva, este paso no será necesario.
+Arranca la MV. Si aparece el mensaje *«Press any key to boot from CD or DVD»*, **pulsa una tecla** rápidamente.
 
-2. **Verificación del hardware**: Comprobar que el equipo cumple con los requisitos del sistema operativo. Esto incluye procesador, memoria RAM, espacio en disco y compatibilidad con periféricos.
+### Paso a paso
 
-3. **Diseño de particiones**: Decidir cómo se dividirá el disco. Esto implica elegir entre MBR o GPT, definir el sistema de archivos (NTFS, ReFS, etc.) y decidir si se usarán discos básicos o dinámicos. Herramientas como *GParted* pueden ayudar en esta tarea, aunque el propio asistente de instalación también permite crear particiones.
-
-4. **Descarga del software y drivers**: Tener preparada la imagen ISO del sistema operativo y los controladores necesarios, especialmente si se usan dispositivos RAID o SCSI que no están incluidos por defecto.
-
-5. **Preparación del medio de instalación**: Crear un USB, DVD o configurar una instalación por red (PXE) según el entorno.
-
-6. **Configuración de la BIOS/UEFI**: Ajustar la secuencia de arranque para que el equipo inicie desde el medio de instalación.
-
-7. **Instalación del sistema operativo**: El proceso varía según el sistema elegido, pero suele ser guiado por un asistente.
-
-8. **Configuración post-instalación**: Ajustar el sistema a las necesidades del usuario o de la empresa, incluyendo la red, usuarios, servicios y políticas de seguridad.
-
-9. **Verificación del funcionamiento**: Comprobar que todo funciona correctamente y que el sistema responde como se espera.
-
-10. **Documentación**: Registrar todo el proceso, incluyendo configuraciones realizadas, incidencias detectadas y soluciones aplicadas. Esta documentación será clave para futuras intervenciones o auditorías.
-
-
-### Consideraciones adicionales
-
-En instalaciones de servidor, es habitual plantearse el uso de **RAID** para mejorar el rendimiento o la seguridad de los datos. También hay que decidir si se utilizarán **discos básicos o dinámicos**, según las necesidades de flexibilidad y gestión.
-
-Si se utilizan controladoras RAID o dispositivos SCSI que no están en la lista de compatibilidad del sistema, será necesario **localizar y preparar los drivers** antes de iniciar la instalación, ya que el asistente puede solicitarlos en el proceso.
-
-
-Aquí tienes el contenido revisado, mejorado y adaptado a un estilo técnico más fluido, sin excesiva estructura artificial, y formateado en **Markdown** para que puedas integrarlo fácilmente en tus apuntes o documentación:
-
----
-
-¡Vamos allá, Sergio! Aquí tienes una guía clara y completa para realizar la **instalación gráfica de Windows Server 2025**, ideal si estás montando un servidor desde cero o en entorno virtual.
-
----
-
-## Pasos para la instalación gráfica de Windows Server 2025
-
-1. **Descargar la imagen ISO oficial**
-
-      - Visita el [Centro de evaluación de Microsoft](https://www.microsoft.com/es-es/evalcenter/download-windows-server-2025) y descarga la ISO de Windows Server 2025.
-      - Puedes elegir entre versiones como **Standard**, **Datacenter** o **Datacenter Azure Edition**, según tus necesidades.
-
-2. **Crear una máquina virtual (si aplica)**
-    - Usa VirtualBox, VMware o Hyper-V.
-    - Asigna al menos:
-        - 2 núcleos de CPU
-        - 4 GB de RAM (mínimo recomendado)
-        - 60 GB de disco duro
-    - Monta la ISO como unidad de arranque.
-
-3. **Iniciar la instalación**
-    - Al arrancar desde la ISO, verás el asistente gráfico.
-    - Selecciona:
-        - Idioma
-        - Formato de hora y moneda
-        - Teclado
-
-
-4. **Instalar ahora**
-    - Haz clic en “Instalar ahora”.
-    - Elige la edición que deseas instalar (con o sin interfaz gráfica).
-    - Acepta los términos de licencia.
-
-5. **Tipo de instalación**
-    - Selecciona “Instalación personalizada” para una instalación limpia.
-    - Elige el disco donde se instalará el sistema. Puedes crear particiones si lo deseas.
-
-6. **Proceso de instalación**
-    - El sistema copiará archivos, instalará características y reiniciará automáticamente.
-    - Este proceso puede tardar entre 10 y 30 minutos según el hardware.
-
-7. **Configurar contraseña de administrador**
-    - Al finalizar, se te pedirá establecer la contraseña del usuario **Administrador**.
-
-8. **Primer inicio de sesión**
-    - Inicia sesión con la contraseña que acabas de crear.
-    - Se abrirá el **Administrador del servidor**, desde donde podrás:
-        - Cambiar el nombre del equipo
-        - Unirte a un dominio
-        - Configurar la red
-        - Instalar roles y características
-
-
-!!!tip "Procesos detallados paso a paso en internet"
-
-    Puedes ver capturas de pantalla detalladas en esta [guía paso a paso de SomeBooks.es](https://somebooks.es/instalar-windows-server-2025-con-interfaz-grafica-paso-a-paso/).
-
-    y aquí tienes enlaces con imágenes reales del proceso de otras guías:
-
-    - [Instalación paso a paso con capturas](https://somebooks.es/instalar-windows-server-2025-con-interfaz-grafica-paso-a-paso/)
-    - [Guía visual desde RDR-IT](https://rdr-it.com/es/instalacion-de-windows-server-2025/)
-    - [Tutorial en vídeo (YouTube)](https://www.youtube.com/watch?v=0OI8i9K0ZbE)
-
----
-
-## Finalizar la instalación
-
-Una vez completada la instalación del sistema operativo, es recomendable realizar una serie de comprobaciones antes de comenzar con la configuración:
-
-- **Estado de los dispositivos**: Desde el Administrador de dispositivos, verificamos que todo el hardware esté correctamente detectado y que no haya problemas con los controladores.
-- **Configuración de red**: Es fundamental que la red esté bien configurada. Podemos comprobar la conectividad con comandos como `ping` o `tracert`, y también desde el Centro de redes y recursos compartidos.
-- **Registros de sucesos**: El Visor de eventos nos permite detectar errores o advertencias que podrían indicar fallos en el sistema.
-- **Particiones**: Conviene asegurarse de que el sistema reconoce correctamente todos los discos y particiones.
-
-Una vez revisado todo, se recomienda reiniciar el equipo para confirmar que el arranque se realiza sin problemas.
-
-## Configuración básica inicial
-
-Desde el panel **Administrador del servidor → Servidor local**, realizamos las siguientes tareas:
-
-### Información del equipo
-
-- **Nombre del equipo**: Debe ser único dentro del dominio, no superar los 15 caracteres y utilizar únicamente letras, números o guiones.
-- **Dominio o grupo de trabajo**: Si el servidor se integrará en un dominio existente, indicamos su nombre. Si será el controlador de dominio o no se usará dominio, lo dejamos como grupo de trabajo (más adelante se podrá crear el dominio).
-- **Firewall de Windows**: Debe estar activado y correctamente configurado.
-- **Escritorio remoto**: Podemos habilitarlo si los usuarios van a conectarse al servidor mediante Terminal Server.
-- **Zona horaria**: Es recomendable verificarla y ajustarla si es necesario.
-
-### Configuración de red
-
-En servidores, lo habitual es utilizar **direcciones IP estáticas**, ya que suelen actuar como servidores DHCP para los clientes. Si no se ha hecho durante la instalación, ahora es el momento de asignar las IPs correspondientes a cada tarjeta de red.
+1. **Idioma, formato y teclado.** Elige el idioma y el teclado que realmente usas. Un teclado mal elegido es la causa más habitual de contraseñas que luego «no funcionan».
+2. Pulsa **Instalar**.
+3. **Clave de producto.** La ISO de evaluación no pide clave. Si la pidiera, elige *No tengo clave de producto*.
+4. **Edición.** Aquí está la decisión importante:
 
 <figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/ConexionesDeRed.png){ width="80%"}
-  <figcaption>Panel de control. Conexiones de Red</figcaption>
+  ![Selección de edición](./imgs/instalacion/Pantalla-de-instalacion-de-Windows-Server-2025-1.png){ width="70%" }
+  <figcaption>Selección de la edición de Windows Server 2025 durante la instalación</figcaption>
 </figure>
 
-**Como caso particular**, si el servidor va a actuar como **servidor de comunicaciones** y puerta de enlace hacia Internet, debe contar con al menos **dos tarjetas de red**:
+!!! danger "Cuidado con Server Core"
+    La lista muestra la misma edición **dos veces**: una **sin** interfaz gráfica (*Server Core*) y otra con «**Desktop Experience**» (en español, «Experiencia de escritorio»). En las versiones recientes, **la opción sin ese sufijo es Server Core**. Si eliges mal, tendrás que reinstalar, porque no se puede cambiar después. Para trabajar con interfaz gráfica, elige **Standard con Desktop Experience**.
 
-- **Tarjeta externa**: Conectada al router o dispositivo que proporciona acceso a Internet. Se configura con una IP estática en la misma subred que el gateway, y se especifica la puerta de enlace correspondiente. En entornos virtuales (como VirtualBox), la IP dependerá del tipo de adaptador (puente o NAT).
-  
-- **Tarjeta interna**: Conectada al switch que enlaza con los clientes. No se configura gateway en esta tarjeta, ya que la salida será la tarjeta externa. Se asigna una IP estática en la misma subred que los clientes (por ejemplo, 192.168.224.1).
+5. **Licencia.** Acepta los términos.
+6. **Tipo de instalación.** Elige **Personalizada: instalar solo Windows**. La opción *Actualización* solo sirve si ya hay un Windows Server instalado.
+7. **Disco.** Selecciona el disco (*Espacio sin asignar*) y pulsa **Siguiente**. El instalador crea las particiones necesarias (con EFI, tabla GPT).
+8. Espera: copia de archivos, instalación y varios reinicios (entre 10 y 30 minutos según el equipo).
+9. **Contraseña del Administrador.** Se pide al terminar. Debe cumplir la **complejidad** (mayúsculas, minúsculas, números y símbolos).
 
-Para que los clientes puedan acceder a Internet a través del servidor, es necesario **encaminar el tráfico entre ambas tarjetas**. Esto se logra instalando el **Servicio de enrutamiento**, disponible dentro de “Acceso y directivas de red”.
+!!! warning "Anota y custodia la contraseña"
+    Si la pierdes, recuperar el acceso a un servidor es complicado. Guárdala en un sitio seguro, **pero no en el documento de instalación** (apartado de documentación).
 
-!!!Tip
-
-    Si no se va a utilizar IPv6 en la red, es recomendable desactivarlo para evitar conflictos o configuraciones innecesarias.
-
-
-### Actualización del servidor
-
-Mantener el servidor actualizado es esencial para garantizar la seguridad y estabilidad del sistema. A diferencia de los equipos cliente, un servidor expuesto a vulnerabilidades puede comprometer toda la red.
-
-Sin embargo, hay que tener precaución:
-
-- Algunas actualizaciones requieren reiniciar el sistema, lo que puede afectar la disponibilidad del servicio.
-- En casos poco frecuentes, una actualización puede generar incompatibilidades con hardware o software instalado.
-
-Por ello, muchos administradores prefieren que las actualizaciones se **descarguen automáticamente pero no se instalen**, permitiendo aplicar los cambios manualmente en momentos de baja actividad. Esta es la configuración por defecto en Windows Server.
-
-!!!warning "Cuidado"
-
-    En nuestro caso, desactivaremos las actualizaciones automáticas para evitar saturar la red del instituto.
-
-
-### Roles y características
-
-Desde el Administrador del servidor (en modo gráfico) o mediante PowerShell, podemos **agregar o quitar roles y características**:
+10. **Primer inicio de sesión.** Windows pide pulsar **Ctrl + Alt + Supr**. En VirtualBox no sirve el teclado normal: usa el menú **Entrada → Teclado → Insertar Ctrl-Alt-Supr**.
 
 <figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/WindowsServerRolesCaracgaristicas.png){ width="70%"}
-  <figcaption>Agregar roles y características</figcaption>
+  ![Administrador del servidor](./imgs/instalacion/administrador_servidor_inicio.png){ width="80%" }
+  <figcaption>Al iniciar sesión se abre el Administrador del servidor</figcaption>
 </figure>
 
-- **Roles**: Servicios principales del servidor (DNS, DHCP, Active Directory, etc.)
-- **Características**: Funcionalidades adicionales como copias de seguridad, cifrado, balanceo de carga, etc.
+<!-- IMG NUEVA: administrador_servidor_inicio.png — Administrador del servidor recién arrancado -->
 
-### Versión de evaluación
+Si ves el **Administrador del servidor**, la instalación ha terminado.
 
-Windows nos ofrece un tiempo de cortesía antes de activar la licencia para poder probar este sistema.
+### Quitar la ISO
 
-Si hemos instalado una versión de evaluación de Windows Server, podemos consultar el tiempo restante con:
+Cuando termine, expulsa la ISO desde *Dispositivos → Unidades ópticas → Quitar disco*. Si no, en algún reinicio puede volver a aparecer el instalador.
 
-```cmd
-slmgr.vbs -dli
-```
-<figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/WindowsServerPeriodoPrueba.png){ width="70%"}
-  <figcaption>Agregar roles y características</figcaption>
-</figure>
+## Después de instalar
 
+### Guest Additions (si es una MV)
 
-Y ampliar el periodo de prueba con:
+*Dispositivos → Insertar imagen de CD de las Guest Additions*, ejecuta el instalador desde el Explorador y **reinicia**. Mejora la pantalla, el ratón y el portapapeles.
 
-```cmd
-slmgr.vbs -rearm
-```
+### Comprobar que todo está bien
 
-!!!tìp
-
-    Ejecuta esta orden solo cuando se acerque la fecha de expiración. Requiere reiniciar el sistema tras su ejecución.
-
-
-
-## Configuración inicial del servidor desde la terminal
-
-Cuando instalamos **Windows Server sin entorno gráfico (Server Core)**, la configuración debe realizarse desde la terminal. Al iniciar el sistema, se abre automáticamente la herramienta **`sconfig`**, que permite configurar de forma sencilla aspectos básicos como el nombre del equipo, la red, el dominio, actualizaciones, etc.
+| Qué | Cómo | Qué debe verse |
+|-----|------|----------------|
+| **Versión y edición** | `winver` | Windows Server 2025 |
+| **Dispositivos** | *Administrador de dispositivos* | Sin signos de exclamación amarillos |
+| **Errores del sistema** | *Visor de eventos → Registros de Windows → Sistema* | Sin errores graves repetidos |
+| **Tarjetas de red** | *Panel de control → Redes → Cambiar configuración del adaptador* | Tantas como adaptadores configurados |
+| **Periodo de evaluación** | `slmgr /dli` | Tiempo de evaluación restante |
 
 <figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/ServerCore.png){ width="80%"}
-  <figcaption>Server Core. Configuración con sconfig</figcaption>
+  ![Periodo de evaluación](./imgs/instalacion/WindowsServerPeriodoPrueba.png){ width="70%" }
+  <figcaption>Información de la licencia: tiempo de evaluación restante</figcaption>
 </figure>
 
-Además, podemos utilizar directamente **PowerShell**, que ofrece un control más avanzado y flexible.
+!!! info "Cuando se acabe el periodo de evaluación"
+    El comando `slmgr /rearm` permite ampliar el periodo, pero el número de veces es limitado. Úsalo solo cuando se acerque la fecha de caducidad y reinicia después.
 
----
+### Instantánea: el punto de seguridad
 
-### Comandos útiles en PowerShell
+Con el servidor recién instalado y limpio, apaga la MV y haz una **instantánea** (por ejemplo, *«Windows Server 2025 recién instalado»*). Si algo se rompe más adelante, se vuelve a este punto en segundos sin reinstalar.
 
-- Cambiar el nombre del servidor
+## Errores típicos
 
-```powershell
-Rename-Computer -NewName "MISERVIDOR"
-Restart-Computer -Force
-```
+| Síntoma | Causa probable | Solución |
+|---------|----------------|----------|
+| Al arrancar solo aparece una consola negra con un menú numerado | Se instaló **Server Core** | Reinstalar eligiendo *Desktop Experience* |
+| Vuelve a salir el instalador tras reiniciar | La ISO sigue montada o el orden de arranque es incorrecto | Quitar la ISO y poner el disco duro primero |
+| *«Windows no se puede instalar en este disco»* | Desajuste EFI/BIOS con el tipo de partición | Comprobar que **EFI está habilitado** en la MV |
+| La contraseña «no funciona» al iniciar sesión | Teclado distinto al elegido durante la instalación | Comprobar el idioma del teclado, usar el botón de ver contraseña |
+| La MV va muy lenta | Poca RAM o recursos mal repartidos | Revisar RAM asignada y la reserva del anfitrión |
+| No hay tarjetas de red | Adaptadores desactivados en VirtualBox | Revisar *Red → Cable conectado* |
 
-- Configurar la red
+<figure markdown="span" align="center">
+  ![Server Core con sconfig](./imgs/instalacion/ServerCore.png){ width="70%" }
+  <figcaption>Si ves esto al iniciar, se ha instalado Server Core: la herramienta sconfig sustituye al escritorio</figcaption>
+</figure>
 
-```powershell
-Get-NetAdapter –Name "Ethernet" | Remove-NetIPAddress -Confirm:$false
-Get-NetAdapter –Name "Ethernet" | New-NetIPAddress –AddressFamily IPv4 –IpAddress 192.168.1.25 -PrefixLength 24 -DefaultGateway 192.168.1.1
-```
+## Lista de comprobación
 
-- Habilitar DHCP
+- [ ] La máquina tiene RAM, CPU y disco suficientes, y **EFI** habilitado.
+- [ ] Los adaptadores de red corresponden al papel del servidor.
+- [ ] Windows Server arranca **con Desktop Experience** y muestra el Administrador del servidor.
+- [ ] Las Guest Additions están instaladas (si es una MV).
+- [ ] Hay una **instantánea** del estado limpio.
 
-```powershell
-Set-NetIPInterface -InterfaceAlias "Ethernet" -Dhcp Enabled
-```
+## Con PowerShell (opcional)
 
-- Ver tabla de enrutamiento
+??? note "Para alumnado más avanzado"
+    Todo esto se puede comprobar desde la consola. **No es necesario para seguir el módulo.**
 
-```powershell
-Get-NetRoute
-```
+    | Tarea | Comando |
+    |-------|---------|
+    | Ver edición instalada | `Get-ComputerInfo -Property WindowsProductName, WindowsEditionId` |
+    | Ver si es Core o Desktop Experience | `(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').InstallationType` |
+    | Listar las tarjetas con su MAC | `Get-NetAdapter \| Format-Table Name, MacAddress, Status` |
 
-- Establecer servidores DNS
+    **Pregunta de lectura:** el segundo comando devuelve `Server` o `Server Core`. ¿Cuál esperarías en una instalación con Desktop Experience y por qué?
 
-```powershell
-Set-DNSClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("192.168.1.1", "8.8.8.8")
-```
+## Resumen
 
-- Deshabilitar IPv6
-
-```powershell
-Disable-NetAdapterBinding –Name "Ethernet" -ComponentID ms_tcpip6
-```
-
-- Para ver los componentes disponibles:
-
-```powershell
-Get-NetAdapterBinding
-```
-
-- Para ver las interfaces de red:
-
-```powershell
-Get-NetIPInterface
-```
-
-- Configuración del Firewall
-
-En **Windows Server 2022**, el firewall bloquea por defecto el tráfico ICMP (ping) desde equipos fuera del dominio. Para comprobar la red, podemos desactivarlo temporalmente:
-
-```powershell
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-```
-
-Y volver a activarlo:
-
-```powershell
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
-```
-
-- Crear regla para permitir pings (ICMPv4)
-
-```powershell
-New-NetFirewallRule -DisplayName "Allow inbound ICMPv4" -Direction Inbound -Protocol ICMPv4 -IcmpType 8 -RemoteAddress "192.168.200.0/24" -Action Allow
-```
-
-Para múltiples rangos de IP:
-
-```powershell
-$ips = @("192.168.0.11-192.168.0.40", "192.168.100.10-192.168.100.200", "192.168.200.0/24")
-New-NetFirewallRule -DisplayName "Allow inbound ICMPv4" -Direction Inbound -Protocol ICMPv4 -IcmpType 8 -RemoteAddress $ips -Action Allow
-```
-
-- Deshabilitar una regla:
-
-```powershell
-Disable-NetFirewallRule –DisplayName "Allow inbound ICMPv4"
-```
-
-- Eliminar una regla (⚠️ nunca sin `DisplayName`):
-
-```powershell
-Remove-NetFirewallRule –DisplayName "Allow inbound ICMPv4"
-```
-
-- Ver todas las reglas:
-
-```powershell
-Get-NetFirewallRule
-```
-
-- Ver IPs y puertos de una regla:
-
-```powershell
-Get-NetFirewallRule -DisplayName "Allow inbound ICMPv4" | Get-NetFirewallAddressFilter
-Get-NetFirewallRule -DisplayName "Allow inbound ICMPv4" | Get-NetFirewallPortFilter
-```
-
-- Mostrar reglas activas en formato tabla:
-
-```powershell
-Get-NetFirewallRule -Action Allow -Enabled True -Direction Inbound |
-Format-Table -Property Name,
-@{Name="Protocol";Expression={($_ | Get-NetFirewallPortFilter).Protocol}},
-@{Name="LocalPort";Expression={($_ | Get-NetFirewallPortFilter).LocalPort}},
-@{Name="RemotePort";Expression={($_ | Get-NetFirewallPortFilter).RemotePort}},
-@{Name="RemoteAddress";Expression={($_ | Get-NetFirewallAddressFilter).RemoteAddress}},
-Enabled, Profile, Direction, Action
-```
-
-- **Alternativa con `netsh` para configurar el firewall**
-
-- Añadir regla:
-
-```cmd
-netsh advfirewall firewall add rule name="Allow inbound ICMPv4" protocol=icmpv4:8,any dir=in action=allow
-```
-
-- Bloquear regla:
-
-```cmd
-netsh advfirewall firewall add rule name="Allow inbound ICMPv4" protocol=icmpv4:8,any dir=in action=block
-```
-
-
+- Se prepara la máquina **antes** de instalar: recursos, EFI y adaptadores de red según el papel del servidor.
+- Al instalar hay que elegir la opción **Desktop Experience**; la que no lo indica es Server Core.
+- Después se quita la ISO, se instalan las Guest Additions y se comprueban dispositivos, eventos y licencia.
+- **Siempre una instantánea del estado limpio** antes de seguir.

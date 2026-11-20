@@ -1,295 +1,202 @@
 ---
-title: Active Directory
-description:  Instalar un dominio o Active Directory en Windows Server
+title: Crear un dominio con Active Directory
+description: UD06 - Windows Server. instalación y configuración
 ---
 
-# Administración centralizada de redes con Active Directory
+El servidor ya tiene nombre, red y salida a Internet. Falta lo que lo convierte en el **centro de la red**: crear el **dominio**. Es el momento en el que pasamos de «un Windows con muchas cosas instaladas» a **un servidor que decide quién entra en la red y con qué permisos**.
 
-En la actualidad, los ordenadores de cualquier organización suelen estar conectados en red, lo que permite compartir información, recursos y servicios de forma eficiente. Esta conectividad, sin embargo, requiere una administración adecuada para garantizar la seguridad, el rendimiento y la disponibilidad de los sistemas.
+Convertir un servidor en controlador de dominio es un proceso en **dos fases**:
 
-Una forma de simplificar la gestión de la red es **centralizar la administración** mediante un servidor que almacene y controle toda la información sobre los elementos conectados: usuarios, equipos, impresoras, carpetas compartidas, etc.
+1. **Instalar el rol** Servicios de dominio de Active Directory (AD DS): copia los componentes, pero no cambia nada.
+2. **Promocionar** el servidor a controlador de dominio: es el paso que crea el dominio, y reinicia el servidor.
 
-## El servidor en redes Windows
+!!! warning "Es un cambio profundo"
+    Tras la promoción, el servidor deja de tener usuarios locales y su cuenta de Administrador se convierte en la del dominio. **Haz una instantánea antes**.
 
-En entornos Windows, el servidor que gestiona la red ejecuta una versión del sistema operativo **Windows Server**, como:
+## Conceptos mínimos
 
-- Windows Server 2012  
-- Windows Server 2016  
-- Windows Server 2019  
-- **Windows Server 2022**  
-- **Windows Server 2025** (versión más reciente, con mejoras en seguridad, virtualización y administración remota)
+| Concepto | Qué es |
+|----------|--------|
+| **Dominio** | Agrupación lógica de usuarios, equipos y recursos con una administración común |
+| **Controlador de dominio (DC)** | Servidor que guarda el directorio y atiende los inicios de sesión |
+| **Directorio** | Base de datos de objetos: usuarios, equipos, grupos, políticas… |
+| **Bosque** | El conjunto de dominios que comparten directorio; el primero que se crea es la «raíz» |
+| **DNS** | Servicio de nombres. Active Directory **lo necesita**: los clientes encuentran al controlador de dominio preguntando al DNS |
 
-Este servidor no solo proporciona servicios básicos, sino que también se encarga de la autenticación de usuarios, la aplicación de políticas de grupo, la gestión de recursos compartidos y la seguridad de la red.
+!!! info "¿Por qué Active Directory depende del DNS?"
+    Cuando un cliente quiere iniciar sesión, **pregunta al DNS dónde está el controlador de dominio**. Si el DNS no responde bien, el dominio «no existe» para él. Por eso casi todos los problemas de dominio son, en realidad, problemas de DNS.
 
-### El directorio: núcleo de la administración
+### Nombre del dominio
 
-La información de la red se organiza en una estructura jerárquica llamada **directorio** o **Active Directory**, que almacena objetos como:
+Cada dominio tiene dos nombres:
 
-- Equipos y servidores  
-- Usuarios y grupos  
-- Impresoras  
-- Carpetas compartidas  
-- Políticas de seguridad  
+| Nombre | Ejemplo | Para qué |
+|--------|---------|----------|
+| **DNS** (completo) | `techsolutions.lan` | El principal; sigue la notación de DNS, con al menos dos partes |
+| **NetBIOS** (corto) | `TECHSOLUTIONS` | Compatibilidad; es el que se escribe en `DOMINIO\usuario` (máximo 15 caracteres) |
+
+!!! warning "Elegir bien el nombre"
+    - **Evita `.local`**: se reserva para otros usos (mDNS) y puede dar conflictos.
+    - En una empresa real se suele usar un **subdominio de un dominio propio registrado** (por ejemplo, `ad.empresa.com`).
+    - En un laboratorio vale un sufijo que no exista en Internet, como `.lan`.
+    - **El nombre no se puede cambiar fácilmente después**: pénsalo antes.
+
+## Antes de promocionar: lista de comprobación
+
+- [ ] El servidor tiene su **nombre definitivo** (apartado de configuración básica).
+- [ ] Tiene **IP estática** y se ha comprobado la red.
+- [ ] La **hora y zona horaria** son correctas.
+- [ ] La contraseña del **Administrador local** cumple la complejidad, porque pasará a ser la del dominio.
+- [ ] Hay una **instantánea** del servidor.
+
+## Instalar el rol AD DS
+
+1. *Administrador del servidor → Administrar → Agregar roles y características*.
+2. Instalación basada en roles o características, servidor local.
+3. Marca **Servicios de dominio de Active Directory** y acepta las características que pida.
+4. **Instalar**.
 
 <figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/logo-active-directory-720.png){ width="50%"}
-  <figcaption>Active Directory (AD)</figcaption>
+  ![Agregar rol de Active Directory](./imgs/instalacion/instalacion_rol_active_directory.png){ width="80%" }
+  <figcaption>Selección del rol Servicios de dominio de Active Directory</figcaption>
 </figure>
 
-Microsoft denomina a su servicio de directorio **Active Directory (AD)**. Este sistema sigue el estándar **LDAP (Lightweight Directory Access Protocol)**, lo que permite interoperabilidad con otros sistemas que también lo utilizan, como OpenLDAP en GNU/Linux.
+Al terminar, en el Administrador del servidor aparece un **triángulo amarillo** en la bandera de notificaciones: es el aviso de que falta la configuración posterior.
 
-### Dominio y controlador de dominio
+## Promocionar a controlador de dominio
 
-La estructura lógica que representa la red administrada se llama **dominio**. Al instalar el rol de **Servicios de dominio de Active Directory** en un servidor Windows, este se convierte en un **controlador de dominio (DC)**.
+1. Clic en la **bandera amarilla → Promover este servidor a controlador de dominio**.
+2. **Configuración de implementación:** elige **Agregar un nuevo bosque** (porque aún no existe ningún dominio) y escribe el **nombre de dominio raíz**.
 
-En una red con arquitectura cliente-servidor, debe existir al menos un **controlador de dominio principal**, aunque es habitual contar con **controladores secundarios** que replican la información del directorio para mejorar la disponibilidad y la tolerancia a fallos.
+<!-- IMG NUEVA: promocion_nuevo_bosque.png — Configuración de implementación -->
 
-Cada dominio tiene un **nombre único** que sigue la notación de DNS, como por ejemplo `iesconsueloaranda.es`. Por ello, es imprescindible contar con un **servidor DNS** que resuelva los nombres de los equipos y servicios del dominio. Si no se dispone de uno, Windows Server instala y configura automáticamente el servicio DNS al activar Active Directory.
+3. **Opciones del controlador de dominio:**
+    - **Nivel funcional** del bosque y del dominio: en un entorno nuevo, el más alto compatible con todos los DC (en nuestro caso, Windows Server 2025).
+    - Marca **Servidor DNS** y **Catálogo global**.
+    - Establece la **contraseña del modo de restauración de servicios de directorio (DSRM)**.
 
-### Árboles y bosques de dominios
+!!! info "¿Qué es la contraseña DSRM?"
+    Es una contraseña de emergencia para arrancar el controlador de dominio en modo de reparación. Es **distinta** de la del Administrador del dominio. Guárdala en un sitio seguro: si la pierdes, no podrás reparar el directorio.
 
-Un dominio puede tener **subdominios**, como `www.iesconsueloaranda.es` o `moodle.iesconsueloaranda.es`. El conjunto formado por el dominio principal y sus subdominios se denomina **árbol de dominios**, siendo el dominio principal el **dominio raíz**.
+<!-- IMG NUEVA: promocion_opciones_dc.png — Opciones del controlador de dominio -->
 
-En organizaciones más complejas, puede haber **varios dominios independientes**, como `departamentos.lan`, con subdominios como `departamento1.departamentos.lan`, `departamento2.departamentos.lan`, etc. El conjunto de varios árboles de dominios se llama **bosque**.
+4. **Opciones de DNS:** puede aparecer el aviso *«No se puede crear una delegación para este servidor DNS»*. En un dominio nuevo **es normal e inofensivo**: no hay un DNS superior al que delegar.
+5. **Nombre NetBIOS:** acepta el que propone o modifícalo.
+6. **Rutas:** carpeta de la base de datos, de los registros y de SYSVOL. En una instalación básica se dejan las que propone. En servidores con varios discos se pueden separar por rendimiento.
+7. **Revisar opciones** y **comprobación de requisitos previos**: debe terminar con *«Se han superado todas las comprobaciones»*. Los avisos amarillos suelen ser tolerables; un **error rojo** impide continuar.
+8. **Instalar.** El servidor se reinicia automáticamente.
 
-<figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/active_directory_tree.jpg){ width="80%"}
-  <figcaption>Active Directory Tree and Forest</figcaption>
-</figure>
+## Después de la promoción
 
-### Relaciones de confianza entre dominios
+Al volver a iniciar sesión, el usuario es del dominio: `TECHSOLUTIONS\Administrador`. La contraseña es la que tenía el Administrador local.
 
-Active Directory permite establecer **relaciones de confianza** entre dominios, incluso si pertenecen a árboles o bosques distintos. Estas relaciones permiten que los usuarios de un dominio puedan acceder a recursos de otro, siempre que se haya configurado la confianza correspondiente.
+### Ajustes imprescindibles de DNS
 
-Cuando en una empresa hay más de un dominio en ocasiones un usuario de un dominio puede necesitar acceder a un recurso de otro dominio. Para evitar que el usuario tenga que tener una cuenta en cada dominio y autenticarse en cada uno cuando necesita un recurso de ese dominio se establecen relaciones de confianza entre los diferentes dominios. 
+1. **El DNS del propio servidor debe ser él mismo.** En las propiedades IPv4 del adaptador, pon como servidor DNS **su propia IP**.
+2. **Reenviadores.** El servidor DNS conoce los nombres del dominio, pero no los de Internet. Para que resuelva ambos:
+    - *Administrador del servidor → Herramientas → **DNS***.
+    - Clic derecho en el servidor → **Propiedades → Reenviadores → Editar**.
+    - Añade un DNS externo (por ejemplo, el del proveedor o `8.8.8.8`).
 
-Tipos de relaciones de confianza:
+!!! tip "Resultado"
+    Los clientes usarán **solo** al controlador de dominio como DNS: resuelve los nombres internos él mismo y reenvía los de Internet.
 
-- **Confianzas transitivas**: automáticas entre dominios del mismo bosque.
-- **Confianzas externas**: entre dominios de bosques distintos.
-- **Confianzas de bosque**: permiten la autenticación entre bosques completos.
-- **Confianzas de reino**: para conectar con dominios no basados en Active Directory (por ejemplo, Kerberos en sistemas UNIX).
+<!-- IMG NUEVA: dns_reenviadores.png — Propiedades del servidor DNS, pestaña Reenviadores -->
 
-<figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/active-directory_confianza.png){ width="80%"}
-  <figcaption>Active Directory relaciones de confianza</figcaption>
-</figure>
+### Herramientas nuevas
 
-Estas relaciones se basan en protocolos como **Kerberos v5**, aunque también se admite **NTLM** y autenticación mediante **SSL/TLS**.
+En *Herramientas* del Administrador del servidor aparecen ahora, entre otras:
 
-Puedes ampliar esta información en la [entrada de Active Directory en Wikipedia](https://es.wikipedia.org/wiki/Active_Directory#Intercambio_entre_dominios.5B2.5D).
+| Herramienta | Para qué |
+|-------------|----------|
+| **Usuarios y equipos de Active Directory** | Crear y gestionar usuarios, grupos, equipos y unidades organizativas |
+| **DNS** | Administrar zonas y registros |
+| **Sitios y servicios de Active Directory** | Replicación entre ubicaciones |
+| **Administración de directivas de grupo** | Crear y aplicar directivas |
 
----
+### Comprobar que el dominio funciona
 
-## La función del dominio en una red Windows
+| Comprobación | Cómo | Qué debe verse |
+|--------------|------|----------------|
+| **Usuario actual** | `whoami` | `techsolutions\administrador` |
+| **Resolución del dominio** | `nslookup techsolutions.lan` | La IP del controlador de dominio |
+| **Salud del controlador** | `dcdiag /q` | Sin salida: solo muestra los fallos |
+| **Zona DNS** | *Herramientas → DNS → Zonas de búsqueda directa* | Existe la zona con el nombre del dominio |
 
-En una red con arquitectura cliente-servidor, el **dominio** es la estructura lógica que permite centralizar la administración de todos los recursos conectados. Esta centralización se logra mediante el uso de un **directorio**, que actúa como una base de datos jerárquica y estructurada, gestionada por el servidor a través de **Active Directory**.
+## Siguiente paso: unir equipos al dominio
 
-El **directorio** tiene como función principal **almacenar información sobre los objetos de la red**. Estos objetos pueden clasificarse en tres grandes grupos:
+Con el dominio creado, el siguiente paso es que los equipos cliente se unan a él. Se explica en el apartado siguiente, **Unir un equipo Windows 11 a un dominio**.
 
-- **Recursos**: dispositivos físicos o virtuales que ofrecen servicios a los usuarios, como impresoras, carpetas compartidas, unidades de red, etc.
-- **Servicios**: funcionalidades que se ejecutan en la red, como correo electrónico, acceso remoto, autenticación, DNS, DHCP, entre otros.
-- **Usuarios**: cuentas individuales, grupos de usuarios, roles administrativos, etc., que representan a las personas o entidades que interactúan con la red.
+!!! warning "Instantáneas del controlador de dominio"
+    Con **un solo** controlador de dominio, restaurar una instantánea funciona. Con **varios** puede romper la replicación. En un laboratorio con un único DC no es un problema, pero conviene saberlo.
 
-Cada objeto en el directorio posee una serie de **atributos** que lo identifican y definen. Por ejemplo:
+## Ampliación: árboles, bosques y confianzas
 
-- Un usuario puede tener atributos como nombre completo, nombre de inicio de sesión, dirección de correo electrónico, departamento, etc.
-- Una impresora puede tener atributos como marca, modelo, ubicación física, tipo de conexión, etc.
+??? note "Estructuras de dominios más complejas"
+    Un dominio puede tener **subdominios** (`ventas.techsolutions.lan`). El dominio principal y sus subdominios forman un **árbol**. Varios árboles independientes forman un **bosque**.
 
-Además, los objetos pueden **contener otros objetos**. Por ejemplo, un grupo de seguridad puede incluir múltiples cuentas de usuario, y una unidad organizativa puede agrupar equipos, usuarios y políticas.
+    <figure markdown="span" align="center">
+      ![Árbol y bosque de Active Directory](./imgs/instalacion/active_directory_tree.jpg){ width="70%" }
+      <figcaption>Árbol y bosque de Active Directory</figcaption>
+    </figure>
 
-La centralización de la información en el dominio ofrece** múltiples beneficios**:
+    Para que los usuarios de un dominio accedan a recursos de otro se establecen **relaciones de confianza**:
 
-- **Inicio de sesión único (Single Sign-On)**: el usuario se autentica una sola vez y, si tiene los permisos adecuados, puede acceder a todos los recursos del dominio sin necesidad de volver a identificarse.
-- **Aplicación de políticas comunes**: mediante las **Directivas de Grupo (GPO)**, el administrador puede definir configuraciones estándar para todos los equipos o usuarios, como restricciones de acceso, configuración del escritorio, instalación de software, etc.
-- **Despliegue de actualizaciones y software**: es posible instalar programas o aplicar parches de seguridad de forma remota y simultánea en múltiples equipos.
-- **Control de acceso y seguridad**: se pueden establecer permisos precisos sobre cada recurso, definir contraseñas seguras, auditar accesos y aplicar medidas de protección a nivel de red.
-- **Escalabilidad**: el dominio puede crecer fácilmente, añadiendo nuevos usuarios, equipos o servicios sin perder el control ni la coherencia en la administración.
+    | Tipo | Entre qué |
+    |------|-----------|
+    | **Transitivas** | Dominios del mismo bosque (automáticas) |
+    | **Externas** | Dominios de bosques distintos |
+    | **De bosque** | Dos bosques completos |
+    | **De reino** | Un dominio de Windows y un dominio Kerberos que no es de Windows |
 
----
+    <figure markdown="span" align="center">
+      ![Relaciones de confianza](./imgs/instalacion/active-directory_confianza.png){ width="70%" }
+      <figcaption>Relaciones de confianza entre dominios</figcaption>
+    </figure>
 
+    En este módulo trabajamos con **un único dominio**, que es lo más habitual en una pyme.
 
-## Instalación y configuración de dominios en Windows Server
+## Errores típicos
 
-Para que un servidor Windows actúe como **controlador de dominio (DC)**, es necesario instalar el rol de **Servicios de dominio de Active Directory (AD DS)**. Este proceso consta de dos fases: la instalación del rol y su posterior configuración.
+| Síntoma | Causa probable | Solución |
+|---------|----------------|----------|
+| La promoción falla en los requisitos previos | Contraseña del administrador local débil o nombre no válido | Cambiar la contraseña o el nombre |
+| Aviso de delegación DNS | Normal en un dominio nuevo | Ignorarlo |
+| Los clientes no salen a Internet tras crear el dominio | Falta el **reenviador** en el DNS | Añadir un reenviador |
 
-### Instalación del rol
+## Lista de comprobación
 
-Se realiza desde el **Administrador del servidor**, en la sección: **Administrar → Agregar roles y características → Servicios de dominio de Active Directory**
+- [ ] El servidor es **controlador de dominio** y entras con `DOMINIO\Administrador`.
+- [ ] El DNS del servidor es **él mismo** y tiene **reenviadores**.
+- [ ] `nslookup` del dominio devuelve la IP del controlador.
+- [ ] Hay una **instantánea** del dominio recién creado.
 
-<figure markdown="span" align="center">
-  ![Image title](./imgs/instalacion/instalacion_rol_active_directory.png){ width="80%"}
-  <figcaption>Agregar rol de Active Directory</figcaption>
-</figure>
+## Con PowerShell (opcional)
 
+??? note "Para alumnado más avanzado"
+    Todo el proceso se puede hacer por consola. **No es necesario para seguir el módulo.**
 
-Una vez finalizada la instalación, se puede iniciar la configuración desde el asistente que aparece automáticamente o ejecutando el comando:
+    | Tarea | Comando |
+    |-------|---------|
+    | Instalar el rol AD DS | `Install-WindowsFeature AD-Domain-Services -IncludeManagementTools` |
+    | Crear el bosque y el dominio | `Install-ADDSForest -DomainName "techsolutions.lan" -DomainNetbiosName "TECHSOLUTIONS" -InstallDns` |
+    | Ver los datos del dominio | `Get-ADDomain` |
+    | Ver los controladores | `Get-ADDomainController` |
+    | Degradar un controlador | `Uninstall-ADDSDomainController` |
 
-```cmd
-dcpromo.exe
-```
+    Si no se indica `-SafeModeAdministratorPassword`, el comando **pide la contraseña DSRM por pantalla**, sin dejarla escrita.
 
-!!!note
+    **Preguntas de lectura**
 
-    En versiones modernas como **Windows Server 2022** y **Windows Server 2025**, el comando `dcpromo.exe` ha sido reemplazado por el asistente gráfico y por cmdlets de PowerShell como `Install-ADDSForest`.
+    1. ¿Por qué no es buena idea escribir la contraseña DSRM dentro de un script?
+    2. ¿Qué dos parámetros del comando de creación del bosque corresponden a los dos nombres del dominio?
 
-### Configuración del dominio
+    !!! note "Niveles funcionales"
+        Para fijarlos por comando hay que usar los parámetros `-ForestMode` y `-DomainMode` con el valor de la versión elegida. Consulta los valores exactos con `Get-Help Install-ADDSForest -Parameter ForestMode`.
 
-Durante la configuración, se deben tomar decisiones clave:
+## Resumen
 
-- **Agregar un nuevo bosque**: Esta opción se selecciona cuando no existe ningún dominio previo en la red. Se crea el dominio raíz del bosque.
-- **Nombre del dominio**: Debe tener al menos dos niveles, por ejemplo `iesconsueloaranda.lan`, siguiendo la notación DNS.
-- **Nivel funcional del bosque y del dominio**: Se recomienda seleccionar el nivel más alto compatible con todos los controladores de dominio. En entornos nuevos, se puede establecer **Windows Server 2025** para aprovechar todas sus funcionalidades.
-- **Instalación del servicio DNS**: Si no hay un servidor DNS en la red, el asistente instalará y configurará uno automáticamente.
-- **Ubicación de los componentes del dominio**: Si el servidor tiene varios discos, se recomienda distribuir los archivos de base de datos, registros y SYSVOL para mejorar el rendimiento. En instalaciones básicas, se puede dejar todo en `C:\`.
-
-Una vez completada la configuración, el servidor se reinicia y pasa a ser un **controlador de dominio**.
-
-### Degradar un controlador de dominio
-
-Si es necesario **eliminar el rol de controlador de dominio**, el proceso se realiza desde el mismo asistente o mediante PowerShell.
-
-- Si el servidor es el **último controlador del dominio**, se debe marcar la opción correspondiente para **eliminar el dominio completo**, lo que implica la pérdida de toda la información del directorio.
-- Si existen otros controladores, el servidor simplemente se degrada a **servidor miembro**, conservando su pertenencia al dominio pero sin funciones de control.
-
-En versiones modernas, el proceso se realiza con el cmdlet:
-
-```powershell
-Uninstall-ADDSDomainController
-```
-
-### Creación de otros dominios
-
-Aunque lo habitual es trabajar con un único dominio, en algunas organizaciones se requiere crear **subdominios** o **dominios adicionales** dentro del mismo bosque. Esto puede deberse a razones geográficas, organizativas o de seguridad.
-
-Para crear un nuevo dominio en un bosque existente:
-
-- Se selecciona la opción **Agregar un nuevo dominio en un bosque existente**.
-- Se indica el nombre del **dominio raíz** del bosque.
-- Se configura el nuevo dominio como **hijo** del dominio principal o como **dominio paralelo**.
-
-Cada dominio debe tener al menos **un controlador de dominio propio**, que puede estar ubicado en la sede correspondiente.
-
-Aquí tienes la explicación completa y detallada del proceso de instalación de un dominio en Windows Server desde PowerShell, utilizando el ejemplo del dominio **ACME.LAN**. He corregido y ampliado el script para que sea más claro y funcional, además de explicar cada paso con precisión.
-
----
-
-## Instalación de un dominio desde PowerShell
-
-En entornos donde se busca automatizar la configuración del servidor o trabajar sin entorno gráfico (Server Core), PowerShell permite instalar y configurar un dominio de forma rápida y eficiente.
-
-**Ejemplo**: creación del dominio **ACME.LAN**"
-
-```powershell
-# Definimos las variables
-$dominioFQDN = "ACME.LAN"                      # Nombre completo del dominio (FQDN)
-$dominioNETBIOS = "ACME"                       # Nombre NetBIOS del dominio
-$adminPass = "abc@1234."                       # Contraseña para el modo seguro de recuperación
-
-# Instalamos los roles necesarios: Active Directory y DNS
-Install-WindowsFeature AD-Domain-Services, DNS -IncludeAllSubFeature
-
-# Importamos el módulo de despliegue de Active Directory
-Import-Module ADDSDeployment
-
-# Ejecutamos la instalación del bosque y del dominio
-Install-ADDSForest `
-    -DomainName $dominioFQDN `
-    -DomainNetBiosName $dominioNETBIOS `
-    -SafeModeAdministratorPassword (ConvertTo-SecureString -String $adminPass -AsPlainText -Force) `
-    -DomainMode WinThreshold `
-    -ForestMode WinThreshold `
-    -InstallDNS `
-    -Confirm:$false
-```
-
-**Explicación de cada parámetro**
-
-- `-DomainName`: nombre completo del dominio (por ejemplo, `empresa.local` o `acme.lan`)
-- `-DomainNetBiosName`: nombre corto del dominio, usado en redes antiguas y para compatibilidad
-- `-SafeModeAdministratorPassword`: contraseña para el modo de recuperación de servicios de directorio (DSRM)
-- `-DomainMode` y `-ForestMode`: nivel funcional del dominio y del bosque. `WinThreshold` es el identificador para Windows Server 2025
-- `-InstallDNS`: instala y configura el servidor DNS si no existe uno en la red
-- `-Confirm:$false`: evita que se solicite confirmación manual durante la ejecución
-
-!!!Nota
-
-    El servidor se reiniciará automáticamente al finalizar la instalación. Al volver a arrancar, ya será un **controlador de dominio (DC)**.
-
----
-
-## Añadir un cliente al dominio en Windows Server
-
-Para que un equipo cliente pueda formar parte de un dominio gestionado por Active Directory, es necesario cumplir una serie de requisitos previos y seguir un proceso de unión al dominio. Este procedimiento permite que el cliente sea administrado centralizadamente, acceda a recursos compartidos y se autentique mediante las políticas del dominio.
-
-### Requisitos previos
-
-Antes de iniciar el proceso de unión, debemos asegurarnos de que el cliente y el servidor están correctamente conectados y configurados:
-
-1. Conectividad de red
-
-      - **Direcciones IP compatibles**: Ambos equipos deben tener direcciones IP dentro de la misma subred o en redes que puedan comunicarse entre sí mediante enrutamiento.
-      - **Conexión física**: Los cables de red deben estar conectados al mismo switch o a switches interconectados. En entornos virtuales, deben estar en la misma red virtual o puente.
-
-2. Configuración del DNS
-
-      - El **servidor DNS del cliente** debe ser la **IP del controlador de dominio**, ya que es el único capaz de resolver correctamente el nombre del dominio.
-      - Esta configuración se realiza desde las propiedades de la tarjeta de red del cliente, en el apartado de IPv4.
-
-3. Verificación de conectividad
-
-    Desde la terminal del cliente, se puede comprobar la conexión con el servidor mediante:
-
-    ```cmd
-    ping nombre_del_servidor
-    nslookup nombre_del_dominio
-    ```
-
-    Si ambos comandos responden correctamente, el cliente está listo para unirse al dominio.
-
-### Proceso de unión al dominio
-
-Una vez verificada la conectividad, seguimos estos pasos desde el equipo cliente (Windows 10, 11 o equivalente):
-
-1. **Abrir Configuración del sistema**  
-   Ir a:  
-   `Panel de control → Sistema → Cambiar configuración (nombre del equipo)`
-
-2. **Cambiar nombre del equipo y dominio**  
-   En la ventana de propiedades del sistema:  
-   - Hacer clic en “Cambiar…”  
-   - Introducir el **nombre del dominio** (por ejemplo, `iesconsueloaranda.lan`)  
-   - Confirmar
-
-3. **Autenticación**  
-   Se solicitarán credenciales de un usuario con permisos para unir equipos al dominio (normalmente un administrador del dominio).
-
-4. **Reinicio del equipo**  
-   Tras la unión, el sistema pedirá reiniciar el equipo para aplicar los cambios.
-
-5. **Inicio de sesión en el dominio**  
-   Al reiniciar, en la pantalla de inicio de sesión aparecerá la opción de iniciar sesión con una cuenta del dominio. Se debe usar el formato:  
-   `DOMINIO\nombre_usuario`
-
-Veamos el proceso en el siguiente video:
-
-<div style="position: relative; width: 70%; padding-bottom: 39.375%; margin: 0 auto;">
-  <iframe src="https://www.youtube-nocookie.com/embed/LxbwB-8b-wg"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          title="YouTube video player">
-  </iframe>
-</div>
-
-
-### Verificación
-
-Una vez unido al dominio, se puede comprobar desde:
-
-- `Sistema → Información del equipo`: debe aparecer el nombre del dominio.
-- `Usuarios y grupos locales`: los usuarios del dominio ya pueden iniciar sesión.
-- `Active Directory`: el nuevo equipo aparecerá como objeto en la unidad organizativa correspondiente.
-
-
+- Crear un dominio son **dos fases**: instalar el rol AD DS y **promocionar** el servidor.
+- Active Directory **depende del DNS**: casi todos los problemas de dominio son de DNS.
+- Tras la promoción: el servidor usa **su propia IP como DNS** y se configura un **reenviador** para Internet.
+- Los clientes se unen al dominio en el apartado siguiente: necesitan **Windows 11 Pro/Enterprise/Education** y **DNS = controlador**.

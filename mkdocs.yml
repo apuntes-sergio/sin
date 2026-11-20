@@ -91,23 +91,27 @@ nav:
     - 04_07_verificacion_documentacion.md
 
 
-  # - Virtualización e instalación de SSOO:
-  #   - 05_01_introduccion.md
+  - Virtualización e instalación de SSOO:
+    - 05_01_sistemas_operativos_actuales.md
+    - 05_02_licencias_software.md
+    - 05_03_virtualizacion.md
+    - 05_04_virtualbox.md
+    - 05_05_redes_virtualbox.md
+    - 05_06_instantaneas_clones.md
 
 
-  # - Introducción a los Sistemas Operativos de Servidor:
-  #   - 05_01_introducción.md
-  #   - 05_02_arquitectura_cliente_servidor.md
-  #   - 05_03_funciones_SO.md
-  #   - 05_04_sistemas_operativos_servidor.md
-  #   - 05_05_recordatorio_red.md
-  # - Instalación de sistemas operativos de servidor privativos:
-  #   - 06_01_instalacion_SO_introduccion.md
-  #   - 06_02_instalacion_windows_server.md
-  #   - 06_03_config_basica.md
-  #   - 06_04_documentar_instalacion.md
-  #   - 06_05_administrar_discos.md
-  #   - 06_06_dominio.md
+  - Instalación de sistemas operativos de servidor privativos:
+    - 06_01_grupo_trabajo_dominio.md
+    - 06_02_instalacion_windows_server.md
+    - 06_03_configuracion_basica.md
+    - 06_04_servidor_router.md
+    - 06_05_discos.md
+    - 06_06_dominio.md
+    - 06_07_unir_cliente_dominio.md
+    - 06_08_documentar_instalacion.md
+    - 06_09_recordatorio_red.md
+
+
   # - Administración de usuarios y grupos en Windows Server:
   #   - 07_01_objetos_dominios.md
   #   - 07_02_usuarios.md
