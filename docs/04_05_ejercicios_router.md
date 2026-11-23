@@ -46,7 +46,7 @@ Administración /28:192.168.50.96/28   hosts: .97–.110  broadcast: .111
 <!-- IMG: captura de PT con la topología de 3 departamentos y el router central -->
 <figure markdown="span" align="center">
   ![Ejercicio 1 tres departamentos](./imgs/packet_tracer/pt_ejercicio_tres_dept.png){ width="85%" }
-  <figcaption>Red de MediTech S.L. con tres departamentos conectados a través de un router central</figcaption>
+  <figcaption>Red de MediTech S.L. con tres departamentos conectados a través de un router central. Debemos añadir módulo con un puerto de red </figcaption>
 </figure>
 
 **Configuración del router:**

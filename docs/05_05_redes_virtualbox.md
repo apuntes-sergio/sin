@@ -9,12 +9,19 @@ La analogía: cada MV tiene una **tarjeta de red virtual** y VirtualBox es el "t
 
 <figure markdown="span" align="center">
   ![Modos de red](./imgs/virtualizacion/modos_red_vbox.png){ width="90%" }
-  <figcaption>Dónde "enchufa" VirtualBox cada tarjeta según el modo</figcaption>
+  <figcaption>Selección de tipos de red en VirtualBox</figcaption>
 </figure>
 
 <!-- IMG: esquema de los 5 modos con host, MV, Internet -->
 
 ## Los modos de red
+
+<figure markdown="span" align="center">
+  ![Modos de red](./imgs/virtualizacion/modos_red_vbox_desc.png){ width="90%" }
+  <figcaption>Dónde "enchufa" VirtualBox cada tarjeta según el modo</figcaption>
+</figure>
+
+
 
 ### NAT
 
@@ -81,6 +88,10 @@ Red privada entre el **anfitrión y las MV**. Útil para que tu PC administre la
     - ¿Que la MV sea un equipo más de la red? → **Puente**.
     - ¿Red de empresa simulada y aislada? → **Red interna**.
     - ¿Acceder yo a la MV sin exponerla? → **Solo anfitrión**.
+
+
+Mas info: [VirtualBox: Tipos de Redes](https://soloconlinux.org.es/virtualbox-tipos-de-redes/)
+
 
 ## Varias tarjetas por MV
 
