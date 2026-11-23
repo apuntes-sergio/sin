@@ -1,0 +1,2487 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD06 - Windows Server. instalación y configuración">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/06_08_documentar_instalacion/">
+      
+      
+        <link rel="prev" href="../06_07_unir_cliente_dominio/">
+      
+      
+        <link rel="next" href="../06_09_recordatorio_red/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Documentar la instalación de un servidor - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#para-que-sirve" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentar la instalación de un servidor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_sistemas_operativos_actuales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_licencias_software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_configuracion_basica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_unir_cliente_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#para-que-sirve" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Para qué sirve?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hay-que-documentar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qué hay que documentar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué hay que documentar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-que-no-debe-ir-en-la-documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lo que NO debe ir en la documentación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-obtener-los-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo obtener los datos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evidencias-las-capturas-de-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evidencias: las capturas de pantalla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-recomendada-del-documento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura recomendada del documento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura recomendada del documento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-ficha-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de ficha de red
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-diagrama-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      El diagrama de red
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registro-de-cambios-e-incidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de cambios e incidencias
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Registro de cambios e incidencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registro-de-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de cambios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registro-de-incidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de incidencias
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copia-del-sistema-recien-instalado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copia del sistema recién instalado
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantenerla-viva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mantenerla viva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#para-que-sirve" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Para qué sirve?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hay-que-documentar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qué hay que documentar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué hay que documentar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lo-que-no-debe-ir-en-la-documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lo que NO debe ir en la documentación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-obtener-los-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo obtener los datos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evidencias-las-capturas-de-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evidencias: las capturas de pantalla
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-recomendada-del-documento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura recomendada del documento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura recomendada del documento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-ficha-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de ficha de red
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-diagrama-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      El diagrama de red
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registro-de-cambios-e-incidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de cambios e incidencias
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Registro de cambios e incidencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registro-de-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de cambios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registro-de-incidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registro de incidencias
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copia-del-sistema-recien-instalado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copia del sistema recién instalado
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantenerla-viva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mantenerla viva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Documentar la instalación de un servidor</h1>
+
+<p>Imagina que heredas un servidor que otro técnico dejó funcionando hace dos años. No está, no contesta al teléfono y algo ha dejado de funcionar. ¿Cómo se llama el equipo? ¿Qué roles tiene? ¿Qué IP debería tener cada tarjeta? ¿Qué se cambió la última vez? Sin documentación, hay que <strong>descubrirlo todo a base de pruebas</strong>, con el servicio caído y los usuarios esperando.</p>
+<p>Documentar no es un trámite que se hace «al final si hay tiempo»: es <strong>parte del trabajo del administrador</strong>. Un servidor sin documentar es una deuda técnica que alguien pagará, normalmente en el peor momento.</p>
+<div class="admonition tip">
+<p class="admonition-title">Regla de oro</p>
+<p>La documentación se escribe <strong>mientras se trabaja</strong>, no después. Lo que no se anota en el momento, se olvida o se anota mal.</p>
+</div>
+<h2 id="para-que-sirve">¿Para qué sirve?</h2>
+<table>
+<thead>
+<tr>
+<th>Para…</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mantener</strong> el servidor</td>
+<td>Saber qué roles y configuración tiene antes de tocarlo</td>
+</tr>
+<tr>
+<td><strong>Reparar</strong> en una avería</td>
+<td>Reconstruir la configuración en un equipo nuevo</td>
+</tr>
+<tr>
+<td><strong>Traspasar</strong> el trabajo</td>
+<td>Que otra persona pueda administrarlo sin ti</td>
+</tr>
+<tr>
+<td><strong>Auditar</strong></td>
+<td>Demostrar qué se hizo, cuándo y por qué</td>
+</tr>
+<tr>
+<td><strong>Aprender de los errores</strong></td>
+<td>Las incidencias anteriores evitan repetirlas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="que-hay-que-documentar">Qué hay que documentar</h2>
+<p>Se organiza por bloques. No hace falta que cada servidor tenga todos, pero conviene repasarlos todos.</p>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Qué se anota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identificación</strong></td>
+<td>Nombre del equipo, rol, ubicación (sala, rack o plataforma de virtualización), responsable, fecha de instalación</td>
+</tr>
+<tr>
+<td><strong>Hardware o máquina virtual</strong></td>
+<td>Procesador, RAM, discos, tarjetas de red con su <strong>MAC</strong></td>
+</tr>
+<tr>
+<td><strong>Sistema operativo</strong></td>
+<td>Versión, edición, modo (Desktop Experience o Core), tipo de licencia y estado de activación</td>
+</tr>
+<tr>
+<td><strong>Discos y volúmenes</strong></td>
+<td>Cada volumen: letra, etiqueta, tamaño, sistema de archivos y para qué se usa</td>
+</tr>
+<tr>
+<td><strong>Red</strong></td>
+<td>Por cada adaptador: nombre, IP, máscara, puerta de enlace, DNS y a qué red está conectado; rutas y NAT si enruta</td>
+</tr>
+<tr>
+<td><strong>Roles y software</strong></td>
+<td>Roles instalados y software adicional, con versión y fecha</td>
+</tr>
+<tr>
+<td><strong>Dominio</strong></td>
+<td>Nombre DNS y NetBIOS, nivel funcional, controladores, ubicación de la base de datos</td>
+</tr>
+<tr>
+<td><strong>Seguridad</strong></td>
+<td>Estado del firewall y reglas añadidas, antivirus, cuentas administrativas</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>Actualizaciones aplicadas, copias de seguridad y su frecuencia, instantáneas</td>
+</tr>
+<tr>
+<td><strong>Clientes</strong></td>
+<td>Equipos que dependen del servidor: nombre, IP, sistema operativo, usuario habitual</td>
+</tr>
+<tr>
+<td><strong>Cambios e incidencias</strong></td>
+<td>Registro cronológico (ver más abajo)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lo-que-no-debe-ir-en-la-documentacion">Lo que NO debe ir en la documentación</h3>
+<div class="admonition danger">
+<p class="admonition-title">Nunca contraseñas ni claves</p>
+<ul>
+<li><strong>Contraseñas</strong> de administrador, DSRM o cuentas de servicio.</li>
+<li><strong>Claves privadas</strong> y certificados.</li>
+<li><strong>Claves de producto completas</strong>.</li>
+</ul>
+<p>Lo que sí se documenta es <strong>dónde se custodian</strong> (un gestor de contraseñas, una caja fuerte) y <strong>quién tiene acceso</strong>. Un documento técnico circula, se copia y se envía; una contraseña dentro de él deja de ser secreta.</p>
+</div>
+<h2 id="como-obtener-los-datos">Cómo obtener los datos</h2>
+<p>No hace falta escribirlos de memoria: el propio sistema los da.</p>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Herramienta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Versión y edición</td>
+<td><code>winver</code></td>
+</tr>
+<tr>
+<td>Resumen del sistema (SO, hardware, parches)</td>
+<td><code>systeminfo</code></td>
+</tr>
+<tr>
+<td>Detalle del hardware</td>
+<td><em>Información del sistema</em> (<code>msinfo32</code>)</td>
+</tr>
+<tr>
+<td>Adaptadores, IP y MAC</td>
+<td><code>ipconfig /all</code></td>
+</tr>
+<tr>
+<td>Tabla de rutas</td>
+<td><code>route print</code></td>
+</tr>
+<tr>
+<td>Discos y volúmenes</td>
+<td><em>Administración de discos</em></td>
+</tr>
+<tr>
+<td>Licencia</td>
+<td><code>slmgr /dli</code></td>
+</tr>
+<tr>
+<td>Roles instalados</td>
+<td><em>Administrador del servidor → Panel</em></td>
+</tr>
+<tr>
+<td>Actualizaciones instaladas</td>
+<td><em>Configuración → Windows Update → Historial de actualizaciones</em></td>
+</tr>
+<tr>
+<td>Errores del sistema</td>
+<td><em>Visor de eventos</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Guarda la salida en un fichero</p>
+<p>Una redirección convierte la pantalla en evidencia:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>systeminfo &gt; sistema.txt
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ipconfig /all &gt; red.txt
+</span></code></pre></div>
+<p>Los ficheros se crean en la carpeta actual y se pueden adjuntar a la documentación.</p>
+</div>
+<h2 id="evidencias-las-capturas-de-pantalla">Evidencias: las capturas de pantalla</h2>
+<p>Una afirmación sin prueba es solo una opinión. Las <strong>capturas</strong> demuestran que algo está configurado como se dice. Para que sirvan:</p>
+<ul>
+<li>Que se vea el <strong>nombre del equipo</strong> (en el título de la ventana o en una esquina).</li>
+<li>Que se vea la <strong>fecha y la hora</strong> si es relevante.</li>
+<li><strong>Recorta</strong> lo que importa, pero sin perder el contexto.</li>
+<li>Pon un <strong>pie descriptivo</strong>: qué se ve y por qué es relevante.</li>
+<li><strong>Nombra los ficheros</strong> de forma ordenada: <code>srv01_red_adaptadores.png</code>, no <code>Captura de pantalla (3).png</code>.</li>
+<li>No incluyas datos sensibles (contraseñas visibles, claves).</li>
+</ul>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/administrador_discos.png" data-desc-position="bottom"><img alt="Ejemplo de evidencia" src="../imgs/instalacion/administrador_discos.png" width="80%"></a>
+<br>
+<figcaption>Ejemplo de evidencia: Administración de discos con los volúmenes y sus etiquetas visibles</figcaption>
+</figure>
+<h2 id="estructura-recomendada-del-documento">Estructura recomendada del documento</h2>
+<p>Una estructura fija ahorra decidir cada vez qué incluir:</p>
+<ol>
+<li><strong>Portada y control de versiones</strong> (autor, fecha, versión).</li>
+<li><strong>Descripción general</strong>: para qué sirve el servidor.</li>
+<li><strong>Ficha técnica</strong>: hardware, sistema operativo, discos.</li>
+<li><strong>Configuración de red</strong>: tabla de adaptadores y diagrama.</li>
+<li><strong>Roles y servicios instalados.</strong></li>
+<li><strong>Configuración del dominio</strong> (si aplica).</li>
+<li><strong>Seguridad y copias de seguridad.</strong></li>
+<li><strong>Clientes conectados.</strong></li>
+<li><strong>Registro de cambios e incidencias.</strong></li>
+<li><strong>Anexos</strong>: capturas y salidas de comandos.</li>
+</ol>
+<h3 id="ejemplo-de-ficha-de-red">Ejemplo de ficha de red</h3>
+<table>
+<thead>
+<tr>
+<th>Adaptador</th>
+<th>Conectado a</th>
+<th>IP</th>
+<th>Máscara</th>
+<th>Puerta de enlace</th>
+<th>DNS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Internet</code></td>
+<td>Salida a Internet</td>
+<td>192.168.1.10</td>
+<td>255.255.255.0</td>
+<td>192.168.1.1</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td><code>LAN-oficina</code></td>
+<td>Red interna</td>
+<td>10.0.0.1</td>
+<td>255.255.255.0</td>
+<td>–</td>
+<td>10.0.0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Datos de ejemplo</p>
+<p>Los valores son ilustrativos. Lo importante es la estructura: <strong>cada adaptador, a qué red va y con qué parámetros</strong>.</p>
+</div>
+<h3 id="el-diagrama-de-red">El diagrama de red</h3>
+<p>Un dibujo explica en segundos lo que una tabla tarda minutos. Debe mostrar:</p>
+<ul>
+<li>Los <strong>dispositivos</strong> (servidor, switches, routers, clientes) con formas distintas.</li>
+<li>Las <strong>conexiones</strong>.</li>
+<li>Las <strong>direcciones IP</strong> y el nombre de cada equipo.</li>
+<li>Cuál es la <strong>puerta de enlace</strong> y quién ofrece el <strong>DNS</strong>.</li>
+</ul>
+<p>Se puede hacer con <strong>draw.io</strong>, <strong>Lucidchart</strong> o, en último caso, papel y lápiz. Si necesitas repasar los parámetros, consulta el <strong><a href="../06_09_recordatorio_red/">Apéndice A: Recordatorio de red</a></strong>.</p>
+<h2 id="registro-de-cambios-e-incidencias">Registro de cambios e incidencias</h2>
+<p>El estado actual es solo una foto. Lo que da valor es el <strong>historial</strong>: qué cambió, cuándo y por qué.</p>
+<h3 id="registro-de-cambios">Registro de cambios</h3>
+<table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Cambio</th>
+<th>Motivo</th>
+<th>Quién</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12/09</td>
+<td>Añadido disco de datos de 100 GB</td>
+<td>El volumen de usuarios estaba lleno</td>
+<td>Ana</td>
+<td>Correcto</td>
+</tr>
+<tr>
+<td>20/09</td>
+<td>Instaladas actualizaciones de septiembre</td>
+<td>Mantenimiento mensual</td>
+<td>Luis</td>
+<td>Correcto, tras reinicio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registro-de-incidencias">Registro de incidencias</h3>
+<p>Cada incidencia merece una entrada con cuatro datos: <strong>síntoma, causa, solución y cómo evitarla</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fecha</strong></td>
+<td>25/09</td>
+</tr>
+<tr>
+<td><strong>Síntoma</strong></td>
+<td>Un cliente no podía unirse al dominio de TechSolutions</td>
+</tr>
+<tr>
+<td><strong>Causa</strong></td>
+<td>Su DNS apuntaba al router y no al controlador de dominio</td>
+</tr>
+<tr>
+<td><strong>Solución</strong></td>
+<td>Cambiar el DNS del cliente a la IP del controlador</td>
+</tr>
+<tr>
+<td><strong>Prevención</strong></td>
+<td>Incluir la comprobación del DNS en la lista de alta de equipos</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Las incidencias son oro</p>
+<p>Una incidencia bien documentada se convierte en la solución de la siguiente. Con el tiempo, el registro de incidencias vale más que cualquier manual.</p>
+</div>
+<h2 id="copia-del-sistema-recien-instalado">Copia del sistema recién instalado</h2>
+<p>Cuando el servidor está instalado, configurado y documentado, es el momento de guardar una <strong>copia del estado limpio</strong>:</p>
+<ul>
+<li>En una <strong>máquina virtual</strong>: una <strong>instantánea</strong> y, si hace falta moverla, una <strong>exportación</strong> a OVA (UD05).</li>
+<li>En un <strong>servidor físico</strong>: una <strong>imagen del sistema</strong> con las herramientas de copia de seguridad.</li>
+</ul>
+<p>Esa copia es el «punto cero» al que volver si algo sale mal. Tiene que <strong>documentarse también</strong>: qué es, cuándo se hizo y dónde está.</p>
+<h2 id="mantenerla-viva">Mantenerla viva</h2>
+<p>Una documentación desactualizada es <strong>peor que ninguna</strong>, porque lleva a decisiones equivocadas con apariencia de fiabilidad.</p>
+<ul>
+<li><strong>Actualízala con cada cambio</strong>, en el momento.</li>
+<li>Lleva un <strong>control de versiones</strong>: fecha, autor y qué cambió.</li>
+<li>Guárdala en un sitio <strong>accesible para quien la necesite</strong> y <strong>protegido</strong> para quien no.</li>
+<li>Fija una <strong>revisión periódica</strong>.</li>
+</ul>
+<h2 id="errores-tipicos">Errores típicos</h2>
+<table>
+<thead>
+<tr>
+<th>Fallo</th>
+<th>Consecuencia</th>
+<th>Cómo evitarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documentar al final de memoria</td>
+<td>Datos incompletos o incorrectos</td>
+<td>Anotar mientras se hace</td>
+</tr>
+<tr>
+<td>Incluir contraseñas</td>
+<td>Fallo de seguridad al compartir el documento</td>
+<td>Documentar dónde se custodian</td>
+</tr>
+<tr>
+<td>Capturas sin contexto</td>
+<td>No se sabe de qué equipo ni de cuándo son</td>
+<td>Nombre del equipo visible y pie descriptivo</td>
+</tr>
+<tr>
+<td>Describir lo que «debería» ser, no lo que es</td>
+<td>El documento no coincide con la realidad</td>
+<td>Copiar los datos del propio sistema</td>
+</tr>
+<tr>
+<td>No registrar los cambios</td>
+<td>No se sabe por qué algo es como es</td>
+<td>Registro de cambios con motivo</td>
+</tr>
+<tr>
+<td>Documento desactualizado</td>
+<td>Decisiones equivocadas</td>
+<td>Versionar y revisar</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lista-de-comprobacion">Lista de comprobación</h2>
+<ul>
+<li>[ ] El documento tiene <strong>identificación, hardware, sistema operativo, discos, red, roles y dominio</strong>.</li>
+<li>[ ] Los datos se han tomado <strong>del propio sistema</strong>, no de memoria.</li>
+<li>[ ] <strong>No</strong> hay contraseñas, claves privadas ni claves de producto.</li>
+<li>[ ] Las capturas tienen el <strong>nombre del equipo</strong>, un <strong>pie</strong> y un <strong>nombre de fichero ordenado</strong>.</li>
+<li>[ ] Hay un <strong>diagrama de red</strong> con IP, puerta de enlace y DNS.</li>
+<li>[ ] Existe un <strong>registro de cambios e incidencias</strong>.</li>
+<li>[ ] Se ha guardado una <strong>copia del estado limpio</strong> y está documentada.</li>
+</ul>
+<blockquote>
+<p><a href="../files/Documentacion_Equipo_ISCA.docx">Descargar documento de ejemplo</a></p>
+</blockquote>
+<h2 id="con-powershell-opcional">Con PowerShell (opcional)</h2>
+<details class="note">
+<summary>Para alumnado más avanzado</summary>
+<p>PowerShell permite recoger datos de forma ordenada y exportarlos. <strong>No es necesario para seguir el módulo.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resumen del sistema</td>
+<td><code>Get-ComputerInfo</code></td>
+</tr>
+<tr>
+<td>Configuración de red</td>
+<td><code>Get-NetIPConfiguration</code></td>
+</tr>
+<tr>
+<td>Discos y volúmenes</td>
+<td><code>Get-Volume</code></td>
+</tr>
+<tr>
+<td>Roles y características instaladas</td>
+<td><code>Get-WindowsFeature \| Where-Object Installed</code></td>
+</tr>
+<tr>
+<td>Actualizaciones instaladas</td>
+<td><code>Get-HotFix</code></td>
+</tr>
+<tr>
+<td>Guardar una salida en un fichero</td>
+<td><code>Get-HotFix \| Out-File actualizaciones.txt</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preguntas de lectura</strong></p>
+<ol>
+<li>¿Qué ventaja tiene sacar los datos de un comando frente a escribirlos a mano?</li>
+<li>¿Por qué <code>Get-WindowsFeature</code> se filtra con <code>Where-Object Installed</code>?</li>
+</ol>
+</details>
+<h2 id="resumen">Resumen</h2>
+<ul>
+<li>Documentar es parte del trabajo de administrar: se hace <strong>mientras se trabaja</strong>.</li>
+<li>Se documenta <strong>qué hay</strong> (ficha técnica), <strong>cómo está conectado</strong> (red y diagrama) y <strong>qué ha pasado</strong> (cambios e incidencias).</li>
+<li><strong>Nunca</strong> van contraseñas ni claves: solo dónde se custodian.</li>
+<li>Las <strong>capturas</strong> son evidencias: con nombre del equipo, pie descriptivo y nombre de fichero ordenado.</li>
+<li>Una documentación <strong>desactualizada</strong> es peor que ninguna.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../06_07_unir_cliente_dominio/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Unir un equipo Windows 11 a un dominio">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Unir un equipo Windows 11 a un dominio
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06_09_recordatorio_red/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Apéndice A. Recordatorio de red">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Apéndice A. Recordatorio de red
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

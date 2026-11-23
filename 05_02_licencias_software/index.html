@@ -1,0 +1,2545 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD05 - Virtualización e instalación de sistemas operativos">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/05_02_licencias_software/">
+      
+      
+        <link rel="prev" href="../05_01_sistemas_operativos_actuales/">
+      
+      
+        <link rel="next" href="../05_03_virtualizacion/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Licencias de software - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#el-software-como-obra-protegida" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Licencias de software
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_sistemas_operativos_actuales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-software-como-obra-protegida" class="md-nav__link">
+    <span class="md-ellipsis">
+      El software como obra protegida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-libre-y-software-privativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software libre y software privativo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Software libre y software privativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#software-privativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software privativo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#software-libre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software libre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-licencias-libres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de licencias libres
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-gratuito-de-prueba-y-de-pago" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software gratuito, de prueba y de pago
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-cuenta-una-licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo se cuenta una licencia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-licencias-de-microsoft-en-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Las licencias de Microsoft en la práctica
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Las licencias de Microsoft en la práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#licenciar-windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenciar Windows Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activacion-y-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activación y comprobación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-no-debemos-usar-software-sin-licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Por qué no debemos usar software sin licencia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-licencias-del-software-que-usamos-en-el-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Las licencias del software que usamos en el módulo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#y-cuando-desarrollamos-nosotros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Y cuando desarrollamos nosotros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clasifica-estos-programas" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Clasifica estos programas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcula-las-licencias-de-una-empresa" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧮 Calcula las licencias de una empresa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_configuracion_basica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_unir_cliente_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_documentar_instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-software-como-obra-protegida" class="md-nav__link">
+    <span class="md-ellipsis">
+      El software como obra protegida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-libre-y-software-privativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software libre y software privativo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Software libre y software privativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#software-privativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software privativo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#software-libre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software libre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-licencias-libres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de licencias libres
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-gratuito-de-prueba-y-de-pago" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software gratuito, de prueba y de pago
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-cuenta-una-licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo se cuenta una licencia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-licencias-de-microsoft-en-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Las licencias de Microsoft en la práctica
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Las licencias de Microsoft en la práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#licenciar-windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenciar Windows Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activacion-y-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activación y comprobación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-no-debemos-usar-software-sin-licencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Por qué no debemos usar software sin licencia
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-licencias-del-software-que-usamos-en-el-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Las licencias del software que usamos en el módulo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#y-cuando-desarrollamos-nosotros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Y cuando desarrollamos nosotros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clasifica-estos-programas" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Clasifica estos programas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcula-las-licencias-de-una-empresa" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧮 Calcula las licencias de una empresa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Licencias de software</h1>
+
+<p>Cuando "compramos" un programa, en realidad no compramos el programa: compramos el <strong>permiso para usarlo</strong> bajo unas condiciones concretas. Ese permiso se llama <strong>licencia</strong>, y es el documento que dice qué podemos hacer con el software, qué no, en cuántos equipos, durante cuánto tiempo y quién responde si algo falla.</p>
+<p>Parece un detalle legal sin importancia, pero es una de las decisiones más relevantes al montar un sistema informático. Instalar un sistema operativo sin la licencia adecuada puede acarrear problemas legales, y elegir un modelo de licencia equivocado puede disparar el presupuesto de una empresa o impedir que una aplicación se distribuya. Además, comparar sistemas operativos según sus <strong>licencias de uso</strong> es uno de los criterios que se evalúan en este módulo.</p>
+<p>Y hay una razón más cercana: cada vez que instaláis un sistema operativo aparece una pantalla que dice "Acepto los términos de la licencia". En este apartado vamos a aprender qué estamos aceptando.</p>
+<h2 id="el-software-como-obra-protegida">El software como obra protegida</h2>
+<p>El software, igual que un libro o una canción, es una <strong>obra protegida por derechos de autor</strong>. En España y en la Unión Europea, el autor (o la empresa que lo desarrolla) tiene derechos exclusivos sobre su obra: decide quién puede copiarla, modificarla y distribuirla. Comprar una copia no transfiere esos derechos.</p>
+<p>La <strong>licencia</strong> es el contrato mediante el cual el titular de los derechos concede al usuario algunos de ellos. En el software privativo ese contrato suele llamarse <strong>EULA</strong> (<em>End User License Agreement</em>, acuerdo de licencia de usuario final). Una licencia define normalmente:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Qué establece</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Alcance de uso</strong></td>
+<td>Para qué se puede usar</td>
+<td>Solo uso personal, o también comercial</td>
+</tr>
+<tr>
+<td><strong>Número de equipos o usuarios</strong></td>
+<td>Cuántas instalaciones o personas</td>
+<td>Un equipo, diez usuarios</td>
+</tr>
+<tr>
+<td><strong>Duración</strong></td>
+<td>Cuánto tiempo es válida</td>
+<td>Perpetua, suscripción anual, 30 días de prueba</td>
+</tr>
+<tr>
+<td><strong>Permiso de copia y modificación</strong></td>
+<td>Si se puede copiar, modificar o redistribuir</td>
+<td>Libre en el software libre, prohibido en el privativo</td>
+</tr>
+<tr>
+<td><strong>Soporte y actualizaciones</strong></td>
+<td>Qué ayuda y parches se incluyen</td>
+<td>Actualizaciones de seguridad</td>
+</tr>
+<tr>
+<td><strong>Garantías y responsabilidad</strong></td>
+<td>Qué responde el fabricante si algo falla</td>
+<td>Casi siempre muy limitadas</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">¿Qué pasa con la copia de seguridad?</p>
+<p>La normativa europea permite al usuario legítimo de un programa hacer una <strong>copia de seguridad</strong> del mismo, aunque la licencia diga lo contrario. Esto no significa que se pueda instalar el programa en más equipos de los que permite la licencia.</p>
+</div>
+<h2 id="software-libre-y-software-privativo">Software libre y software privativo</h2>
+<p>La primera gran clasificación se basa en <strong>los derechos que se conceden al usuario</strong>.</p>
+<h3 id="software-privativo">Software privativo</h3>
+<p>El <strong>software privativo</strong> (o propietario) es aquel cuyo titular mantiene el control: normalmente <strong>no se entrega el código fuente</strong>, y la licencia prohíbe o limita copiar, modificar y redistribuir el programa. Es el caso de Windows, macOS o Microsoft Office.</p>
+<h3 id="software-libre">Software libre</h3>
+<p>El <strong>software libre</strong> es el que respeta cuatro libertades fundamentales del usuario, definidas por la <em>Free Software Foundation</em>:</p>
+<ol>
+<li><strong>Libertad de ejecutar</strong> el programa para cualquier propósito.</li>
+<li><strong>Libertad de estudiar</strong> cómo funciona y modificarlo, lo que exige tener acceso al <strong>código fuente</strong>.</li>
+<li><strong>Libertad de redistribuir</strong> copias.</li>
+<li><strong>Libertad de distribuir versiones modificadas</strong>, para que otros se beneficien de las mejoras.</li>
+</ol>
+<p>Existe un término cercano, el <strong>código abierto</strong> (<em>open source</em>), promovido por la <em>Open Source Initiative</em>. En la práctica, casi todas las licencias libres son también de código abierto y se usan los dos términos como sinónimos, aunque el software libre pone el énfasis en la libertad del usuario y el código abierto en las ventajas técnicas del desarrollo abierto.</p>
+<div class="admonition warning">
+<p class="admonition-title">Libre no significa gratis, ni gratis significa libre</p>
+<p>Esta es la confusión más habitual. Un programa puede ser <strong>gratuito pero no libre</strong> (no podemos ver ni modificar el código) o <strong>libre pero de pago</strong> (como las suscripciones de soporte a una distribución Linux empresarial).</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Gratuito</strong></th>
+<th><strong>De pago</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Libre</strong></td>
+<td>Ubuntu, VLC, LibreOffice</td>
+<td>Suscripciones de soporte (SUSE, Red Hat)</td>
+</tr>
+<tr>
+<td><strong>Privativo</strong></td>
+<td>Packet Tracer, Adobe Reader</td>
+<td>Windows, Microsoft 365, Photoshop</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="tipos-de-licencias-libres">Tipos de licencias libres</h3>
+<p>Dentro del software libre existe un amplio abanico de licencias. La diferencia fundamental es <strong>qué obligaciones imponen cuando alguien redistribuye el programa o una versión modificada</strong>. Se dividen en dos grandes familias:</p>
+<p><strong>Licencias copyleft:</strong> exigen que las obras derivadas se distribuyan <strong>con la misma licencia</strong>. Garantizan que el software siga siendo libre.</p>
+<ul>
+<li><strong>GPL</strong> (<em>GNU General Public License</em>): el copyleft "fuerte". Es la licencia del núcleo Linux (versión 2) y de muchísimos programas, como Git o Wireshark.</li>
+<li><strong>AGPL</strong>: como la GPL, pero extiende la obligación a los programas que se ofrecen como servicio a través de la red.</li>
+<li><strong>LGPL</strong> y <strong>MPL</strong>: copyleft "débil". Permiten usar el programa o la biblioteca desde software que no es libre. La MPL es la licencia de LibreOffice y Firefox.</li>
+</ul>
+<p><strong>Licencias permisivas:</strong> imponen muy pocas obligaciones. Se puede usar, modificar y redistribuir el código, incluso dentro de software privativo, conservando el aviso de autoría.</p>
+<ul>
+<li><strong>MIT</strong> y <strong>BSD</strong>: muy breves y sencillas. MIT es la elección habitual de muchos proyectos de JavaScript y Python.</li>
+<li><strong>Apache 2.0</strong>: permisiva, con cláusulas adicionales sobre patentes. Es la licencia de Android (sus componentes de usuario), de Android Studio y de IntelliJ IDEA Community.</li>
+</ul>
+<!-- IMG: esquema comparativo licencias copyleft (GPL, LGPL, AGPL) frente a permisivas (MIT, BSD, Apache), con ejemplos de proyectos -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/so/licencias_libres.png" data-desc-position="bottom"><img alt="Licencias libres" src="../imgs/so/licencias_libres.png" width="75%"></a>
+<br>
+<figcaption>Licencias libres: copyleft (el código derivado sigue siendo libre) y permisivas (el código derivado puede ser privativo)</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Dos ejemplos para entender la diferencia</p>
+<ul>
+<li>Si modificas un programa con licencia <strong>GPL</strong> y lo distribuyes, tienes que distribuirlo también con licencia GPL y ofrecer el código fuente de tus cambios.</li>
+<li>Si modificas un programa con licencia <strong>MIT</strong>, puedes distribuirlo como programa privativo, siempre que conserves el aviso de la licencia original.</li>
+</ul>
+</div>
+<h2 id="software-gratuito-de-prueba-y-de-pago">Software gratuito, de prueba y de pago</h2>
+<p>La segunda clasificación se basa en <strong>el modelo comercial</strong>: cuánto cuesta y cómo se paga.</p>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Descripción</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Freeware</strong></td>
+<td>Gratuito, pero privativo: no se puede modificar ni redistribuir</td>
+<td>Adobe Acrobat Reader, Packet Tracer</td>
+</tr>
+<tr>
+<td><strong>Shareware / Trial</strong></td>
+<td>Se puede probar gratis durante un tiempo o con funciones limitadas. Para seguir usándolo hay que pagar</td>
+<td>WinRAR, versiones de evaluación</td>
+</tr>
+<tr>
+<td><strong>Freemium</strong></td>
+<td>Versión gratuita básica y funciones avanzadas de pago</td>
+<td>Zoom, Dropbox</td>
+</tr>
+<tr>
+<td><strong>Licencia perpetua</strong></td>
+<td>Se paga una vez y se usa indefinidamente (las actualizaciones mayores pueden costar aparte)</td>
+<td>Versiones clásicas de Office</td>
+</tr>
+<tr>
+<td><strong>Suscripción</strong></td>
+<td>Se paga periódicamente. Si se deja de pagar, se pierde el acceso</td>
+<td>Microsoft 365, Adobe Creative Cloud</td>
+</tr>
+<tr>
+<td><strong>Software como servicio (SaaS)</strong></td>
+<td>No se instala: se usa en la nube y se paga por uso</td>
+<td>Google Workspace</td>
+</tr>
+<tr>
+<td><strong>Software de evaluación</strong></td>
+<td>Versión completa con caducidad, pensada para probar el producto</td>
+<td>Windows Server y Windows 11 Enterprise de evaluación</td>
+</tr>
+</tbody>
+</table>
+<h2 id="como-se-cuenta-una-licencia">Cómo se cuenta una licencia</h2>
+<p>Otro aspecto importante es <strong>qué se cuenta</strong> al vender la licencia. El mismo programa puede venderse de formas distintas, y la diferencia en el precio final puede ser enorme.</p>
+<table>
+<thead>
+<tr>
+<th>Modalidad</th>
+<th>Se cuenta...</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Por equipo o dispositivo</strong></td>
+<td>Cada máquina donde se instala</td>
+<td>Windows en un PC</td>
+</tr>
+<tr>
+<td><strong>Por usuario</strong></td>
+<td>Cada persona, con independencia del número de equipos que use</td>
+<td>Microsoft 365</td>
+</tr>
+<tr>
+<td><strong>Por núcleo</strong> (<em>core</em>)</td>
+<td>El número de núcleos del procesador del servidor</td>
+<td>Windows Server</td>
+</tr>
+<tr>
+<td><strong>Concurrente o flotante</strong></td>
+<td>Los usuarios que usan el programa <em>a la vez</em></td>
+<td>Software de ingeniería y diseño</td>
+</tr>
+<tr>
+<td><strong>De sitio (<em>site license</em>)</strong></td>
+<td>Una licencia para toda la organización o centro</td>
+<td>Licencias para centros educativos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="las-licencias-de-microsoft-en-la-practica">Las licencias de Microsoft en la práctica</h2>
+<p>Como trabajaremos principalmente con Windows en el proyecto, vale la pena conocer cómo se comercializan sus licencias. Una misma versión de Windows puede adquirirse de varias formas:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Cómo se obtiene</th>
+<th>Particularidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OEM</strong></td>
+<td>Viene preinstalada con un equipo nuevo</td>
+<td>Queda vinculada a ese equipo y no puede pasar a otro</td>
+</tr>
+<tr>
+<td><strong>Retail</strong> (comercio)</td>
+<td>Se compra por separado</td>
+<td>Puede transferirse a otro equipo (de uno en uno)</td>
+</tr>
+<tr>
+<td><strong>Volumen</strong></td>
+<td>Contrato para organizaciones con muchos equipos</td>
+<td>Se activa de forma centralizada; precios por volumen</td>
+</tr>
+<tr>
+<td><strong>Académica</strong></td>
+<td>Programas para centros educativos</td>
+<td>Condiciones y precios específicos</td>
+</tr>
+<tr>
+<td><strong>Evaluación</strong></td>
+<td>Versión de prueba gratuita</td>
+<td>Funciona un tiempo limitado, con fines de prueba</td>
+</tr>
+</tbody>
+</table>
+<p>Microsoft ofrece versiones de <strong>evaluación</strong> de Windows Server y Windows 11 Enterprise en su centro de evaluación, con una duración limitada (de 90 a 180 días según el producto). Son legales, completas y perfectas para prácticas como las de este módulo.</p>
+<h3 id="licenciar-windows-server">Licenciar Windows Server</h3>
+<p>Windows Server tiene un esquema distinto al de Windows cliente, y es un buen ejemplo de licenciamiento "por núcleo":</p>
+<ul>
+<li><strong>Licencias de servidor, por núcleo.</strong> Se licencian los núcleos del procesador del servidor, con un <strong>mínimo de 8 por procesador y 16 por servidor</strong>. Es decir, un servidor con un único procesador de 6 núcleos se licencia igualmente por 16.</li>
+<li><strong>Edición.</strong> <em>Standard</em> permite ejecutar 2 máquinas virtuales por servidor licenciado; <em>Datacenter</em>, un número ilimitado.</li>
+<li><strong>Licencias de acceso de cliente (CAL).</strong> Además de la licencia del servidor, <strong>cada usuario o cada dispositivo</strong> que accede a los servicios del servidor necesita una CAL. Hay CAL <strong>por usuario</strong> (la persona usa varios equipos) y <strong>por dispositivo</strong> (varios usuarios comparten un equipo).</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo: una empresa con un servidor y 14 clientes</p>
+<p>La empresa TechSolutions tiene un servidor Windows Server y 14 equipos cliente con Windows 11 Pro. Necesitaría:</p>
+<ul>
+<li>1 licencia de Windows Server (Standard) para 16 núcleos.</li>
+<li>14 CAL, por usuario o por dispositivo.</li>
+<li>14 licencias de Windows 11 Pro, normalmente OEM, incluidas con los equipos.</li>
+</ul>
+<p>El servicio de <strong>Escritorio remoto</strong> tiene además sus propias CAL. Para el cálculo de un caso real conviene consultar siempre a un distribuidor o a las condiciones vigentes de Microsoft, porque las normas de licenciamiento cambian con frecuencia.</p>
+</div>
+<h3 id="activacion-y-comprobacion">Activación y comprobación</h3>
+<p>Para demostrar que una instalación de Windows está licenciada se usa la <strong>activación</strong>: el sistema se valida online con una clave de producto o con una licencia digital vinculada al equipo. En organizaciones, las activaciones se gestionan de forma centralizada con servidores KMS o claves MAK.</p>
+<p>Para comprobar el estado de la licencia de un equipo:</p>
+<ul>
+<li>En Windows 11: <strong>Configuración → Sistema → Activación</strong>.</li>
+<li>Por comandos (PowerShell o CMD como administrador):</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>slmgr /dli     ← información básica de la licencia
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>slmgr /xpr     ← fecha de caducidad de la activación
+</span></code></pre></div>
+<p>En una versión de evaluación, estos comandos muestran cuánto tiempo queda.</p>
+<!-- IMG: captura de Windows 11 con la pantalla Configuración → Sistema → Activación y la ventana de slmgr /dli -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/so/windows_activacion.png" data-desc-position="bottom"><img alt="Activación de Windows" src="../imgs/so/windows_activacion.png" width="80%"></a>
+<br>
+<figcaption>Comprobación del estado de activación de Windows desde la configuración y con slmgr</figcaption>
+</figure>
+<p>En Linux no hay activación. La mayoría de distribuciones son libres y se instalan sin clave. En las distribuciones con soporte comercial, como Ubuntu Pro, lo que se contrata es el soporte, no el derecho de uso.</p>
+<h2 id="por-que-no-debemos-usar-software-sin-licencia">Por qué no debemos usar software sin licencia</h2>
+<p>Instalar software sin licencia, ya sea por una copia pirata o por usar un programa de pago sin comprarlo, es una mala idea por varias razones que no son solo legales:</p>
+<ul>
+<li><strong>Riesgos legales.</strong> Usar software sin licencia infringe los derechos de autor y puede suponer sanciones económicas e incluso responsabilidad penal en determinados supuestos. Las empresas pueden ser objeto de <strong>auditorías de licencias</strong>.</li>
+<li><strong>Riesgos de seguridad.</strong> Los programas "crackeados" y los generadores de claves son una de las vías más habituales de entrada de <strong>malware</strong>.</li>
+<li><strong>Sin soporte ni actualizaciones.</strong> El software sin licencia no recibe parches de forma fiable, y un sistema sin parches es un sistema vulnerable.</li>
+<li><strong>Imagen profesional.</strong> En un entorno de trabajo, un técnico que instala software pirata compromete a su empresa.</li>
+</ul>
+<p>Para el aprendizaje existen alternativas totalmente legales: software libre, versiones de evaluación y licencias educativas.</p>
+<h2 id="las-licencias-del-software-que-usamos-en-el-modulo">Las licencias del software que usamos en el módulo</h2>
+<p>Es un buen ejercicio mirar el software de nuestro propio entorno de trabajo:</p>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Licencia</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu</td>
+<td>Mayoritariamente GPL y otras licencias libres</td>
+<td>Libre, gratuito</td>
+</tr>
+<tr>
+<td>Windows 11 / Windows Server (evaluación)</td>
+<td>Licencia privativa (EULA) con evaluación</td>
+<td>Privativo, evaluación gratuita</td>
+</tr>
+<tr>
+<td>VirtualBox (paquete base)</td>
+<td>GPLv3</td>
+<td>Libre, gratuito</td>
+</tr>
+<tr>
+<td>VirtualBox Extension Pack</td>
+<td>PUEL (uso personal y educativo)</td>
+<td>Privativo, gratuito para uso personal y educativo</td>
+</tr>
+<tr>
+<td>Cisco Packet Tracer</td>
+<td>Licencia de Cisco</td>
+<td>Privativo, gratuito con cuenta NetAcad</td>
+</tr>
+<tr>
+<td>draw.io</td>
+<td>Apache 2.0</td>
+<td>Libre, gratuito</td>
+</tr>
+<tr>
+<td>MkDocs</td>
+<td>BSD</td>
+<td>Libre, gratuito</td>
+</tr>
+<tr>
+<td>Material for MkDocs</td>
+<td>MIT</td>
+<td>Libre, gratuito</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Licencia de la PSF (permisiva)</td>
+<td>Libre, gratuito</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">El caso de VirtualBox</p>
+<p>VirtualBox es un ejemplo perfecto de licencias mezcladas: el programa base es libre (GPLv3), pero el <strong>Extension Pack</strong> tiene una licencia privativa propia, la PUEL (<em>Personal Use and Evaluation License</em>), que es gratuita para uso personal, de evaluación y educativo, pero <strong>de pago en un uso comercial</strong>. Según las notas de la versión 7.2, parte de lo que antes era exclusivo del Extension Pack ha pasado al paquete base, así que conviene comprobar qué se necesita realmente. Un administrador que lo instale en la empresa debe revisar siempre las condiciones de cada componente.</p>
+</div>
+<h2 id="y-cuando-desarrollamos-nosotros">Y cuando desarrollamos nosotros</h2>
+<p>Como futuros desarrolladores, también seremos <strong>autores</strong> de software y tendremos que elegir una licencia. Tres ideas básicas:</p>
+<ol>
+<li><strong>Si no pones licencia, no es libre.</strong> Un proyecto en GitHub sin licencia tiene por defecto <em>todos los derechos reservados</em>: nadie más puede legalmente usarlo ni modificarlo, aunque el código sea público.</li>
+<li><strong>Revisa las licencias de las bibliotecas que uses.</strong> Al incluir un componente con licencia GPL en una aplicación que se distribuye, la obligación de licencia copyleft puede afectar a toda la aplicación. Los detalles dependen de cómo se integre y se distribuya, así que hay que consultarlo antes.</li>
+<li><strong>También el contenido tiene licencia.</strong> Los documentos, imágenes y apuntes (como los de este curso) usan licencias específicas, como las <strong>Creative Commons</strong>. Estos apuntes están publicados bajo <strong>CC BY-SA 4.0</strong>: se pueden compartir y adaptar citando al autor, y las obras derivadas deben mantener la misma licencia.</li>
+</ol>
+<p>Algunos ejemplos de licencias en herramientas de desarrollo: OpenJDK es GPLv2 con una excepción que permite usarlo en aplicaciones propias, MySQL es GPL con opción comercial de pago (licencia dual), PostgreSQL usa una licencia permisiva y Visual Studio Code tiene su código fuente con licencia MIT mientras que el producto de Microsoft se distribuye con una licencia propia.</p>
+<hr>
+<h2 id="actividad-en-clase">Actividad en clase</h2>
+<h3 id="clasifica-estos-programas">🖥️ Clasifica estos programas</h3>
+<p><strong>Duración:</strong> 15 minutos
+<strong>Dinámica:</strong> individual + corrección en grupo</p>
+<p>Para cada programa, indica si es <strong>libre o privativo</strong> y si es <strong>gratuito, de pago o por suscripción</strong>. Después, comparad vuestras respuestas.</p>
+<table>
+<thead>
+<tr>
+<th>Programa</th>
+<th>¿Libre o privativo?</th>
+<th>¿Gratuito, de pago o suscripción?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Windows 11 Pro</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VLC</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WinRAR</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Microsoft 365</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LibreOffice</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Packet Tracer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Zoom</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Adobe Acrobat Reader</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Solución</summary>
+<table>
+<thead>
+<tr>
+<th>Programa</th>
+<th>¿Libre o privativo?</th>
+<th>¿Gratuito, de pago o suscripción?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu</td>
+<td>Libre</td>
+<td>Gratuito</td>
+</tr>
+<tr>
+<td>Windows 11 Pro</td>
+<td>Privativo</td>
+<td>De pago (licencia perpetua, normalmente OEM)</td>
+</tr>
+<tr>
+<td>VLC</td>
+<td>Libre</td>
+<td>Gratuito</td>
+</tr>
+<tr>
+<td>WinRAR</td>
+<td>Privativo</td>
+<td>Shareware: periodo de prueba y licencia de pago</td>
+</tr>
+<tr>
+<td>Microsoft 365</td>
+<td>Privativo</td>
+<td>Suscripción</td>
+</tr>
+<tr>
+<td>LibreOffice</td>
+<td>Libre</td>
+<td>Gratuito</td>
+</tr>
+<tr>
+<td>Packet Tracer</td>
+<td>Privativo</td>
+<td>Gratuito (freeware, con cuenta NetAcad)</td>
+</tr>
+<tr>
+<td>Zoom</td>
+<td>Privativo</td>
+<td>Freemium</td>
+</tr>
+<tr>
+<td>Adobe Acrobat Reader</td>
+<td>Privativo</td>
+<td>Gratuito (freeware)</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>Libre</td>
+<td>Gratuito</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="calcula-las-licencias-de-una-empresa">🧮 Calcula las licencias de una empresa</h3>
+<p><strong>Duración:</strong> 15 minutos
+<strong>Dinámica:</strong> por parejas</p>
+<p>Una pequeña empresa de desarrollo tiene <strong>10 puestos</strong> y quiere montar un servidor Windows Server con Active Directory. Cada empleado tiene su propio equipo con Windows 11 Pro. El servidor tiene un único procesador de 8 núcleos. No hay virtualización y tampoco quieren gastar en el sistema operativo de los equipos del aula de pruebas, que usan Ubuntu.</p>
+<p>Indica qué licencias necesitan y cuáles no.</p>
+<details>
+<summary>Solución</summary>
+<ul>
+<li><strong>Windows Server (Standard):</strong> licencia para <strong>16 núcleos</strong>. Aunque el procesador tenga 8, el mínimo por servidor es 16 licencias de núcleo.</li>
+<li><strong>CAL de Windows Server:</strong> <strong>10 CAL</strong>, por dispositivo o por usuario. Como cada empleado usa un único equipo fijo, ambas opciones sirven.</li>
+<li><strong>Windows 11 Pro:</strong> 10 licencias (normalmente OEM, incluidas al comprar los equipos).</li>
+<li><strong>Ubuntu:</strong> ninguna licencia: es libre y gratuito. Solo se pagaría si quisieran soporte comercial.</li>
+<li><strong>Para aprender o probar:</strong> pueden usar las versiones de evaluación de Windows Server y Windows 11 de Microsoft sin coste y de forma legal.</li>
+</ul>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../05_01_sistemas_operativos_actuales/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Sistemas operativos actuales y cómo elegir">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Sistemas operativos actuales y cómo elegir
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05_03_virtualizacion/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Virtualización; conceptos, tipos y requisitos">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Virtualización; conceptos, tipos y requisitos
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

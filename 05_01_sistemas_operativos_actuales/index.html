@@ -1,0 +1,2688 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD05 - Virtualización e instalación de sistemas operativos">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/05_01_sistemas_operativos_actuales/">
+      
+      
+        <link rel="prev" href="../04_07_verificacion_documentacion/">
+      
+      
+        <link rel="next" href="../05_02_licencias_software/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Sistemas operativos actuales y cómo elegir - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#funciones-de-un-sistema-operativo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sistemas operativos actuales y cómo elegir
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-un-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones de un sistema operativo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-nucleo-shell-y-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitectura: núcleo, shell y aplicaciones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura: núcleo, shell y aplicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-nucleo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de núcleo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-de-los-sistemas-operativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clasificación de los sistemas operativos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-operativos-segun-el-dispositivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas operativos según el dispositivo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas operativos según el dispositivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moviles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Móviles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embebidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embebidos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-la-nube" class="md-nav__link">
+    <span class="md-ellipsis">
+      "En la nube"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-operativos-para-ordenadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas operativos para ordenadores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas operativos para ordenadores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microsoft Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microsoft Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows cliente
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows cliente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      macOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnulinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNU/Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-familia-bsd" class="md-nav__link">
+    <span class="md-ellipsis">
+      La familia BSD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-arquitectura-del-procesador-tambien-cuenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      La arquitectura del procesador también cuenta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-elegir-un-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo elegir un sistema operativo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cómo elegir un sistema operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciclo-de-vida-y-soporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ciclo de vida y soporte
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-sistema-operativo-elegirias" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ ¿Qué sistema operativo elegirías?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_licencias_software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_configuracion_basica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_unir_cliente_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_documentar_instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-un-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones de un sistema operativo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-nucleo-shell-y-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitectura: núcleo, shell y aplicaciones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura: núcleo, shell y aplicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-nucleo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de núcleo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-de-los-sistemas-operativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clasificación de los sistemas operativos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-operativos-segun-el-dispositivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas operativos según el dispositivo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas operativos según el dispositivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moviles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Móviles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embebidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embebidos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-la-nube" class="md-nav__link">
+    <span class="md-ellipsis">
+      "En la nube"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-operativos-para-ordenadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sistemas operativos para ordenadores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas operativos para ordenadores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microsoft Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microsoft Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows cliente
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows cliente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      macOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnulinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNU/Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-familia-bsd" class="md-nav__link">
+    <span class="md-ellipsis">
+      La familia BSD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-arquitectura-del-procesador-tambien-cuenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      La arquitectura del procesador también cuenta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-elegir-un-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo elegir un sistema operativo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cómo elegir un sistema operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciclo-de-vida-y-soporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ciclo de vida y soporte
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividad-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividad en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-sistema-operativo-elegirias" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ ¿Qué sistema operativo elegirías?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Sistemas operativos actuales y cómo elegir</h1>
+
+<p>Cuando compramos un ordenador nuevo, el sistema operativo suele venir ya instalado y rara vez nos planteamos si es el adecuado. Un administrador de sistemas no tiene ese lujo: cada vez que monta un equipo, un servidor o una máquina virtual tiene que decidir <strong>qué sistema operativo instalar, en qué versión y con qué licencia</strong>. Elegir mal tiene consecuencias reales: aplicaciones que no funcionan, hardware que no da la talla, costes de licencias que nadie había previsto o un sistema sin soporte y sin parches de seguridad.</p>
+<p>En este apartado vamos a ver qué hace un sistema operativo, cómo está organizado por dentro, qué tipos existen y cuáles son los más importantes hoy en día. Al final aprenderemos a <strong>comparar y elegir</strong> con criterios técnicos, que es exactamente lo que se pide en el módulo (RA2) y lo que haremos en las próximas unidades con Windows Server y Linux.</p>
+<p>Como vimos en la UD01, el sistema operativo es la capa de software que se sitúa entre el hardware y las aplicaciones. Gestiona el hardware y ofrece una plataforma común sobre la que se ejecutan los programas.</p>
+<h2 id="funciones-de-un-sistema-operativo">Funciones de un sistema operativo</h2>
+<p>Un sistema operativo hace por nosotros un montón de trabajo invisible. Sin él, cada programa tendría que saber manejar directamente el disco, la memoria o la tarjeta de red, y dos programas no podrían ejecutarse a la vez sin pisarse. Sus funciones principales son:</p>
+<table>
+<thead>
+<tr>
+<th>Función</th>
+<th>Qué hace</th>
+<th>Ejemplo cotidiano</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gestión de procesos</strong></td>
+<td>Decide qué programa usa la CPU y durante cuánto tiempo</td>
+<td>Escuchar música mientras compilas código</td>
+</tr>
+<tr>
+<td><strong>Gestión de memoria</strong></td>
+<td>Reparte la RAM entre los programas y evita que invadan la memoria de otros</td>
+<td>Abrir el IDE y el navegador a la vez</td>
+</tr>
+<tr>
+<td><strong>Gestión de ficheros</strong></td>
+<td>Organiza la información en el almacenamiento mediante un sistema de archivos</td>
+<td>Guardar un documento en una carpeta</td>
+</tr>
+<tr>
+<td><strong>Gestión de dispositivos</strong></td>
+<td>Controla el hardware a través de drivers</td>
+<td>Imprimir o conectar un pendrive</td>
+</tr>
+<tr>
+<td><strong>Usuarios y seguridad</strong></td>
+<td>Identifica a cada usuario y controla qué puede hacer</td>
+<td>Iniciar sesión con contraseña</td>
+</tr>
+<tr>
+<td><strong>Interfaz con el usuario</strong></td>
+<td>Ofrece una forma de interactuar: gráfica (GUI) o por comandos (CLI)</td>
+<td>Escritorio o terminal</td>
+</tr>
+</tbody>
+</table>
+<p>Estas funciones las veremos en detalle en las unidades siguientes: procesos y servicios, usuarios y permisos, y sistemas de archivos.</p>
+<h2 id="arquitectura-nucleo-shell-y-aplicaciones">Arquitectura: núcleo, shell y aplicaciones</h2>
+<p>Un sistema operativo no es un único programa sino un conjunto de componentes organizados en capas:</p>
+<ul>
+<li><strong>Núcleo (<em>kernel</em>)</strong>: el corazón del sistema. Tiene acceso directo al hardware y se encarga de la gestión de procesos, memoria y dispositivos. Se ejecuta en un modo privilegiado al que las aplicaciones normales no pueden acceder.</li>
+<li><strong>Intérprete de comandos o <em>shell</em></strong>: el programa que recibe las órdenes del usuario y se las pasa al núcleo. Puede ser gráfico (el escritorio) o de texto (PowerShell, Bash).</li>
+<li><strong>Aplicaciones</strong>: los programas del usuario, que piden servicios al núcleo mediante llamadas al sistema.</li>
+</ul>
+<!-- IMG: diagrama en capas: hardware → núcleo → shell/servicios → aplicaciones, con la frontera modo núcleo / modo usuario -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/so/arquitectura_capas_so.png" data-desc-position="bottom"><img alt="Capas del sistema operativo" src="../imgs/so/arquitectura_capas_so.png" width="60%"></a>
+<br>
+<figcaption>Arquitectura en capas de un sistema operativo: el núcleo es el único que habla directamente con el hardware</figcaption>
+</figure>
+<p>La separación entre modo núcleo y modo usuario es una de las claves de la seguridad: si una aplicación falla, el sistema sigue funcionando, porque la aplicación no puede tocar directamente el hardware ni la memoria de otros programas.</p>
+<h3 id="tipos-de-nucleo">Tipos de núcleo</h3>
+<p>No todos los núcleos están diseñados igual:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Idea</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monolítico</strong></td>
+<td>Casi todo (procesos, memoria, drivers, sistemas de archivos) funciona dentro del núcleo. Rápido, pero un fallo en un driver puede afectar a todo</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td><strong>Microkernel</strong></td>
+<td>El núcleo es mínimo y el resto de servicios se ejecutan fuera de él. Más robusto, algo más lento</td>
+<td>QNX, Minix</td>
+</tr>
+<tr>
+<td><strong>Híbrido</strong></td>
+<td>Combina ambos enfoques</td>
+<td>Windows (familia NT), macOS (XNU)</td>
+</tr>
+</tbody>
+</table>
+<p>Linux es monolítico, pero <strong>modular</strong>: se pueden cargar y descargar módulos del núcleo (por ejemplo, drivers) sin reiniciar.</p>
+<h2 id="clasificacion-de-los-sistemas-operativos">Clasificación de los sistemas operativos</h2>
+<p>Un mismo sistema operativo se puede clasificar desde varios puntos de vista, y conviene conocerlos porque se usan constantemente en la documentación técnica:</p>
+<ul>
+<li><strong>Por número de usuarios</strong>: <em>monousuario</em> (un solo usuario a la vez) o <em>multiusuario</em> (varios usuarios con sus propias cuentas y permisos; es el caso de Windows y Linux actuales).</li>
+<li><strong>Por número de tareas</strong>: <em>monotarea</em> (una cosa cada vez, como el antiguo MS-DOS) o <em>multitarea</em> (varios procesos a la vez; todos los actuales).</li>
+<li><strong>Por finalidad o dispositivo</strong>: escritorio, servidor, móvil, embebido.</li>
+<li><strong>Por licencia</strong>: <em>libres</em> (se puede usar, estudiar, modificar y redistribuir) o <em>privativos</em> (el fabricante controla el código y las condiciones de uso). Lo veremos con detalle en el siguiente apartado.</li>
+</ul>
+<h2 id="sistemas-operativos-segun-el-dispositivo">Sistemas operativos según el dispositivo</h2>
+<h3 id="moviles">Móviles</h3>
+<p>Los sistemas operativos móviles controlan teléfonos y tablets. Están muy orientados a la conectividad inalámbrica, el consumo de batería y las aplicaciones multimedia.</p>
+<ul>
+<li><strong>Android</strong>: el más extendido del mundo. Está basado en el núcleo Linux y su código base es abierto (proyecto AOSP), aunque muchos servicios de Google que lo acompañan son propietarios.</li>
+<li><strong>iOS / iPadOS</strong>: el sistema de Apple para iPhone y iPad. Es privativo y solo funciona en hardware de Apple.</li>
+<li><strong>HarmonyOS</strong>: desarrollado por Huawei como alternativa propia a Android.</li>
+</ul>
+<p>Otros sistemas que tuvieron su momento, como Windows Phone, BlackBerry OS o Symbian, han desaparecido del mercado.</p>
+<div class="admonition tip">
+<p class="admonition-title">¿Por qué le importa esto a un desarrollador DAM?</p>
+<p>Si vais a desarrollar aplicaciones multiplataforma, trabajaréis para estos dos sistemas. Y un detalle práctico: para compilar y publicar aplicaciones iOS <strong>es necesario un equipo con macOS</strong>.</p>
+</div>
+<h3 id="embebidos">Embebidos</h3>
+<p>Un sistema operativo embebido controla un dispositivo que realiza una función concreta: un router, una impresora, un cajero automático, un electrodoméstico inteligente o un sensor IoT. Suelen ser muy ligeros y, en muchos casos, deben responder en tiempos garantizados. A estos se les llama <strong>sistemas operativos de tiempo real (RTOS)</strong>.</p>
+<p>Algunos ejemplos son <strong>FreeRTOS</strong> y <strong>Zephyr</strong> (libres), <strong>VxWorks</strong> y <strong>QNX</strong> (propietarios; VxWorks se usa en aviones y equipos industriales) y versiones reducidas de <strong>Linux embebido</strong>, que está presente en una enorme cantidad de routers y dispositivos de red.</p>
+<h3 id="en-la-nube">"En la nube"</h3>
+<p>Con frecuencia se habla de "sistemas operativos en la nube", pero conviene aclarar el concepto, porque se presta a confusión. <strong>No existe un sistema operativo especial para la nube</strong>: cuando contratamos un servidor en AWS, Azure o Google Cloud, lo que obtenemos es una <strong>máquina virtual</strong> en la que instalamos un Linux o un Windows Server normales. Es la misma virtualización que veremos en este tema, pero ejecutándose en los centros de datos del proveedor.</p>
+<p>Lo que sí existe son sistemas pensados para trabajar principalmente a través del navegador y de servicios web, como <strong>ChromeOS</strong> (el sistema de los Chromebooks).</p>
+<p>Los servicios en la nube se suelen clasificar en tres niveles según lo que gestiona el proveedor y lo que gestionamos nosotros:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Nombre</th>
+<th>Qué nos da el proveedor</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IaaS</strong></td>
+<td>Infraestructura como servicio</td>
+<td>Máquinas virtuales, red y almacenamiento. El sistema operativo lo instalamos y mantenemos nosotros</td>
+<td>Amazon EC2, Azure Virtual Machines</td>
+</tr>
+<tr>
+<td><strong>PaaS</strong></td>
+<td>Plataforma como servicio</td>
+<td>La plataforma ya preparada para desplegar nuestras aplicaciones</td>
+<td>Google App Engine, Azure App Service</td>
+</tr>
+<tr>
+<td><strong>SaaS</strong></td>
+<td>Software como servicio</td>
+<td>La aplicación completa lista para usar</td>
+<td>Google Workspace, Microsoft 365</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sistemas-operativos-para-ordenadores">Sistemas operativos para ordenadores</h2>
+<h3 id="microsoft-windows">Microsoft Windows</h3>
+<p>Windows es el sistema operativo de escritorio más usado en el mundo empresarial, y lo encontraremos en dos grandes variantes con propósitos muy distintos: la <strong>versión cliente</strong>, para los puestos de trabajo, y la <strong>versión servidor</strong>, para los servidores.</p>
+<!-- IMG: línea temporal de versiones de Windows de cliente (7, 8, 10, 11) y servidor (2012, 2016, 2019, 2022, 2025) -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/so/windows_linea_temporal.png" data-desc-position="bottom"><img alt="Versiones de Windows" src="../imgs/so/windows_linea_temporal.png" width="85%"></a>
+<br>
+<figcaption>Versiones recientes de Windows, en su variante cliente y servidor</figcaption>
+</figure>
+<h4 id="windows-cliente">Windows cliente</h4>
+<p>La versión actual es <strong>Windows 11</strong>. <strong>Windows 10 dejó de recibir soporte estándar el 14 de octubre de 2025</strong>, lo que significa que ya no recibe parches de seguridad de forma gratuita; un equipo con Windows 10 es un equipo que hay que migrar.</p>
+<p>Windows 11 se ofrece en varias ediciones. Las que nos interesan son:</p>
+<table>
+<thead>
+<tr>
+<th>Edición</th>
+<th>Destinada a</th>
+<th>Características destacadas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Home</strong></td>
+<td>Uso doméstico</td>
+<td>Lo básico. Sin funciones de administración empresarial</td>
+</tr>
+<tr>
+<td><strong>Pro</strong></td>
+<td>Profesionales y pequeñas empresas</td>
+<td>Añade funciones de administración y seguridad</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Grandes organizaciones</td>
+<td>Se adquiere por licenciamiento por volumen. Funciones avanzadas de seguridad y gestión</td>
+</tr>
+<tr>
+<td><strong>Education</strong></td>
+<td>Centros educativos</td>
+<td>Similar a Enterprise, con licencias específicas para educación</td>
+</tr>
+</tbody>
+</table>
+<p>La diferencia entre Home y Pro es mucho más importante de lo que parece, sobre todo para el trabajo que haremos en este módulo:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th style="text-align: center;">Home</th>
+<th style="text-align: center;">Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unirse a un dominio de Active Directory</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr>
+<td>Directivas de grupo (<code>gpedit.msc</code>)</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr>
+<td>Aceptar conexiones de Escritorio remoto</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr>
+<td>Hyper-V (virtualización integrada)</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr>
+<td>Cifrado con BitLocker (gestión completa)</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Para entornos con dominio</p>
+<p>En una empresa con un dominio de Active Directory, los equipos cliente tienen que <strong>unirse al dominio</strong> del servidor Windows y recibir directivas de grupo. Con Windows 11 Home esto es imposible, así que los clientes tienen que ser <strong>Windows 11 Pro</strong> (o Enterprise/Education).</p>
+</div>
+<h5 id="requisitos-de-windows-11">Requisitos de Windows 11</h5>
+<p>Windows 11 es más exigente que sus predecesores, y no solo en potencia: exige <strong>funciones de seguridad del hardware</strong>. Si no se cumplen, el instalador se detiene con el aviso de que el equipo no puede ejecutar Windows 11.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Requisito mínimo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Procesador</td>
+<td>1 GHz o más, 2 o más núcleos, 64 bits compatible</td>
+</tr>
+<tr>
+<td>Memoria RAM</td>
+<td>4 GB</td>
+</tr>
+<tr>
+<td>Almacenamiento</td>
+<td>64 GB</td>
+</tr>
+<tr>
+<td>Firmware</td>
+<td>UEFI con Secure Boot</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>TPM 2.0</td>
+</tr>
+<tr>
+<td>Gráficos</td>
+<td>Compatible con DirectX 12</td>
+</tr>
+</tbody>
+</table>
+<p>Recordad el apartado de UEFI de la UD01: aquí es donde Secure Boot y el TPM dejan de ser un detalle y se convierten en condición de instalación. Al instalar Windows 11 en una máquina virtual tendremos que activar estas funciones en la configuración de la máquina.</p>
+<h4 id="windows-server">Windows Server</h4>
+<p><strong>Windows Server</strong> es la versión de Windows para servidores. Las versiones que más encontraremos son <strong>Windows Server 2019, 2022 y 2025</strong> (esta última publicada a finales de 2024). Es el sistema que usaremos en el proyecto para montar el dominio, los usuarios, las carpetas compartidas y las directivas.</p>
+<p>Se instala de dos formas muy diferentes:</p>
+<ul>
+<li><strong>Con experiencia de escritorio</strong> (<em>Desktop Experience</em>): trae la interfaz gráfica habitual de Windows. Es la que usaremos nosotros.</li>
+<li><strong>Server Core</strong>: sin interfaz gráfica, se administra por línea de comandos o de forma remota. Consume menos recursos y presenta menos superficie de ataque.</li>
+</ul>
+<p>Y se ofrece principalmente en dos ediciones: <strong>Standard</strong>, para entornos con poca virtualización, y <strong>Datacenter</strong>, con derechos de virtualización ilimitados y funciones avanzadas para centros de datos.</p>
+<table>
+<thead>
+<tr>
+<th>Requisito mínimo</th>
+<th>Windows Server 2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Procesador</td>
+<td>1,4 GHz, 64 bits</td>
+</tr>
+<tr>
+<td>Memoria RAM</td>
+<td>2 GB con experiencia de escritorio (512 MB en Server Core)</td>
+</tr>
+<tr>
+<td>Almacenamiento</td>
+<td>32 GB</td>
+</tr>
+</tbody>
+</table>
+<p>Windows Server tiene un ciclo de vida largo: unos <strong>10 años</strong> de soporte (5 estándar + 5 extendido). Instalaremos y configuraremos Windows Server en la UD06.</p>
+<h3 id="macos">macOS</h3>
+<p><strong>macOS</strong> es el sistema de Apple para sus ordenadores. Es privativo, <strong>solo funciona en hardware de Apple</strong> y está basado en tecnologías UNIX. Desde Apple Silicon (los chips M, que ya vimos en la UD01) funciona sobre arquitectura ARM. Desde macOS 26 (<em>Tahoe</em>, 2025) la numeración de versiones sigue el año.</p>
+<p>Para un desarrollador tiene un interés especial: es el único entorno donde se puede desarrollar y publicar para iOS y macOS.</p>
+<h3 id="gnulinux">GNU/Linux</h3>
+<p>Linux es, en realidad, <strong>solo el núcleo</strong> del sistema. Lo que llamamos "un Linux" es una <strong>distribución</strong>: el núcleo, junto con las herramientas GNU, un gestor de paquetes, un entorno de escritorio (opcional) y la configuración por defecto que decide el equipo que la mantiene. Por eso hablamos de <strong>GNU/Linux</strong> y de distribuciones.</p>
+<p>Existen cientos de distribuciones, pero la mayoría pertenecen a unas pocas <strong>familias</strong>, que se distinguen sobre todo por el formato de paquetes y el gestor que usan:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Núcleo Linux
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── Familia Debian      (paquetes .deb, gestor apt)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│     ├── Debian
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│     └── Ubuntu ── Linux Mint, Lliurex, Kubuntu, Xubuntu, Lubuntu...
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── Familia Red Hat     (paquetes .rpm, gestor dnf)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│     ├── RHEL (comercial)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│     ├── Fedora (comunitaria, banco de pruebas de RHEL)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│     └── Rocky Linux, AlmaLinux, CentOS Stream...
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── Familia SUSE        (paquetes .rpm, gestor zypper)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│     └── SLES (comercial), openSUSE
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>└── Independientes      (Arch Linux, Gentoo...)
+</span></code></pre></div>
+<!-- IMG: árbol de distribuciones Linux con logotipos de las familias Debian, Red Hat y SUSE -->
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/so/familias_linux.png" data-desc-position="bottom"><img alt="Familias de distribuciones Linux" src="../imgs/so/familias_linux.png" width="75%"></a>
+<br>
+<figcaption>Las grandes familias de distribuciones GNU/Linux</figcaption>
+</figure>
+<p>Las que más nos interesan en este curso:</p>
+<p><strong>Debian</strong> es un proyecto comunitario, independiente de cualquier empresa, muy centrado en la <strong>estabilidad</strong>. Sus versiones llevan nombres de personajes de <em>Toy Story</em> y se publican en tres ramas: <em>stable</em> (la estable, para producción), <em>testing</em> (en pruebas) y <em>unstable</em> (desarrollo activo). La versión estable actual es Debian 13 «Trixie».</p>
+<p><strong>Ubuntu</strong>, mantenido por la empresa Canonical, se basa en Debian y busca un buen equilibrio entre estabilidad y facilidad de uso. Sigue un calendario muy regular:</p>
+<ul>
+<li>Cada <strong>6 meses</strong> sale una versión nueva, con numeración año.mes (por ejemplo, 24.10).</li>
+<li>Cada <strong>2 años</strong>, en abril, sale una versión <strong>LTS</strong> (<em>Long Term Support</em>) con soporte de <strong>5 años</strong>, ampliable hasta 10 con Ubuntu Pro. Son las recomendables para servidores y entornos que necesitan estabilidad: las versiones intermedias solo tienen 9 meses de soporte.</li>
+<li>Existen sabores según el escritorio: Ubuntu (GNOME), Kubuntu (KDE), Xubuntu (Xfce) o Lubuntu (LXQt), además de <strong>Ubuntu Server</strong>, sin entorno gráfico.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Distribuciones comerciales y de comunidad</p>
+<p>Fijaos en la pareja <em>RHEL / Fedora</em> o <em>SLES / openSUSE</em>: en cada familia hay una distribución <strong>comercial</strong> (con soporte de pago y certificaciones, pensada para empresas) y otra <strong>comunitaria</strong> (gratuita). Que el sistema sea libre no significa que no haya negocio alrededor: Red Hat, SUSE y Canonical viven de ofrecer soporte y servicios sobre software libre.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">¿Y CentOS?</p>
+<p>CentOS fue durante años la alternativa gratuita a RHEL, muy usada en servidores. Red Hat dio por terminado CentOS Linux como clon de RHEL y hoy el relevo lo toman <strong>Rocky Linux</strong> y <strong>AlmaLinux</strong>. Es un buen ejemplo de por qué hay que comprobar siempre el estado de soporte de una distribución antes de instalarla.</p>
+</div>
+<h3 id="la-familia-bsd">La familia BSD</h3>
+<p><strong>FreeBSD</strong>, <strong>OpenBSD</strong> y <strong>NetBSD</strong> son sistemas libres de la familia UNIX, independientes de Linux y con otra licencia (BSD). Los encontraréis sobre todo en equipos de red y almacenamiento, como cortafuegos y NAS.</p>
+<h2 id="la-arquitectura-del-procesador-tambien-cuenta">La arquitectura del procesador también cuenta</h2>
+<p>En la UD01 vimos que existen dos grandes arquitecturas: <strong>x86-64</strong> (Intel y AMD) y <strong>ARM</strong>. El sistema operativo tiene que estar compilado para la arquitectura del equipo, y eso condiciona la elección:</p>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th style="text-align: center;">x86-64</th>
+<th style="text-align: center;">ARM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 11</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅ (con emulación para programas x86)</td>
+</tr>
+<tr>
+<td>Windows Server</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">Solo en entornos muy concretos</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td style="text-align: center;">Solo Macs antiguos con Intel</td>
+<td style="text-align: center;">✅ (Apple Silicon)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Un problema práctico para este curso</p>
+<p>Los alumnos con un Mac con chip M o un portátil Windows con procesador Snapdragon tienen un equipo ARM. Según las notas de VirtualBox 7.1, <strong>un equipo anfitrión ARM no puede ejecutar máquinas virtuales x86</strong>, que es lo que necesitamos para Windows Server. Si tenéis un equipo así, avisad al profesor desde el primer día: usaremos los equipos del aula.</p>
+</div>
+<h2 id="como-elegir-un-sistema-operativo">Cómo elegir un sistema operativo</h2>
+<p>Elegir un sistema operativo es una decisión técnica que debe justificarse. No hay un "mejor" sistema operativo: hay uno <strong>adecuado para un caso concreto</strong>. Estos son los criterios que debemos valorar siempre:</p>
+<ol>
+<li><strong>Para qué se va a usar</strong>: puesto de trabajo, servidor de ficheros, servidor web, desarrollo, kiosco...</li>
+<li><strong>Qué aplicaciones necesita</strong>: si el software imprescindible solo existe para un sistema, la decisión ya está tomada.</li>
+<li><strong>Qué hardware hay disponible</strong>: los requisitos mínimos y recomendados del sistema.</li>
+<li><strong>Cuánto cuesta</strong>: licencias, y también el coste de soporte y administración.</li>
+<li><strong>Cuánto tiempo tendrá soporte</strong>: un sistema sin parches de seguridad es un riesgo.</li>
+<li><strong>Cómo se administra</strong>: si hay que integrarlo con un dominio, un sistema de gestión centralizada o herramientas que ya usa la empresa.</li>
+<li><strong>Qué sabe hacer el equipo técnico</strong>: la formación y la experiencia también cuentan.</li>
+</ol>
+<h3 id="requisitos-de-instalacion">Requisitos de instalación</h3>
+<p>Antes de instalar, hay que comprobar los requisitos publicados por el fabricante. Atención a una diferencia importante: el <strong>mínimo</strong> es lo necesario para que el sistema <em>arranque</em>, no para que se pueda <em>trabajar</em> cómodamente.</p>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th style="text-align: center;">RAM mínima</th>
+<th style="text-align: center;">Disco</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 11</td>
+<td style="text-align: center;">4 GB</td>
+<td style="text-align: center;">64 GB</td>
+<td>Exige UEFI, Secure Boot y TPM 2.0</td>
+</tr>
+<tr>
+<td>Windows Server 2025</td>
+<td style="text-align: center;">2 GB (escritorio)</td>
+<td style="text-align: center;">32 GB</td>
+<td>Server Core necesita menos</td>
+</tr>
+<tr>
+<td>Ubuntu Desktop 26.04 LTS</td>
+<td style="text-align: center;"><strong>6 GB</strong></td>
+<td style="text-align: center;">25 GB</td>
+<td>Primera LTS que sube el mínimo desde 4 GB</td>
+</tr>
+<tr>
+<td>Ubuntu Server 26.04 LTS</td>
+<td style="text-align: center;">desde 1,5 GB</td>
+<td style="text-align: center;">unos 4-5 GB</td>
+<td>Los requisitos dependen del uso</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Cuidado con Ubuntu 26.04 en máquinas virtuales</p>
+<p>Ubuntu 26.04 LTS ha subido el mínimo de RAM del escritorio de 4 a 6 GB. Si asignáis 4 GB a una máquina virtual (como hacemos con Windows 11), Ubuntu 26.04 Desktop se instalará, pero funcionará mal. Tenedlo en cuenta al dimensionar las máquinas virtuales: <strong>6 GB para Ubuntu Desktop 26.04</strong>, o 4 GB para la versión Server.</p>
+</div>
+<h3 id="ciclo-de-vida-y-soporte">Ciclo de vida y soporte</h3>
+<p>Antes de instalar hay que mirar también <strong>hasta cuándo habrá actualizaciones de seguridad</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Soporte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 10</td>
+<td>Terminó el 14 de octubre de 2025</td>
+</tr>
+<tr>
+<td>Windows Server</td>
+<td>Aproximadamente 10 años (5 + 5)</td>
+</tr>
+<tr>
+<td>Ubuntu LTS</td>
+<td>5 años (hasta 10 con Ubuntu Pro)</td>
+</tr>
+<tr>
+<td>Ubuntu versiones intermedias</td>
+<td>9 meses</td>
+</tr>
+<tr>
+<td>Debian estable</td>
+<td>Unos 3 años de soporte normal, ampliables con el proyecto LTS</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Regla práctica</p>
+<p>En servidores y entornos de producción usa siempre versiones con <strong>soporte a largo plazo</strong> (LTS en Ubuntu, la estable en Debian, o una versión vigente de Windows Server). Las versiones intermedias son para probar novedades, no para producción.</p>
+</div>
+<hr>
+<h2 id="actividad-en-clase">Actividad en clase</h2>
+<h3 id="que-sistema-operativo-elegirias">🖥️ ¿Qué sistema operativo elegirías?</h3>
+<p><strong>Duración:</strong> 20 minutos
+<strong>Dinámica:</strong> por parejas + puesta en común</p>
+<p>Para cada situación, indicad <strong>qué sistema operativo y qué versión o edición</strong> elegiríais, y justificad la decisión con al menos dos de los criterios vistos.</p>
+<p><strong>Caso 1.</strong> Un alumno de DAM quiere un portátil para desarrollar aplicaciones Java y Android, con 8 GB de RAM. También quiere jugar de vez en cuando.</p>
+<p><strong>Caso 2.</strong> La empresa TechSolutions necesita un servidor para gestionar los usuarios, las carpetas compartidas y las directivas de 14 equipos cliente con Windows 11.</p>
+<p><strong>Caso 3.</strong> Una pequeña empresa quiere un servidor para una aplicación web. Tienen presupuesto cero para licencias y quieren un sistema estable durante muchos años.</p>
+<p><strong>Caso 4.</strong> Un instituto tiene 10 ordenadores antiguos con 4 GB de RAM y quiere instalar Ubuntu 26.04 Desktop en todos ellos.</p>
+<p><strong>Caso 5.</strong> Una desarrolladora necesita compilar y publicar una aplicación para iPhone.</p>
+<details>
+<summary>Solución orientativa</summary>
+<p><strong>Caso 1.</strong> Windows 11 (Home o Pro) o Ubuntu LTS. Android Studio y el entorno Java funcionan en ambos, así que la clave es el uso lúdico: Windows tiene más compatibilidad con videojuegos. Una opción equilibrada es <strong>instalación dual</strong>.</p>
+<p><strong>Caso 2.</strong> <strong>Windows Server 2025 Standard</strong> con experiencia de escritorio, para montar Active Directory. Los clientes deben ser <strong>Windows 11 Pro</strong>, porque Home no se puede unir a un dominio.</p>
+<p><strong>Caso 3.</strong> <strong>Ubuntu Server LTS</strong> o <strong>Debian estable</strong>: gratuitos, sin coste de licencias y con ciclos de soporte largos.</p>
+<p><strong>Caso 4.</strong> Ubuntu 26.04 Desktop <strong>no cumple</strong> el mínimo de 6 GB. Alternativas: <strong>Ubuntu 24.04 LTS</strong> (mínimo de 4 GB, soporte hasta 2029), <strong>Lubuntu</strong> (escritorio ligero) o Ubuntu Server con un entorno de escritorio ligero.</p>
+<p><strong>Caso 5.</strong> <strong>macOS</strong>, porque Xcode, la herramienta necesaria para compilar y publicar en iOS, solo existe para este sistema.</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../04_07_verificacion_documentacion/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Verificación, documentación y exportación">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Verificación, documentación y exportación
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05_02_licencias_software/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Licencias de software">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Licencias de software
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

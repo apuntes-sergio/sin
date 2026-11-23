@@ -1,0 +1,2594 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD06 - Windows Server. instalación y configuración">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/06_07_unir_cliente_dominio/">
+      
+      
+        <link rel="prev" href="../06_06_dominio/">
+      
+      
+        <link rel="next" href="../06_08_documentar_instalacion/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Unir un equipo Windows 11 a un dominio - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requisitos-previos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unir un equipo Windows 11 a un dominio
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_sistemas_operativos_actuales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_licencias_software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_configuracion_basica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-red-en-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Red en VirtualBox
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-red-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Red en Windows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verificar-la-conectividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Verificar la conectividad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Verificar la conectividad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-ping-solo-en-un-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      El ping solo en un sentido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-poner-nombre-al-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Poner nombre al equipo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-unir-al-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Unir al dominio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-verificar-que-se-ha-unido" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Verificar que se ha unido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Verificar que se ha unido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-el-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      En el cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      En el servidor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-iniciar-sesion-cuenta-del-equipo-o-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Iniciar sesión: cuenta del equipo o del dominio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Iniciar sesión: cuenta del equipo o del dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demostracion-comprobar-con-que-cuenta-has-entrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demostración: comprobar con qué cuenta has entrado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-que-cambia-al-estar-en-un-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Qué cambia al estar en un dominio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-salir-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Salir del dominio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Salir del dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clones-e-instantaneas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clones e instantáneas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_documentar_instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-red-en-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Red en VirtualBox
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-red-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Red en Windows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verificar-la-conectividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Verificar la conectividad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Verificar la conectividad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-ping-solo-en-un-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      El ping solo en un sentido
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-poner-nombre-al-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Poner nombre al equipo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-unir-al-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Unir al dominio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-verificar-que-se-ha-unido" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Verificar que se ha unido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Verificar que se ha unido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-el-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      En el cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      En el servidor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-iniciar-sesion-cuenta-del-equipo-o-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Iniciar sesión: cuenta del equipo o del dominio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Iniciar sesión: cuenta del equipo o del dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demostracion-comprobar-con-que-cuenta-has-entrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demostración: comprobar con qué cuenta has entrado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-que-cambia-al-estar-en-un-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Qué cambia al estar en un dominio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-salir-del-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Salir del dominio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Salir del dominio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clones-e-instantaneas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clones e instantáneas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Unir un equipo Windows 11 a un dominio</h1>
+
+<p>Hasta ahora, cuando alguien iniciaba sesión en un equipo, <strong>el propio equipo</strong> comprobaba su usuario y su contraseña. Unir un equipo a un dominio cambia quién decide: a partir de ese momento <strong>el controlador de dominio</strong> valida las cuentas del dominio. El equipo pasa a ser «socio del club»: tiene un carnet (su cuenta de equipo en Active Directory) y acepta las normas del club.</p>
+<p>Unir un equipo parece un solo paso, pero casi todos los fallos vienen de <strong>lo que hay que preparar antes</strong>. Este apartado sigue siempre la misma secuencia:</p>
+<ol>
+<li>Conectar el cliente a la red correcta.</li>
+<li>Configurar su red, <strong>con el DNS apuntando al controlador</strong>.</li>
+<li>Verificar la conectividad.</li>
+<li>Ponerle nombre.</li>
+<li>Unirlo al dominio y verificar.</li>
+<li>Iniciar sesión y distinguir <strong>cuenta del equipo</strong> de <strong>cuenta del dominio</strong>.</li>
+</ol>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<ul>
+<li>[ ] El cliente tiene instalado <strong>Windows 11 Pro, Enterprise o Education</strong>. <strong>Home no puede unirse.</strong></li>
+<li>[ ] El servidor ya es <strong>controlador de dominio</strong> y su DNS funciona.</li>
+<li>[ ] La regla de eco ICMPv4 está habilitada <strong>en el servidor</strong>.</li>
+<li>[ ] La <strong>hora</strong> del cliente es correcta.</li>
+</ul>
+<p>Para comprobar la edición: <em>Configuración → Sistema → Información</em>.</p>
+<h2 id="1-red-en-virtualbox">1. Red en VirtualBox</h2>
+<p>El cliente debe estar en la <strong>misma red</strong> que el servidor. Con la MV apagada:</p>
+<ol>
+<li><em>Configuración → Red → Adaptador 1</em>.</li>
+<li><strong>Conectado a: Red interna</strong>.</li>
+<li><strong>Nombre:</strong> el mismo que tiene el adaptador interno del servidor (se distingue entre mayúsculas y minúsculas).</li>
+<li>Comprueba que <strong>Cable conectado</strong> está marcado.</li>
+</ol>
+<!-- IMG NUEVA: cliente_vbox_red_interna.png — Configuración > Red del cliente -->
+
+<div class="admonition warning">
+<p class="admonition-title">Un solo adaptador</p>
+<p>Si el servidor hace de router (apartado anterior), el cliente solo necesita <strong>un adaptador</strong>, en la red interna. Si además dejas uno en NAT, el cliente tendrá <strong>dos puertas de enlace</strong> y la conectividad será errática.</p>
+</div>
+<p>Los modos de red se explican con detalle en la UD05.</p>
+<h2 id="2-red-en-windows">2. Red en Windows</h2>
+<p>Dentro del cliente: <em>Windows + R</em> → <code>ncpa.cpl</code> → clic derecho sobre el adaptador → <strong>Propiedades → Protocolo de Internet versión 4 (TCP/IPv4) → Propiedades</strong>.</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/ConexionesDeRedConfigIPv4.png" data-desc-position="bottom"><img alt="Conexiones de red" src="../imgs/instalacion/ConexionesDeRedConfigIPv4.png" width="70%"></a>
+<br>
+<figcaption>Conexiones de red: se elige el adaptador y se abren sus propiedades</figcaption>
+</figure>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/intro/config_ipv4.png" data-desc-position="bottom"><img alt="Configuración IPv4" src="../imgs/intro/config_ipv4.png" width="70%"></a>
+<br>
+<figcaption>Propiedades de TCP/IPv4 del cliente</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IP</strong></td>
+<td>Una libre del rango de la red del servidor</td>
+</tr>
+<tr>
+<td><strong>Máscara</strong></td>
+<td>La misma que el servidor</td>
+</tr>
+<tr>
+<td><strong>Puerta de enlace</strong></td>
+<td>La IP del servidor en esa red (si hace de router)</td>
+</tr>
+<tr>
+<td><strong>DNS preferido</strong></td>
+<td><strong>La IP del controlador de dominio</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">El DNS es lo que hace posible unirse</p>
+<p>El cliente encuentra el dominio <strong>preguntando al DNS</strong>. Si el DNS es el router o uno público, <strong>no sabrá dónde está el controlador</strong> y la unión fallará, aunque todo lo demás esté perfecto.</p>
+</div>
+<p>Para repasar qué es cada parámetro, consulta el <strong><a href="../06_09_recordatorio_red/">Apéndice A: Recordatorio de red</a></strong>.</p>
+<h2 id="3-verificar-la-conectividad">3. Verificar la conectividad</h2>
+<p>Desde una ventana de símbolo del sistema del <strong>cliente</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Comprobación</th>
+<th>Comando</th>
+<th>Qué debe pasar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IP recibida</strong></td>
+<td><code>ipconfig /all</code></td>
+<td>IP, máscara, puerta de enlace y DNS correctos</td>
+</tr>
+<tr>
+<td><strong>Llegada al servidor</strong></td>
+<td><code>ping &lt;IP del servidor&gt;</code></td>
+<td>Responde</td>
+</tr>
+<tr>
+<td><strong>Resolución del dominio</strong></td>
+<td><code>nslookup techsolutions.lan</code></td>
+<td>Devuelve la IP del controlador</td>
+</tr>
+<tr>
+<td><strong>Resolución por nombre</strong></td>
+<td><code>ping techsolutions.lan</code></td>
+<td>Responde con la IP del controlador</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">El ping solo prueba la red; el nslookup prueba el dominio</p>
+<p>Si el <code>ping</code> por IP funciona pero <code>nslookup</code> del dominio falla, el problema es el <strong>DNS</strong>. Es el caso más frecuente.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><code>Servidor: UnKnown</code> en el nslookup</p>
+<p>Es normal si el DNS no tiene zona de búsqueda inversa. Lo importante es que <strong>la dirección del dominio sea la del controlador</strong>.</p>
+</div>
+<h3 id="el-ping-solo-en-un-sentido">El ping solo en un sentido</h3>
+<p>Es habitual que el cliente llegue al servidor, pero el servidor <strong>no</strong> llegue al cliente. No es una avería:</p>
+<ul>
+<li>El <strong>servidor</strong> tiene habilitada la regla de eco, así que contesta.</li>
+<li>El <strong>cliente</strong> Windows 11 la tiene <strong>desactivada por defecto</strong>, así que no contesta.</li>
+</ul>
+<p>Para una unión al dominio basta con que <strong>el cliente llegue al servidor</strong>. Si quieres ping en ambos sentidos, habilita la regla de eco ICMPv4 también en el cliente (apartado de configuración básica).</p>
+<h2 id="4-poner-nombre-al-equipo">4. Poner nombre al equipo</h2>
+<p>Windows asigna un nombre aleatorio (del tipo <code>DESKTOP-4F8K2LQ</code>). Antes de unirlo, <strong>elige un nombre propio</strong>:</p>
+<ul>
+<li>Máximo <strong>15 caracteres</strong>, solo letras, números y guiones.</li>
+<li><strong>Único</strong> en el dominio.</li>
+<li>Que <strong>identifique</strong> el equipo (por ejemplo, el puesto o el usuario).</li>
+</ul>
+<p><strong>Pasos:</strong> <em>Configuración → Sistema → Información → Cambiar el nombre de este equipo</em>, o desde <code>sysdm.cpl</code>. <strong>Reinicia.</strong></p>
+<p>En los ejemplos de este apartado el cliente se llama <strong><code>PCDEMO</code></strong>.</p>
+<!-- IMG NUEVA: cliente_cambiar_nombre.png — Cambiar nombre del equipo -->
+
+<h2 id="5-unir-al-dominio">5. Unir al dominio</h2>
+<ol>
+<li><em>Windows + R</em> → <code>sysdm.cpl</code>.</li>
+<li>Pestaña <strong>Nombre de equipo → Cambiar…</strong></li>
+<li>En <strong>Miembro de</strong>, selecciona <strong>Dominio</strong> y escribe el nombre DNS: <code>techsolutions.lan</code>.</li>
+<li>Aparece una ventana pidiendo <strong>credenciales</strong>: escribe una cuenta del dominio con permiso para unir equipos, con el dominio por delante: <code>TECHSOLUTIONS\Administrador</code>.</li>
+<li>Debe aparecer <strong>«Bienvenido al dominio techsolutions.lan»</strong>.</li>
+<li><strong>Reinicia.</strong></li>
+</ol>
+<!-- IMG NUEVA: cliente_unir_dominio.png — ventana Cambiar nombre o dominio del equipo -->
+
+<p>Veamos el proceso en el siguiente vídeo:</p>
+<div style="position: relative; width: 70%; padding-bottom: 39.375%; margin: 0 auto;">
+  <iframe src="https://www.youtube-nocookie.com/embed/LxbwB-8b-wg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Unir un equipo cliente a un dominio">
+  </iframe>
+</div>
+
+<details class="info">
+<summary>Otra forma: desde Configuración</summary>
+<p><em>Configuración → Cuentas → Acceso a trabajo o escuela → Conectar → Unir este dispositivo a un dominio de Active Directory local.</em> Es el mismo proceso con otra interfaz.</p>
+</details>
+<h2 id="6-verificar-que-se-ha-unido">6. Verificar que se ha unido</h2>
+<h3 id="en-el-cliente">En el cliente</h3>
+<table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Cómo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dominio del equipo</strong></td>
+<td><code>sysdm.cpl</code> o <em>Configuración → Sistema → Información</em></td>
+<td>Aparece <code>techsolutions.lan</code></td>
+</tr>
+<tr>
+<td><strong>Dominio de la sesión</strong></td>
+<td><code>echo %USERDOMAIN%</code></td>
+<td>El nombre NetBIOS del dominio, tras iniciar sesión con una cuenta del dominio</td>
+</tr>
+<tr>
+<td><strong>Quién ha validado el inicio de sesión</strong></td>
+<td><code>echo %LOGONSERVER%</code></td>
+<td>El nombre del controlador de dominio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="en-el-servidor">En el servidor</h3>
+<table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Cómo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cuenta del equipo</strong></td>
+<td><em>Usuarios y equipos de Active Directory → Computers</em></td>
+<td>Aparece <code>PCDEMO</code></td>
+</tr>
+<tr>
+<td><strong>Registro DNS</strong></td>
+<td><em>Herramientas → DNS → zona del dominio</em></td>
+<td>Aparece un registro de host (A) para <code>PCDEMO</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Si el registro DNS no aparece</p>
+<p>En el cliente, ejecuta <code>ipconfig /registerdns</code> y actualiza la vista del DNS.</p>
+</div>
+<h2 id="7-iniciar-sesion-cuenta-del-equipo-o-del-dominio">7. Iniciar sesión: cuenta del equipo o del dominio</h2>
+<p>Tras el reinicio, en la pantalla de inicio de sesión hay que elegir <strong>Otro usuario</strong>. Aquí aparece la confusión más habitual, porque en el equipo existen <strong>dos tipos de cuentas</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Quién la guarda</th>
+<th>Quién valida la contraseña</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cuenta local</strong></td>
+<td>El propio equipo</td>
+<td>El propio equipo</td>
+</tr>
+<tr>
+<td><strong>Cuenta de dominio</strong></td>
+<td>El controlador de dominio</td>
+<td>El controlador de dominio</td>
+</tr>
+</tbody>
+</table>
+<p>Y <strong>pueden llamarse igual</strong>. El ejemplo clásico:</p>
+<table>
+<thead>
+<tr>
+<th>Lo que escribes</th>
+<th>Qué cuenta es</th>
+<th>Se valida en</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PCDEMO\Administrador</code> o <code>.\Administrador</code></td>
+<td><strong>Administrador local</strong> del equipo</td>
+<td>El propio equipo</td>
+</tr>
+<tr>
+<td><code>TECHSOLUTIONS\Administrador</code></td>
+<td><strong>Administrador del dominio</strong></td>
+<td>El controlador de dominio</td>
+</tr>
+<tr>
+<td><code>Administrador@techsolutions.lan</code></td>
+<td><strong>Administrador del dominio</strong> (otro formato)</td>
+<td>El controlador de dominio</td>
+</tr>
+<tr>
+<td><code>Administrador</code> (sin nada más)</td>
+<td><strong>Ambiguo</strong></td>
+<td>Depende del contexto</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Al escribir solo el nombre, cambias el significado</p>
+<p>Si escribes solo <code>Administrador</code>, no le estás diciendo a Windows <strong>de quién</strong> es esa cuenta, y suele interpretarla como la cuenta <strong>del propio equipo</strong>. Para entrar con una cuenta del dominio hay que indicarlo siempre: <strong><code>DOMINIO\usuario</code></strong> o <strong><code>usuario@dominio</code></strong>. Para una cuenta local, <strong><code>NOMBREEQUIPO\usuario</code></strong> o <strong><code>.\usuario</code></strong>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">El texto «Iniciar sesión en:»</p>
+<p>Bajo el cuadro de usuario Windows puede mostrar <em>«Iniciar sesión en: …»</em>, indicando a qué se refiere un usuario sin prefijo. Es un indicador útil, pero <strong>no te fíes de él: escribe siempre el prefijo</strong>.</p>
+</div>
+<!-- IMG NUEVA: cliente_login_otro_usuario.png — pantalla de inicio de sesión con DOMINIO\usuario -->
+
+<h3 id="demostracion-comprobar-con-que-cuenta-has-entrado">Demostración: comprobar con qué cuenta has entrado</h3>
+<p>Inicia sesión con cada una y ejecuta en el símbolo del sistema:</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Cuenta local</th>
+<th>Cuenta de dominio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>whoami</code></td>
+<td><code>pcdemo\administrador</code></td>
+<td><code>techsolutions\administrador</code></td>
+</tr>
+<tr>
+<td><code>echo %USERDOMAIN%</code></td>
+<td><code>PCDEMO</code></td>
+<td><code>TECHSOLUTIONS</code></td>
+</tr>
+<tr>
+<td><code>echo %LOGONSERVER%</code></td>
+<td><code>\\PCDEMO</code></td>
+<td><code>\\</code> + nombre del controlador</td>
+</tr>
+</tbody>
+</table>
+<p>Además, cada cuenta tiene <strong>su propio perfil</strong>: al iniciar sesión por primera vez con la cuenta de dominio se crea una carpeta nueva en <code>C:\Users</code>. Si ya existía una con el mismo nombre (la de la cuenta local), el perfil del dominio puede aparecer con el <strong>nombre del dominio como sufijo</strong>, algo como <code>Administrador.TECHSOLUTIONS</code>.</p>
+<details class="warning">
+<summary>Preparar la demostración: el Administrador local de Windows 11 está desactivado</summary>
+<p>En un cliente Windows 11, la cuenta integrada <strong>Administrador está desactivada</strong> por defecto. Para poder enseñar el contraste con <code>DOMINIO\Administrador</code>, el profesor puede <strong>activarla solo para la demostración</strong>, desde un símbolo del sistema <strong>como administrador</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>net user administrador /active:yes
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>net user administrador *
+</span></code></pre></div>
+<p>El segundo comando pide la contraseña (sin mostrarla). <strong>Al terminar, desactívala de nuevo:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>net user administrador /active:no
+</span></code></pre></div>
+<p>En un equipo real esta cuenta se deja <strong>desactivada</strong>: es un blanco habitual de ataques. Si prefieres no activarla, el contraste también se puede hacer con el usuario local creado durante la instalación de Windows (por ejemplo, <code>PCDEMO\alumno</code>).</p>
+</details>
+<h2 id="8-que-cambia-al-estar-en-un-dominio">8. Qué cambia al estar en un dominio</h2>
+<table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Cómo queda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cuentas locales</strong></td>
+<td><strong>Siguen existiendo</strong>: se puede iniciar sesión con ellas aunque el controlador esté apagado</td>
+</tr>
+<tr>
+<td><strong>Cuentas del dominio</strong></td>
+<td>Los usuarios del dominio pueden iniciar sesión en el equipo</td>
+</tr>
+<tr>
+<td><strong>Administradores</strong></td>
+<td>Los administradores del dominio se convierten en <strong>administradores locales</strong> del equipo</td>
+</tr>
+<tr>
+<td><strong>Controlador apagado</strong></td>
+<td>Los usuarios que ya habían entrado antes pueden hacerlo con credenciales en caché; los nuevos, no</td>
+</tr>
+<tr>
+<td><strong>Políticas</strong></td>
+<td>El equipo empieza a recibir las directivas de grupo del dominio (UD siguientes)</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>¿Quién puede unir equipos al dominio?</summary>
+<p>Los administradores del dominio, sí. Pero por defecto <strong>un usuario normal del dominio puede unir hasta 10 equipos</strong>. Es una configuración que conviene restringir en un entorno real. Verifica el valor en la documentación de Microsoft para tu versión.</p>
+</details>
+<h2 id="9-salir-del-dominio">9. Salir del dominio</h2>
+<ol>
+<li><em>Windows + R</em> → <code>sysdm.cpl</code> → <strong>Cambiar…</strong></li>
+<li>Selecciona <strong>Grupo de trabajo</strong>, escribe un nombre y acepta.</li>
+<li>Pide credenciales y <strong>reinicia</strong>.</li>
+<li>Hace falta conocer la <strong>contraseña de un administrador local</strong> del equipo, porque con la cuenta del dominio ya no se podrá entrar.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">La cuenta del equipo no desaparece</p>
+<p>En el servidor, el objeto del equipo <strong>sigue en Active Directory</strong>, deshabilitado. Si el equipo no va a volver, bórralo en <em>Usuarios y equipos de Active Directory</em>.</p>
+</div>
+<h3 id="clones-e-instantaneas">Clones e instantáneas</h3>
+<ul>
+<li><strong>Clona el cliente antes de unirlo.</strong> Un clon de un equipo ya unido tiene la misma identidad que el original, y dos equipos con el mismo nombre en un dominio entran en conflicto.</li>
+<li>Si restauras una <strong>instantánea de un cliente ya unido</strong> puede aparecer <em>«La relación de confianza entre esta estación de trabajo y el dominio principal ha fallado»</em>, porque la contraseña interna del equipo ha retrocedido. Se soluciona saliendo del dominio y volviendo a unirlo.</li>
+</ul>
+<h2 id="errores-tipicos">Errores típicos</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>«No se pudo contactar con un controlador de dominio»</em></td>
+<td>DNS del cliente incorrecto</td>
+<td>Poner la IP del controlador como DNS</td>
+</tr>
+<tr>
+<td><code>nslookup</code> del dominio falla pero el <code>ping</code> por IP funciona</td>
+<td>DNS</td>
+<td>Revisar el DNS del cliente y que el servicio DNS del servidor esté activo</td>
+</tr>
+<tr>
+<td>No hay <code>ping</code> al servidor</td>
+<td>Red interna con nombre distinto, IP de otro rango o regla ICMP deshabilitada</td>
+<td>Revisar red de VirtualBox, IP y firewall del servidor</td>
+</tr>
+<tr>
+<td>No aparece la opción de dominio</td>
+<td>Windows 11 Home</td>
+<td>Usar Pro, Enterprise o Education</td>
+</tr>
+<tr>
+<td>La unión falla con credenciales correctas</td>
+<td>Hora desajustada</td>
+<td>Corregir hora y zona horaria</td>
+</tr>
+<tr>
+<td><em>«La cuenta ya existe»</em> o conflicto de nombre</td>
+<td>Otro equipo con el mismo nombre</td>
+<td>Cambiar el nombre del cliente</td>
+</tr>
+<tr>
+<td>No se puede iniciar sesión con el usuario del dominio</td>
+<td>Se ha escrito sin prefijo y se interpreta como cuenta local</td>
+<td>Usar <code>DOMINIO\usuario</code> o <code>usuario@dominio</code></td>
+</tr>
+<tr>
+<td>Entra, pero con un perfil vacío distinto del esperado</td>
+<td>Es el perfil de la cuenta del dominio, otro distinto del local</td>
+<td>Es normal: cada cuenta tiene el suyo</td>
+</tr>
+<tr>
+<td><em>«La relación de confianza… ha fallado»</em></td>
+<td>Instantánea restaurada</td>
+<td>Salir del dominio y volver a unir</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lista-de-comprobacion">Lista de comprobación</h2>
+<ul>
+<li>[ ] El cliente es <strong>Windows 11 Pro</strong> (o Enterprise/Education).</li>
+<li>[ ] Está en la <strong>misma red interna</strong> que el servidor, con <strong>un solo adaptador</strong>.</li>
+<li>[ ] Su <strong>DNS es la IP del controlador de dominio</strong>.</li>
+<li>[ ] <code>ping</code> al servidor y <code>nslookup</code> del dominio funcionan.</li>
+<li>[ ] Tiene <strong>nombre propio</strong> y se ha reiniciado.</li>
+<li>[ ] Se ha <strong>unido al dominio</strong> y aparece en <em>Computers</em> y en el DNS del servidor.</li>
+<li>[ ] Sabes entrar con <strong><code>DOMINIO\usuario</code></strong> y con <strong><code>NOMBREEQUIPO\usuario</code></strong>, y distinguir una de otra con <code>whoami</code>.</li>
+</ul>
+<h2 id="con-powershell-opcional">Con PowerShell (opcional)</h2>
+<details class="note">
+<summary>Para alumnado más avanzado</summary>
+<p>Todo el proceso se puede hacer desde la consola. <strong>No es necesario para seguir el módulo.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cambiar el nombre</td>
+<td><code>Rename-Computer -NewName "PCDEMO" -Restart</code></td>
+</tr>
+<tr>
+<td>Poner el DNS</td>
+<td><code>Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.1.10</code></td>
+</tr>
+<tr>
+<td>Unir al dominio</td>
+<td><code>Add-Computer -DomainName "techsolutions.lan" -Credential "TECHSOLUTIONS\Administrador" -Restart</code></td>
+</tr>
+<tr>
+<td>Ver el dominio del equipo</td>
+<td><code>(Get-CimInstance Win32_ComputerSystem).Domain</code></td>
+</tr>
+<tr>
+<td>Salir del dominio</td>
+<td><code>Remove-Computer -WorkgroupName "WORKGROUP" -Restart</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preguntas de lectura</strong></p>
+<ol>
+<li>¿Por qué <code>Add-Computer</code> necesita <code>-Credential</code>?</li>
+<li>¿Qué devolvería el cuarto comando en un equipo que no está en ningún dominio?</li>
+<li>¿Qué pasaría si ejecutas <code>Remove-Computer</code> sin conocer la contraseña de un administrador local?</li>
+</ol>
+</details>
+<h2 id="resumen">Resumen</h2>
+<ul>
+<li>Unir un equipo al dominio hace que <strong>el controlador valide las cuentas del dominio</strong>.</li>
+<li>La secuencia es: <strong>red → DNS apuntando al controlador → verificar → nombre → unir → verificar</strong>.</li>
+<li>El <strong>DNS</strong> del cliente debe ser el controlador: es la causa de casi todos los fallos.</li>
+<li>En el equipo conviven <strong>cuentas locales</strong> y <strong>cuentas de dominio</strong>, y pueden llamarse igual.</li>
+<li>Para entrar con una cuenta del dominio hay que escribir <strong><code>DOMINIO\usuario</code></strong> o <strong><code>usuario@dominio</code></strong>; sin prefijo, Windows suele entender una cuenta local.</li>
+<li>Con <code>whoami</code>, <code>%USERDOMAIN%</code> y <code>%LOGONSERVER%</code> se comprueba con qué cuenta se ha entrado.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../06_06_dominio/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Crear un dominio con Active Directory">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Crear un dominio con Active Directory
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06_08_documentar_instalacion/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Documentar la instalación de un servidor">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Documentar la instalación de un servidor
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

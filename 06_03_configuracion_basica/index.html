@@ -1,0 +1,2465 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD06 - Windows Server. instalación y configuración">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/06_03_configuracion_basica/">
+      
+      
+        <link rel="prev" href="../06_02_instalacion_windows_server/">
+      
+      
+        <link rel="next" href="../06_04_servidor_router/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Configuración básica del servidor - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#el-administrador-del-servidor" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuración básica del servidor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_sistemas_operativos_actuales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_licencias_software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_04_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-administrador-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Administrador del servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nombre-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nombre del equipo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de red
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de red">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#donde-se-configura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dónde se configura
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-poner-en-cada-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qué poner en cada campo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varios-adaptadores-identificarlos-y-nombrarlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Varios adaptadores: identificarlos y nombrarlos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobar la configuración
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-de-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall de Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall de Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permitir-el-ping-icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir el ping (ICMP)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hora-y-zona-horaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hora y zona horaria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizaciones
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-y-caracteristicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles y características
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles y características">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-instalarlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo instalarlos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_unir_cliente_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_documentar_instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-administrador-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Administrador del servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nombre-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nombre del equipo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de red
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de red">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#donde-se-configura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dónde se configura
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-poner-en-cada-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qué poner en cada campo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varios-adaptadores-identificarlos-y-nombrarlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Varios adaptadores: identificarlos y nombrarlos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobar la configuración
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-de-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall de Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall de Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permitir-el-ping-icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir el ping (ICMP)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hora-y-zona-horaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hora y zona horaria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizaciones
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-y-caracteristicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles y características
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles y características">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-instalarlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo instalarlos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errores típicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-comprobacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lista de comprobación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con-powershell-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Con PowerShell (opcional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Configuración básica del servidor</h1>
+
+<p>Un servidor recién instalado se comporta como cualquier Windows: todavía no sirve nada a nadie. Antes de convertirlo en controlador de dominio, servidor de archivos o lo que toque, hay que dejarlo con una <strong>configuración base ordenada</strong>: un nombre definitivo, una red bien configurada, el firewall en su sitio, la hora correcta y las actualizaciones bajo control.</p>
+<p>Todo esto se hace desde un mismo sitio, el <strong>Administrador del servidor</strong>, en el apartado <strong>Servidor local</strong>. El orden importa: algunas decisiones (el nombre, la red) son muy incómodas de cambiar cuando el servidor ya tiene roles instalados, y la más delicada, <strong>el nombre del equipo, debe fijarse antes de crear un dominio</strong>.</p>
+<h2 id="el-administrador-del-servidor">El Administrador del servidor</h2>
+<p>Se abre solo al iniciar sesión. Desde <strong>Servidor local</strong> se ven y se modifican las propiedades principales del equipo.</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/administrador_servidor_local.png" data-desc-position="bottom"><img alt="Administrador del servidor" src="../imgs/instalacion/administrador_servidor_local.png" width="80%"></a>
+<br>
+<figcaption>Administrador del servidor: propiedades del servidor local</figcaption>
+</figure>
+<p>Los valores que vamos a tocar en este apartado aparecen como enlaces azules: <strong>nombre del equipo</strong>, <strong>Ethernet</strong>, <strong>Firewall</strong>, <strong>Zona horaria</strong>, <strong>Windows Update</strong>.</p>
+<h2 id="nombre-del-equipo">Nombre del equipo</h2>
+<p>Es el nombre con el que el servidor se identificará en la red y, más adelante, en el dominio.</p>
+<p>Reglas del nombre:</p>
+<ul>
+<li><strong>Máximo 15 caracteres</strong> (por compatibilidad con NetBIOS).</li>
+<li>Solo <strong>letras, números y guiones</strong>. Sin espacios ni acentos.</li>
+<li>Debe ser <strong>único</strong> en la red.</li>
+<li>Conviene que <strong>diga algo</strong>: rol y número, por ejemplo <code>SRV01</code> o <code>DC01</code>.</li>
+</ul>
+<p><strong>Pasos</strong></p>
+<ol>
+<li><em>Administrador del servidor → Servidor local → Nombre de equipo</em>.</li>
+<li>Pulsa <strong>Cambiar…</strong> y escribe el nuevo nombre.</li>
+<li>Acepta y <strong>reinicia</strong>.</li>
+</ol>
+<!-- IMG NUEVA: cambiar_nombre_equipo.png — ventana Cambiar nombre o dominio del equipo -->
+
+<div class="admonition warning">
+<p class="admonition-title">Cámbialo ahora, no después</p>
+<p>Renombrar un controlador de dominio ya promocionado es posible pero delicado. Si el servidor va a ser DC, <strong>elige el nombre definitivo antes de instalar Active Directory</strong>.</p>
+</div>
+<h2 id="configuracion-de-red">Configuración de red</h2>
+<p>Un servidor debe tener una <strong>dirección IP estática</strong>: otros equipos lo buscan siempre en la misma dirección, y si cambiara, dejarían de encontrarlo.</p>
+<p>Para recordar qué significa cada parámetro, consulta el <strong><a href="../06_09_recordatorio_red/">Apéndice A: Recordatorio de red</a></strong>.</p>
+<h3 id="donde-se-configura">Dónde se configura</h3>
+<p><em>Servidor local → Ethernet</em> (o desde el Panel de control: <em>Redes e Internet → Centro de redes → Cambiar configuración del adaptador</em>).</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/ConexionesDeRedConfig.png" data-desc-position="bottom"><img alt="Conexiones de red" src="../imgs/instalacion/ConexionesDeRedConfig.png" width="80%"></a>
+<br>
+<figcaption>Panel de control: conexiones de red</figcaption>
+</figure>
+<p>Sobre el adaptador: clic derecho → <strong>Propiedades</strong> → <strong>Protocolo de Internet versión 4 (TCP/IPv4)</strong> → <strong>Propiedades</strong>.</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/intro/config_ipv4.png" data-desc-position="bottom"><img alt="Configuración IPv4" src="../imgs/intro/config_ipv4.png" width="70%"></a>
+<br>
+<figcaption>Propiedades de TCP/IPv4: dirección IP, máscara, puerta de enlace y DNS</figcaption>
+</figure>
+<h3 id="que-poner-en-cada-campo">Qué poner en cada campo</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Qué indica</th>
+<th>Regla práctica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dirección IP</strong></td>
+<td>Identidad del servidor en esa red</td>
+<td>Fija, dentro del rango de la red</td>
+</tr>
+<tr>
+<td><strong>Máscara de subred</strong></td>
+<td>Qué parte de la IP es la red</td>
+<td>La misma que el resto de equipos de esa red</td>
+</tr>
+<tr>
+<td><strong>Puerta de enlace</strong></td>
+<td>Por dónde se sale a otras redes</td>
+<td>Solo en el adaptador que da salida fuera de la red</td>
+</tr>
+<tr>
+<td><strong>Servidor DNS</strong></td>
+<td>Quién resuelve los nombres</td>
+<td>Depende del rol (ver más abajo)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Una sola puerta de enlace</p>
+<p>Si el servidor tiene <strong>varios adaptadores</strong>, <strong>solo uno</strong> debe llevar puerta de enlace: el que da salida hacia fuera (Internet u otra red). Con dos puertas de enlace el servidor no sabe por dónde enviar los paquetes y la conectividad se vuelve errática.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">El DNS cambia con el rol</p>
+<ul>
+<li><strong>Antes</strong> de ser controlador de dominio, puede apuntar a un DNS externo, para poder descargar actualizaciones.</li>
+<li><strong>Cuando sea controlador de dominio</strong>, su DNS debe ser <strong>él mismo</strong>. Lo veremos en el apartado del dominio.</li>
+<li>Los <strong>clientes del dominio</strong> deben usar siempre como DNS al controlador de dominio, no uno público.</li>
+</ul>
+</div>
+<h3 id="varios-adaptadores-identificarlos-y-nombrarlos">Varios adaptadores: identificarlos y nombrarlos</h3>
+<p>Windows nombra las tarjetas por orden: <em>Ethernet</em>, <em>Ethernet 2</em>, <em>Ethernet 3</em>… sin indicar a qué red está conectada cada una. En un servidor con varias tarjetas conviene:</p>
+<ol>
+<li><strong>Identificar</strong> cada adaptador por su dirección MAC (<em>Ethernet → Estado → Detalles</em> o <code>ipconfig /all</code>).</li>
+<li><strong>Renombrarlo</strong> con algo descriptivo (clic derecho → <em>Cambiar nombre</em>): <code>Internet</code>, <code>LAN-oficina</code>, etc.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Nombrar bien ahorra errores</p>
+<p>Cuando un servidor tiene tres tarjetas, «Ethernet 2» no significa nada. Un nombre claro evita configurar la IP en la tarjeta equivocada.</p>
+</div>
+<h3 id="ipv6">IPv6</h3>
+<p>Si no se usa IPv6 en la red, es frecuente desmarcarlo en las propiedades del adaptador para simplificar el laboratorio.</p>
+<div class="admonition note">
+<p class="admonition-title">Precaución</p>
+<p>Microsoft no recomienda deshabilitar IPv6 en equipos de producción, porque algunos componentes del sistema dependen de él. En un laboratorio no suele dar problemas, pero en un entorno real conviene consultar la documentación antes de hacerlo.</p>
+</div>
+<h3 id="comprobar-la-configuracion">Comprobar la configuración</h3>
+<p>Con una ventana de símbolo del sistema:</p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Qué comprueba</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ipconfig /all</code></td>
+<td>IP, máscara, puerta de enlace, DNS y MAC de cada adaptador</td>
+</tr>
+<tr>
+<td><code>ping &lt;puerta de enlace&gt;</code></td>
+<td>Que llegas a tu router o red de salida</td>
+</tr>
+<tr>
+<td><code>ping 8.8.8.8</code></td>
+<td>Que sales a Internet por IP</td>
+</tr>
+<tr>
+<td><code>ping www.google.com</code></td>
+<td>Que además el DNS funciona</td>
+</tr>
+<tr>
+<td><code>route print</code></td>
+<td>La tabla de rutas del servidor</td>
+</tr>
+</tbody>
+</table>
+<p>Interpreta el resultado <strong>de cerca a lejos</strong>: si falla el ping a la puerta de enlace, no tiene sentido probar Internet.</p>
+<h2 id="firewall-de-windows">Firewall de Windows</h2>
+<p>El firewall viene <strong>activado</strong> y bloquea por defecto el tráfico entrante no solicitado, <strong>incluido el ping</strong> (ICMP). Por eso un servidor recién instalado «no responde al ping» aunque la red esté bien: no está estropeado, está protegido.</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/Herramientas_de_firewall.png" data-desc-position="bottom"><img alt="Firewall de Windows con seguridad avanzada" src="../imgs/instalacion/Herramientas_de_firewall.png" width="70%"></a>
+<br>
+<figcaption>Firewall de Windows Defender con seguridad avanzada</figcaption>
+</figure>
+<div class="admonition danger">
+<p class="admonition-title">No lo desactives</p>
+<p>Es tentador apagar el firewall para que «todo funcione». Un servidor con el firewall apagado queda expuesto. Lo correcto es <strong>abrir solo lo que hace falta</strong>.</p>
+</div>
+<h3 id="permitir-el-ping-icmp">Permitir el ping (ICMP)</h3>
+<p>Windows ya trae una regla predefinida, desactivada por defecto. Solo hay que <strong>habilitarla</strong>:</p>
+<ol>
+<li>Abre <strong>Firewall de Windows Defender con seguridad avanzada</strong> (búscalo desde el menú Inicio).</li>
+<li>Entra en <strong>Reglas de entrada</strong>.</li>
+<li>Busca <strong>Compartir archivos e impresoras (petición eco: ICMPv4 de entrada)</strong>.</li>
+<li>Clic derecho → <strong>Habilitar regla</strong>.</li>
+</ol>
+<!-- IMG NUEVA: regla_icmp_habilitar.png — reglas de entrada con la regla de eco ICMPv4 habilitada -->
+
+<div class="admonition note">
+<p class="admonition-title">Una regla por perfil</p>
+<p>Hay una regla por cada <strong>perfil de red</strong> (dominio, privado, público). Habilita la que corresponda al perfil de la red de tu servidor. Cuando el servidor pase a formar parte de un dominio, la red pasará a perfil <strong>Dominio</strong>.</p>
+</div>
+<details class="info">
+<summary>Alternativa: crear una regla propia</summary>
+<p>Si no encuentras la regla predefinida, o quieres restringirla a ciertas direcciones:</p>
+<ol>
+<li><em>Reglas de entrada → Nueva regla…</em></li>
+<li><strong>Personalizada</strong> → todos los programas → protocolo <strong>ICMPv4</strong>.</li>
+<li>Elige el ámbito (cualquier IP, o un rango concreto).</li>
+<li><strong>Permitir la conexión</strong>, selecciona los perfiles y ponle un nombre.</li>
+</ol>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">Hazlo en todos los equipos Windows</p>
+<p>La misma regla hay que habilitarla en los <strong>clientes</strong>: si no, el servidor no podrá hacer ping a ellos aunque ellos sí puedan hacerlo al servidor.</p>
+</div>
+<h2 id="hora-y-zona-horaria">Hora y zona horaria</h2>
+<p>Parece un detalle menor, pero en un dominio <strong>la hora es crítica</strong>: la autenticación (Kerberos) falla si el reloj de un equipo se desvía más de unos <strong>5 minutos</strong> del controlador de dominio.</p>
+<ol>
+<li><em>Servidor local → Zona horaria</em> → <strong>Cambiar zona horaria</strong>.</li>
+<li>Selecciona la zona correcta.</li>
+<li>Verifica la hora.</li>
+</ol>
+<p>En una MV, la hora puede desviarse por la suspensión o las instantáneas. Comprueba el estado con:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>w32tm /query /status
+</span></code></pre></div>
+<h2 id="actualizaciones">Actualizaciones</h2>
+<p>Mantener un servidor actualizado es esencial para la seguridad, pero con una diferencia respecto a un equipo cliente: <strong>un servidor no se puede reiniciar cuando le apetece al sistema</strong>, porque da servicio a otros equipos.</p>
+<table>
+<thead>
+<tr>
+<th>Estrategia</th>
+<th>Ventaja</th>
+<th>Riesgo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Instalación automática</strong></td>
+<td>Siempre al día</td>
+<td>Reinicios inesperados; una actualización problemática afecta a todo</td>
+</tr>
+<tr>
+<td><strong>Descargar y avisar</strong></td>
+<td>Tú eliges cuándo instalar</td>
+<td>Hay que acordarse de hacerlo</td>
+</tr>
+<tr>
+<td><strong>Pausar o manual</strong></td>
+<td>Control total</td>
+<td>Se acumulan vulnerabilidades</td>
+</tr>
+</tbody>
+</table>
+<p>En un entorno profesional se suelen instalar <strong>en una ventana de mantenimiento</strong>, con una copia o instantánea previa. En un laboratorio con muchos equipos descargando a la vez, puede interesar limitar o pausar las descargas para no saturar la red.</p>
+<!-- IMG NUEVA: windows_update_pausa.png — pantalla de Windows Update del servidor -->
+
+<div class="admonition warning">
+<p class="admonition-title">Antes de actualizar, instantánea</p>
+<p>Si el servidor es una MV, haz una instantánea antes de aplicar actualizaciones importantes.</p>
+</div>
+<h2 id="roles-y-caracteristicas">Roles y características</h2>
+<p>Hasta ahora el servidor es un Windows con nombre y red. Lo que lo convierte en <strong>servidor de algo</strong> son los roles y las características.</p>
+<ul>
+<li><strong>Rol</strong>: servicio principal (dominio, DNS, DHCP, archivos…).</li>
+<li><strong>Característica</strong>: complemento (copia de seguridad, cifrado…).</li>
+</ul>
+<h3 id="como-instalarlos">Cómo instalarlos</h3>
+<ol>
+<li><em>Administrador del servidor → Administrar → Agregar roles y características</em>.</li>
+</ol>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/WindowsServerRolesCaracgaristicas.png" data-desc-position="bottom"><img alt="Agregar roles y características" src="../imgs/instalacion/WindowsServerRolesCaracgaristicas.png" width="70%"></a>
+<br>
+<figcaption>Menú Administrar → Agregar roles y características</figcaption>
+</figure>
+<ol>
+<li>Selecciona <strong>Instalación basada en características o en roles</strong>.</li>
+<li>Elige el <strong>servidor de destino</strong> (el local).</li>
+<li>Marca el <strong>rol</strong> que quieres instalar y acepta las <strong>características adicionales</strong> que pida.</li>
+<li>Revisa y pulsa <strong>Instalar</strong>. Reinicia si lo pide.</li>
+</ol>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/instalacion/instalacion_roles_caracteristicas.png" data-desc-position="bottom"><img alt="Asistente de roles y características" src="../imgs/instalacion/instalacion_roles_caracteristicas.png" width="70%"></a>
+<br>
+<figcaption>Asistente para la instalación de roles y características</figcaption>
+</figure>
+<div class="admonition info">
+<p class="admonition-title">Instalar el rol no es configurarlo</p>
+<p>En muchos roles, la instalación solo copia los componentes. Después hay que <strong>configurarlo</strong> con un asistente posterior (por ejemplo, promocionar el servidor a controlador de dominio). Lo veremos rol por rol.</p>
+</div>
+<h2 id="errores-tipicos">Errores típicos</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El servidor no responde al ping</td>
+<td>Firewall: regla ICMP deshabilitada</td>
+<td>Habilitar la regla de eco de ICMPv4</td>
+</tr>
+<tr>
+<td>Se llega a la red local pero no a Internet</td>
+<td>Falta puerta de enlace o está en el adaptador equivocado</td>
+<td>Revisar <code>ipconfig /all</code> y la tabla de rutas</td>
+</tr>
+<tr>
+<td>Conectividad errática con varias tarjetas</td>
+<td>Más de una puerta de enlace</td>
+<td>Dejarla solo en el adaptador de salida</td>
+</tr>
+<tr>
+<td>Se llega a Internet por IP pero no por nombre</td>
+<td>DNS incorrecto</td>
+<td>Revisar el servidor DNS del adaptador</td>
+</tr>
+<tr>
+<td>Se configuró la IP en la tarjeta equivocada</td>
+<td>Adaptadores sin identificar</td>
+<td>Comprobar por MAC y renombrar</td>
+</tr>
+<tr>
+<td>Fallos de autenticación en el dominio</td>
+<td>Hora desajustada</td>
+<td>Corregir zona horaria y sincronizar</td>
+</tr>
+<tr>
+<td>No deja poner el nombre</td>
+<td>Más de 15 caracteres o caracteres no válidos</td>
+<td>Ajustar el nombre</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lista-de-comprobacion">Lista de comprobación</h2>
+<ul>
+<li>[ ] El servidor tiene un <strong>nombre definitivo</strong> de máximo 15 caracteres.</li>
+<li>[ ] Cada adaptador tiene <strong>IP estática</strong> y el nombre descriptivo.</li>
+<li>[ ] Solo el adaptador de salida tiene <strong>puerta de enlace</strong>.</li>
+<li>[ ] <code>ping</code> funciona hasta la puerta de enlace, a una IP de Internet y a un nombre.</li>
+<li>[ ] El <strong>firewall sigue activado</strong> y la regla de eco ICMPv4 está habilitada.</li>
+<li>[ ] <strong>Zona horaria</strong> y hora correctas.</li>
+<li>[ ] Sabes cómo <strong>instalar un rol</strong> desde el Administrador del servidor.</li>
+</ul>
+<h2 id="con-powershell-opcional">Con PowerShell (opcional)</h2>
+<details class="note">
+<summary>Para alumnado más avanzado</summary>
+<p>Todo lo anterior se puede hacer desde la consola. <strong>No es necesario para seguir el módulo.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cambiar el nombre y reiniciar</td>
+<td><code>Rename-Computer -NewName "SRV01" -Restart</code></td>
+</tr>
+<tr>
+<td>Renombrar un adaptador</td>
+<td><code>Rename-NetAdapter -Name "Ethernet" -NewName "Internet"</code></td>
+</tr>
+<tr>
+<td>Desactivar DHCP en el adaptador</td>
+<td><code>Set-NetIPInterface -InterfaceAlias "Internet" -Dhcp Disabled</code></td>
+</tr>
+<tr>
+<td>Asignar IP, máscara y puerta de enlace</td>
+<td><code>New-NetIPAddress -InterfaceAlias "Internet" -IPAddress 192.168.1.10 -PrefixLength 24 -DefaultGateway 192.168.1.1</code></td>
+</tr>
+<tr>
+<td>Asignar DNS</td>
+<td><code>Set-DnsClientServerAddress -InterfaceAlias "Internet" -ServerAddresses 192.168.1.1</code></td>
+</tr>
+<tr>
+<td>Ver los adaptadores y su MAC</td>
+<td><code>Get-NetAdapter</code></td>
+</tr>
+<tr>
+<td>Habilitar el ping</td>
+<td><code>Enable-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)"</code></td>
+</tr>
+<tr>
+<td>Cambiar la zona horaria</td>
+<td><code>Set-TimeZone -Id "Romance Standard Time"</code></td>
+</tr>
+<tr>
+<td>Ver los roles disponibles</td>
+<td><code>Get-WindowsFeature</code></td>
+</tr>
+<tr>
+<td>Instalar un rol</td>
+<td><code>Install-WindowsFeature -Name &lt;rol&gt; -IncludeManagementTools</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preguntas de lectura</strong></p>
+<ol>
+<li>¿Por qué hay que desactivar DHCP antes de asignar una IP estática?</li>
+<li>¿Qué diferencia hay entre <code>-PrefixLength 24</code> y la máscara <code>255.255.255.0</code>?</li>
+<li>El nombre de la regla de firewall aparece en inglés. ¿Qué pasaría si el servidor estuviera en español?</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Nombre de la regla</p>
+<p><code>DisplayName</code> depende del idioma del sistema. Si falla, lista las reglas con <code>Get-NetFirewallRule</code> y busca la de ICMPv4.</p>
+</div>
+</details>
+<h2 id="resumen">Resumen</h2>
+<ul>
+<li>La configuración base se hace desde el <strong>Administrador del servidor → Servidor local</strong>.</li>
+<li>El <strong>nombre</strong> se fija antes de crear el dominio; la <strong>IP</strong> es estática; solo una <strong>puerta de enlace</strong>.</li>
+<li>El <strong>firewall se queda activado</strong>: se habilita solo la regla del ping.</li>
+<li>La <strong>hora</strong> importa en un dominio, y las <strong>actualizaciones</strong> se instalan de forma controlada.</li>
+<li>Los <strong>roles</strong> son lo que hace de un Windows un servidor: se instalan desde el asistente, y luego se configuran.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../06_02_instalacion_windows_server/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Instalación de Windows Server 2025">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Instalación de Windows Server 2025
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06_04_servidor_router/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: El servidor como router (enrutamiento y NAT)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                El servidor como router (enrutamiento y NAT)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

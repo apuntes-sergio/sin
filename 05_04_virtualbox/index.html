@@ -1,0 +1,2450 @@
+<!DOCTYPE html><html lang="es" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UD05 - Virtualización e instalación de SSOO">
+      
+      
+        <meta name="author" content="Sergio Rey Martínez">
+      
+      
+        <link rel="canonical" href="https://sergio-apuntes.github.io/sin/05_04_virtualbox/">
+      
+      
+        <link rel="prev" href="../05_03_virtualizacion/">
+      
+      
+        <link rel="next" href="../05_05_redes_virtualbox/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>VirtualBox; instalación y primera máquina virtual - Apuntes Sistemas Informáticos - DAM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#instalacion-de-virtualbox" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-header__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apuntes Sistemas Informáticos - DAM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VirtualBox; instalación y primera máquina virtual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo oscuro" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green" aria-label="Cambiar a modo claro" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Apuntes Sistemas Informáticos - DAM" class="md-nav__button md-logo" aria-label="Apuntes Sistemas Informáticos - DAM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Apuntes Sistemas Informáticos - DAM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware y Arquitectura
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware y Arquitectura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción al sistema informático
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_02_representacion_informacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representación de la información
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_03_cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_04_placa_base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_05_memoria/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La memoria RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_06_almacenamiento/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Almacenamiento
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_07_perifericos_conectores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Periféricos y conectores externos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_08_fuentes_alimentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La fuente de alimentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_09_arranque_diagnostico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arranque, diagnóstico y resolución de averías
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_10_ejercicio_integrador/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicio Integrador
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Fundamentos de redes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamentos de redes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_01_introduccion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es una red y para qué sirve?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_02_tipos_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tipos de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_03_topologias_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Topologías de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_04_medios_transmision/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Medios de transmisión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_05_dispositivos_interconexion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispositivos de interconexión
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_06_modelo_osi_tcpip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de referencia OSI y TCP/IP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Direccionamiento IP y subnetting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Direccionamiento IP y subnetting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_01_direccion_ip_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirección IP, estructura y clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_02_ip_publica_privada_nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPs públicas, privadas y NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_03_mascara_cidr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La máscara de subred y notación CIDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_04_calculo_subredes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cálculo de subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_05_vlsm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLSM — Subredes de tamaño variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_06_ipv6_ipcalc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6 e ipcalc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Simulación de redes con Packet Tracer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Simulación de redes con Packet Tracer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_01_introduccion_packet_tracer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_02_primera_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primera red en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_03_ejercicios_lan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios de redes LAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_04_router_gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El router — Gateway y conexión entre subredes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_05_ejercicios_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios con router — Escenarios de empresa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_06_proyecto_isca_dam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Proyecto — Red de ISCA_DAM en Packet Tracer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_07_verificacion_documentacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verificación, documentación y exportación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Virtualización e instalación de SSOO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Virtualización e instalación de SSOO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_01_sistemas_operativos_actuales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sistemas operativos actuales y cómo elegir
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_02_licencias_software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias de software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_03_virtualizacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualización; conceptos, tipos y requisitos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox; instalación y primera máquina virtual
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de VirtualBox
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de VirtualBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-instalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antes de instalar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-segun-el-anfitrion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación según el anfitrión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-pack-y-guest-additions-no-son-lo-mismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Pack y Guest Additions: no son lo mismo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-clave-antes-de-crear-una-mv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptos clave antes de crear una MV
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos clave antes de crear una MV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-disco-virtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de disco virtual
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-tu-primera-mv-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear tu primera MV: Windows 11
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear tu primera MV: Windows 11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-minimos-de-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos mínimos de Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso a paso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-de-la-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Después de la instalación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestores-de-arranque" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestores de arranque
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestores de arranque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-secuencia-de-arranque" class="md-nav__link">
+    <span class="md-ellipsis">
+      La secuencia de arranque
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#los-gestores-que-veras-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los gestores que verás en el curso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uefi-frente-a-bios-clasica" class="md-nav__link">
+    <span class="md-ellipsis">
+      UEFI frente a BIOS clásica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dual-boot-dos-sistemas-en-un-mismo-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dual boot: dos sistemas en un mismo equipo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividades en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividades en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-1-crea-tu-mv-con-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad 1: Crea tu MV con Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-2-preguntas-de-analisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad 2: Preguntas de análisis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_05_redes_virtualbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redes en VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_06_instantaneas_clones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instantáneas, clones y exportación de MV
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instalación de sistemas operativos de servidor privativos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Instalación de sistemas operativos de servidor privativos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_01_grupo_trabajo_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Del grupo de trabajo al dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_02_instalacion_windows_server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Windows Server 2025
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_03_configuracion_basica/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuración básica del servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_04_servidor_router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    El servidor como router (enrutamiento y NAT)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_05_discos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administración básica de discos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_06_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crear un dominio con Active Directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_07_unir_cliente_dominio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unir un equipo Windows 11 a un dominio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_08_documentar_instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentar la instalación de un servidor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_09_recordatorio_red/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apéndice A. Recordatorio de red
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de VirtualBox
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de VirtualBox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-instalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antes de instalar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-segun-el-anfitrion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación según el anfitrión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-pack-y-guest-additions-no-son-lo-mismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension Pack y Guest Additions: no son lo mismo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-clave-antes-de-crear-una-mv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptos clave antes de crear una MV
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos clave antes de crear una MV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-disco-virtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de disco virtual
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-tu-primera-mv-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear tu primera MV: Windows 11
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear tu primera MV: Windows 11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-minimos-de-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos mínimos de Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso a paso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-de-la-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Después de la instalación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestores-de-arranque" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestores de arranque
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestores de arranque">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-secuencia-de-arranque" class="md-nav__link">
+    <span class="md-ellipsis">
+      La secuencia de arranque
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#los-gestores-que-veras-en-el-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los gestores que verás en el curso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uefi-frente-a-bios-clasica" class="md-nav__link">
+    <span class="md-ellipsis">
+      UEFI frente a BIOS clásica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dual-boot-dos-sistemas-en-un-mismo-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dual boot: dos sistemas en un mismo equipo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividades en clase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actividades en clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-1-crea-tu-mv-con-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad 1: Crea tu MV con Windows 11
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividad-2-preguntas-de-analisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actividad 2: Preguntas de análisis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>VirtualBox; instalación y primera máquina virtual</h1>
+
+<p>En el apartado anterior vimos <strong>qué</strong> es la virtualización y <strong>qué necesita</strong> tu equipo. Ahora toca ponerla en práctica con la herramienta que usaremos todo el curso: <strong>Oracle VirtualBox</strong>, un hipervisor de tipo 2 gratuito y multiplataforma.</p>
+<p>Piensa en VirtualBox como en un taller donde construyes ordenadores a medida con piezas virtuales: eliges cuánta RAM, cuántos núcleos y qué disco tendrá, y después "enciendes" ese ordenador dentro de una ventana. Lo que decidas aquí condiciona todo lo que viene después, así que conviene hacerlo con criterio.</p>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/virtualizacion/virtualbox_gestor.png" data-desc-position="bottom"><img alt="VirtualBox" src="../imgs/virtualizacion/virtualbox_gestor.png" width="80%"></a>
+<br>
+<figcaption>Ventana principal del Administrador de VirtualBox</figcaption>
+</figure>
+<!-- IMG: captura del Administrador de VirtualBox con 2-3 MV creadas -->
+
+<h2 id="instalacion-de-virtualbox">Instalación de VirtualBox</h2>
+<h3 id="antes-de-instalar">Antes de instalar</h3>
+<p>Comprueba lo visto en el apartado 3:</p>
+<ul>
+<li>[ ] La virtualización está activada en la BIOS/UEFI.</li>
+<li>[ ] Sabes cuánta RAM puedes asignar a una MV (RAM total menos ~4 GB de reserva).</li>
+<li>[ ] Hay espacio libre en disco: una MV de Windows 11 ocupa fácilmente <strong>40-60 GB</strong> reales.</li>
+<li>[ ] Conoces si tienes Hyper-V/WSL2 activos (pueden ralentizar VirtualBox).</li>
+</ul>
+<h3 id="instalacion-segun-el-anfitrion">Instalación según el anfitrión</h3>
+<table>
+<thead>
+<tr>
+<th>Anfitrión</th>
+<th>Cómo se instala</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows</strong></td>
+<td>Descargar el instalador desde <a href="https://www.virtualbox.org/wiki/Downloads">virtualbox.org</a> y seguir el asistente. Acepta instalar los adaptadores de red virtuales (se corta la red unos segundos).</td>
+</tr>
+<tr>
+<td><strong>Debian / Ubuntu</strong></td>
+<td>Paquete <code>.deb</code> de la web oficial o repositorio de Oracle. El nombre del paquete depende de la versión (<code>virtualbox-7.x</code>).</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td>Instalador <code>.dmg</code>. Fíjate en la arquitectura de tu equipo (ver aviso).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Comprueba el paquete en Debian</p>
+<p>No des por hecho que <code>apt install virtualbox</code> funcione en tu versión de Debian: la disponibilidad del paquete en los repositorios oficiales ha cambiado entre versiones. Consulta <code>apt search virtualbox</code> y, si no aparece, usa el <code>.deb</code> o el repositorio de Oracle. Verifícalo en vuestras máquinas del aula antes de la sesión.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Equipos con procesador ARM</p>
+<p>VirtualBox 7.1 no ejecuta MV x86 sobre un anfitrión ARM. La 7.2 añade soporte para <strong>ARM sobre ARM</strong>, es decir, MV con sistemas ARM, no Windows x86 tradicional. Si tu portátil es ARM, consulta antes con el profesor.</p>
+</div>
+<p>En Linux, para poder usar los puertos USB y las carpetas compartidas, tu usuario debe pertenecer al grupo <code>vboxusers</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>vboxusers<span class="w"> </span><span class="nv">$USER</span>
+</span></code></pre></div>
+<p>Cierra sesión y vuelve a entrar para que el cambio tenga efecto.</p>
+<h3 id="extension-pack-y-guest-additions-no-son-lo-mismo">Extension Pack y Guest Additions: no son lo mismo</h3>
+<p>Se confunden muchísimo, así que fíjate bien:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Extension Pack</th>
+<th>Guest Additions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Se instala en</strong></td>
+<td>El <strong>anfitrión</strong> (host)</td>
+<td>El <strong>invitado</strong> (guest)</td>
+</tr>
+<tr>
+<td><strong>Qué aporta</strong></td>
+<td>USB 2.0/3.0, cifrado de disco, otras funciones</td>
+<td>Pantalla ajustable, portapapeles compartido, carpetas compartidas, mejor ratón</td>
+</tr>
+<tr>
+<td><strong>Licencia</strong></td>
+<td><strong>PUEL</strong> (uso personal/educativo; restringido en empresa)</td>
+<td>GPL</td>
+</tr>
+<tr>
+<td><strong>¿Imprescindible?</strong></td>
+<td>No para este curso</td>
+<td>Muy recomendable</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Licencias</p>
+<p>Recuerda el caso del apartado 2: VirtualBox es GPL, pero el Extension Pack tiene licencia propia (PUEL). Para este módulo no lo necesitamos, así que no lo instalaremos salvo que la actividad lo pida.</p>
+</div>
+<h2 id="conceptos-clave-antes-de-crear-una-mv">Conceptos clave antes de crear una MV</h2>
+<p>Una máquina virtual en VirtualBox son, en realidad, <strong>dos cosas</strong>:</p>
+<ol>
+<li>Una <strong>configuración</strong> (fichero <code>.vbox</code>): RAM, CPU, red, orden de arranque...</li>
+<li>Uno o varios <strong>discos virtuales</strong> (<code>.vdi</code>, <code>.vmdk</code>, <code>.vhd</code>): ficheros enormes que hacen de disco duro.</li>
+</ol>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/virtualizacion/anatomia_mv.png" data-desc-position="bottom"><img alt="Anatomía de una MV" src="../imgs/virtualizacion/anatomia_mv.png" width="70%"></a>
+<br>
+<figcaption>Una MV es una configuración más uno o varios ficheros de disco</figcaption>
+</figure>
+<!-- IMG: esquema con carpeta "VirtualBox VMs/NombreMV" y dentro .vbox y .vdi -->
+
+<div class="admonition tip">
+<p class="admonition-title">Dónde se guardan</p>
+<p>Por defecto, en <code>Carpeta personal/VirtualBox VMs</code>. Si el disco del sistema va justo de espacio, cambia la <strong>carpeta predeterminada</strong> en <em>Archivo → Preferencias → General</em> antes de crear nada. Mover una MV después es posible, pero más incómodo.</p>
+</div>
+<h3 id="tipos-de-disco-virtual">Tipos de disco virtual</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de asignación</th>
+<th>Qué hace</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reservado dinámicamente</strong></td>
+<td>El fichero crece según se usa</td>
+<td>Lo normal: ahorra espacio</td>
+</tr>
+<tr>
+<td><strong>Tamaño fijo</strong></td>
+<td>Ocupa todo el espacio desde el principio</td>
+<td>Algo más de rendimiento; solo si sobra disco</td>
+</tr>
+</tbody>
+</table>
+<p>El formato <strong>VDI</strong> es el nativo de VirtualBox; <strong>VMDK</strong> (VMware) y <strong>VHD/VHDX</strong> (Microsoft) permiten mover discos entre hipervisores.</p>
+<h2 id="crear-tu-primera-mv-windows-11">Crear tu primera MV: Windows 11</h2>
+<p>Windows 11 es un buen primer reto porque <strong>exige</strong> requisitos que cualquier sistema moderno debería cumplir.</p>
+<h3 id="requisitos-minimos-de-windows-11">Requisitos mínimos de Windows 11</h3>
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Mínimo de Microsoft</th>
+<th>Recomendado para el aula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAM</td>
+<td>4 GB</td>
+<td><strong>4 GB</strong> (8 GB si el anfitrión lo permite)</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>2 núcleos</td>
+<td><strong>2 vCPU</strong></td>
+</tr>
+<tr>
+<td>Disco</td>
+<td>64 GB</td>
+<td><strong>64 GB</strong>, dinámico</td>
+</tr>
+<tr>
+<td>Firmware</td>
+<td>UEFI con Secure Boot</td>
+<td>EFI activado</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>TPM 2.0</td>
+<td>TPM 2.0 activado</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Por qué importan UEFI y TPM</p>
+<ul>
+<li><strong>UEFI</strong> sustituye a la antigua BIOS: arranque más rápido, discos GPT de más de 2 TB y arranque seguro.</li>
+<li><strong>Secure Boot</strong> impide arrancar gestores de arranque no firmados.</li>
+<li><strong>TPM 2.0</strong> es un chip de seguridad que guarda claves (lo usa BitLocker, por ejemplo). VirtualBox puede <strong>emular</strong> uno.</li>
+</ul>
+</div>
+<h3 id="paso-a-paso">Paso a paso</h3>
+<!-- IMG: una captura por cada paso -->
+
+<ol>
+<li>Pulsa <strong>Nueva</strong>. Pon nombre (p. ej. <code>W11-Cliente</code>) y selecciona la <strong>ISO</strong> de Windows 11.</li>
+<li>Si VirtualBox detecta la ISO, <strong>activará solo</strong> EFI y TPM. Comprueba que el tipo es <em>Microsoft Windows</em> y la versión <em>Windows 11 (64-bit)</em>.</li>
+<li><strong>Instalación desatendida</strong>: usuario y contraseña, y clave de producto si la tienes. Te ahorra el asistente de Windows, pero <strong>anota</strong> el usuario y la contraseña que pongas.</li>
+<li><strong>Hardware</strong>: 4096 MB de RAM y 2 CPU. No pongas más RAM de la que puedas dedicar sin ahogar al anfitrión.</li>
+<li><strong>Disco</strong>: 64 GB, reservado dinámicamente.</li>
+<li>Antes de arrancar, entra en <em>Configuración</em> y revisa:<ul>
+<li><em>Sistema → Placa base</em>: <strong>Habilitar EFI</strong>, <strong>Secure Boot</strong> y <strong>TPM 2.0</strong>.</li>
+<li><em>Sistema → Procesador</em>: 2 CPU.</li>
+<li><em>Pantalla</em>: memoria de vídeo al máximo.</li>
+</ul>
+</li>
+<li>Arranca la MV y espera a que termine la instalación (varios reinicios).</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Si el instalador dice «Este equipo no puede ejecutar Windows 11»</p>
+<p>Casi siempre es EFI, TPM o RAM/CPU insuficientes. <strong>Revisa la configuración antes de buscar trucos</strong> que saltan los requisitos: en una instalación de empresa no tiene sentido saltarse las comprobaciones.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">ISO de evaluación</p>
+<p>Para el proyecto puedes usar ISO de evaluación de Microsoft (limitada en tiempo). Para la actividad vale cualquiera, pero no te dejes caducar una MV a medias.</p>
+</div>
+<h3 id="despues-de-la-instalacion">Después de la instalación</h3>
+<ol>
+<li><strong>Instala las Guest Additions</strong>: <em>Dispositivos → Insertar imagen de CD de las Guest Additions</em>, ejecuta el instalador desde el explorador y reinicia.</li>
+<li>Comprueba que la <strong>resolución</strong> se ajusta a la ventana y que el <strong>portapapeles</strong> compartido funciona (si lo has activado).</li>
+<li>Ejecuta <strong>Windows Update</strong> y anota las actualizaciones instaladas (te servirá como evidencia en la actividad).</li>
+<li><strong>Haz una instantánea</strong> del sistema recién instalado y limpio. La usaremos en el apartado 6.</li>
+</ol>
+<h2 id="gestores-de-arranque">Gestores de arranque</h2>
+<p>Hasta ahora has visto que "se enciende y aparece Windows". Entre medias ocurre algo importante: el firmware busca un <strong>gestor de arranque</strong> que sepa cargar el sistema operativo. Entenderlo es imprescindible para instalaciones con <strong>varios sistemas</strong> (<em>dual boot</em>) y para reparar un equipo que no arranca.</p>
+<h3 id="la-secuencia-de-arranque">La secuencia de arranque</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Encendido → Firmware (UEFI) → Gestor de arranque → Núcleo del SO → Sistema operativo
+</span></code></pre></div>
+<figure align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/virtualizacion/secuencia_arranque.png" data-desc-position="bottom"><img alt="Secuencia de arranque" src="../imgs/virtualizacion/secuencia_arranque.png" width="80%"></a>
+<br>
+<figcaption>Cadena de arranque de un equipo con UEFI</figcaption>
+</figure>
+<!-- IMG: esquema de la cadena de arranque -->
+
+<h3 id="los-gestores-que-veras-en-el-curso">Los gestores que verás en el curso</h3>
+<table>
+<thead>
+<tr>
+<th>Gestor</th>
+<th>Sistema</th>
+<th>Particularidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows Boot Manager</strong> (<code>bootmgr</code>)</td>
+<td>Windows</td>
+<td>Configuración en el almacén BCD. Edita con <code>bcdedit</code>.</td>
+</tr>
+<tr>
+<td><strong>GRUB 2</strong></td>
+<td>Linux</td>
+<td>Muestra un menú de sistemas. Configuración en <code>/etc/default/grub</code>; se regenera con <code>update-grub</code> (Debian/Ubuntu).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="uefi-frente-a-bios-clasica">UEFI frente a BIOS clásica</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>BIOS (MBR)</th>
+<th>UEFI (GPT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tabla de particiones</td>
+<td>MBR (máx. 2 TB, 4 primarias)</td>
+<td>GPT (prácticamente sin límite)</td>
+</tr>
+<tr>
+<td>Dónde está el gestor</td>
+<td>Primer sector del disco</td>
+<td><strong>Partición ESP</strong> (FAT32)</td>
+</tr>
+<tr>
+<td>Arranque seguro</td>
+<td>No</td>
+<td>Sí (Secure Boot)</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>ESP</strong> (<em>EFI System Partition</em>) es una pequeña partición FAT32 donde viven los gestores de arranque de todos los sistemas instalados.</p>
+<h3 id="dual-boot-dos-sistemas-en-un-mismo-equipo">Dual boot: dos sistemas en un mismo equipo</h3>
+<p>Cuando se instalan dos sistemas, <strong>el orden importa</strong>:</p>
+<ul>
+<li>Instalar <strong>primero Windows y luego Linux</strong>: GRUB detecta Windows y lo añade al menú. Es lo recomendable.</li>
+<li>Instalar <strong>Windows después de Linux</strong>: Windows sobrescribe el arranque y Linux "desaparece" del menú (no está borrado: hay que reparar GRUB).</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">En el aula</p>
+<p>Nosotros no haremos dual boot sobre equipos físicos. Practicaremos el mismo concepto en MV: una MV con <strong>dos discos</strong> o con dos sistemas en particiones separadas. El enfoque es idéntico y sin riesgo de romper un equipo real.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Orden de arranque en VirtualBox</p>
+<p>En <em>Configuración → Sistema → Placa base</em> puedes cambiar el orden: <strong>Óptica, Disco duro, Red</strong>. Cuando la instalación termina, deja el <strong>disco duro primero</strong>, o la MV volverá a arrancar el instalador cada vez. Con EFI, pulsa <strong>F2/Supr</strong> al arrancar para entrar en el menú de firmware.</p>
+</div>
+<h2 id="actividades-en-clase">Actividades en clase</h2>
+<h3 id="actividad-1-crea-tu-mv-con-windows-11">Actividad 1: Crea tu MV con Windows 11</h3>
+<p>Crea una MV Windows 11 con 4 GB de RAM, 2 vCPU y 64 GB de disco dinámico. Entrega capturas de:</p>
+<ol>
+<li>Configuración de <em>Placa base</em> con EFI, Secure Boot y TPM activos.</li>
+<li>Windows instalado con Guest Additions (resolución ajustada).</li>
+<li><em>Información del sistema</em> (<code>msinfo32</code>) mostrando el modo de BIOS (<strong>UEFI</strong>) y el <strong>Arranque seguro</strong>.</li>
+<li>Resultado de Windows Update.</li>
+</ol>
+<details class="success">
+<summary>Solución orientativa</summary>
+<ul>
+<li>En <code>msinfo32</code> aparecen <em>Modo de BIOS: UEFI</em> y <em>Estado de arranque seguro: Activado</em>.</li>
+<li>Si ves <em>Heredado (Legacy)</em>, la MV se creó sin EFI: hay que crearla de nuevo, porque cambiar de BIOS a EFI con el SO ya instalado no funciona sin reinstalar.</li>
+</ul>
+</details>
+<h3 id="actividad-2-preguntas-de-analisis">Actividad 2: Preguntas de análisis</h3>
+<ol>
+<li>¿Qué diferencia hay entre instalar el <em>Extension Pack</em> y las <em>Guest Additions</em>?</li>
+<li>Tu MV vuelve a mostrar el instalador tras terminar la instalación. ¿Qué ajuste revisas?</li>
+<li>Una MV de 64 GB dinámicos, ¿cuánto ocupa justo tras crearla? ¿Y tras instalar Windows?</li>
+<li>¿Qué es la ESP y qué se guarda en ella?</li>
+<li>Instalas Windows en un equipo que ya tenía Ubuntu y desaparece el menú de arranque. ¿Qué ha pasado?</li>
+</ol>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li>El Extension Pack se instala en el <strong>anfitrión</strong> y añade funciones (USB 2/3, cifrado). Las Guest Additions se instalan en el <strong>invitado</strong> y mejoran pantalla, portapapeles y carpetas compartidas.</li>
+<li>El <strong>orden de arranque</strong>: hay que poner el disco duro antes que la unidad óptica (o quitar la ISO).</li>
+<li>Justo tras crearla, apenas unos KB/MB; tras instalar Windows, unos <strong>20-30 GB</strong> reales, y crece con el uso.</li>
+<li>La <em>EFI System Partition</em>, una partición FAT32 con los gestores de arranque de los sistemas instalados.</li>
+<li>Windows ha sobrescrito la entrada de arranque y GRUB ya no es el primero. Linux sigue instalado: se repara reinstalando GRUB desde un medio <em>live</em>.</li>
+</ol>
+</details>
+<h2 id="resumen">Resumen</h2>
+<ul>
+<li>VirtualBox es un hipervisor tipo 2 gratuito; la MV son una <strong>configuración</strong> más sus <strong>discos</strong>.</li>
+<li><strong>Extension Pack</strong> va en el anfitrión (licencia PUEL); <strong>Guest Additions</strong> van en el invitado.</li>
+<li>Windows 11 exige <strong>UEFI, Secure Boot, TPM 2.0</strong>, 4 GB de RAM y 64 GB de disco.</li>
+<li>Siempre: instalar Guest Additions, actualizar y hacer una <strong>instantánea</strong> limpia.</li>
+<li>El gestor de arranque (Boot Manager o GRUB) es el eslabón entre el firmware y el SO; en dual boot, <strong>primero Windows, después Linux</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie">
+        
+          
+          <a href="../05_03_virtualizacion/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Virtualización; conceptos, tipos y requisitos">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Virtualización; conceptos, tipos y requisitos
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05_05_redes_virtualbox/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Redes en VirtualBox">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Redes en VirtualBox
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Sergio Rey Martínez - DAM - SIN - 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.follow", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
