@@ -44,7 +44,7 @@ Los modos de red se explican con detalle en la UD05.
 Dentro del cliente: *Windows + R* → `ncpa.cpl` → clic derecho sobre el adaptador → **Propiedades → Protocolo de Internet versión 4 (TCP/IPv4) → Propiedades**.
 
 <figure markdown="span" align="center">
-  ![Conexiones de red](./imgs/instalacion/ConexionesDeRed.png){ width="70%" }
+  ![Conexiones de red](./imgs/instalacion/ConexionesDeRedConfigIPv4.png){ width="70%" }
   <figcaption>Conexiones de red: se elige el adaptador y se abren sus propiedades</figcaption>
 </figure>
 

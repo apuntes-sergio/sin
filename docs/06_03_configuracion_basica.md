@@ -12,7 +12,7 @@ Todo esto se hace desde un mismo sitio, el **Administrador del servidor**, en el
 Se abre solo al iniciar sesión. Desde **Servidor local** se ven y se modifican las propiedades principales del equipo.
 
 <figure markdown="span" align="center">
-  ![Administrador del servidor](./imgs/instalacion/administrador_servidor_inicio.png){ width="80%" }
+  ![Administrador del servidor](./imgs/instalacion/administrador_servidor_local.png){ width="80%" }
   <figcaption>Administrador del servidor: propiedades del servidor local</figcaption>
 </figure>
 
@@ -51,7 +51,7 @@ Para recordar qué significa cada parámetro, consulta el **[Apéndice A: Record
 *Servidor local → Ethernet* (o desde el Panel de control: *Redes e Internet → Centro de redes → Cambiar configuración del adaptador*).
 
 <figure markdown="span" align="center">
-  ![Conexiones de red](./imgs/instalacion/ConexionesDeRed.png){ width="80%" }
+  ![Conexiones de red](./imgs/instalacion/ConexionesDeRedConfig.png){ width="80%" }
   <figcaption>Panel de control: conexiones de red</figcaption>
 </figure>
 

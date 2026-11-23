@@ -3,13 +3,19 @@ site/
 
 # Python cache
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*.pip
 
 # Virtual environments
 venv/
-.env/
+.venv/
+env/
+.env
 
-# Archivos específicos
-*:Zero.Identifier*
+# Metadatos de Windows / WSL (corregido Zone.Identifier)
+*:Zone.Identifier
+
+# Archivos temporales de editores (VS Code, Linux, etc.)
+.vscode/
+*~
+.DS_Store
